@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // 👈 ต้อง import ตรงนี้
+import { Router } from '@angular/router'; // เพิ่ม Router เพื่อใช้ในการนำทาง
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post-api',
   templateUrl: './post-api.component.html',
   styleUrls: ['./post-api.component.css'],
-    imports: [FormsModule],
+    imports: [FormsModule,CommonModule],
   
 })
 export class PostApiComponent {
@@ -16,6 +18,7 @@ export class PostApiComponent {
   imtemList: any;  // เก็บข้อมูลจาก API
 
   http = inject(HttpClient);
+  router = inject(Router); // Inject Router
 
   OnSave() {
   const payload = {
@@ -42,5 +45,10 @@ export class PostApiComponent {
       console.log(result); // ตรวจสอบข้อมูลที่ได้รับจาก API
       this.imtemList = result; // ปรับให้ตรงกับข้อมูลที่ได้จาก API
     });
+  }
+
+  // คลิกแล้วไปที่หน้ารายละเอียด
+  onItemClick(id: number) {
+    this.router.navigate([`/item/${id}`]); // ไปยังหน้ารายละเอียดของ id นั้นๆ
   }
 }

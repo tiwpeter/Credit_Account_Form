@@ -4,15 +4,16 @@
     <div>
         <div class="col-3">
             <div class="btn btn-success" (click)="getItem()">Load</div>
-
         </div>
     </div>
 
-    <p>{{ imtemList }}</p>
+    <div *ngFor="let item of imtemList">
+        <div class="item" (click)="onItemClick(item.id)">
+            <p>{{ item.name }} (ID: {{ item.id }})</p>
+        </div>
+    </div>
 
     <div>
-
-        <!-- ngModel binds input value to userObj.name -->
         <input type="text" [(ngModel)]="userObj.name">
     </div>
     <button (click)="OnSave()">Save</button>
