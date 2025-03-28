@@ -1,0 +1,61 @@
+//ngModel = use stale form
+carObj: any = {
+  "T"
+}
+  = carObj.T
+//Use
+onsavecar() {
+  this.HttpClient.post("http")
+}
+
+catfact: any; // ตัวแปร เก็บข้อมูล api
+
+/***use***/
+http.get
+
+/* */
+
+รูปแบบ	ความหมาย	ตัวอย่าง
+[ngModel]	One-way binding (จาก component → view)	<input [ngModel]="name">
+(ngModelChange)	Binding เหตุการณ์เมื่อค่าถูกเปลี่ยน	<input (ngModelChange)="onChange($event)">
+[(ngModel)]	Two-way binding (view ↔ component)	<input [(ngModel)]="name">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.component.ts = import ui 
+selector: 'app-get-api',
+
+
+ getCat() {
+  this.http.get("https://catfact.ninja/fact").subscribe((result: any) => {
+    this.catfact = result.fact;
+  });
+    
+    
+    import { HttpClient } from '@angular/common/http';
+
+      catfact: any;
+
+  <p>{{ catfact }
+} </p>
+    
+constructor with HttpClient
+
+get 
+inject
