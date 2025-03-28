@@ -12,7 +12,7 @@ namespace testget.Controllers
 
         // GET: api/testget
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             var items = new List<object>();
 
@@ -20,7 +20,7 @@ namespace testget.Controllers
             {
                 connection.Open();
                 var command = connection.CreateCommand();
-                command.CommandText = "SELECT id, name FROM Name;"; // ✅ เอา id มาด้วย
+                command.CommandText = "SELECT name_id, name FROM Name;"; // Query ดึงข้อมูลทั้งหมด
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -28,15 +28,44 @@ namespace testget.Controllers
                     {
                         items.Add(new
                         {
-                            id = reader.GetInt32(0),    // id
-                            name = reader.GetString(1)  // name
+                            id = reader.GetInt32(0),        // name_id
+                            name = reader.GetString(1)
                         });
                     }
                 }
             }
 
-            return Ok(items); // ✅ return เป็น list ของ object
+            return Ok(items); // ส่งกลับเป็น List ของ Object
         }
 
+        // GET: api/testget/1
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT name_id, name FROM Name WHERE name_id = @id;"; // Query ดึงข้อมูลจาก id ที่ระบุ
+                command.Parameters.AddWithValue("@id", id);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        var item = new
+                        {
+                            id = reader.GetInt32(0),        // name_id
+                            name = reader.GetString(1)
+                        };
+                        return Ok(item); // ส่งข้อมูลที่เจอ
+                    }
+                    else
+                    {
+                        return NotFound(); // ถ้าไม่พบข้อมูล
+                    }
+                }
+            }
+        }
     }
 }
