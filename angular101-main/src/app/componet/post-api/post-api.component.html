@@ -2,7 +2,8 @@
 
 <div>
     <div>
-        <!--ngModel = เมื่อผู้ใช้พิมพ์ใน <input> → ค่าจะถูกส่งเข้าไปในตัวแปร-->
-        <input type="text" [(ngModel)]>
+        <!-- ngModel binds input value to userObj.name -->
+        <input type="text" [(ngModel)]="userObj.name">
     </div>
+    <button (click)="OnSave()">Save</button>
 </div>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
 
 namespace testget.Controllers
@@ -7,20 +8,34 @@ namespace testget.Controllers
     [Route("api/testget")]
     public class TestGetController : ControllerBase
     {
+        private readonly string _connectionString = "Data Source=test.db"; // Your database file path
+
         // GET: api/testget
         [HttpGet]
         public IActionResult Get()
         {
-            // ข้อมูลจำลองที่คุณต้องการส่งกลับ
-            var result = new List<string>
-            {
-                "Test Data 1",
-                "Test Data 2",
-                "Test Data 3"
-            };
+            var names = new List<string>(); // List to store names
 
-            // ส่งกลับข้อมูลในรูปแบบ JSON
-            return Ok(result);
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+
+                // Query to select names from the Name table
+                command.CommandText = "SELECT name FROM Name;";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    // Read each row and add name to the list
+                    while (reader.Read())
+                    {
+                        names.Add(reader.GetString(0)); // Assuming the column 'name' is of type text
+                    }
+                }
+            }
+
+
+            return Ok(names); // Return the list of names
         }
     }
 }

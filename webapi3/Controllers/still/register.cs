@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
-using System;
 using RegisteersTable.Models; // ต้องตรงกับ namespace ของ RegisterModel
 
 namespace RegisteersTable.Registeers

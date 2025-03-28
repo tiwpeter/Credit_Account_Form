@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\webapi\\Netapi\\โฟลเดอร์ใหม่\\webapi3\\demoapi.csproj": {}
+    "D:\\agularAnd101\\Angular-NetCor\\webapi3\\demoapi.csproj": {}
   },
   "projects": {
-    "D:\\webapi\\Netapi\\โฟลเดอร์ใหม่\\webapi3\\demoapi.csproj": {
+    "D:\\agularAnd101\\Angular-NetCor\\webapi3\\demoapi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\webapi\\Netapi\\โฟลเดอร์ใหม่\\webapi3\\demoapi.csproj",
+        "projectUniqueName": "D:\\agularAnd101\\Angular-NetCor\\webapi3\\demoapi.csproj",
         "projectName": "demoapi",
-        "projectPath": "D:\\webapi\\Netapi\\โฟลเดอร์ใหม่\\webapi3\\demoapi.csproj",
+        "projectPath": "D:\\agularAnd101\\Angular-NetCor\\webapi3\\demoapi.csproj",
         "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
-        "outputPath": "D:\\webapi\\Netapi\\โฟลเดอร์ใหม่\\webapi3\\obj\\",
+        "outputPath": "D:\\agularAnd101\\Angular-NetCor\\webapi3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
