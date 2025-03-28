@@ -14,28 +14,29 @@ namespace testget.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var names = new List<string>(); // List to store names
+            var items = new List<object>();
 
             using (var connection = new SqliteConnection(_connectionString))
             {
                 connection.Open();
                 var command = connection.CreateCommand();
-
-                // Query to select names from the Name table
-                command.CommandText = "SELECT name FROM Name;";
+                command.CommandText = "SELECT id, name FROM Name;"; // ✅ เอา id มาด้วย
 
                 using (var reader = command.ExecuteReader())
                 {
-                    // Read each row and add name to the list
                     while (reader.Read())
                     {
-                        names.Add(reader.GetString(0)); // Assuming the column 'name' is of type text
+                        items.Add(new
+                        {
+                            id = reader.GetInt32(0),    // id
+                            name = reader.GetString(1)  // name
+                        });
                     }
                 }
             }
 
-
-            return Ok(names); // Return the list of names
+            return Ok(items); // ✅ return เป็น list ของ object
         }
+
     }
 }

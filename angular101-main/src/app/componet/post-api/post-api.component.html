@@ -2,6 +2,16 @@
 
 <div>
     <div>
+        <div class="col-3">
+            <div class="btn btn-success" (click)="getItem()">Load</div>
+
+        </div>
+    </div>
+
+    <p>{{ imtemList }}</p>
+
+    <div>
+
         <!-- ngModel binds input value to userObj.name -->
         <input type="text" [(ngModel)]="userObj.name">
     </div>

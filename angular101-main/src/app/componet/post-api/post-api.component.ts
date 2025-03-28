@@ -13,6 +13,7 @@ export class PostApiComponent {
   userObj: any = {
     name: ''
   };
+  imtemList: any;  // เก็บข้อมูลจาก API
 
   http = inject(HttpClient);
 
@@ -32,6 +33,14 @@ export class PostApiComponent {
     (error) => {
       console.error('Error:', error);
     }
-  );
-}
+    );
+    
+  }
+  getItem() {
+    this.http.get("http://localhost:5083/api/testget").subscribe((result: any) => {
+      // ตรวจสอบว่า response มีข้อมูลในรูปแบบที่คาดไว้หรือไม่
+      console.log(result); // ตรวจสอบข้อมูลที่ได้รับจาก API
+      this.imtemList = result; // ปรับให้ตรงกับข้อมูลที่ได้จาก API
+    });
+  }
 }
