@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { HomeComponent } from "./componet/home/home.component";
 import { PostApiComponent } from "./componet/post-api/post-api.component";
 import { ItemDetailComponent } from "./componet/item-detail/item-detail.component";
+import { FormComponent } from "./componet/form/form.component";
 
 const routeConfig: Routes = [
     {
@@ -12,6 +13,11 @@ const routeConfig: Routes = [
     {
         path: 'postget',
         component: PostApiComponent,
+        title: 'PostApi'
+  },
+     {
+        path: 'form',
+        component: FormComponent,
         title: 'PostApi'
     },
   {
