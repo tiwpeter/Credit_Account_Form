@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // 👈 ต้อง import ตรงนี้
 import { Router } from '@angular/router'; // เพิ่ม Router เพื่อใช้ในการนำทาง
 import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpClient } from '@angular/common/http'; // 👈 เพิ่ม HttpClientModule
 
 @Component({
   selector: 'app-post-api',
   templateUrl: './post-api.component.html',
   styleUrls: ['./post-api.component.css'],
-    imports: [FormsModule,CommonModule],
+    imports: [FormsModule,CommonModule,HttpClientModule],
   
 })
 export class PostApiComponent {
@@ -49,6 +49,7 @@ export class PostApiComponent {
 
   // คลิกแล้วไปที่หน้ารายละเอียด
   onItemClick(id: number) {
-    this.router.navigate([`/item/${id}`]); // ไปยังหน้ารายละเอียดของ id นั้นๆ
-  }
+  this.router.navigate([`/item-detail`, id]); // 👈 ส่ง id ไปใน path
+}
+
 }
