@@ -59,6 +59,39 @@ public class IndustryTypeModel
     public string InduTypeDes { get; set; }
 }
 
+public class SaleOrgModel
+{
+    public int Id { get; set; }
+    public string SaleOrgCode { get; set; }
+    public string SaleOrgName { get; set; }
+    public string SaleOrgDes { get; set; }
+}
+
+public class AccountGroupModel
+{
+    public int Id { get; set; }
+    public string AccGroupCode { get; set; }
+    public string AccGroupName { get; set; }
+    public string AccGroupDes { get; set; }
+}
+
+public class BusinessTypeModel
+{
+    public int BusiTypeID { get; set; }
+    public string BusiTypeCode { get; set; }
+    public string BusiTypeName { get; set; }
+    public string BusiTypeDes { get; set; }
+    public DateTime RegistrationDate { get; set; }
+    public decimal RegisteredCapital { get; set; }
+}
+
+public class CreditInfoModel
+{
+    public int CreditInfoId { get; set; }
+    public string EstimatedPurchase { get; set; }
+    public string TimeRequired { get; set; }
+    public string CreditLimit { get; set; }
+}
 
 // Combined RegisterModel for API request
 public class RegisterModel
@@ -72,5 +105,11 @@ public class RegisterModel
     public IndustryTypeModel IndustryType { get; set; }
     public CompanyModel Company { get; set; }
 
+    public SaleOrgModel SaleOrg { get; set; }
+
+    public AccountGroupModel AccountGroup { get; set; }  // เพิ่ม AccountGroupModel ที่นี่
+    public BusinessTypeModel BusinessType { get; set; }  // 
+
+    public RegisterModel Register { get; set; }  // 
 
 }

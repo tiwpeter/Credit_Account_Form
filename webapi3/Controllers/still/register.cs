@@ -188,6 +188,75 @@ namespace RegisteersTable.Registeers
                                 }
                             }
 
+                            // คำสั่ง SQL สำหรับเพิ่มข้อมูลในตาราง SaleOrg
+                            using (var command = new SqliteCommand("INSERT INTO SaleOrg (saleOrgCode, saleOrgName, saleOrgDes) VALUES (@saleOrgCode, @saleOrgName, @saleOrgDes)", connection))
+                            {
+                                command.Parameters.AddWithValue("@saleOrgCode", register.SaleOrg.SaleOrgCode);
+                                command.Parameters.AddWithValue("@saleOrgName", register.SaleOrg.SaleOrgName);
+                                command.Parameters.AddWithValue("@saleOrgDes", register.SaleOrg.SaleOrgDes);
+
+                                command.Transaction = transaction;
+                                int rowsAffected = command.ExecuteNonQuery();
+                                if (rowsAffected == 0)
+                                {
+                                    throw new Exception("ไม่สามารถเพิ่มข้อมูลในตาราง SaleOrg");
+                                }
+                            }
+
+                            // เพิ่มข้อมูลในตาราง  AccountGroup
+                            using (var command = new SqliteCommand("INSERT INTO AccountGroup (accGroupCode, accGroupName, accGroupDes) VALUES (@accGroupCode, @accGroupName, @accGroupDes)", connection))
+                            {
+                                command.Parameters.AddWithValue("@accGroupCode", register.AccountGroup.AccGroupCode);
+                                command.Parameters.AddWithValue("@accGroupName", register.AccountGroup.AccGroupName);
+                                command.Parameters.AddWithValue("@accGroupDes", register.AccountGroup.AccGroupDes);
+
+                                command.Transaction = transaction;
+                                int rowsAffected = command.ExecuteNonQuery();
+                                if (rowsAffected == 0)
+                                {
+                                    throw new Exception("ไม่สามารถเพิ่มข้อมูลในตาราง AccountGroup");
+                                }
+                            }
+
+                            // เพิ่มข้อมูลในตาราง BusinessType
+                            using (var command = new SqliteCommand("INSERT INTO BusinessType (busiTypeCode, busiTypeName, busiTypeDes, registrationDate, registeredCapital) VALUES (@busiTypeCode, @busiTypeName, @busiTypeDes, @registrationDate, @registeredCapital)", connection))
+                            {
+                                command.Parameters.AddWithValue("@busiTypeCode", register.BusinessType.BusiTypeCode);
+                                command.Parameters.AddWithValue("@busiTypeName", register.BusinessType.BusiTypeName);
+                                command.Parameters.AddWithValue("@busiTypeDes", register.BusinessType.BusiTypeDes);
+                                command.Parameters.AddWithValue("@registrationDate", register.BusinessType.RegistrationDate);
+                                command.Parameters.AddWithValue("@registeredCapital", register.BusinessType.RegisteredCapital);
+
+                                command.Transaction = transaction;
+                                int rowsAffected = command.ExecuteNonQuery();
+                                if (rowsAffected == 0)
+                                {
+                                    throw new Exception("ไม่สามารถเพิ่มข้อมูลในตาราง BusinessType");
+                                }
+                            }
+
+                            // เพิ่มข้อมูลในตาราง CreditInfo
+                            using (var command = new SqliteCommand("INSERT INTO CreditInfo (estimatedPurchase, timeRequired, creditLimit) VALUES (@estimatedPurchase, @timeRequired, @creditLimit)", connection))
+                            {
+                                command.Parameters.AddWithValue("@estimatedPurchase", creditInfo.EstimatedPurchase);
+                                command.Parameters.AddWithValue("@timeRequired", creditInfo.TimeRequired);
+                                command.Parameters.AddWithValue("@creditLimit", creditInfo.CreditLimit);
+
+                                command.Transaction = transaction;
+                                int rowsAffected = command.ExecuteNonQuery();
+                                if (rowsAffected == 0)
+                                {
+                                    throw new Exception("ไม่สามารถเพิ่มข้อมูลในตาราง CreditInfo");
+                                }
+                            }
+
+
+
+
+
+
+
+
                             // คอมมิทการทำงานทั้งหมด
                             transaction.Commit();
 

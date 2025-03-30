@@ -223,7 +223,13 @@ CREATE TABLE SortKey (
 --CashGroup
 CREATE TABLE CashGroup (   id int NOT NULL,   cashCode VARCHAR(255),   cashName VARCHAR(255),   PRIMARY KEY (id) );
 
-
+--เครดิต เช่น ข้อมูลเกี่ยวกับการซื้อ,
+CREATE TABLE CreditInfo (
+    creditInfo_id INT NOT NULL PRIMARY KEY,
+    estimatedPurchase VARCHAR(255),
+    timeRequired VARCHAR(255),
+    creditLimit VARCHAR(255)
+);
 
 
 
