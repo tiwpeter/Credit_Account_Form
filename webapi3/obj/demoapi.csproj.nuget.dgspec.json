@@ -62,6 +62,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.119, )"
             }
           },
           "imports": [
