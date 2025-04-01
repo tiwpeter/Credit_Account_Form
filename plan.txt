@@ -1,0 +1,5 @@
+get id => print fastreport
+client look id & print
+
+backend get id & dowload Pdf
+list object

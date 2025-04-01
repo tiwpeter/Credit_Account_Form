@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report>
+  <Dictionary>
+    <DataSet Name="Data">
+      <TableDataSource Name="Account" DataType="System.Int32" Enabled="true">
+        <Column Name="FullName" DataType="System.String"/>
+        <Column Name="AccountNumber" DataType="System.String"/>
+        <Column Name="AccountType" DataType="System.String"/>
+        <Column Name="Branch" DataType="System.String"/>
+        <Column Name="UserId" DataType="System.Int32"/>
+      </TableDataSource>
+    </DataSet>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand>
+      <TextObject Left="100" Top="10" Width="400" Height="30" Text="แบบฟอร์มเปิดบัญชี" HorzAlign="Center" Font="Arial, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand DataSource="Account" Name="Data1">
+      <TextObject Left="20" Top="40" Width="200" Height="20" Text="ชื่อ: [Account.FullName]"/>
+      <TextObject Left="20" Top="70" Width="200" Height="20" Text="เลขที่บัญชี: [Account.AccountNumber]"/>
+      <TextObject Left="20" Top="100" Width="200" Height="20" Text="ประเภทบัญชี: [Account.AccountType]"/>
+      <TextObject Left="20" Top="130" Width="200" Height="20" Text="สาขา: [Account.Branch]"/>
+      <TextObject Left="20" Top="160" Width="200" Height="20" Text="รหัสผู้ใช้: [Account.UserId]"/>
+    </DataBand>
+  </ReportPage>
+</Report>
