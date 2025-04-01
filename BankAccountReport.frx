@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/01/2025 11:38:22" ReportInfo.Modified="04/01/2025 11:39:15" ReportInfo.CreatorVersion="2025.1.0.0">
+    <Dictionary>
+        <TableDataSource Name="AccountData" ReferenceName="AccountData" DataType="System.Data.DataTable" Enabled="true">
+            <Column Name="FullName" DataType="System.String"/>
+            <Column Name="AccountNumber" DataType="System.String"/>
+            <Column Name="AccountType" DataType="System.String"/>
+            <Column Name="Branch" DataType="System.String"/>
+            <Column Name="UserId" DataType="System.Int32"/>
+        </TableDataSource>
+    </Dictionary>
+    <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+        <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+            <TextObject Name="Title" Left="10" Top="10" Width="700" Height="20" Text="รายงานข้อมูลบัญชีธนาคาร" Font="Arial, 14pt, style=Bold"/>
+        </ReportTitleBand>
+        <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35">
+            <TextObject Name="Header1" Left="10" Width="150" Height="20" Text="ชื่อ - นามสกุล" Font="Arial, 10pt, style=Bold"/>
+            <TextObject Name="Header2" Left="170" Width="150" Height="20" Text="เลขที่บัญชี" Font="Arial, 10pt, style=Bold"/>
+            <TextObject Name="Header3" Left="330" Width="150" Height="20" Text="ประเภทบัญชี" Font="Arial, 10pt, style=Bold"/>
+            <TextObject Name="Header4" Left="490" Width="150" Height="20" Text="สาขา" Font="Arial, 10pt, style=Bold"/>
+        </PageHeaderBand>
+        <DataBand Name="Data1" Top="74.15" Width="718.2" Height="25" DataSource="AccountData">
+            <TextObject Name="Text1" Left="10" Width="150" Height="20" Text="[AccountData.FullName]"/>
+            <TextObject Name="Text2" Left="170" Width="150" Height="20" Text="[AccountData.AccountNumber]"/>
+            <TextObject Name="Text3" Left="330" Width="150" Height="20" Text="[AccountData.AccountType]"/>
+            <TextObject Name="Text4" Left="490" Width="150" Height="20" Text="[AccountData.Branch]"/>
+        </DataBand>
+        <PageFooterBand Name="PageFooter1" Top="153.75" Width="718.2" Height="18.9">
+            <TextObject Name="Footer" Left="10" Width="700" Height="20" Text="หน้าที่ [Page#] จาก [TotalPages#]" Font="Arial, 10pt, style=Italic"/>
+        </PageFooterBand>
+    </ReportPage>
+</Report>
