@@ -1,0 +1,432 @@
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\appsettings.Development.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\appsettings.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\demoapi.staticwebassets.endpoints.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\demoapi.exe
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\demoapi.deps.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\demoapi.runtimeconfig.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\demoapi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\demoapi.pdb
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.csproj.AssemblyReference.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.GeneratedMSBuildEditorConfig.editorconfig
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.AssemblyInfoInputs.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.AssemblyInfo.cs
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.csproj.CoreCompileInputs.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cs
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\scopedcss\bundle\demoapi.styles.css
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets.build.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets.development.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets\msbuild.build.demoapi.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.demoapi.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.demoapi.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\staticwebassets.pack.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.csproj.Up2Date
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\refint\demoapi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.pdb
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.genruntimeconfig.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\ref\demoapi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\obj\Debug\net9.0\demoapi.sourcelink.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\demoapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\appsettings.Development.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\appsettings.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.staticwebassets.endpoints.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.exe
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.deps.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.runtimeconfig.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.pdb
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Microsoft.Data.Sqlite.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\SQLitePCLRaw.batteries_v2.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\SQLitePCLRaw.core.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\browser-wasm\nativeassets\net9.0\e_sqlite3.a
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-arm\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-armel\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-mips64\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-arm\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-arm64\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-s390x\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-ppc64le\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-s390x\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-x64\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-x86\native\libe_sqlite3.so
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\maccatalyst-arm64\native\libe_sqlite3.dylib
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\osx-arm64\native\libe_sqlite3.dylib
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-arm\native\e_sqlite3.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-arm64\native\e_sqlite3.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-x64\native\e_sqlite3.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-x86\native\e_sqlite3.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.csproj.AssemblyReference.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.GeneratedMSBuildEditorConfig.editorconfig
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.AssemblyInfoInputs.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.AssemblyInfo.cs
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.csproj.CoreCompileInputs.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cs
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\scopedcss\bundle\demoapi.styles.css
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.build.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.development.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.build.demoapi.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.demoapi.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.demoapi.props
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.pack.json
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.csproj.Up2Date
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\refint\demoapi.dll
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.pdb
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.genruntimeconfig.cache
+D:\โฟลเดอร์ใหม่ (3)\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\ref\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.csproj.AssemblyReference.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.GeneratedMSBuildEditorConfig.editorconfig
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.AssemblyInfoInputs.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.AssemblyInfo.cs
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.csproj.CoreCompileInputs.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cs
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\refint\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.pdb
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\appsettings.Development.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\appsettings.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.staticwebassets.endpoints.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.exe
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.deps.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.runtimeconfig.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\demoapi.pdb
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Microsoft.Data.Sqlite.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\SQLitePCLRaw.batteries_v2.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\SQLitePCLRaw.core.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\browser-wasm\nativeassets\net9.0\e_sqlite3.a
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-arm\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-armel\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-mips64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-arm\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-arm64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-s390x\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-ppc64le\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-s390x\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-x64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\linux-x86\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\maccatalyst-arm64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\osx-arm64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-arm\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-arm64\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-x64\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\bin\Debug\net9.0\runtimes\win-x86\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\scopedcss\bundle\demoapi.styles.css
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.build.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.development.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.build.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\staticwebassets.pack.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.csproj.Up2Date
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.genruntimeconfig.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\ref\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi\obj\Debug\net9.0\demoapi.sourcelink.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\appsettings.Development.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\appsettings.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\demoapi.staticwebassets.endpoints.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\demoapi.exe
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\demoapi.deps.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\demoapi.runtimeconfig.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\demoapi.pdb
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\Microsoft.Data.Sqlite.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\SQLitePCLRaw.batteries_v2.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\SQLitePCLRaw.core.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\browser-wasm\nativeassets\net9.0\e_sqlite3.a
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-arm\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-armel\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-mips64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-musl-arm\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-musl-arm64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-musl-s390x\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-ppc64le\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-s390x\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-x64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\linux-x86\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\maccatalyst-arm64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\osx-arm64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\win-arm\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\win-arm64\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\win-x64\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\bin\Debug\net9.0\runtimes\win-x86\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.csproj.AssemblyReference.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.GeneratedMSBuildEditorConfig.editorconfig
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.AssemblyInfoInputs.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.AssemblyInfo.cs
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.csproj.CoreCompileInputs.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cs
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\scopedcss\bundle\demoapi.styles.css
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets.build.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets.development.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets\msbuild.build.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\staticwebassets.pack.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.csproj.Up2Date
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\refint\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.pdb
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.genruntimeconfig.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\ref\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi2\obj\Debug\net9.0\demoapi.sourcelink.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\appsettings.Development.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\appsettings.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\demoapi.staticwebassets.endpoints.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\demoapi.exe
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\demoapi.deps.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\demoapi.runtimeconfig.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\demoapi.pdb
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\Microsoft.Data.Sqlite.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\SQLitePCLRaw.batteries_v2.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\SQLitePCLRaw.core.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\browser-wasm\nativeassets\net9.0\e_sqlite3.a
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-arm\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-armel\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-mips64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-musl-arm\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-musl-arm64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-musl-s390x\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-ppc64le\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-s390x\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-x64\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\linux-x86\native\libe_sqlite3.so
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\maccatalyst-arm64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\osx-arm64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\win-arm\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\win-arm64\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\win-x64\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\bin\Debug\net9.0\runtimes\win-x86\native\e_sqlite3.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.csproj.AssemblyReference.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.GeneratedMSBuildEditorConfig.editorconfig
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.AssemblyInfoInputs.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.AssemblyInfo.cs
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.csproj.CoreCompileInputs.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cs
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\scopedcss\bundle\demoapi.styles.css
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets.build.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets.development.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.build.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.demoapi.props
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\staticwebassets.pack.json
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.csproj.Up2Date
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\refint\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.pdb
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.genruntimeconfig.cache
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\ref\demoapi.dll
+D:\webapi\Netapi\โฟลเดอร์ใหม่\webapi3\obj\Debug\net9.0\demoapi.sourcelink.json
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\appsettings.Development.json
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\appsettings.json
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\demoapi.staticwebassets.endpoints.json
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\demoapi.exe
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\demoapi.deps.json
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\demoapi.runtimeconfig.json
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\demoapi.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\demoapi.pdb
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\Microsoft.Data.Sqlite.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\SQLitePCLRaw.batteries_v2.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\SQLitePCLRaw.core.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\browser-wasm\nativeassets\net9.0\e_sqlite3.a
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-arm\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-armel\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-mips64\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-musl-arm\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-musl-arm64\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-musl-s390x\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-ppc64le\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-s390x\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-x64\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\linux-x86\native\libe_sqlite3.so
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\maccatalyst-arm64\native\libe_sqlite3.dylib
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\osx-arm64\native\libe_sqlite3.dylib
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\win-arm\native\e_sqlite3.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\win-arm64\native\e_sqlite3.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\win-x64\native\e_sqlite3.dll
+D:\agularAnd101\Angular-NetCor\webapi3\bin\Debug\net9.0\runtimes\win-x86\native\e_sqlite3.dll
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.csproj.AssemblyReference.cache
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.GeneratedMSBuildEditorConfig.editorconfig
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.AssemblyInfoInputs.cache
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.AssemblyInfo.cs
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.csproj.CoreCompileInputs.cache
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cs
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cache
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.sourcelink.json
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\scopedcss\bundle\demoapi.styles.css
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets.build.json
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets.development.json
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.build.demoapi.props
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.demoapi.props
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.demoapi.props
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\staticwebassets.pack.json
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.csproj.Up2Date
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.dll
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\refint\demoapi.dll
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.pdb
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\demoapi.genruntimeconfig.cache
+D:\agularAnd101\Angular-NetCor\webapi3\obj\Debug\net9.0\ref\demoapi.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.csproj.AssemblyReference.cache
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.AssemblyInfoInputs.cache
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.AssemblyInfo.cs
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\refint\demoapi.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.pdb
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\appsettings.json
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\demoapi.staticwebassets.endpoints.json
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\demoapi.exe
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\demoapi.deps.json
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\demoapi.runtimeconfig.json
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\demoapi.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\demoapi.pdb
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\scopedcss\bundle\demoapi.styles.css
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.demoapi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.build.demoapi.props
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.demoapi.props
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.demoapi.props
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\staticwebassets.pack.json
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.csproj.Up2Date
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\demoapi.genruntimeconfig.cache
+C:\Users\WIN10\Desktop\testfast\webapi3\obj\Debug\net9.0\ref\demoapi.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\FastReport.Compat.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\FastReport.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\FastReport.OpenSource.Export.PdfSimple.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\System.Drawing.Common.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\WIN10\Desktop\testfast\webapi3\bin\Debug\net9.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll

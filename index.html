@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File</title>
+</head>
+
+<body>
+    <h1>Download File</h1>
+    <button id="downloadBtn">Download</button>
+
+    <script>
+        document.getElementById("downloadBtn").addEventListener("click", async function () {
+            try {
+                const response = await fetch("http://localhost:5083/api/Download"); // แก้พอร์ตให้ตรงกับ API
+                if (!response.ok) {
+                    throw new Error("File not found");
+                }
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "downloaded_file.jpg"; // เปลี่ยนชื่อตามไฟล์ที่ API ส่งมา
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    </script>
+</body>
+
+</html>
