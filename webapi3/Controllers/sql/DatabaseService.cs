@@ -79,6 +79,52 @@ public class DatabaseService
         return post; // ถ้าไม่มีข้อมูลคืนค่า null
     }
 
+    //เมธอด เพิ่ม Title และ Body ลงในตาราง Posts
+    public bool CreatePost(Post newPost)
+    {
+        // สร้างตัวแปรเพื่อเก็บผลลัพธ์ว่าโพสต์ถูกเพิ่มหรือไม่
+        bool isSuccess = false;
+
+        using (var connection = new SQLiteConnection(_connectionString))
+        {
+            connection.Open();
+
+            // สร้างคำสั่ง SQL เพื่อเพิ่มโพสต์ใหม่
+            string query = "INSERT INTO Posts (Title, Body) VALUES (@Title, @Body)";
+
+            using (var command = new SQLiteCommand(query, connection))
+            {
+                // ป้องกัน SQL Injection โดยการใช้พารามิเตอร์
+                //ใช้พารามิเตอร์ชื่อ @Title, @Body เพื่อแทนที่ค่าที่ผู้ใช้ป้อนเข้าสู่ฐานข้อมูล
+                //AddWithValue() เป็นวิธีการเพิ่มพารามิเตอร์ลงในคำสั่ง SQL เพื่อป้องกัน SQL Injection
+                //ใช้ Add() แทนถ้าต้องการกำหนดประเภทข้อมูลเอง
+                command.Parameters.AddWithValue("@Title", newPost.Title);
+                command.Parameters.AddWithValue("@Body", newPost.Body);
+
+                //@ParameterName → ชื่อพารามิเตอร์ในคำสั่ง SQL ที่ต้องการแทนที่ค่า
+                //value → ค่าที่ต้องการใส่ลงในพารามิเตอร์นั้น
+                command.Parameters.AddWithValue("@ParameterName", value);
+
+
+                try
+                {
+                    // ดำเนินการคำสั่ง SQL
+                    command.ExecuteNonQuery();
+                    isSuccess = true;  // ถ้าคำสั่งทำงานสำเร็จ
+                }
+                catch (Exception ex)
+                {
+                    // ถ้ามีข้อผิดพลาดเกิดขึ้น
+                    Console.WriteLine(ex.Message);
+                    isSuccess = false;
+                }
+            }
+        }
+
+        return isSuccess;  // คืนค่าผลลัพธ์การเพิ่มโพสต์
+    }
+
+
 }
 public class Post
 {
