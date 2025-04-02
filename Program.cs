@@ -1,5 +1,6 @@
 using API.Data;
 using Microsoft.EntityFrameworkCore;
+using MyApp.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,11 @@ builder.Services.AddSwaggerGen();
 
 // Add controller services
 builder.Services.AddControllers();
+
+// ลงทะเบียน MyDbContext รันคำสั่ง create table
+builder.Services.AddDbContext<MyDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestCon")));
+
 
 // Connect to the database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
