@@ -107,23 +107,6 @@ namespace ModelTest.Controllers
     */
 
 
-    public class Customer
-    {
-        public int CustomerId { get; set; } // เพิ่ม CustomerId
-
-        //GeneralsModel เป็น ชนิดข้อมูล  คลาส ที่คุณสร้างขึ้นมาเพื่อเก็บข้อมูลต่าง ๆ
-        //ข้อมูลของ Generals จะถูกเก็บใน GeneralsModel
-        public GeneralsModel Generals { get; set; }
-        public AddressesModel Addresses { get; set; }
-        public ShippingModel Shipping { get; set; }
-
-        public ShopTypeModel ShopType { get; set; }
-        public CompanyModel Company { get; set; }
-
-
-
-    }
-
 
     public class ShippingModel
     {
@@ -146,6 +129,86 @@ namespace ModelTest.Controllers
 
 
     }
+
+
+    public class Customer
+    {
+        public int CustomerId { get; set; } // เพิ่ม CustomerId
+
+        //GeneralsModel เป็น ชนิดข้อมูล  คลาส ที่คุณสร้างขึ้นมาเพื่อเก็บข้อมูลต่าง ๆ
+        //ข้อมูลของ Generals จะถูกเก็บใน GeneralsModel
+        public GeneralsModel Generals { get; set; }
+        public AddressesModel Addresses { get; set; }
+        public ShippingModel Shipping { get; set; }
+
+        public ShopTypeModel ShopType { get; set; }
+
+        public IndustryTypeModel IndustryType { get; set; }
+        ///
+
+        public CompanyModel Company { get; set; }
+        public SortKeyModel SortKey { get; set; }
+        public CashGroupModel CashGroup { get; set; }
+        public PaymentMethodModel PaymentMethod { get; set; }
+        public TermOfPayModel TermOfPay { get; set; }
+
+        public AccountCodeModel AccountCode { get; set; }
+
+    }
+
+    //รหัสทางบัญชี
+    public class AccountCodeModel
+    {
+        public int id { get; set; }
+        public string accCode { get; set; }
+        public string accName { get; set; }
+        public string accDes { get; set; }
+    }
+
+
+
+
+
+
+    public class SortKeyModel
+    {
+        public int id { get; set; }
+        public string sortkeyCode { get; set; }
+        public string sortkeyName { get; set; }
+        public string sortkeyDes { get; set; }
+    }
+
+    public class CashGroupModel
+    {
+        public int id { get; set; }
+        public string cashCode { get; set; }
+        public string cashName { get; set; }
+        public string cashDes { get; set; }
+
+    }
+
+    public class PaymentMethodModel
+    {
+        public int id { get; set; }
+        public string payCode { get; set; }
+        public string payName { get; set; }
+        public string payDes { get; set; }
+
+    }
+
+    public class TermOfPayModel
+    {
+        public int id { get; set; }
+        public string topCode { get; set; }
+        public string topName { get; set; }
+        public string topDes { get; set; }
+
+    }
+
+
+
+
+
 
 
 }

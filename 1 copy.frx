@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="04/04/2025 13:01:20" ReportInfo.Modified="04/05/2025 05:15:21" ReportInfo.CreatorVersion="2025.1.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/04/2025 13:01:20" ReportInfo.Modified="04/04/2025 16:11:35" ReportInfo.CreatorVersion="2025.1.0.0">
   <Dictionary>
     <BusinessObjectDataSource Name="Generals" ReferenceName="Generals" DataType="System.Int32" Enabled="true"/>
   </Dictionary>
   <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="56.7"/>
     <PageHeaderBand Name="PageHeader1" Top="60.7" Width="718.2" Height="37.8"/>
-    <DataBand Name="Data1" Top="102.5" Width="718.2" Height="1285.2" Guides="132.3,141.75,160.65,519.75">
+    <DataBand Name="Data1" Top="102.5" Width="718.2" Height="1086.75" Guides="132.3,141.75,160.65,519.75">
       <TextObject Name="Text2" Left="9.45" Top="28.35" Width="217.35" Height="18.9" Text="General Data/ข้อมูลทั่วไป			&#13;&#10;" Font="Arial, 10pt"/>
       <TextObject Name="Text3" Left="-18.9" Top="66.15" Width="217.35" Height="18.9" Text="	Name 1/ชื่อ (35 Digits)*																												&#13;&#10;" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="217.35" Top="132.3" Width="207.9" Height="18.9" Text="[Customer.addrLine1]" Font="Arial, 10pt"/>
@@ -60,20 +60,11 @@
       <TextObject Name="Text7" Left="207.9" Top="774.9" Width="160.65" Height="18.9" Text="[Customer.IndustryTypeName]" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="396.9" Top="774.9" Width="160.65" Height="18.9" Text="[Customer.IndustryTypeDescription]" Font="Arial, 10pt"/>
       <TextObject Name="Text33" Left="37.8" Top="822.15" Width="207.9" Height="18.9" Text="Contact Person/บุคคลที่ติดต่อ" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="283.5" Top="822.15" Width="160.65" Height="18.9" Text="[Customer.contact_name]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="274.05" Top="822.15" Width="160.65" Height="18.9" Text="[Customer.contact_name]" Font="Arial, 10pt"/>
       <TextObject Name="Text35" Left="37.8" Top="878.85" Width="226.8" Height="18.9" Text="Company code data/ข้อมูลรหัสบริษัท" Font="Arial, 10pt"/>
       <TextObject Name="Text36" Left="37.8" Top="916.65" Width="170.1" Height="18.9" Text="Account Code/รหัสบัญชี	&#13;&#10;" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="292.95" Top="878.85" Width="160.65" Height="18.9" Text="[Customer.companyName]" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="557.55" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.sortkeyCode]" Font="Arial, 10pt"/>
-      <TextObject Name="Text37" Left="434.7" Top="916.65" Width="189" Height="18.9" Text="Sort Key/เรียงลำดับ			&#13;&#10;" Font="Arial, 10pt"/>
-      <TextObject Name="Text38" Left="37.8" Top="963.9" Width="264.6" Height="18.9" Text="Cash Management Group/กลุ่มบริหารเงินสด						&#13;&#10;" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="330.75" Top="963.9" Width="160.65" Height="18.9" Text="[Customer.cashDes]" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="330.75" Top="1011.15" Width="160.65" Height="18.9" Text="[Customer.payDes]" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="330.75" Top="1058.4" Width="160.65" Height="18.9" Text="[Customer.topName]" Font="Arial, 10pt"/>
-      <TextObject Name="Text39" Left="37.8" Top="1011.15" Width="274.05" Height="18.9" Text="Payment Method/วิธีการชำระเงิน			&#13;&#10;" Font="Arial, 10pt"/>
-      <TextObject Name="Text40" Left="37.8" Top="1058.4" Width="236.25" Height="18.9" Text="Term of Payment/เงื่อนไขการชำระเงิน				&#13;&#10;" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="255.15" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.accName]" Font="Arial, 10pt"/>
+      
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="1391.7" Width="718.2" Height="75.6"/>
+    <PageFooterBand Name="PageFooter1" Top="1193.25" Width="718.2" Height="75.6"/>
   </ReportPage>
 </Report>
