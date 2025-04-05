@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/04/2025 13:01:20" ReportInfo.Modified="04/04/2025 16:11:35" ReportInfo.CreatorVersion="2025.1.0.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="Generals" ReferenceName="Generals" DataType="System.Int32" Enabled="true"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="56.7"/>
+    <PageHeaderBand Name="PageHeader1" Top="60.7" Width="718.2" Height="37.8"/>
+    <DataBand Name="Data1" Top="102.5" Width="718.2" Height="1086.75" Guides="132.3,141.75,160.65,519.75">
+      <TextObject Name="Text2" Left="9.45" Top="28.35" Width="217.35" Height="18.9" Text="General Data/ข้อมูลทั่วไป			&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text3" Left="-18.9" Top="66.15" Width="217.35" Height="18.9" Text="	Name 1/ชื่อ (35 Digits)*																												&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="217.35" Top="132.3" Width="207.9" Height="18.9" Text="[Customer.addrLine1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="453.6" Top="132.3" Width="207.9" Height="18.9" Text="[Customer.addrLine2]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="217.35" Top="170.1" Width="207.9" Height="18.9" Text="[Customer.subDistrict]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="453.6" Top="170.1" Width="207.9" Height="18.9" Text="[Customer.district]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="217.35" Top="207.9" Width="141.75" Height="18.9" Text="[Customer.Province]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="576.45" Top="207.9" Width="141.75" Height="18.9" Text="[Customer.Country]" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="217.35" Top="66.15" Width="207.9" Height="18.9" Text="[Customer.GeneralName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="-18.9" Top="103.95" Width="217.35" Height="18.9" Text="	Name 2/ชื่อ (35 Digits)*																												&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="217.35" Top="103.95" Width="207.9" Height="18.9" Text="[Customer.GeneralName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="37.8" Top="132.3" Width="94.5" Height="18.9" Text="Address / ที่อยู่ *&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="37.8" Top="170.1" Width="94.5" Height="18.9" Text="District/เขต/อำเภอ			&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text12" Left="37.8" Top="207.9" Width="94.5" Height="18.9" Text="City/เมือง/จังหวัด		&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text13" Left="453.6" Top="207.9" Width="113.4" Height="18.9" Text="Country/ประเทศ" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="425.25" Top="245.7" Width="160.65" Height="18.9" Text="[Customer.postalCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Left="217.35" Top="245.7" Width="179.55" Height="18.9" Text="Postal code/รหัสไปรษณีย์" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="37.8" Top="283.5" Width="113.4" Height="18.9" Text="Telephone/เบอร์โทรศัพท์*&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="217.35" Top="283.5" Width="160.65" Height="18.9" Text="[Customer.GeneralTel]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="529.2" Top="283.5" Width="160.65" Height="18.9" Text="[Customer.GeneralFax]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="217.35" Top="330.75" Width="160.65" Height="18.9" Text="[Customer.GeneralEmail]" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="396.9" Top="283.5" Width="94.5" Height="18.9" Text="FAX/แฟกซ์			&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text17" Left="37.8" Top="330.75" Width="141.75" Height="18.9" Text="Email Address/อีเมล์&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text18" Left="396.9" Top="330.75" Width="151.2" Height="18.9" Text="Line ID/ไลน์" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="557.55" Top="330.75" Width="160.65" Height="18.9" Text="[Customer.GeneralLine]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="217.35" Top="378" Width="160.65" Height="18.9" Text="[Customer.GeneralTax]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="529.2" Top="378" Width="160.65" Height="18.9" Text="[Customer.GeneralBranch]" Font="Arial, 10pt"/>
+      <TextObject Name="Text19" Left="37.8" Top="368.55" Width="94.5" Height="18.9" Text="Tax ID/เลขที่ผู้เสียภาษี*&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text20" Left="396.9" Top="378" Width="94.5" Height="18.9" Text="Branch/สาขา*			&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="274.05" Top="519.75" Width="207.9" Height="18.9" Text="[Customer.ShippingDistrict]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="576.45" Top="557.55" Width="141.75" Height="18.9" Text="[Customer.shippingcountry]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="425.25" Top="595.35" Width="217.35" Height="18.9" Text="[Customer.ShippingPostalCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text21" Left="37.8" Top="425.25" Width="179.55" Height="18.9" Text="Delivery Data/ข้อมูลการขนส่ง" Font="Arial, 10pt"/>
+      <TextObject Name="Text22" Left="122.85" Top="453.6" Width="122.85" Height="18.9" Text="Name 1/ชื่อ (35 Digits)&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text23" Left="122.85" Top="491.4" Width="94.5" Height="18.9" Text="Address / ที่อยู่&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="274.05" Top="453.6" Width="160.65" Height="18.9" Text="[Customer.DeliveryName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="274.05" Top="491.4" Width="160.65" Height="18.9" Text="[Customer.address1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text24" Left="122.85" Top="519.75" Width="94.5" Height="18.9" Text="District/เขต/อำเภอ			&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text25" Left="122.85" Top="557.55" Width="94.5" Height="18.9" Text="City/เมือง/จังหวัด		&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text26" Left="463.05" Top="557.55" Width="122.85" Height="18.9" Text="Country/ประเทศ" Font="Arial, 10pt"/>
+      <TextObject Name="Text27" Left="122.85" Top="595.35" Width="274.05" Height="18.9" Text="Postal code/รหัสไปรษณีย์" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="274.05" Top="557.55" Width="160.65" Height="18.9" Text="[Customer.ShippingProvince]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="311.85" Top="633.15" Width="160.65" Height="18.9" Text="[Customer.Telephone]" Font="Arial, 10pt"/>
+      <TextObject Name="Text28" Left="122.85" Top="633.15" Width="160.65" Height="18.9" Text="Telephone/เบอร์โทรศัพท์	&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="292.95" Top="670.95" Width="160.65" Height="18.9" Text="[Customer.Freight]" Font="Arial, 10pt"/>
+      <TextObject Name="Text29" Left="122.85" Top="670.95" Width="113.4" Height="18.9" Text="Freight/ค่าขนส่ง&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text30" Left="500.85" Top="633.15" Width="94.5" Height="18.9" Text="FAX/แฟกซ์&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text31" Left="37.8" Top="727.65" Width="132.3" Height="18.9" Text="Purpost for/ประเภท		&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text32" Left="37.8" Top="774.9" Width="132.3" Height="18.9" Text="Industry/อุตหสากรรม	&#13;&#10;" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="567" Top="774.9" Width="160.65" Height="18.9" Text="[Customer.IndustryTypeCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="207.9" Top="774.9" Width="160.65" Height="18.9" Text="[Customer.IndustryTypeName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="396.9" Top="774.9" Width="160.65" Height="18.9" Text="[Customer.IndustryTypeDescription]" Font="Arial, 10pt"/>
+      <TextObject Name="Text33" Left="37.8" Top="822.15" Width="207.9" Height="18.9" Text="Contact Person/บุคคลที่ติดต่อ" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="274.05" Top="822.15" Width="160.65" Height="18.9" Text="[Customer.contact_name]" Font="Arial, 10pt"/>
+      <TextObject Name="Text35" Left="37.8" Top="878.85" Width="226.8" Height="18.9" Text="Company code data/ข้อมูลรหัสบริษัท" Font="Arial, 10pt"/>
+      <TextObject Name="Text36" Left="37.8" Top="916.65" Width="170.1" Height="18.9" Text="Account Code/รหัสบัญชี	&#13;&#10;" Font="Arial, 10pt"/>
+      
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="1193.25" Width="718.2" Height="75.6"/>
+  </ReportPage>
+</Report>
