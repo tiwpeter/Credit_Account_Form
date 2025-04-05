@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="04/04/2025 13:01:20" ReportInfo.Modified="04/05/2025 11:51:36" ReportInfo.CreatorVersion="2025.1.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/04/2025 13:01:20" ReportInfo.Modified="04/05/2025 11:26:42" ReportInfo.CreatorVersion="2025.1.0.0">
   <Dictionary>
     <BusinessObjectDataSource Name="Generals" ReferenceName="Generals" DataType="System.Int32" Enabled="true"/>
   </Dictionary>
   <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="718.2"/>
-    <PageHeaderBand Name="PageHeader1" Top="4" Width="718.2" Height="9.45"/>
-    <DataBand Name="Data1" Top="17.45" Width="718.2" Height="1285.2" Guides="132.3,141.75,160.65,519.75">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="56.7"/>
+    <PageHeaderBand Name="PageHeader1" Top="60.7" Width="718.2" Height="37.8"/>
+    <DataBand Name="Data1" Top="102.5" Width="718.2" Height="1285.2" Guides="132.3,141.75,160.65,519.75">
       <TextObject Name="Text2" Left="9.45" Top="28.35" Width="217.35" Height="18.9" Text="General Data/ข้อมูลทั่วไป" Font="Arial, 10pt"/>
       <TextObject Name="Text3" Left="-18.9" Top="66.15" Width="217.35" Height="18.9" Text="	Name 1/ชื่อ (35 Digits)*																												&#13;&#10;" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="217.35" Top="132.3" Width="207.9" Height="18.9" Text="[Customer.addrLine1]" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="453.6" Top="132.3" Width="207.9" Height="18.9" Text="[Customer.addrLine2]" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="217.35" Top="170.1" Width="207.9" Height="18.9" Text="[Customer.subDistrict]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="453.6" Top="170.1" Width="207.9" Height="18.9" Text="[Customer.district]" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="217.35" Top="207.9" Width="141.75" Height="18.9" Text="[Customer.Province]" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="576.45" Top="207.9" Width="141.75" Height="18.9" Text="[Customer.Country]" Font="Arial, 10pt"/>
       <TextObject Name="Text6" Left="217.35" Top="66.15" Width="207.9" Height="18.9" Text="[Customer.GeneralName]" Font="Arial, 10pt"/>
@@ -25,7 +26,9 @@
       <TextObject Name="Text14" Left="217.35" Top="245.7" Width="179.55" Height="18.9" Text="Postal code/รหัสไปรษณีย์" Font="Arial, 10pt"/>
       <TextObject Name="Text15" Left="37.8" Top="283.5" Width="113.4" Height="18.9" Text="Telephone/เบอร์โทรศัพท์*&#13;&#10;" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="217.35" Top="283.5" Width="160.65" Height="18.9" Text="[Customer.GeneralTel]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="529.2" Top="283.5" Width="160.65" Height="18.9" Text="[Customer.GeneralFax]" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="217.35" Top="330.75" Width="160.65" Height="18.9" Text="[Customer.GeneralEmail]" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="396.9" Top="283.5" Width="94.5" Height="18.9" Text="FAX/แฟกซ์			&#13;&#10;" Font="Arial, 10pt"/>
       <TextObject Name="Text17" Left="37.8" Top="330.75" Width="141.75" Height="18.9" Text="Email Address/อีเมล์&#13;&#10;" Font="Arial, 10pt"/>
       <TextObject Name="Text18" Left="396.9" Top="330.75" Width="151.2" Height="18.9" Text="Line ID/ไลน์" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="557.55" Top="330.75" Width="160.65" Height="18.9" Text="[Customer.GeneralLine]" Font="Arial, 10pt"/>
@@ -71,6 +74,6 @@
       <TextObject Name="Text40" Left="37.8" Top="1058.4" Width="236.25" Height="18.9" Text="Term of Payment/เงื่อนไขการชำระเงิน				&#13;&#10;" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="255.15" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.accName]" Font="Arial, 10pt"/>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="1306.65" Width="718.2" Height="75.6"/>
+    <PageFooterBand Name="PageFooter1" Top="1391.7" Width="718.2" Height="75.6"/>
   </ReportPage>
 </Report>

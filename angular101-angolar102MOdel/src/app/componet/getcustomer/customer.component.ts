@@ -1,11 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CustomerService } from '../../sevice/customer.service';
+import { CommonModule } from '@angular/common'; // <-- Import CommonModule here
 
 @Component({
   selector: 'app-customer',
-  imports: [],
   templateUrl: './customer.component.html',
-  styleUrl: './customer.component.css'
+  styleUrls: ['./customer.component.css'],
+  imports:[CommonModule]
 })
-export class CustomerComponent {
+export class CustomerComponent implements OnInit {
+  customers: any[] = [];
 
+  constructor(private customerService: CustomerService) {}
+
+  ngOnInit(): void {
+    this.customerService.getCustomers().subscribe(
+      (data) => {
+        console.log('Data received from API:', data); // Log the data to the console
+        this.customers = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error); // Log any errors to the console
+      }
+    );
+  }
 }

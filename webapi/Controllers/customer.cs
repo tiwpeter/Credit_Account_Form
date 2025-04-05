@@ -16,15 +16,17 @@ namespace CustomerApi.Controllers
             {
                 CustomerId = 1,
                 Generals = new GeneralsModel
-                {
-                    GeneralName = "บริษัท A",
-                    GeneralTel = "012-3456789",
-                    GeneralFax = "012-3456790",
-                    GeneralEmail = "contact@companyA.com",
-                    GeneralLine = "@companyA",
-                    GeneralTax = "1234567890",
-                    GeneralBranch = "สำนักงานใหญ่"
-                },
+{
+    GeneralName = "บริษัท เอ ไอ เทคโนโลยี จำกัด",
+    GeneralName1 = "A.I. Technology Co., Ltd.",
+    GeneralTel = "02-123-4567",
+    GeneralFax = "02-123-4568",
+    GeneralEmail = "contact@aitech.co.th",
+    GeneralLine = "@aitech",
+    GeneralTax = "1234567890123",
+    GeneralBranch = "สำนักงานใหญ่"
+},
+
                 Addresses = new AddressesModel
                 {
                     addrType = "ที่อยู่สำนักงาน",
@@ -55,59 +57,70 @@ namespace CustomerApi.Controllers
                 },
                 ShopType = new ShopTypeModel
                 {
-                    id = 1,
-                    shopCode = "A123",
-                    shopName = "ร้าน A",
-                    shopDes = "ร้านขายสินค้าครบวงจร",
-                    accGroupName = "กลุ่มธุรกิจ A"
-                },
+    id = 1,
+    shopCode = "A123",
+    shopName = "ร้าน A",
+    shopDes = "ร้านจำหน่ายสินค้าครบวงจร รวมทั้งอุปกรณ์ต่าง ๆ ที่หลากหลาย",
+    accGroupName = "กลุ่มธุรกิจค้าปลีก"
+},
                 Company = new CompanyModel
                 {
                     company_id = 1,
                     companyCode = "CMP001",
                     companyName = "บริษัท A จำกัด",
                     companyAddr = "123 ถนนสุขุมวิท แขวงคลองตัน เขตวัฒนา กรุงเทพมหานคร 10110"
-                }
+                },
+                IndustryType = new IndustryTypeModel
+{
+    id = 2,
+    InduTypeCode = "IT001",  // รหัสประเภทอุตสาหกรรม
+    InduTypeName = "เทคโนโลยีสารสนเทศ",  // ชื่อประเภทอุตสาหกรรม
+    InduTypeDes = "อุตสาหกรรมที่เกี่ยวข้องกับการพัฒนาเทคโนโลยีสารสนเทศ เช่น ซอฟต์แวร์, ฮาร์ดแวร์, และบริการด้านไอที"  // คำอธิบาย
+}
             },
+
             new Customer
            {
      CustomerId = 2,
     Generals = new GeneralsModel
-    {
-        GeneralName = "บริษัท B",
-        GeneralTel = "098-7654321",
-        GeneralFax = "098-7654332",
-        GeneralEmail = "contact@companyB.com",
-        GeneralLine = "@companyB",
-        GeneralTax = "9876543210",
-        GeneralBranch = "สาขาลอสแอนเจลิส"
-    },
+{
+    GeneralName = "บริษัท สมาร์ทเทค โซลูชั่น จำกัด",
+    GeneralName1 = "SmartTech Solution Co., Ltd.",
+    GeneralTel = "02-987-6543",
+    GeneralFax = "02-987-6544",
+    GeneralEmail = "info@smarttech.co.th",
+    GeneralLine = "@smarttech",
+    GeneralTax = "9876543210987",
+    GeneralBranch = "สาขากรุงเทพฯ"
+},
     Addresses = new AddressesModel
-    {
-        addrType = "ที่อยู่สำนักงาน",
-        addrLine1 = "456 ถนนฮอลลีวูด",
-        addrLine2 = "อาคาร B",
-        subDistrict = "Hollywood",
-        district = "Los Angeles",
-        postalCode = "90028",
-        createdDate = "2025-04-02",
-        CountryId = 2,
-        ProvinceId = 201
-    },
+{
+    addrType = "ที่อยู่สำนักงาน",
+    addrLine1 = "99/1 ถนนสุขุมวิท",
+    addrLine2 = "ชั้น 10 อาคารไทยพาณิชย์",
+    subDistrict = "คลองเตย",
+    district = "คลองเตย",
+    postalCode = "10110",
+    createdDate = "2025-04-02",
+    CountryId = 1,         // ประเทศไทย
+    ProvinceId = 101        // กรุงเทพมหานคร
+}
+,
     Shipping = new ShippingModel
-    {
-        shipping_id = 2,
-        addrType = "ที่อยู่จัดส่ง",
-        DeliveryName = "คุณจอห์น",
-        address1 = "789 ถนนเมลโรส",
-        district = "Los Angeles",
-        province = "California",
-        postalCode = "90029",
-        shippingcountry = "us",
-        freight = "150.00m",
-        mobile = "089-1234567",
-        contact_name = "คุณจอห์น สมิธ"
-    },
+{
+    shipping_id = 2,
+    addrType = "ที่อยู่จัดส่ง",
+    DeliveryName = "คุณสมชาย ใจดี",
+    address1 = "88 ซอยสุขุมวิท 22",
+    district = "คลองเตย",
+    province = "กรุงเทพมหานคร",
+    postalCode = "10110",
+    shippingcountry = "TH",     // รหัสประเทศไทย
+    freight = "150.00m",
+    mobile = "081-2345678",
+    contact_name = "คุณสมชาย ใจดี"
+}
+,
     IndustryType = new IndustryTypeModel
     {
         id = 2,
@@ -117,12 +130,12 @@ namespace CustomerApi.Controllers
     },
     ShopType = new ShopTypeModel
     {
-        id = 2,
-        shopCode = "B456",
-        shopName = "ร้าน B",
-        shopDes = "ร้านจำหน่ายอุปกรณ์ไฮเทค",
-        accGroupName = "กลุ่มธุรกิจ B"
-    },
+    id = 2,
+    shopCode = "B456",
+    shopName = "ร้าน B",
+    shopDes = "ร้านจำหน่ายอุปกรณ์ไฮเทคและเทคโนโลยีล้ำสมัยสำหรับผู้ที่สนใจ",
+    accGroupName = "กลุ่มธุรกิจเทคโนโลยี"
+},
     Company = new CompanyModel
     {
         company_id = 2,
@@ -181,6 +194,28 @@ namespace CustomerApi.Controllers
             new Province { CountryId = 2, ProvinceId = 201, NameTh = "แคลิฟอร์เนีย", NameEn = "California", ProvinceCode = "CA" }
         };
 
+
+
+        [HttpGet("customer")]
+        public IActionResult GetAllCustomers()
+        {
+            var allCustomers = customers.Select(customer => new
+            {
+                GeneralName = customer.Generals?.GeneralName ?? "ไม่ระบุ",  // ใช้ null-coalescing operator (??) เพื่อใช้ค่า default หากเป็น null
+                addrLine1 = customer.Addresses?.addrLine1 ?? "ไม่ระบุ",
+                accGroupName = customer.ShopType?.accGroupName ?? "ไม่ระบุ",
+                InduTypeName = customer.IndustryType?.InduTypeName ?? "ไม่ระบุ",
+                DeliveryName = customer.Shipping?.DeliveryName ?? "ไม่ระบุ",
+                payName = customer.PaymentMethod?.payName ?? "ไม่ระบุ",
+
+            }).ToList();
+
+            return Ok(allCustomers);
+        }
+
+
+
+
         // http get customer details
         [HttpGet("customer-report/{customerId}")]
         public IActionResult GetCustomerReport(int customerId)
@@ -197,6 +232,7 @@ namespace CustomerApi.Controllers
                 {
                     c.CustomerId,
                     c.Generals.GeneralName,
+                    c.Generals.GeneralName1,
                     c.Generals.GeneralTel,
                     c.Generals.GeneralFax,
                     c.Generals.GeneralEmail,
