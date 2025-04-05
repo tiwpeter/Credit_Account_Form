@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Claim & Complaint List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex justify-center p-6">
+    <div class="w-full max-w-6xl bg-white shadow-lg rounded-lg p-6">
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">CS: Claim & Complaint List</h1>
+
+        <!-- Add Button -->
+        <div class="flex mb-6">
+            <button
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                Add Claim/Complaint
+            </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="flex  mb-6">
+            <input type="text" placeholder="Search user..."
+                class="bg-gray-100 w-full sm:w-80 px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600" />
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto text-sm">
+                <thead class="bg-gray-200 text-left">
+                    <tr>
+                        <th class="px-4 py-3">#</th>
+                        <th class="px-4 py-3">ผู้ติดต่อ</th>
+                        <th class="px-4 py-3">ที่อยู่</th>
+                        <th class="px-4 py-3">ประเภทร้านค้า</th>
+                        <th class="px-4 py-3">บริษัท</th>
+                        <th class="px-4 py-3">อุสาหกรรม</th>
+                        <th class="px-4 py-3">วิธีการชำระเงิน</th>
+                        <th class="px-4 py-3 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Row 1 -->
+                    <tr class="border-b border-gray-200">
+                        <td class="px-4 py-3">1</td>
+                        <td class="px-4 py-3">John Doe</td>
+                        <td class="px-4 py-3">johncom</td>
+                        <td class="px-4 py-3">Retailer</td>
+                        <td class="px-4 py-3">JD Enterprises</td>
+                        <td class="px-4 py-3">Retail</td>
+                        <td class="px-4 py-3">Credit</td>
+                        <td class="px-4 py-3 text-center">
+                            <button
+                                class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600">View</button>
+                            <button
+                                class="bg-yellow-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-yellow-600">Edit</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Row 2 -->
+                    <tr class="border-b border-gray-200">
+                        <td class="px-4 py-3">2</td>
+                        <td class="px-4 py-3">Jane Smith</td>
+                        <td class="px-4 py-3">janecom</td>
+                        <td class="px-4 py-3">Wholesaler</td>
+                        <td class="px-4 py-3">JS Enterprises</td>
+                        <td class="px-4 py-3">Wholesale</td>
+                        <td class="px-4 py-3">Cash</td>
+                        <td class="px-4 py-3 text-center">
+                            <button
+                                class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600">View</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

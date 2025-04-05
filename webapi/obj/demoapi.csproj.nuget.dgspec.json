@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\WIN10\\Desktop\\0\\webapi\\demoapi.csproj": {}
+    "C:\\Users\\WIN10\\Desktop\\0\\intigret\\webapi\\demoapi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\WIN10\\Desktop\\0\\webapi\\demoapi.csproj": {
+    "C:\\Users\\WIN10\\Desktop\\0\\intigret\\webapi\\demoapi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\0\\webapi\\demoapi.csproj",
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\0\\intigret\\webapi\\demoapi.csproj",
         "projectName": "demoapi",
-        "projectPath": "C:\\Users\\WIN10\\Desktop\\0\\webapi\\demoapi.csproj",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\0\\intigret\\webapi\\demoapi.csproj",
         "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\WIN10\\Desktop\\0\\webapi\\obj\\",
+        "outputPath": "C:\\Users\\WIN10\\Desktop\\0\\intigret\\webapi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

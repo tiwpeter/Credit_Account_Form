@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LMhZMvyWg9M=",
+  "dgSpecHash": "THuUpppAP3I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\WIN10\\Desktop\\0\\webapi\\demoapi.csproj",
+  "projectFilePath": "C:\\Users\\WIN10\\Desktop\\0\\intigret\\webapi\\demoapi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\WIN10\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\WIN10\\.nuget\\packages\\fastreport.compat\\2025.1.22\\fastreport.compat.2025.1.22.nupkg.sha512",
