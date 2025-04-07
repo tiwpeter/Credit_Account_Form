@@ -42,19 +42,34 @@ export class GetbyidComponent implements OnInit {
   }
 
 //เตรียมข้อมูลที่ส่ง
-  initForm(customer: any) {
-    this.customerForm = this.fb.group({
-      generalName: [customer.general?.generalName || ''],
+ initForm(customer: any) {
+  this.customerForm = this.fb.group({
+    generalName: [customer.general?.generalName || ''],
+    generalFax: [customer.general?.generalFax || ''],
+    generalTax: [customer.general?.generalTax || ''],
+    generalTel: [customer.general?.generalTel || ''],
+    generalLine: [customer.general?.generalLine || ''],
+    generalEmail: [customer.general?.generalEmail || ''],
+    generalName1: [customer.general?.generalName1 || ''],
+    generalBranch: [customer.general?.generalBranch || '']
+  });
+}
 
-    });
-  }
 
  onSubmit() {
   if (this.customerForm.valid && this.customerId) {
     console.log('ข้อมูลที่ส่งไป:', this.customerForm.value); // ตรวจสอบข้อมูลที่ส่งไป
 
+    // ส่งข้อมูลทั้งหมดที่กรอกในฟอร์มไปที่ API
     this.apiService.updateCustomer(this.customerId, {
-      generalName: this.customerForm.value.generalName || "",
+      generalName: this.customerForm.value.generalName || '',
+      generalFax: this.customerForm.value.generalFax || '',
+      generalTax: this.customerForm.value.generalTax || '',
+      generalTel: this.customerForm.value.generalTel || '',
+      generalLine: this.customerForm.value.generalLine || '',
+      generalEmail: this.customerForm.value.generalEmail || '',
+      generalName1: this.customerForm.value.generalName1 || '',
+      generalBranch: this.customerForm.value.generalBranch || ''
     }).subscribe({
       next: () => {
         console.log('API เรียกสำเร็จ');
@@ -69,6 +84,7 @@ export class GetbyidComponent implements OnInit {
     alert('กรุณากรอกข้อมูลให้ครบถ้วน');
   }
 }
+
 
 
 }

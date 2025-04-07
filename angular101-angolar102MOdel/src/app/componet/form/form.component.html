@@ -731,7 +731,7 @@
 
             </div>
 
-            <div class="container mx-auto p-6">
+            <div class="container mx-auto ">
 
                 <!-- กลุ่มเงินสด -->
                 <h2 class="text-xl font-bold text-gray-800 mb-6">กลุ่มเงินสด</h2>
@@ -786,7 +786,7 @@
 
 
             <!--PaymentMethod-->
-            <div class="mx-auto p-6 bg-white rounded-lg shadow-md">
+            <div class="mx-auto mt-12 bg-white rounded-lg shadow-md">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">เลือกวิธีการชำระเงิน</h2>
                 <form (ngSubmit)="onSubmit()" class="space-y-4">
                     <!-- เลือก Payment Method -->
@@ -846,7 +846,7 @@
 
 
             <!--SaleGroup-->
-            <div class="container mx-auto p-6">
+            <div class="container mx-auto ">
                 <h2 class="text-xl font-bold text-gray-800 mb-6">กลุ่มการขาย</h2>
                 <form class="space-y-4">
                     <!-- รหัสกลุ่มการขาย -->
@@ -892,7 +892,7 @@
 
 
             <!--CustGroupType-->
-            <div class="container mx-auto p-6">
+            <div class="container mx-auto ">
                 <h2 class="text-xl font-bold text-gray-800 mb-6">ประเภทของกลุ่มลูกค้า</h2>
                 <form class="space-y-4">
                     <!-- รหัสประเภทกลุ่มลูกค้า -->
@@ -936,7 +936,7 @@
 
 
             <!--Currency-->
-            <div class="container mx-auto p-6">
+            <div class="container mx-auto ">
                 <h2 class="text-xl font-bold text-gray-800 mb-6">สกุลเงิน</h2>
                 <form class="space-y-4">
                     <!-- รหัสสกุลเงิน -->
@@ -1006,7 +1006,7 @@
             <!--คำอธิบายเกี่ยวกับขอบเขตความรับผิดชอบของ Incoterm นั้น เช่น ใครจ่ายค่าขนส่ง ใครรับผิดชอบเมื่อของเสียหาย ฯลฯ-->
             <!--เขตความรับผิดชอบของ-->
             <div class="Incoterms">
-                <div class="p-6">
+                <div class="">
                     <h1 class="text-2xl font-bold mb-4">ข้อกำหนดการค้าระหว่างประเทศ</h1>
 
                     <form (ngSubmit)="onSubmit()" #incotermForm="ngForm">
@@ -1054,8 +1054,8 @@
 
             <!--CustGroupContry  จัดกลุ่มลูกค้าตามประเทศ -->
             <!--TH-G1	กลุ่มลูกค้าภายในประเทศไทย	ลูกค้าประเภทค้าส่งในไทย-->
-            <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
-                <h2 class="text-2xl font-semibold mb-6 text-gray-800">กลุ่มลูกค้าตามประเทศ</h2>
+            <div class="max-w-xl mx-auto mt-10  bg-white shadow-lg rounded-xl">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">กลุ่มลูกค้าแต่ละประเทศ</h2>
 
                 <form>
                     <!-- custgroContryCode -->

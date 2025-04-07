@@ -1,8 +1,27 @@
 <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" *ngIf="customerForm">
-    <label>ชื่อทั่วไป:</label>
-    <!---อัปเดตค่าเมื่อมีการเปลี่ยนแปลงค่าในฟอร์ม.-->
-    <input type="text" formControlName="generalName"><br>
+    <label for="generalName">ชื่อทั่วไป:</label>
+    <input id="generalName" type="text" formControlName="generalName"><br>
 
+    <label for="generalFax">แฟกซ์:</label>
+    <input id="generalFax" type="text" formControlName="generalFax"><br>
 
-    <button type="submit">บันทึกข้อมูล</button>
+    <label for="generalTax">หมายเลขภาษี:</label>
+    <input id="generalTax" type="text" formControlName="generalTax"><br>
+
+    <label for="generalTel">หมายเลขโทรศัพท์:</label>
+    <input id="generalTel" type="text" formControlName="generalTel"><br>
+
+    <label for="generalLine">ไลน์ ID:</label>
+    <input id="generalLine" type="text" formControlName="generalLine"><br>
+
+    <label for="generalEmail">อีเมล:</label>
+    <input id="generalEmail" type="email" formControlName="generalEmail"><br>
+
+    <label for="generalName1">ชื่อที่สอง:</label>
+    <input id="generalName1" type="text" formControlName="generalName1"><br>
+
+    <label for="generalBranch">สาขา:</label>
+    <input id="generalBranch" type="text" formControlName="generalBranch"><br>
+
+    <button type="submit" [disabled]="!customerForm.valid">บันทึกข้อมูล</button>
 </form>

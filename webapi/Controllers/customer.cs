@@ -195,19 +195,18 @@ namespace CustomerApi.Controllers
         };
 
         [HttpPut("customer/{customerId}")]
-        public IActionResult UpdateCustomer(int customerId, [FromBody] GeneralsModel updatedGenerals)
+        public IActionResult UpdateCustomer(int customerId, [FromBody] Customer updatedCustomer)
         {
             // ตรวจสอบข้อมูลที่ได้รับ
-            if (updatedGenerals == null)
+            if (updatedCustomer == null)
             {
-                return BadRequest("ข้อมูล Generals ผิดรูปแบบ");
+                return BadRequest("ข้อมูลลูกค้าผิดรูปแบบ");
             }
 
             // แสดงข้อมูลที่ได้รับใน console
             Console.WriteLine("ข้อมูลที่ได้รับจาก client:");
-            Console.WriteLine($"GeneralName: {updatedGenerals.GeneralName}");
+            Console.WriteLine($"GeneralName: {updatedCustomer.Generals?.GeneralName}");
 
-            // ค้นหาลูกค้าจาก ID
             var customer = customers.FirstOrDefault(c => c.CustomerId == customerId);
 
             if (customer == null)
@@ -215,12 +214,11 @@ namespace CustomerApi.Controllers
                 return NotFound("ไม่พบข้อมูลลูกค้า");
             }
 
-            // อัปเดตเฉพาะข้อมูล Generals
-            customer.Generals.GeneralName = updatedGenerals.GeneralName ?? customer.Generals.GeneralName;
+            // อัปเดตข้อมูลลูกค้า
+            customer.Generals.GeneralName = updatedCustomer.Generals?.GeneralName ?? customer.Generals.GeneralName;
 
-            return Ok("อัปเดตข้อมูล Generals สำเร็จ");
+            return Ok("อัปเดตข้อมูลลูกค้าสำเร็จ");
         }
-
 
 
 
