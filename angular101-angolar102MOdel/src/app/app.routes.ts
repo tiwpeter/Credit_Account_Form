@@ -3,6 +3,7 @@ import { TestComponent } from './componet/test/test.component';
 import { DowndloadComponent } from './componet/downdload/downdload.component';
 import { CustomerComponent } from './componet/getcustomer/customer.component';
 import { FormComponent } from './componet/form/form.component';
+import { GetbyidComponent } from './componet/getbyid/getbyid.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,11 @@ export const routes: Routes = [
     }   ,{
         path: 'form',  // รับค่า id จาก URL
         component: FormComponent,
+        title: 'Home Page'
+    },
+    {
+        path: 'Customer/:id',  // รับค่า id จาก URL
+        component: GetbyidComponent,
         title: 'Home Page'
     }
 ];

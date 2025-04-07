@@ -31,6 +31,25 @@ namespace YourApp.Controllers
             // ถ้าพบ ก็ส่งกลับข้อมูล
             return Ok(item);
         }
+        // PUT api/Testfect/{id}
+        [HttpPut("{id}")]
+        public ActionResult<Item> UpdateItem(int id, [FromBody] Item updatedItem)
+        {
+            // ค้นหาสินค้าในรายการตาม id
+            var item = Items.FirstOrDefault(i => i.Id == id);
+
+            if (item == null)
+            {
+                return NotFound(new { message = "Item not found" });
+            }
+
+            // อัปเดตข้อมูลสินค้า
+            item.Name = updatedItem.Name;
+            item.Description = updatedItem.Description;
+            item.Price = updatedItem.Price;
+
+            return Ok(item);
+        }
     }
 }
 namespace YourApp.Models

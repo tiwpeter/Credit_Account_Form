@@ -194,6 +194,34 @@ namespace CustomerApi.Controllers
             new Province { CountryId = 2, ProvinceId = 201, NameTh = "แคลิฟอร์เนีย", NameEn = "California", ProvinceCode = "CA" }
         };
 
+        [HttpPut("customer/{customerId}")]
+        public IActionResult UpdateCustomer(int customerId, [FromBody] GeneralsModel updatedGenerals)
+        {
+            // ตรวจสอบข้อมูลที่ได้รับ
+            if (updatedGenerals == null)
+            {
+                return BadRequest("ข้อมูล Generals ผิดรูปแบบ");
+            }
+
+            // แสดงข้อมูลที่ได้รับใน console
+            Console.WriteLine("ข้อมูลที่ได้รับจาก client:");
+            Console.WriteLine($"GeneralName: {updatedGenerals.GeneralName}");
+
+            // ค้นหาลูกค้าจาก ID
+            var customer = customers.FirstOrDefault(c => c.CustomerId == customerId);
+
+            if (customer == null)
+            {
+                return NotFound("ไม่พบข้อมูลลูกค้า");
+            }
+
+            // อัปเดตเฉพาะข้อมูล Generals
+            customer.Generals.GeneralName = updatedGenerals.GeneralName ?? customer.Generals.GeneralName;
+
+            return Ok("อัปเดตข้อมูล Generals สำเร็จ");
+        }
+
+
 
 
         [HttpGet("customer")]
@@ -201,13 +229,13 @@ namespace CustomerApi.Controllers
         {
             var allCustomers = customers.Select(customer => new
             {
-                GeneralName = customer.Generals?.GeneralName ?? "ไม่ระบุ",  // ใช้ null-coalescing operator (??) เพื่อใช้ค่า default หากเป็น null
+                id = customer.CustomerId, // ✅ เพิ่ม id ที่นี่
+                GeneralName = customer.Generals?.GeneralName ?? "ไม่ระบุ",
                 addrLine1 = customer.Addresses?.addrLine1 ?? "ไม่ระบุ",
                 accGroupName = customer.ShopType?.accGroupName ?? "ไม่ระบุ",
                 InduTypeName = customer.IndustryType?.InduTypeName ?? "ไม่ระบุ",
                 DeliveryName = customer.Shipping?.DeliveryName ?? "ไม่ระบุ",
-                payName = customer.PaymentMethod?.payName ?? "ไม่ระบุ",
-
+                payName = customer.PaymentMethod?.payName ?? "ไม่ระบุ"
             }).ToList();
 
             return Ok(allCustomers);
@@ -215,8 +243,40 @@ namespace CustomerApi.Controllers
 
 
 
+        [HttpGet("customer/{customerId}")]
+        public IActionResult GetDetailCustomers(int customerId)
+        {
+            var customer = customers.FirstOrDefault(c => c.CustomerId == customerId);
 
-        // http get customer details
+            if (customer == null)
+            {
+                return NotFound("ไม่พบข้อมูลลูกค้า");
+            }
+
+            var detailCustomer = new
+            {
+                General = customer.Generals,
+                Addresses = customer.Addresses,
+                Shipping = customer.Shipping,
+                IndustryType = customer.IndustryType,
+                ShopType = customer.ShopType,
+                Company = customer.Company,
+                SortKey = customer.SortKey,
+                CashGroup = customer.CashGroup,
+                PaymentMethod = customer.PaymentMethod,
+                TermOfPay = customer.TermOfPay,
+                AccountCode = customer.AccountCode,
+            };
+
+            return Ok(detailCustomer); // ส่ง object เดียว ไม่ใช่ list
+        }
+
+
+
+
+
+
+        // PDF
         [HttpGet("customer-report/{customerId}")]
         public IActionResult GetCustomerReport(int customerId)
         {

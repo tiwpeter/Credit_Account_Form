@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../sevice/customer.service';
 import { CommonModule } from '@angular/common'; // <-- Import CommonModule here
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.css'],
-  imports:[CommonModule]
+  imports:[CommonModule, RouterModule]
 })
 export class CustomerComponent implements OnInit {
   customers: any[] = [];

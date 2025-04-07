@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private apiUrl = 'http://localhost:5083/api/Testfect'; // URL ของ API
 
-  
   constructor(private http: HttpClient) {}
 
   // ฟังก์ชันเพื่อดึงข้อมูลจาก API
@@ -31,4 +30,9 @@ export class ApiService {
   addCustomer(name: string) {
     return this.http.post(this.apiUrl, { name });
   }
+
+  // ฟังก์ชันเพื่ออัปเดตข้อมูลลูกค้า
+ updateCustomer(id: string, updatedUser: any): Observable<any> {
+  return this.http.put<any>(`${this.apiUrl}/${id}`, updatedUser);
+}
 }

@@ -1,0 +1,8 @@
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" *ngIf="customerForm">
+    <label>ชื่อทั่วไป:</label>
+    <!---อัปเดตค่าเมื่อมีการเปลี่ยนแปลงค่าในฟอร์ม.-->
+    <input type="text" formControlName="generalName"><br>
+
+
+    <button type="submit">บันทึกข้อมูล</button>
+</form>
