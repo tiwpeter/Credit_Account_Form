@@ -786,7 +786,7 @@
 
 
             <!--PaymentMethod-->
-            <div class="mx-auto p-6 bg-white rounded-lg shadow-md">
+            <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">เลือกวิธีการชำระเงิน</h2>
                 <form (ngSubmit)="onSubmit()" class="space-y-4">
                     <!-- เลือก Payment Method -->
@@ -842,7 +842,32 @@
 
 
 
+            <!-- SaleDistrict Form -->
+            <div class="max-w-lg mx-auto p-4 bg-white rounded-lg shadow-md">
 
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">เลือกเขตการขาย</h2>
+
+                <form>
+                    <!-- SaleDistrict Select -->
+                    <div class="mb-4">
+                        <label for="saleDistrict" class="block text-gray-700">เขตการขาย</label>
+                        <select id="saleDistrict" name="saleDistrict"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                            <option value="">เลือกเขตการขาย</option>
+                            <option *ngFor="let district of saleDistricts" [value]="district.id">{{ district.saledisName
+                                }}</option>
+                        </select>
+                    </div>
+
+                    <!-- Selected District Details -->
+                    <div *ngIf="selectedDistrict" class="mt-4 p-4 bg-gray-50 border border-gray-300 rounded-md">
+                        <h3 class="text-lg font-semibold text-gray-800">รายละเอียดเขตการขาย</h3>
+                        <p><strong>รหัสเขต:</strong> {{ selectedDistrict.saledisCode }}</p>
+                        <p><strong>ชื่อเขต:</strong> {{ selectedDistrict.saledisName }}</p>
+                        <p><strong>คำอธิบาย:</strong> {{ selectedDistrict.saledisDes }}</p>
+                    </div>
+                </form>
+            </div>
 
 
             <!--SaleGroup-->
@@ -863,28 +888,13 @@
                             class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
                     </div>
 
-                    <!-- SaleDistrict Form -->
-                    <form>
-                        <!-- SaleDistrict Select -->
-                        <div class="mb-4">
-                            <label for="saleDistrict" class="block text-gray-700">เขตการขาย</label>
-                            <select id="saleDistrict" name="saleDistrict"
-                                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
-                                <option value="">เลือกเขตการขาย</option>
-                                <option *ngFor="let district of saleDistricts" [value]="district.id">{{
-                                    district.saledisName
-                                    }}</option>
-                            </select>
-                        </div>
-
-                        <!-- Selected District Details -->
-                        <div *ngIf="selectedDistrict" class="mt-4 p-4 bg-gray-50 border border-gray-300 rounded-md">
-                            <h3 class="text-lg font-semibold text-gray-800">รายละเอียดเขตการขาย</h3>
-                            <p><strong>รหัสเขต:</strong> {{ selectedDistrict.saledisCode }}</p>
-                            <p><strong>ชื่อเขต:</strong> {{ selectedDistrict.saledisName }}</p>
-                            <p><strong>คำอธิบาย:</strong> {{ selectedDistrict.saledisDes }}</p>
-                        </div>
-                    </form>
+                    <!-- ปุ่ม Submit -->
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                            บันทึก
+                        </button>
+                    </div>
                 </form>
             </div>
 
@@ -1004,44 +1014,30 @@
             <!--ข้อกำหนดทางการค้าระหว่างประเทศ-->
             <!--ชื่อเต็มของ Incoterm เช่น  ผู้รับผิดชอบค่าใช้จ่ายต่าง-->
             <!--คำอธิบายเกี่ยวกับขอบเขตความรับผิดชอบของ Incoterm นั้น เช่น ใครจ่ายค่าขนส่ง ใครรับผิดชอบเมื่อของเสียหาย ฯลฯ-->
-            <!--เขตความรับผิดชอบของ-->
             <div class="Incoterms">
                 <div class="p-6">
-                    <h1 class="text-2xl font-bold mb-4">ข้อกำหนดการค้าระหว่างประเทศ</h1>
+                    <h1 class="text-2xl font-bold mb-4">Incoterms Table</h1>
 
-                    <form (ngSubmit)="onSubmit()" #incotermForm="ngForm">
-                        <!-- incotermCode -->
-                        <div class="mb-4">
-                            <label for="incotermCode" class="block text-gray-700 font-medium mb-2">รหัส การค้า</label>
-                            <input id="incotermCode" type="text" name="incotermCode" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                        </div>
-
-                        <!-- incotermName -->
-                        <div class="mb-4">
-                            <label for="incotermName"
-                                class="block text-gray-700 font-medium mb-2">ผู้รับผิดชอบค่าใช้จ่ายต่าง</label>
-                            <input id="incotermName" type="text" name="incotermName" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                        </div>
-
-                        <!-- incotermDes -->
-                        <div class="mb-6">
-                            <label for="incotermDes"
-                                class="block text-gray-700 font-medium mb-2">คำอธิบายเกี่ยวกับขอบเขตข้อกำหนดการค้าระหว่างประเทศ</label>
-                            <textarea id="incotermDes" name="incotermDes" rows="4" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" [disabled]="!incotermForm.form.valid"
-                            class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
-                            บันทึกข้อมูล
-                        </button>
-                    </form>
+                    <table class="min-w-full border border-gray-300">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="border px-4 py-2 text-left">#</th>
+                                <th class="border px-4 py-2 text-left">Code</th>
+                                <th class="border px-4 py-2 text-left">Name</th>
+                                <th class="border px-4 py-2 text-left">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let incoterm of incoterms; let i = index" class="hover:bg-gray-50">
+                                <td class="border px-4 py-2">{{ i + 1 }}</td>
+                                <td class="border px-4 py-2 font-medium">{{ incoterm.incotermCode }}</td>
+                                <td class="border px-4 py-2">{{ incoterm.incotermName }}</td>
+                                <td class="border px-4 py-2">{{ incoterm.incotermDes }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
 
             <!--SalePerson  เก็บข้อมูลเกี่ยวกับพนักงานขาย -->
 
@@ -1055,7 +1051,7 @@
             <!--CustGroupContry  จัดกลุ่มลูกค้าตามประเทศ -->
             <!--TH-G1	กลุ่มลูกค้าภายในประเทศไทย	ลูกค้าประเภทค้าส่งในไทย-->
             <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
-                <h2 class="text-2xl font-semibold mb-6 text-gray-800">กลุ่มลูกค้าตามประเทศ</h2>
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">เพิ่ม/แก้ไข กลุ่มลูกค้าตามประเทศ</h2>
 
                 <form>
                     <!-- custgroContryCode -->

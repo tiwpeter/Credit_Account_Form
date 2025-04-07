@@ -178,4 +178,61 @@ export class FormComponent {
     console.log('Payment Description: ', this.paymentDescription);
   }
 
+
+selectedTerm: string = '';
+
+  onTermChange(event: any): void {
+    this.selectedTerm = event.target.value;
+    const description = document.getElementById('paymentTermDescription');
+    switch (this.selectedTerm) {
+      case 'NET30':
+        description!.innerHTML = '<p>ลูกค้าต้องชำระเงินภายใน 30 วันหลังจากได้รับใบแจ้งหนี้</p>';
+        break;
+      case 'NET60':
+        description!.innerHTML = '<p>ลูกค้าต้องชำระเงินภายใน 60 วันหลังจากได้รับใบแจ้งหนี้</p>';
+        break;
+      case 'ทันที':
+        description!.innerHTML = '<p>ลูกค้าต้องชำระเงินทันทีเมื่อทำการสั่งซื้อ</p>';
+        break;
+      default:
+        description!.innerHTML = '<p>กรุณาเลือกเงื่อนไขการชำระเงิน</p>';
+        break;
+    }
+  }
+ // ตัวอย่างข้อมูลเขตการขาย
+  saleDistricts = [
+    { id: 1, saledisCode: 'SD001', saledisName: 'เขตภาคเหนือ', saledisDes: 'เขตการขายในภาคเหนือ' },
+    { id: 2, saledisCode: 'SD002', saledisName: 'เขตภาคกลาง', saledisDes: 'เขตการขายในภาคกลาง' },
+    { id: 3, saledisCode: 'SD003', saledisName: 'เขตภาคใต้', saledisDes: 'เขตการขายในภาคใต้' }
+  ];
+
+  // ตัวแปรสำหรับเก็บเขตการขายที่เลือก
+  selectedDistrict: any;
+
+  // เมื่อเลือกเขตการขาย จะอัพเดทข้อมูล
+  onDistrictChange(event: any) {
+    const selectedId = event.target.value;
+    this.selectedDistrict = this.saleDistricts.find(district => district.id === parseInt(selectedId));
+  }
+
+// {/*<!--Incoterms-->*/ }
+incoterms = [
+    {
+      incotermCode: 'FOB',
+      incotermName: 'Free on Board',
+      incotermDes: 'ผู้ขายส่งของขึ้นเรือที่ท่าเรือต้นทาง',
+    },
+    {
+      incotermCode: 'CIF',
+      incotermName: 'Cost, Insurance and Freight',
+      incotermDes: 'ผู้ขายรับผิดชอบค่าขนส่งและประกันภัยถึงท่าเรือปลายทาง',
+    },
+    {
+      incotermCode: 'EXW',
+      incotermName: 'Ex Works',
+      incotermDes: 'ผู้ซื้อรับผิดชอบตั้งแต่โรงงานของผู้ขาย',
+    },
+  ];
+  
 }
+  
