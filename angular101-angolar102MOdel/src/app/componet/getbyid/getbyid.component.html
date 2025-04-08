@@ -1,27 +1,246 @@
-<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" *ngIf="customerForm">
-    <label for="generalName">ชื่อทั่วไป:</label>
-    <input id="generalName" type="text" formControlName="generalName"><br>
+<!DOCTYPE html>
+<html lang="en">
 
-    <label for="generalFax">แฟกซ์:</label>
-    <input id="generalFax" type="text" formControlName="generalFax"><br>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view</title>
+</head>
 
-    <label for="generalTax">หมายเลขภาษี:</label>
-    <input id="generalTax" type="text" formControlName="generalTax"><br>
+<body class="bg-gray-100 min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg">
+        <form *ngIf="customerForm" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+            <!-- General -->
+            <h2 class="text-xl font-bold text-gray-800 mb-6">ข้อมูลประจำตัว</h2>
+            <div formGroupName="generals" class="General">
+                <div class="flex gap-2">
+                    <!-- Name -->
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <div class="ml-2 flex flex-col">
+                            <span class="text-gray-500">Name</span>
+                            <input type="text" formControlName="generalName1" placeholder=""
+                                class="placeholder:text-black bg-transparent outline-none" />
+                        </div>
+                    </div>
 
-    <label for="generalTel">หมายเลขโทรศัพท์:</label>
-    <input id="generalTel" type="text" formControlName="generalTel"><br>
+                    <!-- Tel -->
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <div class="ml-2 flex flex-col">
+                            <span class="text-gray-500">Tel</span>
+                            <input type="text" formControlName="generalTel" placeholder=""
+                                class="placeholder:text-black bg-transparent outline-none" />
+                        </div>
+                    </div>
 
-    <label for="generalLine">ไลน์ ID:</label>
-    <input id="generalLine" type="text" formControlName="generalLine"><br>
+                    <!-- Fax -->
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <div class="ml-2 flex flex-col">
+                            <span class="text-gray-500">Fax</span>
+                            <input type="text" formControlName="generalFax" placeholder=""
+                                class="placeholder:text-black bg-transparent outline-none" />
+                        </div>
+                    </div>
+                </div>
 
-    <label for="generalEmail">อีเมล:</label>
-    <input id="generalEmail" type="email" formControlName="generalEmail"><br>
+                <!-- Email -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Email</span>
+                        <input type="email" formControlName="generalEmail" placeholder=""
+                            class="placeholder:text-black bg-transparent outline-none" />
+                    </div>
+                </div>
 
-    <label for="generalName1">ชื่อที่สอง:</label>
-    <input id="generalName1" type="text" formControlName="generalName1"><br>
+                <!-- Line -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Line</span>
+                        <input type="text" formControlName="generalLine" placeholder="line_id"
+                            class="placeholder:text-black bg-transparent outline-none" />
+                    </div>
+                </div>
 
-    <label for="generalBranch">สาขา:</label>
-    <input id="generalBranch" type="text" formControlName="generalBranch"><br>
+                <!-- Tax -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Tax</span>
+                        <input type="text" formControlName="generalTax" placeholder="123456789"
+                            class="placeholder:text-black bg-transparent outline-none" />
+                    </div>
+                </div>
 
-    <button type="submit" [disabled]="!customerForm.valid">บันทึกข้อมูล</button>
-</form>
+                <!-- Branch -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Branch</span>
+                        <input type="text" formControlName="generalBranch" placeholder="Main Branch"
+                            class="placeholder:text-black bg-transparent outline-none" />
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6 mt-6">ที่อยู่</h2>
+            <!--Addresses-->
+            <div formGroupName="addresses" class="Addresses " [formGroup]="customerForm">
+                <div class="flex gap-2 ">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="group-users.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">ประเภทของที่อยู่</span>
+                            <input type="text" formControlName="addrType" class="placeholder:text-black" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">บรรทัดแรกของที่อยู่</span>
+                            <input type="text" formControlName="addrLine1" placeholder="asmr"
+                                class="placeholder:text-black" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">บรรทัดที่สองของที่อยู่</span>
+                            <input type="text" formControlName="addrLine2" placeholder="asmr"
+                                class="placeholder:text-black" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">SubDistrict</span>
+                            <input type="text" formControlName="subDistrict" placeholder="subDistrict"
+                                class="placeholder:text-black" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">District</span>
+                            <input type="text" formControlName="district" placeholder="district"
+                                class="placeholder:text-black" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Province</span>
+                            <input type="text" formControlName="province" placeholder="province"
+                                class="placeholder:text-black" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">PostalCode</span>
+                            <input type="text" formControlName="postalCode" placeholder="postalCode"
+                                class="placeholder:text-black" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Country</span>
+                            <input type="text" formControlName="country" placeholder="country"
+                                class="placeholder:text-black" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6 mt-8">ข้อมูลการจัดส่ง</h2>
+            <!-- Shipping -->
+            <div formGroupName="shipping" class="Shipping" [formGroup]="customerForm">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="delivery-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">ชื่อผู้รับ</span>
+                            <input type="text" name="DeliveryName" class="placeholder:text-black"
+                                formControlName="DeliveryName" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ที่อยู่บรรทัดแรก</span>
+                            <input type="text" name="Address1" class="placeholder:text-black" formControlName="address1"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ที่อยู่บรรทัดที่สอง</span>
+                            <input type="text" name="Address2" class="placeholder:text-black" formControlName="address2"
+                                required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">District</span>
+                            <input type="text" name="District" class="placeholder:text-black" formControlName="district"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Province</span>
+                            <input type="text" name="Province" class="placeholder:text-black" formControlName="province"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">PostalCode</span>
+                            <input type="text" name="PostalCode" class="placeholder:text-black"
+                                formControlName="postalCode" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Country</span>
+                            <input type="text" name="Country" class="placeholder:text-black"
+                                formControlName="shippingcountry" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex end">
+                <button (click)="downloadCustomerReport()"
+                    class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                    Download Report
+                </button>
+
+            </div>
+
+
+        </form>
+    </div>
+</body>
+
+</html>

@@ -9,11 +9,34 @@ namespace YourApp.Controllers
     {
         // สมมุติว่ามีรายการสินค้า
         private static readonly List<Item> Items = new List<Item>
-        {
-            new Item { Id = 1, Name = "Item 1", Description = "Description for item 1", Price = 10.5 },
-            new Item { Id = 2, Name = "Item 2", Description = "Description for item 2", Price = 20.75 },
-            new Item { Id = 3, Name = "Item 3", Description = "Description for item 3", Price = 30.0 }
-        };
+{
+    new Item
+    {
+        Id = 1,
+        Name = "Item 1",
+        Description = "Description for item 1",
+        Price = 10.5,
+        Province = new Province { NameEn = "Bangkok" }
+    },
+    new Item
+    {
+        Id = 2,
+        Name = "Item 2",
+        Description = "Description for item 2",
+        Price = 20.75,
+        Province = new Province { NameEn = "Chiang Mai" }
+    },
+    new Item
+    {
+        Id = 3,
+        Name = "Item 3",
+        Description = "Description for item 3",
+        Price = 30.0,
+        Province = new Province { NameEn = "Phuket" }
+    }
+};
+
+
 
         // GET api/Testfect/{id}
         [HttpGet("{id}")]
@@ -47,6 +70,10 @@ namespace YourApp.Controllers
             item.Name = updatedItem.Name;
             item.Description = updatedItem.Description;
             item.Price = updatedItem.Price;
+            item.Province = new Province
+            {
+                NameEn = updatedItem.Province.NameEn
+            };
 
             return Ok(item);
         }
@@ -60,5 +87,13 @@ namespace YourApp.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
+
+        public Province Province { get; set; }
+
+    }
+
+    public class Province
+    {
+        public string NameEn { get; set; }
     }
 }

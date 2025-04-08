@@ -22,6 +22,7 @@ export class TestComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  //hook
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
 
@@ -30,7 +31,11 @@ export class TestComponent implements OnInit {
         next: (data) => {
           console.log('ข้อมูลที่ได้รับใน component:', data);
           this.user = data;
-          this.updatedUser = { ...data }; // Initialize the updatedUser with the current user data
+          //
+         this.updatedUser = { 
+    ...data, 
+    province: data.province || { nameEn: '' } // ✅ ใส่ตรงนี้
+  };
           this.isLoading = false; // Set loading to false after data is fetched
         },
         error: (err) => {
