@@ -55,6 +55,10 @@ namespace ModelTest.Controllers
         // Foreign Key referencing ProvinceId
         public int ProvinceId { get; set; }
         public ProvinceModel Province { get; set; } // Relationship with Province
+
+        // FK กลับไป General
+        public int general_id { get; set; }
+        public General General { get; set; }
     }
 
 }

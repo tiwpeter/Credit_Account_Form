@@ -11,9 +11,9 @@ namespace ModelTest.Controllers
         public int general_id { get; set; }
         public string generalName1 { get; set; }
 
-        // ความสัมพันธ์กับ Address
-        [ForeignKey("AddressId")]
-        public int AddressId { get; set; }
+
+        //จะส่งข้อมูลจาก General โดยอ้างอิงไปที่ AddressModel ของ General
+
         public AddressModel Address { get; set; }
     }
 
@@ -24,10 +24,12 @@ namespace ModelTest.Controllers
         public int shipping_id { get; set; }
         public string subDistrict { get; set; }
 
-        // ความสัมพันธ์กับ Address
-        //ใช้ ForeignKey เพื่อบ่งบอกว่า AddressId ควรจะอ้างอิงไปที่ AddressModel และให้ระบุความสัมพันธ์ที่ชัดเจน
-        [ForeignKey("AddressId")]
-        public int AddressId { get; set; }
-        public AddressModel Address { get; set; }
+        // FK ไป Province
+        public int ProvinceId { get; set; }
+        public ProvinceModel Province { get; set; }
+
+        // FK ไป Country
+        public int CountryId { get; set; }
+        public CountryModel Country { get; set; }
     }
 }

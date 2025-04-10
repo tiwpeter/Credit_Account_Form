@@ -14,6 +14,7 @@ namespace API.Data
         public DbSet<ProvinceModel> Provinces { get; set; }
         public DbSet<AddressModel> Addresses { get; set; }
         public DbSet<CountryModel> Countries { get; set; }
+        public DbSet<Shipping> Shippings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // ความสัมพันธ์ระหว่าง Country และ ThaiProvince
@@ -24,32 +25,34 @@ namespace API.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             //ไม่ต้องการเก็บการอ้างอิงย้อนกลับนี้ก็สามารถใช้ WithMany() ได้
-            // Define the relationship between Address and General (one-to-many)
-            modelBuilder.Entity<General>()
-                .HasOne(g => g.Address)
-                .WithMany()  // No need for a collection in AddressModel, as it's one-to-many
-                .HasForeignKey(g => g.AddressId)
+            // Shipping โยงกับ Province
+            modelBuilder.Entity<Shipping>()
+                .HasOne(s => s.Province)
+                .WithMany()
+                .HasForeignKey(s => s.ProvinceId)
+                .OnDelete(DeleteBehavior.Restrict);
+            // Shipping โยงกับ ประเทศ
+            modelBuilder.Entity<Shipping>()
+                .HasOne(s => s.Country)
+                .WithMany()
+                .HasForeignKey(s => s.CountryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Shipping>()
-                   .HasOne(s => s.Address)  // One Shipping can have one Address
-                   .WithMany()  // One Address can have many Shipping entries
-                   .HasForeignKey(s => s.AddressId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure Address to Province relationship
+            // General กับ  AddressModel
             modelBuilder.Entity<AddressModel>()
-                .HasOne(a => a.Province) // Each Address has one Province
-                .WithMany()  // One Province can have many Addresses
-                .HasForeignKey(a => a.ProvinceId) // ProvinceId is the foreign key in Address
-                .OnDelete(DeleteBehavior.Restrict);  // Don't delete Address when Province is deleted
+                .HasOne(a => a.General)
+                .WithOne(g => g.Address)
+                .HasForeignKey<AddressModel>(a => a.general_id)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Configure Province to Country relationship
-            modelBuilder.Entity<ProvinceModel>()
-                .HasOne(p => p.Country) // Each Province has one Country
-                .WithMany() // One Country can have many Provinces
-                .HasForeignKey(p => p.CountryId) // CountryId is the foreign key in Province
-                .OnDelete(DeleteBehavior.Restrict); // Don't delete Province when Country is deleted
+            //ตาราง FK ไป ความสัมพันธ์
+            //Shipping Province, Country   Shipping อยู่ในจังหวัดและประเทศไหน
+            //AddressModel General ที่อยู่ไหนเป็นของ General คนไหน
+            //Customer    General, Shipping ลูกค้าคนนี้โยงกับข้อมูลทั่วไปและที่จัดส่งไหน
+
+
+
+
 
             // Seed data
             modelBuilder.Entity<CountryModel>().HasData(
