@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/Test")]
+    [Route("api/Addresses")]
     [ApiController]
     public class AddressController : ControllerBase
     {

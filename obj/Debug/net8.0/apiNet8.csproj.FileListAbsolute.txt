@@ -792,3 +792,4 @@ C:\Users\WIN10\Desktop\0.1DB\DB101\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\WIN10\Desktop\0.1DB\DB101\obj\Debug\net8.0\apiNet8.csproj.Up2Date
 C:\Users\WIN10\Desktop\0.1DB\DB101\obj\Debug\net8.0\apiNet8.genruntimeconfig.cache
 C:\Users\WIN10\Desktop\0.1DB\DB101\obj\Debug\net8.0\ref\apiNet8.dll
+C:\Users\WIN10\Desktop\0.1DB\DB101\obj\Debug\net8.0\apiNet8.sourcelink.json

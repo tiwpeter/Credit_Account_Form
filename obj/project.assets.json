@@ -5545,11 +5545,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\0.1DB\\DB101\\apiNet8.csproj",
+      "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\0.2\\DB101\\apiNet8.csproj",
       "projectName": "apiNet8",
-      "projectPath": "C:\\Users\\WIN10\\Desktop\\0.1DB\\DB101\\apiNet8.csproj",
+      "projectPath": "C:\\Users\\WIN10\\Desktop\\0.2\\DB101\\apiNet8.csproj",
       "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\WIN10\\Desktop\\0.1DB\\DB101\\obj\\",
+      "outputPath": "C:\\Users\\WIN10\\Desktop\\0.2\\DB101\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
