@@ -14,22 +14,10 @@ namespace ModelTest.Controllers
 
         //จะส่งข้อมูลจาก General โดยอ้างอิงไปที่ AddressModel ของ General
 
+        // หากชื่อเป็น AddressId1 ก็ต้องระบุเป็น AddressId1
+        public int AddressId { get; set; }  // กำหนด FK ที่ใช้ใน General
         public AddressModel Address { get; set; }
     }
 
-    public class Shipping
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
-        public int shipping_id { get; set; }
-        public string subDistrict { get; set; }
 
-        // FK ไป Province
-        public int ProvinceId { get; set; }
-        public ProvinceModel Province { get; set; }
-
-        // FK ไป Country
-        public int CountryId { get; set; }
-        public CountryModel Country { get; set; }
-    }
 }

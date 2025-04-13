@@ -19,6 +19,8 @@ namespace ModelTest.Controllers
 
         // FK2 → AddressModel
         // ถ้า General อ้างอิงถึง Address แล้ว อาจไม่จำเป็นต้องมี AddressId ใน Customer
+        public int AddressId { get; set; }  // เพิ่มฟิลด์นี้
+
         public AddressModel Address { get; set; }
 
         // FK3 → Shipping

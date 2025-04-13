@@ -18,33 +18,46 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET: api/address
         [HttpGet]
-        public async Task<ActionResult> GetAddresses()
+        public async Task<ActionResult<IEnumerable<AddressModel>>> GetAddresses()
         {
-            var addresses = await _context.Addresses
-                .Include(a => a.Province) // Include related Province data
-                .ThenInclude(p => p.Country) // Include related Country data
-                .ToListAsync();
-
-            return Ok(addresses);
+            return await _context.Addresses.Include(a => a.Province).ToListAsync();
         }
 
-        // GET: api/address/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAddress(int id)
+        public async Task<ActionResult<AddressModel>> GetAddress(int id)
         {
-            var address = await _context.Addresses
-                .Include(a => a.Province)
-                .ThenInclude(p => p.Country)
-                .FirstOrDefaultAsync(a => a.AddressId == id);
+            var address = await _context.Addresses.Include(a => a.Province).FirstOrDefaultAsync(a => a.AddressId == id);
+            if (address == null) return NotFound();
+            return address;
+        }
 
-            if (address == null)
-            {
-                return NotFound();
-            }
+        [HttpPost]
+        public async Task<ActionResult<AddressModel>> PostAddress(AddressModel address)
+        {
+            _context.Addresses.Add(address);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetAddress), new { id = address.AddressId }, address);
+        }
 
-            return Ok(address);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAddress(int id, AddressModel address)
+        {
+            if (id != address.AddressId) return BadRequest();
+            _context.Entry(address).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAddress(int id)
+        {
+            var address = await _context.Addresses.FindAsync(id);
+            if (address == null) return NotFound();
+            _context.Addresses.Remove(address);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
+
 }
