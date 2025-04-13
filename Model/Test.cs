@@ -17,6 +17,10 @@ namespace ModelTest.Controllers
         public int CountryId { get; set; }
         public CountryModel Country { get; set; } // ความสัมพันธ์กับ Province
 
+        // ✅ เพิ่ม geography
+        public int GeographyId { get; set; }
+        public GeographyModel Geography { get; set; }
+
     }
     // ประเทศ
     public class CountryModel

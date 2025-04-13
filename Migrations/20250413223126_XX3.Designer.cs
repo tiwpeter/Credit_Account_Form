@@ -3,6 +3,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiNet8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250413223126_XX3")]
+    partial class XX3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,6 +53,22 @@ namespace apiNet8.Migrations
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1,
+                            ProvinceId = 1,
+                            Street = "123 Sukhumvit",
+                            ZipCode = "10110"
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            ProvinceId = 2,
+                            Street = "456 Nimman",
+                            ZipCode = "50000"
+                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.CountryModel", b =>
@@ -161,21 +180,21 @@ namespace apiNet8.Migrations
                         {
                             ProvinceId = 1,
                             CountryId = 1,
-                            GeographyId = 2,
+                            GeographyId = 0,
                             ProvinceName = "Bangkok"
                         },
                         new
                         {
                             ProvinceId = 2,
                             CountryId = 1,
-                            GeographyId = 1,
+                            GeographyId = 0,
                             ProvinceName = "Chiang Mai"
                         },
                         new
                         {
                             ProvinceId = 3,
                             CountryId = 2,
-                            GeographyId = 2,
+                            GeographyId = 0,
                             ProvinceName = "Tokyo"
                         });
                 });
@@ -205,6 +224,20 @@ namespace apiNet8.Migrations
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("Shippings");
+
+                    b.HasData(
+                        new
+                        {
+                            shipping_id = 1,
+                            ProvinceId = 1,
+                            subDistrict = "Wattana"
+                        },
+                        new
+                        {
+                            shipping_id = 2,
+                            ProvinceId = 3,
+                            subDistrict = "Shibuya"
+                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.ThaiProvince", b =>
