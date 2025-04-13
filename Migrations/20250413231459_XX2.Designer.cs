@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiNet8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250413223906_XX5")]
-    partial class XX5
+    [Migration("20250413231459_XX2")]
+    partial class XX2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,9 +32,6 @@ namespace apiNet8.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
 
-                    b.Property<int?>("CountryModelCountryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProvinceId")
                         .HasColumnType("int");
 
@@ -47,8 +44,6 @@ namespace apiNet8.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AddressId");
-
-                    b.HasIndex("CountryModelCountryId");
 
                     b.HasIndex("ProvinceId");
 
@@ -68,6 +63,20 @@ namespace apiNet8.Migrations
                             ProvinceId = 2,
                             Street = "456 Nimman",
                             ZipCode = "50000"
+                        },
+                        new
+                        {
+                            AddressId = 3,
+                            ProvinceId = 3,
+                            Street = "789 Shibuya",
+                            ZipCode = "150-0002"
+                        },
+                        new
+                        {
+                            AddressId = 4,
+                            ProvinceId = 5,
+                            Street = "101 Manhattan",
+                            ZipCode = "10001"
                         });
                 });
 
@@ -97,6 +106,11 @@ namespace apiNet8.Migrations
                         {
                             CountryId = 2,
                             Name = "Japan"
+                        },
+                        new
+                        {
+                            CountryId = 3,
+                            Name = "United States"
                         });
                 });
 
@@ -196,6 +210,27 @@ namespace apiNet8.Migrations
                             CountryId = 2,
                             GeographyId = 2,
                             ProvinceName = "Tokyo"
+                        },
+                        new
+                        {
+                            ProvinceId = 4,
+                            CountryId = 2,
+                            GeographyId = 2,
+                            ProvinceName = "Osaka"
+                        },
+                        new
+                        {
+                            ProvinceId = 5,
+                            CountryId = 3,
+                            GeographyId = 2,
+                            ProvinceName = "California"
+                        },
+                        new
+                        {
+                            ProvinceId = 6,
+                            CountryId = 3,
+                            GeographyId = 2,
+                            ProvinceName = "New York"
                         });
                 });
 
@@ -207,9 +242,6 @@ namespace apiNet8.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("shipping_id"));
 
-                    b.Property<int?>("CountryModelCountryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProvinceId")
                         .HasColumnType("int");
 
@@ -218,8 +250,6 @@ namespace apiNet8.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("shipping_id");
-
-                    b.HasIndex("CountryModelCountryId");
 
                     b.HasIndex("ProvinceId");
 
@@ -237,6 +267,12 @@ namespace apiNet8.Migrations
                             shipping_id = 2,
                             ProvinceId = 3,
                             subDistrict = "Shibuya"
+                        },
+                        new
+                        {
+                            shipping_id = 3,
+                            ProvinceId = 5,
+                            subDistrict = "Brooklyn"
                         });
                 });
 
@@ -265,14 +301,54 @@ namespace apiNet8.Migrations
                     b.HasIndex("GeographyId");
 
                     b.ToTable("ThaiProvinces");
+
+                    b.HasData(
+                        new
+                        {
+                            ThaiProvinceId = 1,
+                            CountryId = 1,
+                            GeographyId = 2,
+                            ThaiProvinceName = "Bangkok"
+                        },
+                        new
+                        {
+                            ThaiProvinceId = 2,
+                            CountryId = 1,
+                            GeographyId = 1,
+                            ThaiProvinceName = "Chiang Mai"
+                        },
+                        new
+                        {
+                            ThaiProvinceId = 3,
+                            CountryId = 1,
+                            GeographyId = 1,
+                            ThaiProvinceName = "Chiang Rai"
+                        },
+                        new
+                        {
+                            ThaiProvinceId = 4,
+                            CountryId = 1,
+                            GeographyId = 4,
+                            ThaiProvinceName = "Phuket"
+                        },
+                        new
+                        {
+                            ThaiProvinceId = 5,
+                            CountryId = 1,
+                            GeographyId = 3,
+                            ThaiProvinceName = "Khon Kaen"
+                        },
+                        new
+                        {
+                            ThaiProvinceId = 6,
+                            CountryId = 1,
+                            GeographyId = 3,
+                            ThaiProvinceName = "Nakhon Ratchasima"
+                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.AddressModel", b =>
                 {
-                    b.HasOne("ModelTest.Controllers.CountryModel", null)
-                        .WithMany("Address")
-                        .HasForeignKey("CountryModelCountryId");
-
                     b.HasOne("ModelTest.Controllers.ProvinceModel", "Province")
                         .WithMany()
                         .HasForeignKey("ProvinceId")
@@ -291,7 +367,7 @@ namespace apiNet8.Migrations
                         .IsRequired();
 
                     b.HasOne("ModelTest.Controllers.GeographyModel", "Geography")
-                        .WithMany()
+                        .WithMany("Provinces")
                         .HasForeignKey("GeographyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -303,10 +379,6 @@ namespace apiNet8.Migrations
 
             modelBuilder.Entity("ModelTest.Controllers.ShippingModel", b =>
                 {
-                    b.HasOne("ModelTest.Controllers.CountryModel", null)
-                        .WithMany("Shipping")
-                        .HasForeignKey("CountryModelCountryId");
-
                     b.HasOne("ModelTest.Controllers.ProvinceModel", "Province")
                         .WithMany()
                         .HasForeignKey("ProvinceId")
@@ -335,15 +407,10 @@ namespace apiNet8.Migrations
                     b.Navigation("Geography");
                 });
 
-            modelBuilder.Entity("ModelTest.Controllers.CountryModel", b =>
-                {
-                    b.Navigation("Address");
-
-                    b.Navigation("Shipping");
-                });
-
             modelBuilder.Entity("ModelTest.Controllers.GeographyModel", b =>
                 {
+                    b.Navigation("Provinces");
+
                     b.Navigation("ThaiProvinces");
                 });
 #pragma warning restore 612, 618

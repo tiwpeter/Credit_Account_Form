@@ -3,25 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelTest.Controllers
 {
-    // จังหวัด
-    public class ProvinceModel
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProvinceId { get; set; }
-        public string ProvinceName { get; set; }
 
-
-
-        // เก็บชื่อประเทศ
-        public int CountryId { get; set; }
-        public CountryModel Country { get; set; } // ความสัมพันธ์กับ Province
-
-        // ✅ เพิ่ม geography
-        public int GeographyId { get; set; }
-        public GeographyModel Geography { get; set; }
-
-    }
     // ประเทศ
     public class CountryModel
     {
@@ -29,8 +11,6 @@ namespace ModelTest.Controllers
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
         public int CountryId { get; set; }
         public string Name { get; set; }
-        public ICollection<AddressModel> Address { get; set; }
-        public ICollection<ShippingModel> Shipping { get; set; }
 
     }
 

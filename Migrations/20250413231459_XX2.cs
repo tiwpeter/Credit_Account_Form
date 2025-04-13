@@ -5,7 +5,7 @@
 namespace apiNet8.Migrations
 {
     /// <inheritdoc />
-    public partial class XX5 : Migration
+    public partial class XX2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

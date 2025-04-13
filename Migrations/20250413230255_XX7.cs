@@ -7,7 +7,7 @@
 namespace apiNet8.Migrations
 {
     /// <inheritdoc />
-    public partial class XX : Migration
+    public partial class XX7 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,13 +26,27 @@ namespace apiNet8.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GeographyModel",
+                columns: table => new
+                {
+                    GeographyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GeographyName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GeographyModel", x => x.GeographyId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Provinces",
                 columns: table => new
                 {
                     ProvinceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProvinceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: false)
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    GeographyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,6 +57,12 @@ namespace apiNet8.Migrations
                         principalTable: "Countries",
                         principalColumn: "CountryId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Provinces_GeographyModel_GeographyId",
+                        column: x => x.GeographyId,
+                        principalTable: "GeographyModel",
+                        principalColumn: "GeographyId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,7 +72,8 @@ namespace apiNet8.Migrations
                     ThaiProvinceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ThaiProvinceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: false)
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    GeographyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,6 +83,12 @@ namespace apiNet8.Migrations
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ThaiProvinces_GeographyModel_GeographyId",
+                        column: x => x.GeographyId,
+                        principalTable: "GeographyModel",
+                        principalColumn: "GeographyId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -124,17 +151,47 @@ namespace apiNet8.Migrations
                 values: new object[,]
                 {
                     { 1, "Thailand" },
-                    { 2, "Japan" }
+                    { 2, "Japan" },
+                    { 3, "United States" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GeographyModel",
+                columns: new[] { "GeographyId", "GeographyName" },
+                values: new object[,]
+                {
+                    { 1, "ภาคเหนือ" },
+                    { 2, "ภาคกลาง" },
+                    { 3, "ภาคตะวันออกเฉียงเหนือ" },
+                    { 4, "ภาคใต้" },
+                    { 5, "ภาคตะวันตก" },
+                    { 6, "ภาคตะวันออก" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Provinces",
-                columns: new[] { "ProvinceId", "CountryId", "ProvinceName" },
+                columns: new[] { "ProvinceId", "CountryId", "GeographyId", "ProvinceName" },
                 values: new object[,]
                 {
-                    { 1, 1, "Bangkok" },
-                    { 2, 1, "Chiang Mai" },
-                    { 3, 2, "Tokyo" }
+                    { 1, 1, 2, "Bangkok" },
+                    { 2, 1, 1, "Chiang Mai" },
+                    { 3, 2, 2, "Tokyo" },
+                    { 4, 2, 2, "Osaka" },
+                    { 5, 3, 2, "California" },
+                    { 6, 3, 2, "New York" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ThaiProvinces",
+                columns: new[] { "ThaiProvinceId", "CountryId", "GeographyId", "ThaiProvinceName" },
+                values: new object[,]
+                {
+                    { 1, 1, 2, "Bangkok" },
+                    { 2, 1, 1, "Chiang Mai" },
+                    { 3, 1, 1, "Chiang Rai" },
+                    { 4, 1, 4, "Phuket" },
+                    { 5, 1, 3, "Khon Kaen" },
+                    { 6, 1, 3, "Nakhon Ratchasima" }
                 });
 
             migrationBuilder.InsertData(
@@ -143,7 +200,9 @@ namespace apiNet8.Migrations
                 values: new object[,]
                 {
                     { 1, null, 1, "123 Sukhumvit", "10110" },
-                    { 2, null, 2, "456 Nimman", "50000" }
+                    { 2, null, 2, "456 Nimman", "50000" },
+                    { 3, null, 3, "789 Shibuya", "150-0002" },
+                    { 4, null, 5, "101 Manhattan", "10001" }
                 });
 
             migrationBuilder.InsertData(
@@ -152,7 +211,8 @@ namespace apiNet8.Migrations
                 values: new object[,]
                 {
                     { 1, null, 1, "Wattana" },
-                    { 2, null, 3, "Shibuya" }
+                    { 2, null, 3, "Shibuya" },
+                    { 3, null, 5, "Brooklyn" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -171,6 +231,11 @@ namespace apiNet8.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Provinces_GeographyId",
+                table: "Provinces",
+                column: "GeographyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Shippings_CountryModelCountryId",
                 table: "Shippings",
                 column: "CountryModelCountryId");
@@ -184,6 +249,11 @@ namespace apiNet8.Migrations
                 name: "IX_ThaiProvinces_CountryId",
                 table: "ThaiProvinces",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ThaiProvinces_GeographyId",
+                table: "ThaiProvinces",
+                column: "GeographyId");
         }
 
         /// <inheritdoc />
@@ -203,6 +273,9 @@ namespace apiNet8.Migrations
 
             migrationBuilder.DropTable(
                 name: "Countries");
+
+            migrationBuilder.DropTable(
+                name: "GeographyModel");
         }
     }
 }

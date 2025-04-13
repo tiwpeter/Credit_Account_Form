@@ -31,9 +31,28 @@ namespace ModelTest.Controllers
         public string GeographyName { get; set; } // เช่น "ภาคเหนือ", "ภาคใต้"
 
         public ICollection<ThaiProvince> ThaiProvinces { get; set; }
+        public ICollection<ProvinceModel> Provinces { get; set; } // เชื่อมโยงกับ ProvinceModel
     }
 
 
+    // จังหวัดทั่วไป (ทั่วโลก)
+    public class ProvinceModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ProvinceId { get; set; }
+        public string ProvinceName { get; set; }
 
+
+
+        // เก็บชื่อประเทศ
+        public int CountryId { get; set; }
+        public CountryModel Country { get; set; } // ความสัมพันธ์กับ Province
+
+        // ✅ เพิ่ม geography
+        public int GeographyId { get; set; }
+        public GeographyModel Geography { get; set; }
+
+    }
 
 }
