@@ -57,9 +57,5 @@ namespace ModelTest.Controllers
         // FK ไป Province
         public int ProvinceId { get; set; }
         public ProvinceModel Province { get; set; }
-
-        // FK ไป Country
-        public int CountryId { get; set; }
-        public CountryModel Country { get; set; }
     }
 }

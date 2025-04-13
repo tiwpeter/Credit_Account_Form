@@ -39,10 +39,12 @@ namespace API.Data
             );
 
             // Seed Shipping
+            // Seed Shipping (ลบ CountryId)
             modelBuilder.Entity<ShippingModel>().HasData(
-                new ShippingModel { shipping_id = 1, subDistrict = "Wattana", ProvinceId = 1, CountryId = 1 },
-                new ShippingModel { shipping_id = 2, subDistrict = "Shibuya", ProvinceId = 3, CountryId = 2 }
+                new ShippingModel { shipping_id = 1, subDistrict = "Wattana", ProvinceId = 1 },
+                new ShippingModel { shipping_id = 2, subDistrict = "Shibuya", ProvinceId = 3 }
             );
+
         }
 
     }

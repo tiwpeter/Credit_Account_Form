@@ -25,7 +25,7 @@ namespace ModelTest.Controllers
 
         // FK3 → Shipping
         public int ShippingId { get; set; }
-        public Shipping Shipping { get; set; }
+        public ShippingModel Shipping { get; set; }
     }
 
 }
