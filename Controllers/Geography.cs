@@ -7,45 +7,43 @@ using ModelTest.Controllers;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/thai-provinces")]
-    public class GeographyController : ControllerBase
+    [Route("api/provinces")]
+    public class ProvincesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public GeographyController(ApplicationDbContext context)
+
+        public ProvincesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/ThaiProvinces
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ThaiProvince>>> GetThaiProvinces()
+        [HttpGet("thai")]
+        public ActionResult<IEnumerable<ThaiProvinceDto>> GetThaiProvinces()
         {
-            return await _context.ThaiProvinces.Include(tp => tp.Country).Include(tp => tp.Geography).ToListAsync();
+            var provinces = _context.ThaiProvinces
+                .Include(p => p.Country)
+                .Include(p => p.Geography)
+                .ToList();
+
+            var dtos = provinces.Select(p => ProvinceMapper.ToDto(p)).ToList();
+
+            return Ok(dtos);
         }
 
-        // GET: api/ThaiProvinces/5
-        // GET: api/thai-provinces/by-geography/1
-        [HttpGet("by-geography/{geographyId}")]
-        public async Task<ActionResult<IEnumerable<ThaiProvince>>> GetThaiProvincesByGeography(int geographyId)
+        [HttpGet("global")]
+        public ActionResult<IEnumerable<ProvinceDto>> GetAllProvinces()
         {
-            // กรองเฉพาะ ThaiProvince ที่มี GeographyId ตรง และอยู่ในประเทศไทย
-            // สมมุติว่า CountryId ของประเทศไทยเป็น 1 (คุณสามารถเปลี่ยนให้ dynamic ได้ด้วยถ้าต้องการ)
-            var thailandCountryId = 1;
+            var provinces = _context.Provinces
+                .Include(p => p.Country)
+                .Include(p => p.Geography)
+                .ToList();
 
-            var provinces = await _context.ThaiProvinces
-                .Where(tp => tp.GeographyId == geographyId && tp.CountryId == thailandCountryId)
-                .Include(tp => tp.Geography)
-                .ToListAsync();
+            var dtos = provinces.Select(p => ProvinceMapper.ToDto(p)).ToList();
 
-            if (provinces == null || provinces.Count == 0)
-            {
-                return NotFound("ไม่พบจังหวัดในภูมิภาคที่ระบุ");
-            }
-
-            return Ok(provinces);
+            return Ok(dtos);
         }
-
     }
+
 
 }

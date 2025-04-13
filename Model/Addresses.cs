@@ -54,5 +54,43 @@ namespace ModelTest.Controllers
         public GeographyModel Geography { get; set; }
 
     }
+    // ประเทศ
+    public class CountryModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
+        public int CountryId { get; set; }
+        public string Name { get; set; }
+        // ❌ ตัดความสัมพันธ์ย้อนกลับ
+        // public List<ThaiProvince> ThaiProvinces { get; set; }
+
+    }
+
+    //สร้าง DTO เฉพาะข้อมูลที่ต้องการส่งออก
+    // DTOs/ThaiProvinceDto.cs
+    public class ThaiProvinceDto
+    {
+        public int ThaiProvinceId { get; set; }
+        public string ThaiProvinceName { get; set; }
+        public string CountryName { get; set; }
+        public string GeographyName { get; set; }
+    }
+
+    // DTOs/ProvinceDto.cs
+    public class ProvinceDto
+    {
+        public int ProvinceId { get; set; }
+        public string ProvinceName { get; set; }
+        public string CountryName { get; set; }
+        public string GeographyName { get; set; }
+    }
+
+    // DTOs/CountryDto.cs
+    public class CountryDto
+    {
+        public int CountryId { get; set; }
+        public string Name { get; set; }
+    }
+
 
 }

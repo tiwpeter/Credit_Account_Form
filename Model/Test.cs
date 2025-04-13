@@ -4,15 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelTest.Controllers
 {
 
-    // ประเทศ
-    public class CountryModel
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
-        public int CountryId { get; set; }
-        public string Name { get; set; }
 
-    }
 
     // ที่อยู่
     public class AddressModel
