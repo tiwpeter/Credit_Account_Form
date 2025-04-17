@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiNet8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250415214700_XX3")]
+    partial class XX3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +81,7 @@ namespace apiNet8.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ModelTest.Controllers.BusinessTypeDto", b =>
+            modelBuilder.Entity("ModelTest.Controllers.BusinessTypeModel", b =>
                 {
                     b.Property<int>("busiTypeID")
                         .ValueGeneratedOnAdd()
@@ -87,10 +90,10 @@ namespace apiNet8.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("busiTypeID"));
 
                     b.Property<decimal?>("RegisteredCapital")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(15,2)");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("busiTypeCode")
                         .IsRequired()
@@ -112,7 +115,7 @@ namespace apiNet8.Migrations
                         new
                         {
                             busiTypeID = 1,
-                            RegisteredCapital = 1000000m,
+                            RegisteredCapital = 1000000.00m,
                             RegistrationDate = new DateTime(2010, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             busiTypeCode = "RET",
                             busiTypeDes = "ธุรกิจค้าปลีกทั่วไป",

@@ -14,6 +14,13 @@ namespace API.Data
         public DbSet<AddressModel> Addresses { get; set; }
         public DbSet<CountryModel> Countries { get; set; }
         public DbSet<ShippingModel> Shippings { get; set; }
+        public DbSet<CompanyModel> Company { get; set; }
+        public DbSet<IndustryType> IndustryType { get; set; }
+        public DbSet<accountGroupModel> accountGroup { get; set; }
+        public DbSet<SaleOrgModel> SaleOrg { get; set; }
+        public DbSet<shopTypeModel> shopType { get; set; }
+        public DbSet<BusinessTypeDto> BusinessType { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,6 +77,54 @@ namespace API.Data
                 new ShippingModel { shipping_id = 2, subDistrict = "Shibuya", ProvinceId = 3 },
                 new ShippingModel { shipping_id = 3, subDistrict = "Brooklyn", ProvinceId = 5 }
             );
+
+            modelBuilder.Entity<BusinessTypeDto>().HasData(
+            new BusinessTypeDto
+            {
+                busiTypeID = 1,
+                busiTypeCode = "RET",
+                busiTypeName = "ค้าปลีก",
+                busiTypeDes = "ธุรกิจค้าปลีกทั่วไป",
+                RegistrationDate = new DateTime(2010, 1, 1),
+                RegisteredCapital = 1000000m
+            },
+            new BusinessTypeDto
+            {
+                busiTypeID = 2,
+                busiTypeCode = "WHL",
+                busiTypeName = "ค้าส่ง",
+                busiTypeDes = "ธุรกิจค้าส่งสินค้า",
+                RegistrationDate = new DateTime(2011, 5, 20),
+                RegisteredCapital = 5000000.00m
+            },
+            new BusinessTypeDto
+            {
+                busiTypeID = 3,
+                busiTypeCode = "MFG",
+                busiTypeName = "การผลิต",
+                busiTypeDes = "โรงงานผลิตสินค้าทั่วไป",
+                RegistrationDate = new DateTime(2015, 3, 15),
+                RegisteredCapital = 15000000.00m
+            },
+            new BusinessTypeDto
+            {
+                busiTypeID = 4,
+                busiTypeCode = "SRV",
+                busiTypeName = "บริการ",
+                busiTypeDes = "บริษัทให้บริการทั่วไป",
+                RegistrationDate = new DateTime(2018, 7, 10),
+                RegisteredCapital = 2000000.00m
+            },
+            new BusinessTypeDto
+            {
+                busiTypeID = 5,
+                busiTypeCode = "GOV",
+                busiTypeName = "หน่วยงานราชการ",
+                busiTypeDes = "องค์กรภาครัฐ",
+                RegistrationDate = new DateTime(2005, 11, 1),
+                RegisteredCapital = null
+            }
+        );
         }
 
 
