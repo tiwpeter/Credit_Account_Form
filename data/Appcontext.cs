@@ -26,6 +26,20 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<RegisformModel>()
+       .HasOne(r => r.Address)
+       .WithMany()
+       .HasForeignKey(r => r.AddressId)
+       .OnDelete(DeleteBehavior.NoAction); // 👈 หรือ .Restrict
+
+            modelBuilder.Entity<RegisformModel>()
+                .HasOne(r => r.Shipping)
+                .WithMany()
+                .HasForeignKey(r => r.ShippingId)
+                .OnDelete(DeleteBehavior.NoAction); // 👈 หรือ .Restrict
+
+
             // --- Geography
             modelBuilder.Entity<GeographyModel>().HasData(
                 new GeographyModel { GeographyId = 1, GeographyName = "ภาคเหนือ" },
@@ -40,74 +54,34 @@ namespace API.Data
 
             // --- ThaiProvince
             modelBuilder.Entity<ThaiProvince>().HasData(
-                new ThaiProvince
-                {
-                    ThaiProvinceId = 1,
-                    ThaiProvinceName = "เชียงใหม่",
-                    CountryId = 1,
-                    GeographyId = 1
-                },
-                new ThaiProvince
-                {
-                    ThaiProvinceId = 2,
-                    ThaiProvinceName = "กรุงเทพมหานคร",
-                    CountryId = 1,
-                    GeographyId = 2
-                }
+                new ThaiProvince { ThaiProvinceId = 1, ThaiProvinceName = "เชียงใหม่", CountryId = 1, GeographyId = 1 },
+                new ThaiProvince { ThaiProvinceId = 2, ThaiProvinceName = "กรุงเทพมหานคร", CountryId = 1, GeographyId = 2 }
             );
 
             // --- ProvinceModel (ทั่วไป)
             modelBuilder.Entity<ProvinceModel>().HasData(
-                new ProvinceModel
-                {
-                    ProvinceId = 1,
-                    ProvinceName = "California",
-                    CountryId = 2,
-                    GeographyId = 2
-                },
-                new ProvinceModel
-                {
-                    ProvinceId = 2,
-                    ProvinceName = "New York",
-                    CountryId = 2,
-                    GeographyId = 2
-                }
+                new ProvinceModel { ProvinceId = 1, ProvinceName = "California", CountryId = 2, GeographyId = 2 },
+                new ProvinceModel { ProvinceId = 2, ProvinceName = "New York", CountryId = 2, GeographyId = 2 }
             );
 
             // --- AddressModel
             modelBuilder.Entity<AddressModel>().HasData(
-                new AddressModel
-                {
-                    AddressId = 1,
-                    Street = "123 ถนนราชดำเนิน",
-                    CountryId = 1,
-                    ThaiProvinceId = 2
-                },
-                new AddressModel
-                {
-                    AddressId = 2,
-                    Street = "456 Sunset Blvd",
-                    CountryId = 2,
-                    ProvinceId = 1
-                }
+                new AddressModel { AddressId = 1, Street = "123 ถนนราชดำเนิน", CountryId = 1, ThaiProvinceId = 2 },
+                new AddressModel { AddressId = 2, Street = "456 Sunset Blvd", CountryId = 2, ProvinceId = 1 }
             );
+
             // Seed Shipping
             modelBuilder.Entity<ShippingModel>().HasData(
                 new ShippingModel { shipping_id = 1, subDistrict = "Wang Thonglang", ProvinceId = 1 },
                 new ShippingModel { shipping_id = 2, subDistrict = "Mueang Chiang Mai", ProvinceId = 2 }
             );
 
-
             // --- RegisformModel
-            // Seed Regisform
             modelBuilder.Entity<RegisformModel>().HasData(
-                new RegisformModel { Id = 1, AddressId = 1, shipping_id = 1 },
-                new RegisformModel { Id = 2, AddressId = 2, shipping_id = 2 }
+                new RegisformModel { Id = 1, AddressId = 1, ShippingId = 1 },
+                new RegisformModel { Id = 2, AddressId = 2, ShippingId = 2 }
             );
         }
-
-
-
 
     }
 }

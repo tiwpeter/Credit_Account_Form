@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace apiNet8.Migrations
 {
     /// <inheritdoc />
-    public partial class XX6 : Migration
+    public partial class XX13f : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -273,7 +273,8 @@ namespace apiNet8.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AddressId = table.Column<int>(type: "int", nullable: false)
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    ShippingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -282,8 +283,12 @@ namespace apiNet8.Migrations
                         name: "FK_Regisforms_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "AddressId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AddressId");
+                    table.ForeignKey(
+                        name: "FK_Regisforms_Shippings_ShippingId",
+                        column: x => x.ShippingId,
+                        principalTable: "Shippings",
+                        principalColumn: "shipping_id");
                 });
 
             migrationBuilder.InsertData(
@@ -332,9 +337,22 @@ namespace apiNet8.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Shippings",
+                columns: new[] { "shipping_id", "ProvinceId", "subDistrict" },
+                values: new object[,]
+                {
+                    { 1, 1, "Wang Thonglang" },
+                    { 2, 2, "Mueang Chiang Mai" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Regisforms",
-                columns: new[] { "Id", "AddressId" },
-                values: new object[] { 1, 1 });
+                columns: new[] { "Id", "AddressId", "ShippingId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CountryId",
@@ -365,6 +383,11 @@ namespace apiNet8.Migrations
                 name: "IX_Regisforms_AddressId",
                 table: "Regisforms",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Regisforms_ShippingId",
+                table: "Regisforms",
+                column: "ShippingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RegisterForms_Test1",
@@ -412,22 +435,22 @@ namespace apiNet8.Migrations
                 name: "SaleOrg");
 
             migrationBuilder.DropTable(
-                name: "Shippings");
-
-            migrationBuilder.DropTable(
                 name: "shopType");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
 
             migrationBuilder.DropTable(
+                name: "Shippings");
+
+            migrationBuilder.DropTable(
                 name: "TestModel");
 
             migrationBuilder.DropTable(
-                name: "Provinces");
+                name: "ThaiProvinces");
 
             migrationBuilder.DropTable(
-                name: "ThaiProvinces");
+                name: "Provinces");
 
             migrationBuilder.DropTable(
                 name: "Countries");

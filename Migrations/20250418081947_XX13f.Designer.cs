@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiNet8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250418023827_XX6")]
-    partial class XX6
+    [Migration("20250418081947_XX13f")]
+    partial class XX13f
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,9 +266,14 @@ namespace apiNet8.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ShippingId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("ShippingId");
 
                     b.ToTable("Regisforms");
 
@@ -276,7 +281,14 @@ namespace apiNet8.Migrations
                         new
                         {
                             Id = 1,
-                            AddressId = 1
+                            AddressId = 1,
+                            ShippingId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AddressId = 2,
+                            ShippingId = 2
                         });
                 });
 
@@ -322,6 +334,20 @@ namespace apiNet8.Migrations
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("Shippings");
+
+                    b.HasData(
+                        new
+                        {
+                            shipping_id = 1,
+                            ProvinceId = 1,
+                            subDistrict = "Wang Thonglang"
+                        },
+                        new
+                        {
+                            shipping_id = 2,
+                            ProvinceId = 2,
+                            subDistrict = "Mueang Chiang Mai"
+                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.TestModel", b =>
@@ -495,10 +521,18 @@ namespace apiNet8.Migrations
                     b.HasOne("ModelTest.Controllers.AddressModel", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ModelTest.Controllers.ShippingModel", "Shipping")
+                        .WithMany()
+                        .HasForeignKey("ShippingId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Address");
+
+                    b.Navigation("Shipping");
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.RegisterFrom", b =>

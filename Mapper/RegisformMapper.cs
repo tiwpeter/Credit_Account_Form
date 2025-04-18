@@ -20,7 +20,7 @@ public static class RegisformMapper
             ThaiProvinceName = isThailand ? model.Address.ThaiProvince?.ThaiProvinceName : null,
 
             // 👉 Shipping fields
-            ShippingId = model.shipping_id,
+            shipping_id = model.ShippingId,
             ShippingSubDistrict = model.Shipping?.subDistrict,
             ShippingProvinceId = model.Shipping?.ProvinceId ?? 0,
         };
@@ -31,7 +31,7 @@ public static class RegisformMapper
         return new RegisformModel
         {
             Id = dto.Id,
-            shipping_id = dto.ShippingId,
+            ShippingId = dto.shipping_id,
             Address = new AddressModel
             {
                 AddressId = dto.AddressId,
@@ -42,7 +42,7 @@ public static class RegisformMapper
             },
             Shipping = new ShippingModel
             {
-                shipping_id = dto.ShippingId,
+                shipping_id = dto.shipping_id,
                 subDistrict = dto.ShippingSubDistrict,
                 ProvinceId = dto.ShippingProvinceId
             }

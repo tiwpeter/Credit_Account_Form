@@ -7,15 +7,19 @@ namespace ModelTest.Controllers
     //ตัวอย่าง Customer Model แบบมี FK ทั้ง 3
     public class RegisformModel
     {
-        [Key] // 👈 เพิ่ม annotation นี้ด้วย
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int Id { get; set; }
+
         public int AddressId { get; set; }
+        [ForeignKey("AddressId")]
         public AddressModel Address { get; set; }
-        public int shipping_id { get; set; }
+
+        public int ShippingId { get; set; }
+        [ForeignKey("ShippingId")]
         public ShippingModel Shipping { get; set; }
     }
+
     public class RegisformDto
     {
         public int Id { get; set; }
@@ -34,11 +38,23 @@ namespace ModelTest.Controllers
         public string ThaiProvinceName { get; set; }
 
         // 👉 Shipping fields
-        public int ShippingId { get; set; }
+        public int shipping_id { get; set; }
         public string ShippingSubDistrict { get; set; }
         public int ShippingProvinceId { get; set; }
         public string ShippingProvinceName { get; set; }
     }
 
+    public class ShippingModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
+        public int shipping_id { get; set; }
+        public string subDistrict { get; set; }
+
+        // FK ไป Province
+        [ForeignKey("ProvinceId")]
+        public int ProvinceId { get; set; }
+        public ProvinceModel Province { get; set; }
+    }
 
 }
