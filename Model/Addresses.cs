@@ -4,93 +4,102 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelTest.Controllers
 {
 
-    //จังหวัดในไทย
-    //ในกรณีที่ Country เป็น "ประเทศไทย": คุณจะสามารถค้นหาข้อมูลจาก thai_provinces ได้ 
-    // โดยใช้ CountryId ที่ตรงกับ "ประเทศไทย"
-    // ตาราง ThaiProvinces (เก็บจังหวัดของประเทศไทย)
-    public class ThaiProvince
+    public class AddressModel
     {
         [Key]
-        public int ThaiProvinceId { get; set; }
-        public string ThaiProvinceName { get; set; } // ชื่อจังหวัดในประเทศไทย
+        public int AddressId { get; set; }
 
-        public int CountryId { get; set; } // Foreign Key ไปที่ Country
-        public CountryModel Country { get; set; } // ความสัมพันธ์กับ Country
+        public string Street { get; set; }
 
-        // เพิ่ม geography_id และความสัมพันธ์
-        public int GeographyId { get; set; }
-        public GeographyModel Geography { get; set; }
+        public int CountryId { get; set; }
+        public CountryModel Country { get; set; }
+
+        public int? ProvinceId { get; set; }
+        public ProvinceModel Province { get; set; }
+
+        public int? ThaiProvinceId { get; set; }
+        public ThaiProvince ThaiProvince { get; set; }
     }
+    public class CountryModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CountryId { get; set; }
 
-    //ดึง "จังหวัด" เฉพาะในประเทศไทย และ กรองตาม ภูมิภาค(Geography)
+        public string CountryName { get; set; }
+
+        // Navigation
+        public ICollection<ThaiProvince> ThaiProvinces { get; set; }
+        public ICollection<ProvinceModel> Provinces { get; set; }
+    }
     public class GeographyModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GeographyId { get; set; }
 
         public string GeographyName { get; set; } // เช่น "ภาคเหนือ", "ภาคใต้"
 
         public ICollection<ThaiProvince> ThaiProvinces { get; set; }
-        public ICollection<ProvinceModel> Provinces { get; set; } // เชื่อมโยงกับ ProvinceModel
+        public ICollection<ProvinceModel> Provinces { get; set; }
     }
+    public class ThaiProvince
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ThaiProvinceId { get; set; }
 
+        public string ThaiProvinceName { get; set; }
 
-    // จังหวัดทั่วไป (ทั่วโลก)
+        // FK → Country (ควรเป็นประเทศไทยเสมอ)
+        public int CountryId { get; set; }
+        [ForeignKey("CountryId")]
+        public CountryModel Country { get; set; }
+
+        // FK → Geography
+        public int GeographyId { get; set; }
+        [ForeignKey("GeographyId")]
+        public GeographyModel Geography { get; set; }
+    }
     public class ProvinceModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProvinceId { get; set; }
+
         public string ProvinceName { get; set; }
 
-
-
-        // เก็บชื่อประเทศ
+        // FK → Country
         public int CountryId { get; set; }
-        public CountryModel Country { get; set; } // ความสัมพันธ์กับ Province
+        [ForeignKey("CountryId")]
+        public CountryModel Country { get; set; }
 
-        // ✅ เพิ่ม geography
+        // FK → Geography (ถ้ามีการแบ่งเป็นภูมิภาคในประเทศนั้น)
         public int GeographyId { get; set; }
+        [ForeignKey("GeographyId")]
         public GeographyModel Geography { get; set; }
-
     }
-    // ประเทศ
-    public class CountryModel
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
-        public int CountryId { get; set; }
-        public string Name { get; set; }
-        // ❌ ตัดความสัมพันธ์ย้อนกลับ
-        // public List<ThaiProvince> ThaiProvinces { get; set; }
-
-    }
-
-    //สร้าง DTO เฉพาะข้อมูลที่ต้องการส่งออก
-    // DTOs/ThaiProvinceDto.cs
     public class ThaiProvinceDto
     {
         public int ThaiProvinceId { get; set; }
         public string ThaiProvinceName { get; set; }
         public string CountryName { get; set; }
+        public int GeographyId { get; set; }
         public string GeographyName { get; set; }
     }
-
-    // DTOs/ProvinceDto.cs
-    public class ProvinceDto
+    public class AddressDto
     {
-        public int ProvinceId { get; set; }
-        public string ProvinceName { get; set; }
-        public string CountryName { get; set; }
-        public string GeographyName { get; set; }
-    }
+        public int AddressId { get; set; }
+        public string Street { get; set; }
 
-    // DTOs/CountryDto.cs
-    public class CountryDto
-    {
         public int CountryId { get; set; }
-        public string Name { get; set; }
-    }
+        public string CountryName { get; set; }
 
+        public int? ProvinceId { get; set; }
+        public string ProvinceName { get; set; }
+
+        public int? ThaiProvinceId { get; set; }
+        public string ThaiProvinceName { get; set; }
+    }
 
 }

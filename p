@@ -1,6 +1,6 @@
 Customer
-  ├── FK → General
-  │       └── FK → AddressModel
+  ├── FK → General general_id
+  │       └── FK → AddressModel -> ProvinceModel → CountryModel
   ├── FK → Shipping
   │       ├── FK → ProvinceModel
   │       │       └── FK → CountryModel
@@ -22,3 +22,6 @@ General => have AddressModel => CountryId Province
 
 General => have AddressModel =>  CountryId Province
  Shipping => CountryId Province
+
+ข้อมูลส่วนตัว
+ ที่อยู่

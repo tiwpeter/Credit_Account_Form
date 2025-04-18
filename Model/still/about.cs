@@ -8,7 +8,10 @@ namespace ModelTest.Controllers
     public class RegisterFrom
     {
         public int Id { get; set; }
-        public shopTypeModel shopType { get; set; }
+
+        public int TestId { get; set; }
+        public TestModel Test { get; set; }
+
     }
 
     [Owned]
@@ -19,6 +22,24 @@ namespace ModelTest.Controllers
         public string InduTypeCode { get; set; }
 
     }
+
+    public class TestModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
+        public string Test { get; set; }
+        public int TestId { get; set; }
+
+
+    }
+
+
+
+
+
+
+
+
 
 
     public class CreditInfoModel
