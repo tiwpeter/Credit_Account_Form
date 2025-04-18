@@ -2,6 +2,7 @@ using API.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ModelTest.Controllers;
+using System.Threading.Tasks;
 
 namespace ModelTest.ApiControllers
 {
@@ -9,7 +10,6 @@ namespace ModelTest.ApiControllers
     [ApiController]
     public class RegisformController : ControllerBase
     {
-
         private readonly ApplicationDbContext _context;
 
         public RegisformController(ApplicationDbContext context)
@@ -22,73 +22,38 @@ namespace ModelTest.ApiControllers
         public async Task<IActionResult> GetAll()
         {
             var regisforms = await _context.Regisforms
-                .Include(r => r.Address)
-                    .ThenInclude(a => a.Country)
-                .Include(r => r.Address)
-                    .ThenInclude(a => a.Province)
-                .Include(r => r.Address)
-                    .ThenInclude(a => a.ThaiProvince)
-                .Include(r => r.Shipping) // 👉 เพิ่ม Shipping ด้วย
+                .Include(r => r.General)
+                    .ThenInclude(g => g.Address)
+                        .ThenInclude(a => a.Country)
+                .Include(r => r.General)
+                    .ThenInclude(g => g.Address)
+                        .ThenInclude(a => a.Province)
+                .Include(r => r.General)
+                    .ThenInclude(g => g.Address)
+                        .ThenInclude(a => a.ThaiProvince)
+                .Include(r => r.Shipping)
                     .ThenInclude(s => s.Province)
                 .ToListAsync();
 
-            var dtoList = regisforms.Select(RegisformMapper.ToDto);
+            var dtoList = regisforms.Select(RegisformMapper.ToDto).ToList();
             return Ok(dtoList);
         }
 
-
-        // GET: api/Regisform/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var regisform = await _context.Regisforms
-                .Include(r => r.Address)
-                    .ThenInclude(a => a.Country)
-                .Include(r => r.Address)
-                    .ThenInclude(a => a.Province)
-                .Include(r => r.Address)
-                    .ThenInclude(a => a.ThaiProvince)
-                .FirstOrDefaultAsync(r => r.Id == id);
-
-            if (regisform == null)
-                return NotFound();
-
-            return Ok(regisform);
-        }
-
-        // POST: api/Regisform
         [HttpPost]
-        public async Task<IActionResult> Create(RegisformModel model)
+        public IActionResult Post([FromBody] RegisformDto dto)
         {
-            _context.Regisforms.Add(model);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = model.Id }, model);
-        }
-
-        // PUT: api/Regisform/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, RegisformModel model)
-        {
-            if (id != model.Id)
+            if (dto == null)
                 return BadRequest();
 
-            _context.Entry(model).State = EntityState.Modified;
+            var model = RegisformMapper.ToModel(dto);
 
-            await _context.SaveChangesAsync();
-            return NoContent();
+            // บันทึกลง DB หรือ Logic อื่นๆ
+            _context.Regisforms.Add(model);
+            _context.SaveChanges();
+
+            return Ok(new { message = "Data saved successfully." });
         }
 
-        // DELETE: api/Regisform/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var regisform = await _context.Regisforms.FindAsync(id);
-            if (regisform == null)
-                return NotFound();
 
-            _context.Regisforms.Remove(regisform);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
     }
 }

@@ -27,11 +27,7 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<RegisformModel>()
-       .HasOne(r => r.Address)
-       .WithMany()
-       .HasForeignKey(r => r.AddressId)
-       .OnDelete(DeleteBehavior.NoAction); // 👈 หรือ .Restrict
+
 
             modelBuilder.Entity<RegisformModel>()
                 .HasOne(r => r.Shipping)
@@ -75,11 +71,15 @@ namespace API.Data
                 new ShippingModel { shipping_id = 1, subDistrict = "Wang Thonglang", ProvinceId = 1 },
                 new ShippingModel { shipping_id = 2, subDistrict = "Mueang Chiang Mai", ProvinceId = 2 }
             );
-
+            // Seed General
+            modelBuilder.Entity<GeneralModel>().HasData(
+                new GeneralModel { general_id = 1, generalName = "John Doe", AddressId = 1 },
+                new GeneralModel { general_id = 2, generalName = "Jane Smith", AddressId = 2 }
+            );
             // --- RegisformModel
             modelBuilder.Entity<RegisformModel>().HasData(
-                new RegisformModel { Id = 1, AddressId = 1, ShippingId = 1 },
-                new RegisformModel { Id = 2, AddressId = 2, ShippingId = 2 }
+                new RegisformModel { Id = 1, GeneralId = 1, ShippingId = 1 },
+                new RegisformModel { Id = 2, GeneralId = 2, ShippingId = 2 }
             );
         }
 

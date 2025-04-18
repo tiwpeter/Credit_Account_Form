@@ -87,19 +87,6 @@ namespace ModelTest.Controllers
         public int GeographyId { get; set; }
         public string GeographyName { get; set; }
     }
-    public class AddressDto
-    {
-        public int AddressId { get; set; }
-        public string Street { get; set; }
 
-        public int CountryId { get; set; }
-        public string CountryName { get; set; }
-
-        public int? ProvinceId { get; set; }
-        public string ProvinceName { get; set; }
-
-        public int? ThaiProvinceId { get; set; }
-        public string ThaiProvinceName { get; set; }
-    }
 
 }

@@ -11,9 +11,10 @@ namespace ModelTest.Controllers
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int AddressId { get; set; }
-        [ForeignKey("AddressId")]
-        public AddressModel Address { get; set; }
+        public int GeneralId { get; set; }
+
+        [ForeignKey("GeneralId")]
+        public GeneralModel General { get; set; }
 
         public int ShippingId { get; set; }
         [ForeignKey("ShippingId")]
@@ -23,26 +24,35 @@ namespace ModelTest.Controllers
     public class RegisformDto
     {
         public int Id { get; set; }
-
-        // Address info
+        public GeneralModel General { get; set; }
+        public ShippingDto Shipping { get; set; }
+    }
+    public class GeneralDto
+    {
+        public int GeneralId { get; set; }
+        public string GeneralName { get; set; }
+        public AddressDto Address { get; set; }
+    }
+    public class AddressDto
+    {
         public int AddressId { get; set; }
         public string Street { get; set; }
-
         public int CountryId { get; set; }
         public string CountryName { get; set; }
-
         public int? ProvinceId { get; set; }
         public string ProvinceName { get; set; }
-
         public int? ThaiProvinceId { get; set; }
         public string ThaiProvinceName { get; set; }
+    }
 
-        // 👉 Shipping fields
-        public int shipping_id { get; set; }
+    public class ShippingDto
+    {
+        public int ShippingId { get; set; }
         public string ShippingSubDistrict { get; set; }
         public int ShippingProvinceId { get; set; }
         public string ShippingProvinceName { get; set; }
     }
+
 
     public class ShippingModel
     {
@@ -58,3 +68,14 @@ namespace ModelTest.Controllers
     }
 
 }
+/*
+RegisformModel
+ ├─ GeneralModel
+ │    └─ AddressModel
+ │         ├─ Country
+ │         ├─ Province
+ │         └─ ThaiProvince
+ └─ ShippingModel
+      └─ Province
+markdawn
+*/
