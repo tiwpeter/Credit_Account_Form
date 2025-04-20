@@ -19,40 +19,19 @@ namespace ModelTest.ApiControllers
 
         // GET: api/Regisform
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<CustomerDto>>> GetAllCustomers()
         {
-            var regisforms = await _context.Regisforms
-                .Include(r => r.General)
+            var customers = await _context.Customer
+                .Include(c => c.General)
                     .ThenInclude(g => g.Address)
                         .ThenInclude(a => a.Country)
-                .Include(r => r.General)
-                    .ThenInclude(g => g.Address)
-                        .ThenInclude(a => a.Province)
-                .Include(r => r.General)
-                    .ThenInclude(g => g.Address)
-                        .ThenInclude(a => a.ThaiProvince)
-                .Include(r => r.Shipping)
-                    .ThenInclude(s => s.Province)
                 .ToListAsync();
 
-            var dtoList = regisforms.Select(RegisformMapper.ToDto).ToList();
-            return Ok(dtoList);
+            var customerDtos = customers.Select(CustomerMapper.ToDto).ToList();
+            return Ok(customerDtos);
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] RegisformDto dto)
-        {
-            if (dto == null)
-                return BadRequest();
 
-            var model = RegisformMapper.ToModel(dto);
-
-            // บันทึกลง DB หรือ Logic อื่นๆ
-            _context.Regisforms.Add(model);
-            _context.SaveChanges();
-
-            return Ok(new { message = "Data saved successfully." });
-        }
 
 
     }
