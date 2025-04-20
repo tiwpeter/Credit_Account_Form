@@ -8,11 +8,11 @@ namespace API.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public DbSet<AddressModel> Address { get; set; }
+        public DbSet<AddressModel> Addresses { get; set; }
         public DbSet<CountryModel> Country { get; set; }
         public DbSet<CustomerModel> Customer { get; set; }
-        public DbSet<GeneralModel> General { get; set; }
 
+        public DbSet<ProvinceModel> Provinces { get; set; }
 
 
 
@@ -22,44 +22,43 @@ namespace API.Data
 
             // Seed Country
             modelBuilder.Entity<CountryModel>().HasData(
-                new CountryModel
-                {
-                    CountryId = 1,
-                    CountryName = "ไทย"
-                }
+                new CountryModel { CountryId = 1, CountryName = "Thailand" },
+                new CountryModel { CountryId = 2, CountryName = "Japan" }
             );
 
-            // Seed Address (ต้องมี CountryId)
+            // Seed Province
+            modelBuilder.Entity<ProvinceModel>().HasData(
+                new ProvinceModel { ProvinceId = 1, ProvinceName = "Bangkok", CountryId = 1 },
+                new ProvinceModel { ProvinceId = 2, ProvinceName = "Chiang Mai", CountryId = 1 },
+                new ProvinceModel { ProvinceId = 3, ProvinceName = "Tokyo", CountryId = 2 }
+            );
+
+            // Seed Address
             modelBuilder.Entity<AddressModel>().HasData(
                 new AddressModel
                 {
                     AddressId = 1,
-                    Street = "ถนนพระรามที่ 2",
-                    ZipCode = "10150",
-                    CountryId = 1
-                }
-            );
-
-            // Seed General
-            modelBuilder.Entity<GeneralModel>().HasData(
-                new GeneralModel
+                    Street = "123 Sukhumvit Rd",
+                    ZipCode = "10110",
+                    ProvinceId = 1
+                },
+                new AddressModel
                 {
-                    general_id = 1,
-                    generalName = "สมชาย ใจดี",
-                    AddressId = 1
-                }
-            );
-
-            // Seed Customer
-            modelBuilder.Entity<CustomerModel>().HasData(
-                new CustomerModel
+                    AddressId = 2,
+                    Street = "456 Nimmanhaemin Rd",
+                    ZipCode = "50200",
+                    ProvinceId = 2
+                },
+                new AddressModel
                 {
-                    CustomerId = 1,
-                    CustomerName = "ชานนท์ เทพทวี",
-                    GeneralId = 1
+                    AddressId = 3,
+                    Street = "789 Shibuya",
+                    ZipCode = "150-0002",
+                    ProvinceId = 3
                 }
             );
         }
+
 
 
     }

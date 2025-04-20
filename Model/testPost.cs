@@ -4,6 +4,34 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelTest.Controllers
 {
 
+
+
+
+    public class CustomerModel
+    {
+        [Key]
+        public int CustomerId { get; set; }
+
+        public string CustomerName { get; set; }
+
+        public int GeneralId { get; set; }
+
+    }
+
+
+    public class ProvinceModel
+    {
+        [Key]
+        public int ProvinceId { get; set; }
+        public string ProvinceName { get; set; }
+
+        public int CountryId { get; set; }
+
+        [ForeignKey("CountryId")]
+        public CountryModel Country { get; set; }
+    }
+
+
     public class AddressModel
     {
         [Key]
@@ -12,10 +40,13 @@ namespace ModelTest.Controllers
         public string Street { get; set; }
         public string ZipCode { get; set; }
 
-        public int CountryId { get; set; }
 
-        [ForeignKey("CountryId")]
-        public CountryModel Country { get; set; }
+
+        // เพิ่ม Province
+        public int ProvinceId { get; set; }
+
+        [ForeignKey("ProvinceId")]
+        public ProvinceModel Province { get; set; }
     }
 
     public class CountryModel
@@ -26,60 +57,14 @@ namespace ModelTest.Controllers
 
         public string CountryName { get; set; }
 
+
     }
-
-    public class GeneralModel
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
-        public int general_id { get; set; }
-        public string generalName { get; set; }
-
-
-        //จะส่งข้อมูลจาก General โดยอ้างอิงไปที่ AddressModel ของ General
-        [ForeignKey("AddressId")]
-
-        // หากชื่อเป็น AddressId1 ก็ต้องระบุเป็น AddressId1
-        public int AddressId { get; set; }  // กำหนด FK ที่ใช้ใน General
-        public AddressModel Address { get; set; }
-    }
-    public class CountryDto
-    {
-        public int CountryId { get; set; }
-        public string CountryName { get; set; }
-    }
-
     public class AddressDto
     {
         public string Street { get; set; }
         public string ZipCode { get; set; }
-        public CountryDto Country { get; set; }
-    }
-
-    public class GeneralDto
-    {
-        public int GeneralId { get; set; }
-        public string FullName { get; set; }
-        public AddressDto Address { get; set; }
-    }
-
-    public class CustomerDto
-    {
-        public int CustomerId { get; set; }
-        public string CustomerName { get; set; }
-        public GeneralDto General { get; set; }
-    }
-    public class CustomerModel
-    {
-        [Key]
-        public int CustomerId { get; set; }
-
-        public string CustomerName { get; set; }
-
-        public int GeneralId { get; set; }
-
-        [ForeignKey("GeneralId")]
-        public GeneralModel General { get; set; }
+        public string ProvinceName { get; set; }
+        public string CountryName { get; set; }
     }
 
 

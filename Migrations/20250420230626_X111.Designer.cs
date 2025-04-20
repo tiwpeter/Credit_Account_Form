@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiNet8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250420215825_X12")]
-    partial class X12
+    [Migration("20250420230626_X111")]
+    partial class X111
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace apiNet8.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
 
-                    b.Property<int>("CountryId")
+                    b.Property<int>("ProvinceId")
                         .HasColumnType("int");
 
                     b.Property<string>("Street")
@@ -45,7 +45,7 @@ namespace apiNet8.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.HasIndex("CountryId");
+                    b.HasIndex("ProvinceId");
 
                     b.ToTable("Address");
 
@@ -53,9 +53,23 @@ namespace apiNet8.Migrations
                         new
                         {
                             AddressId = 1,
-                            CountryId = 1,
-                            Street = "ถนนพระรามที่ 2",
-                            ZipCode = "10150"
+                            ProvinceId = 1,
+                            Street = "123 Main Rd",
+                            ZipCode = "10100"
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            ProvinceId = 2,
+                            Street = "456 North Ave",
+                            ZipCode = "50000"
+                        },
+                        new
+                        {
+                            AddressId = 3,
+                            ProvinceId = 3,
+                            Street = "789 East St",
+                            ZipCode = "100-0001"
                         });
                 });
 
@@ -79,7 +93,12 @@ namespace apiNet8.Migrations
                         new
                         {
                             CountryId = 1,
-                            CountryName = "ไทย"
+                            CountryName = "Thailand"
+                        },
+                        new
+                        {
+                            CountryId = 2,
+                            CountryName = "Japan"
                         });
                 });
 
@@ -100,50 +119,63 @@ namespace apiNet8.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.HasIndex("GeneralId");
-
                     b.ToTable("Customer");
-
-                    b.HasData(
-                        new
-                        {
-                            CustomerId = 1,
-                            CustomerName = "ชานนท์ เทพทวี",
-                            GeneralId = 1
-                        });
                 });
 
-            modelBuilder.Entity("ModelTest.Controllers.GeneralModel", b =>
+            modelBuilder.Entity("ModelTest.Controllers.ProvinceModel", b =>
                 {
-                    b.Property<int>("general_id")
+                    b.Property<int>("ProvinceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("general_id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProvinceId"));
 
-                    b.Property<int>("AddressId")
+                    b.Property<int>("CountryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("generalName")
+                    b.Property<string>("ProvinceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("general_id");
+                    b.HasKey("ProvinceId");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("CountryId");
 
-                    b.ToTable("General");
+                    b.ToTable("ProvinceModel");
 
                     b.HasData(
                         new
                         {
-                            general_id = 1,
-                            AddressId = 1,
-                            generalName = "สมชาย ใจดี"
+                            ProvinceId = 1,
+                            CountryId = 1,
+                            ProvinceName = "Bangkok"
+                        },
+                        new
+                        {
+                            ProvinceId = 2,
+                            CountryId = 1,
+                            ProvinceName = "Chiang Mai"
+                        },
+                        new
+                        {
+                            ProvinceId = 3,
+                            CountryId = 2,
+                            ProvinceName = "Tokyo"
                         });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.AddressModel", b =>
+                {
+                    b.HasOne("ModelTest.Controllers.ProvinceModel", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Province");
+                });
+
+            modelBuilder.Entity("ModelTest.Controllers.ProvinceModel", b =>
                 {
                     b.HasOne("ModelTest.Controllers.CountryModel", "Country")
                         .WithMany()
@@ -152,28 +184,6 @@ namespace apiNet8.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("ModelTest.Controllers.CustomerModel", b =>
-                {
-                    b.HasOne("ModelTest.Controllers.GeneralModel", "General")
-                        .WithMany()
-                        .HasForeignKey("GeneralId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("General");
-                });
-
-            modelBuilder.Entity("ModelTest.Controllers.GeneralModel", b =>
-                {
-                    b.HasOne("ModelTest.Controllers.AddressModel", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

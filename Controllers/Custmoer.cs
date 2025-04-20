@@ -16,21 +16,16 @@ namespace ModelTest.ApiControllers
         {
             _context = context;
         }
-
-        // GET: api/Regisform
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CustomerDto>>> GetAllCustomers()
+        public async Task<ActionResult<List<AddressDto>>> GetAll()
         {
-            var customers = await _context.Customer
-                .Include(c => c.General)
-                    .ThenInclude(g => g.Address)
-                        .ThenInclude(a => a.Country)
+            var addresses = await _context.Set<AddressModel>()
+                .Include(a => a.Province)
+                    .ThenInclude(p => p.Country)
                 .ToListAsync();
 
-            var customerDtos = customers.Select(CustomerMapper.ToDto).ToList();
-            return Ok(customerDtos);
+            return addresses.Select(CustomerMapper.ToDto).ToList();
         }
-
 
 
 
