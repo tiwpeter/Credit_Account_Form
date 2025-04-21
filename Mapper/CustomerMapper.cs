@@ -1,76 +1,92 @@
 using ModelTest.Controllers;
 
-public static class CustomerMapper
+public static class ManualMapper
 {
-    public static CustomerDto ToDto(CustomerModel customer)
+    // General
+    public static GeneralDto ToDto(this GeneralModel model)
     {
-
-        return new CustomerDto
+        return new GeneralDto
         {
-            CustomerId = customer.CustomerId,
-            CustomerName = customer.CustomerName,
-            General = new GeneralDto
-            {
-                GeneralId = customer.General.general_id,
-                FullName = customer.General.generalName,
-                Address = new AddressDto
-                {
-                    Street = customer.General.Address.Street,
-                    ZipCode = customer.General.Address.ZipCode,
-                    ProvinceName = customer.General.Address.Province?.ProvinceName,
-                    CountryId = customer.General.Address.Country?.CountryId,
-
-                    GeographyName = customer.General.Address.Province?.Geography?.GeographyName,
-                    AmphureName = customer.General.Address.Province?.Amphures?
-                        .FirstOrDefault(a => a.Tambons.Any(t => t.TambonName == customer.General.Address.Street))?.AmphureName,
-                    TambonName = null // ใส่ใน AddressModel แล้วจะ map ได้ตรง
-                }
-            }
+            GeneralId = model.general_id,
+            GeneralName = model.generalName,
+            AddressId = model.AddressId,
+            Address = model.Address?.ToDto()
         };
     }
-    //ตอนนี้คุณมีแค่ ToDto ต้องเพิ่ม ToModel เพื่อแปลงกลับแบบนี้:
 
-    public static CustomerModel ToModel(CustomerDto dto)
+    public static GeneralModel ToEntity(this GeneralDto dto)
+    {
+        return new GeneralModel
+        {
+            general_id = dto.GeneralId,
+            generalName = dto.GeneralName,
+            AddressId = dto.AddressId,
+            Address = dto.Address?.ToEntity()
+        };
+    }
+
+    // Customer
+    public static CustomerDto ToDto(this CustomerModel model)
+    {
+        return new CustomerDto
+        {
+            CustomerId = model.CustomerId,
+            CustomerName = model.CustomerName,
+            GeneralId = model.GeneralId,
+            General = model.General?.ToDto()
+        };
+    }
+
+    public static CustomerModel ToEntity(this CustomerDto dto)
     {
         return new CustomerModel
         {
             CustomerId = dto.CustomerId,
             CustomerName = dto.CustomerName,
-            General = new GeneralModel
-            {
-                general_id = dto.General.GeneralId,
-                generalName = dto.General.FullName,
-                Address = new AddressModel
-                {
-                    Street = dto.General.Address.Street,
-                    ZipCode = dto.General.Address.ZipCode,
-                    Country = new CountryModel { CountryId = dto.General.Address.CountryId.GetValueOrDefault() },
-
-                    Province = new ProvinceModel
-                    {
-                        ProvinceName = dto.General.Address.ProvinceName,
-                        Geography = new GeographyModel
-                        {
-                            GeographyName = dto.General.Address.GeographyName
-                        },
-                        Amphures = new List<AmphureModel>
-                    {
-                        new AmphureModel
-                        {
-                            AmphureName = dto.General.Address.AmphureName,
-                            Tambons = new List<TambonModel>
-                            {
-                                new TambonModel
-                                {
-                                    TambonName = dto.General.Address.TambonName
-                                }
-                            }
-                        }
-                    }
-                    }
-                }
-            }
+            GeneralId = dto.GeneralId,
+            General = dto.General?.ToEntity()
         };
     }
 
+    // Address
+    public static AddressDto ToDto(this AddressModel model)
+    {
+        return new AddressDto
+        {
+            AddressId = model.AddressId,
+            CustomerName = model.CustomerName,
+            CountryId = model.CountryId,
+            Country = model.Country?.ToDto()
+        };
+    }
+
+    public static AddressModel ToEntity(this AddressDto dto)
+    {
+        return new AddressModel
+        {
+            AddressId = dto.AddressId,
+            CustomerName = dto.CustomerName,
+            CountryId = dto.CountryId,
+            Country = dto.Country?.ToEntity()
+        };
+    }
+
+    // Country
+    public static CountryDto ToDto(this CountryModel model)
+    {
+        return new CountryDto
+        {
+            CountryId = model.CountryId,
+            CountryName = model.CountryName
+        };
+    }
+
+    public static CountryModel ToEntity(this CountryDto dto)
+    {
+        return new CountryModel
+        {
+            CountryId = dto.CountryId,
+            CountryName = dto.CountryName
+        };
+    }
 }
