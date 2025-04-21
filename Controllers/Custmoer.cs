@@ -45,6 +45,23 @@ namespace ModelTest.ApiControllers
 
             return Ok(customerDto);
         }
+        [HttpPost]
+        public async Task<ActionResult<CustomerDto>> CreateCustomer([FromBody] CustomerDto customerDto)
+        {
+            if (customerDto == null)
+                return BadRequest();
+
+            // ใช้ mapper แปลงจาก DTO -> Entity Model
+            var customerModel = CustomerMapper.ToModel(customerDto);
+
+            _context.Customers.Add(customerModel);
+            await _context.SaveChangesAsync();
+
+            // แปลงกลับเป็น DTO เพื่อ return
+            var createdDto = CustomerMapper.ToDto(customerModel);
+
+            return CreatedAtAction(nameof(GetCustomer), new { id = createdDto.CustomerId }, createdDto);
+        }
 
     }
 }

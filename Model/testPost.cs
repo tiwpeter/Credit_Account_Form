@@ -40,6 +40,7 @@ namespace ModelTest.Controllers
         public int GeneralId { get; set; }
         public string FullName { get; set; }
         public AddressDto Address { get; set; }
+
     }
 
     public class CustomerDto
@@ -53,12 +54,13 @@ namespace ModelTest.Controllers
 
     public class AddressDto
     {
+        public int? CountryId { get; set; } // เพิ่มตรงนี้
+        public string CountryName { get; set; }
         public string Street { get; set; }
         public string ZipCode { get; set; }
         public string TambonName { get; set; }
         public string AmphureName { get; set; }
         public string ProvinceName { get; set; }
-        public string CountryName { get; set; }
         public string GeographyName { get; set; }
     }
 
