@@ -5,7 +5,21 @@ namespace ModelTest.Controllers
 {
 
 
+    public class GeneralModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
+        public int general_id { get; set; }
+        public string generalName { get; set; }
 
+
+        //จะส่งข้อมูลจาก General โดยอ้างอิงไปที่ AddressModel ของ General
+        [ForeignKey("AddressId")]
+
+        // หากชื่อเป็น AddressId1 ก็ต้องระบุเป็น AddressId1
+        public int AddressId { get; set; }  // กำหนด FK ที่ใช้ใน General
+        public AddressModel Address { get; set; }
+    }
 
     public class CustomerModel
     {
@@ -16,9 +30,24 @@ namespace ModelTest.Controllers
 
         public int GeneralId { get; set; }
 
+        [ForeignKey("GeneralId")]
+        public GeneralModel General { get; set; }
+
     }
 
+    public class GeneralDto
+    {
+        public int GeneralId { get; set; }
+        public string FullName { get; set; }
+        public AddressDto Address { get; set; }
+    }
 
+    public class CustomerDto
+    {
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public GeneralDto General { get; set; }
+    }
 
 
 
@@ -48,12 +77,16 @@ namespace ModelTest.Controllers
         public int AmphureId { get; set; }
         public string AmphureName { get; set; }
 
+        public int ProvinceId { get; set; }
+        [ForeignKey("ProvinceId")]
+        public ProvinceModel Province { get; set; }
 
+        public ICollection<TambonModel> Tambons { get; set; }
 
 
     }
 
-    public class Tambon
+    public class TambonModel
     {
         [Key]
         public int TambonId { get; set; }
@@ -74,14 +107,18 @@ namespace ModelTest.Controllers
         public int CountryId { get; set; }
 
         [ForeignKey("CountryId")]
+
         public CountryModel Country { get; set; }
 
+        [ForeignKey("GeographyId")]
 
         public int GeographyId { get; set; }
 
         public GeographyModel Geography { get; set; }
 
-        // ✅ เพิ่มแบบ One-to-Many
+        // หนึ่งจังหวัด(Province) มี หลายอำเภอ(Amphure)
+        //หนึ่งอำเภอ(Amphure) มี หลายตำบล(Tambon)
+        // ✅ ความสัมพันธ์แบบ One-to-Many: Province ➝ Amphure
         public ICollection<AmphureModel> Amphures { get; set; }
 
     }
