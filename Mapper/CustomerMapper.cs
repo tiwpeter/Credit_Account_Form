@@ -6,7 +6,6 @@ public static class CustomerMapper
         return new AddressDto
         {
             Street = model.Street,
-            ZipCode = model.ZipCode,
             ProvinceName = model.Province?.ProvinceName,
             CountryName = model.Province?.Country?.CountryName
         };

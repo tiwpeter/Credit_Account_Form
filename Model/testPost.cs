@@ -22,18 +22,6 @@ namespace ModelTest.Controllers
 
 
 
-    public class CountryModel
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CountryId { get; set; }
-
-        public string CountryName { get; set; }
-
-
-    }
-
-
     public class AddressDto
     {
         public string Street { get; set; }
@@ -103,7 +91,22 @@ namespace ModelTest.Controllers
         public int GeographyId { get; set; }
         public string GeographyName { get; set; }
 
+
     }
+
+    public class CountryModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CountryId { get; set; }
+
+        public string CountryName { get; set; }
+
+        // เพิ่ม ICollection สำหรับความสัมพันธ์ One-to-Many
+        public ICollection<AddressModel> Addresses { get; set; }
+        public ICollection<ProvinceModel> Provinces { get; set; }
+    }
+
     public class AddressModel
     {
         [Key]
@@ -120,6 +123,11 @@ namespace ModelTest.Controllers
         [ForeignKey("ProvinceId")]
         public ProvinceModel Province { get; set; }
 
+        public int CountryId { get; set; }
+
+        [ForeignKey("CountryId")]
+
+        public CountryModel Country { get; set; }
 
 
     }

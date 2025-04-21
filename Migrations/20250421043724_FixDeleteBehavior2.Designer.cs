@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiNet8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250421031008_X1dd")]
-    partial class X1dd
+    [Migration("20250421043724_FixDeleteBehavior2")]
+    partial class FixDeleteBehavior2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,12 @@ namespace apiNet8.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
 
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CountryModelCountryId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProvinceId")
                         .HasColumnType("int");
 
@@ -44,6 +50,10 @@ namespace apiNet8.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AddressId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("CountryModelCountryId");
 
                     b.HasIndex("ProvinceId");
 
@@ -69,7 +79,7 @@ namespace apiNet8.Migrations
 
                     b.HasIndex("ProvinceModelProvinceId");
 
-                    b.ToTable("Amphures");
+                    b.ToTable("AmphureModel");
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.CountryModel", b =>
@@ -87,26 +97,6 @@ namespace apiNet8.Migrations
                     b.HasKey("CountryId");
 
                     b.ToTable("CountryModel");
-                });
-
-            modelBuilder.Entity("ModelTest.Controllers.CustomerModel", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GeneralId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CustomerId");
-
-                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.GeographyModel", b =>
@@ -153,35 +143,25 @@ namespace apiNet8.Migrations
                     b.ToTable("Provinces");
                 });
 
-            modelBuilder.Entity("ModelTest.Controllers.Tambon", b =>
-                {
-                    b.Property<int>("TambonId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TambonId"));
-
-                    b.Property<int>("AmphureId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TambonName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TambonId");
-
-                    b.HasIndex("AmphureId");
-
-                    b.ToTable("Tambons");
-                });
-
             modelBuilder.Entity("ModelTest.Controllers.AddressModel", b =>
                 {
+                    b.HasOne("ModelTest.Controllers.CountryModel", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ModelTest.Controllers.CountryModel", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("CountryModelCountryId");
+
                     b.HasOne("ModelTest.Controllers.ProvinceModel", "Province")
                         .WithMany()
                         .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Country");
 
                     b.Navigation("Province");
                 });
@@ -196,7 +176,7 @@ namespace apiNet8.Migrations
             modelBuilder.Entity("ModelTest.Controllers.ProvinceModel", b =>
                 {
                     b.HasOne("ModelTest.Controllers.CountryModel", "Country")
-                        .WithMany()
+                        .WithMany("Provinces")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -212,15 +192,11 @@ namespace apiNet8.Migrations
                     b.Navigation("Geography");
                 });
 
-            modelBuilder.Entity("ModelTest.Controllers.Tambon", b =>
+            modelBuilder.Entity("ModelTest.Controllers.CountryModel", b =>
                 {
-                    b.HasOne("ModelTest.Controllers.AmphureModel", "Amphure")
-                        .WithMany()
-                        .HasForeignKey("AmphureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Addresses");
 
-                    b.Navigation("Amphure");
+                    b.Navigation("Provinces");
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.ProvinceModel", b =>

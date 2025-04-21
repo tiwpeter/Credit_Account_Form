@@ -5,7 +5,7 @@
 namespace apiNet8.Migrations
 {
     /// <inheritdoc />
-    public partial class X1dd : Migration
+    public partial class FixDeleteBehavior : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,20 +21,6 @@ namespace apiNet8.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CountryModel", x => x.CountryId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customer",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GeneralId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,64 +64,69 @@ namespace apiNet8.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ThaiProvince",
+                columns: table => new
+                {
+                    ThaiProvinceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ThaiProvinceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    GeographyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ThaiProvince", x => x.ThaiProvinceId);
+                    table.ForeignKey(
+                        name: "FK_ThaiProvince_CountryModel_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "CountryModel",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ThaiProvince_Geography_GeographyId",
+                        column: x => x.GeographyId,
+                        principalTable: "Geography",
+                        principalColumn: "GeographyId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
                 {
                     AddressId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProvinceId = table.Column<int>(type: "int", nullable: false)
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    ProvinceId = table.Column<int>(type: "int", nullable: true),
+                    ThaiProvinceId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Addresses", x => x.AddressId);
                     table.ForeignKey(
+                        name: "FK_Addresses_CountryModel_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "CountryModel",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Addresses_Provinces_ProvinceId",
                         column: x => x.ProvinceId,
                         principalTable: "Provinces",
                         principalColumn: "ProvinceId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Addresses_ThaiProvince_ThaiProvinceId",
+                        column: x => x.ThaiProvinceId,
+                        principalTable: "ThaiProvince",
+                        principalColumn: "ThaiProvinceId");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Amphures",
-                columns: table => new
-                {
-                    AmphureId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AmphureName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProvinceModelProvinceId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Amphures", x => x.AmphureId);
-                    table.ForeignKey(
-                        name: "FK_Amphures_Provinces_ProvinceModelProvinceId",
-                        column: x => x.ProvinceModelProvinceId,
-                        principalTable: "Provinces",
-                        principalColumn: "ProvinceId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tambons",
-                columns: table => new
-                {
-                    TambonId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TambonName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AmphureId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tambons", x => x.TambonId);
-                    table.ForeignKey(
-                        name: "FK_Tambons_Amphures_AmphureId",
-                        column: x => x.AmphureId,
-                        principalTable: "Amphures",
-                        principalColumn: "AmphureId",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_CountryId",
+                table: "Addresses",
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_ProvinceId",
@@ -143,9 +134,9 @@ namespace apiNet8.Migrations
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Amphures_ProvinceModelProvinceId",
-                table: "Amphures",
-                column: "ProvinceModelProvinceId");
+                name: "IX_Addresses_ThaiProvinceId",
+                table: "Addresses",
+                column: "ThaiProvinceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Provinces_CountryId",
@@ -158,9 +149,14 @@ namespace apiNet8.Migrations
                 column: "GeographyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tambons_AmphureId",
-                table: "Tambons",
-                column: "AmphureId");
+                name: "IX_ThaiProvince_CountryId",
+                table: "ThaiProvince",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ThaiProvince_GeographyId",
+                table: "ThaiProvince",
+                column: "GeographyId");
         }
 
         /// <inheritdoc />
@@ -170,16 +166,10 @@ namespace apiNet8.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Customer");
-
-            migrationBuilder.DropTable(
-                name: "Tambons");
-
-            migrationBuilder.DropTable(
-                name: "Amphures");
-
-            migrationBuilder.DropTable(
                 name: "Provinces");
+
+            migrationBuilder.DropTable(
+                name: "ThaiProvince");
 
             migrationBuilder.DropTable(
                 name: "CountryModel");
