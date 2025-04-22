@@ -21,13 +21,13 @@ public class GetCustomerService
             {
                 CustomerId = c.CustomerId,
                 CustomerName = c.CustomerName,
-                General = new GeneralInfoDTO
+                General = new GeneralDto
                 {
                     GeneralName = c.General.generalName,
-                    Address = new AddressInfoDTO
+                    Address = new AddressDto
                     {
-                        AddressCustomerName = c.General.Address.CustomerName,
-                        Country = new CountryInfoDTO
+                        CustomerName = c.General.Address.CustomerName,
+                        Country = new CountryDto
                         {
                             CountryId = c.General.Address.Country.CountryId
                         }

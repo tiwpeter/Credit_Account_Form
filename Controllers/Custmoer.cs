@@ -13,29 +13,20 @@ namespace ModelTest.ApiControllers
         private readonly ApplicationDbContext _context;
         private readonly CustomerService _customerService;
 
-        public RegisformController(ApplicationDbContext context, CustomerService customerService)
+        private readonly GetCustomerService _getcustomerService;
+
+
+        public RegisformController(ApplicationDbContext context, CustomerService customerService, GetCustomerService getcustomerService)
         {
             _context = context;
             _customerService = customerService;
+            _getcustomerService = getcustomerService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
-            var customers = await _context.Set<CustomerModel>()
-                .Include(c => c.General)
-                .ThenInclude(g => g.Address)
-                .ThenInclude(a => a.Country)
-                .Select(c => new
-                {
-                    CustomerId = c.CustomerId,
-                    CustomerName = c.CustomerName,
-                    GeneralName = c.General.generalName,
-                    AddressCustomerName = c.General.Address.CustomerName,
-                    CountryId = c.General.Address.Country.CountryId
-                })
-                .ToListAsync();
-
+            var customers = await _getcustomerService.GetCustomersAsync();
             return Ok(customers);
         }
 

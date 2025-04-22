@@ -10,6 +10,7 @@ builder.Services.AddSwaggerGen();
 // Add controller services
 builder.Services.AddControllers();
 builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<GetCustomerService>();
 
 
 // Connect to the database
