@@ -2,11 +2,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using ModelTest.Controllers;
 
-public interface ICustomerService
-{
-    Task<string> CreateCustomerAsync(CreateCustomerRequest request);
-}
-public class CustomerService : ICustomerService
+public class CustomerService
 {
     private readonly ApplicationDbContext _context;
 
@@ -15,7 +11,7 @@ public class CustomerService : ICustomerService
         _context = context;
     }
 
-    public async Task<string> CreateCustomerAsync(CreateCustomerRequest request)
+    public async Task CreateCustomerAsync(CreateCustomerRequest request)
     {
         // 1. ตรวจสอบหรือสร้าง Country
         var country = await _context.Set<CountryModel>()
@@ -71,7 +67,5 @@ public class CustomerService : ICustomerService
 
         _context.Add(customer);
         await _context.SaveChangesAsync();
-
-        return "Customer created successfully";
     }
 }
