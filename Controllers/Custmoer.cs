@@ -16,17 +16,39 @@ namespace ModelTest.ApiControllers
         {
             _context = context;
         }
+        [HttpGet]
+        public async Task<IActionResult> GetCustomers()
+        {
+            var customers = await _context.Set<CustomerModel>()
+                .Include(c => c.General)
+                .ThenInclude(g => g.Address)
+                .ThenInclude(a => a.Country)
+                .Select(c => new
+                {
+                    CustomerId = c.CustomerId,
+                    CustomerName = c.CustomerName,
+                    GeneralName = c.General.generalName,
+                    AddressCustomerName = c.General.Address.CustomerName,
+                    CountryId = c.General.Address.Country.CountryId
+                })
+                .ToListAsync();
+
+            return Ok(customers);
+        }
+
+        // id = sevice
+
 
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
         {
             // 1. ตรวจสอบหรือสร้าง Country
             var country = await _context.Set<CountryModel>()
-                .FirstOrDefaultAsync(c => c.CountryName == request.CountryName);
+                .FirstOrDefaultAsync(c => c.CountryId == request.CountryId);
 
             if (country == null)
             {
-                country = new CountryModel { CountryName = request.CountryName };
+                country = new CountryModel { CountryId = request.CountryId };
                 _context.Add(country);
                 await _context.SaveChangesAsync();
             }

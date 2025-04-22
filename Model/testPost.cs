@@ -96,9 +96,10 @@ namespace ModelTest.Controllers
         public string CustomerName { get; set; }
         public string GeneralName { get; set; }
         public string AddressCustomerName { get; set; }
-        public string CountryName { get; set; }
-    }
+        public int CountryId { get; set; }  // เปลี่ยนจาก CountryName เป็น CountryId
 
+    }
+    // objects  adjust dto
 
 
 }
