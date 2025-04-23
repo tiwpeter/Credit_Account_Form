@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,11 +8,28 @@
 namespace apiNet8.Migrations
 {
     /// <inheritdoc />
-    public partial class Test8 : Migration
+    public partial class Tesaaq1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BusinessTypes",
+                columns: table => new
+                {
+                    busiTypeID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    busiTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    busiTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    busiTypeDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RegisteredCapital = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BusinessTypes", x => x.busiTypeID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Countries",
                 columns: table => new
@@ -23,6 +41,35 @@ namespace apiNet8.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Countries", x => x.CountryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CreditInfo",
+                columns: table => new
+                {
+                    CreditInfoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EstimatedPurchase = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TimeRequired = table.Column<int>(type: "int", nullable: false),
+                    CreditLimit = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CreditInfo", x => x.CreditInfoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomerSign",
+                columns: table => new
+                {
+                    CustSignId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustSignFirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerSign", x => x.CustSignId);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,11 +166,30 @@ namespace apiNet8.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GeneralId = table.Column<int>(type: "int", nullable: false),
-                    shipping_id = table.Column<int>(type: "int", nullable: false)
+                    shipping_id = table.Column<int>(type: "int", nullable: false),
+                    BusinessTypeId = table.Column<int>(type: "int", nullable: false),
+                    CreditInfoId = table.Column<int>(type: "int", nullable: true),
+                    CustSignId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.CustomerId);
+                    table.ForeignKey(
+                        name: "FK_Customers_BusinessTypes_BusinessTypeId",
+                        column: x => x.BusinessTypeId,
+                        principalTable: "BusinessTypes",
+                        principalColumn: "busiTypeID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Customers_CreditInfo_CreditInfoId",
+                        column: x => x.CreditInfoId,
+                        principalTable: "CreditInfo",
+                        principalColumn: "CreditInfoId");
+                    table.ForeignKey(
+                        name: "FK_Customers_CustomerSign_CustSignId",
+                        column: x => x.CustSignId,
+                        principalTable: "CustomerSign",
+                        principalColumn: "CustSignId");
                     table.ForeignKey(
                         name: "FK_Customers_Generals_GeneralId",
                         column: x => x.GeneralId,
@@ -139,6 +205,11 @@ namespace apiNet8.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "BusinessTypes",
+                columns: new[] { "busiTypeID", "RegisteredCapital", "RegistrationDate", "busiTypeCode", "busiTypeDes", "busiTypeName" },
+                values: new object[] { 1, null, null, "RT", "Retail Business Type Description", "Retail" });
+
+            migrationBuilder.InsertData(
                 table: "Countries",
                 columns: new[] { "CountryId", "CountryName" },
                 values: new object[,]
@@ -146,6 +217,16 @@ namespace apiNet8.Migrations
                     { 1, "Thailand" },
                     { 2, "Japan" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "CreditInfo",
+                columns: new[] { "CreditInfoId", "CreditLimit", "EstimatedPurchase", "TimeRequired" },
+                values: new object[] { 1, 100000.00m, 50000.00m, 12 });
+
+            migrationBuilder.InsertData(
+                table: "CustomerSign",
+                columns: new[] { "CustSignId", "CustSignFirstName", "CustomerId" },
+                values: new object[] { 1, "John", 0 });
 
             migrationBuilder.InsertData(
                 table: "Provinces",
@@ -185,12 +266,8 @@ namespace apiNet8.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "CustomerName", "GeneralId", "shipping_id" },
-                values: new object[,]
-                {
-                    { 1, "สมชาย", 1, 1 },
-                    { 2, "สมหญิง", 2, 2 }
-                });
+                columns: new[] { "CustomerId", "BusinessTypeId", "CreditInfoId", "CustSignId", "CustomerName", "GeneralId", "shipping_id" },
+                values: new object[] { 1, 1, 1, 1, "John Doe", 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CountryId",
@@ -201,6 +278,21 @@ namespace apiNet8.Migrations
                 name: "IX_Addresses_ProvinceId",
                 table: "Addresses",
                 column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_BusinessTypeId",
+                table: "Customers",
+                column: "BusinessTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_CreditInfoId",
+                table: "Customers",
+                column: "CreditInfoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_CustSignId",
+                table: "Customers",
+                column: "CustSignId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_GeneralId",
@@ -233,6 +325,15 @@ namespace apiNet8.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "BusinessTypes");
+
+            migrationBuilder.DropTable(
+                name: "CreditInfo");
+
+            migrationBuilder.DropTable(
+                name: "CustomerSign");
 
             migrationBuilder.DropTable(
                 name: "Generals");

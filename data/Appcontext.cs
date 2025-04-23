@@ -14,6 +14,8 @@ namespace API.Data
         public DbSet<ProvinceModel> Provinces { get; set; }
         public DbSet<ShippingModel> Shippings { get; set; }
         public DbSet<BusinessTypeModel> BusinessTypes { get; set; }
+        public DbSet<CreditInfoModel> CreditInfo { get; set; }
+        public DbSet<CustomerSignModel> CustomerSign { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,10 +40,15 @@ namespace API.Data
 
             // Seed Business Types
             modelBuilder.Entity<BusinessTypeModel>().HasData(
-                new BusinessTypeModel { busiTypeID = 1, busiTypeName = "Retail" },
-                new BusinessTypeModel { busiTypeID = 2, busiTypeName = "Wholesale" },
-                new BusinessTypeModel { busiTypeID = 3, busiTypeName = "Service" }
+                new BusinessTypeModel
+                {
+                    busiTypeID = 1,
+                    busiTypeName = "Retail",
+                    busiTypeCode = "RT",
+                    busiTypeDes = "Retail Business Type Description"  // เพิ่มค่า busiTypeDes
+                }
             );
+
 
 
             // Seed Country
@@ -83,33 +90,42 @@ namespace API.Data
                     ProvinceId = 2
                 }
             );
+            // Seed CreditInfo
+            modelBuilder.Entity<CreditInfoModel>().HasData(
+                new CreditInfoModel
+                {
+                    CreditInfoId = 1,
+                    EstimatedPurchase = 50000.00m,
+                    TimeRequired = 12,
+                    CreditLimit = 100000.00m,
+                }
+            );
+            // CustomerSignModel
+            modelBuilder.Entity<CustomerSignModel>().HasData(
+                new CustomerSignModel
+                {
+                    CustSignId = 1,
+                    CustSignFirstName = "John",
 
-            // Seed Customer (รวม FK จาก General และ Shipping)
+                }
+            );
+
+            // CustomerModel
             modelBuilder.Entity<CustomerModel>().HasData(
                 new CustomerModel
                 {
                     CustomerId = 1,
                     CustomerName = "John Doe",
-                    GeneralId = 1, // Assuming there's an existing General record with Id=1
-                    shipping_id = 1, // Assuming there's an existing Shipping record with Id=1
-                    BusinessTypeId = 1, // Retail BusinessType
-                                        // CreditInfo can be set directly as a navigation property
-                    CreditInfo = new CreditInfoModel
-                    {
-                        CreditInfoId = 1,
-                        EstimatedPurchase = 50000.00m,
-                        TimeRequired = 12,
-                        CreditLimit = 100000.00m
-                    }
-                },
-                new CustomerModel
-                {
-                    CustomerId = 2,
-                    CustomerName = "สมหญิง",
-                    GeneralId = 2,
-                    shipping_id = 2
+                    GeneralId = 1,
+                    shipping_id = 1,
+                    BusinessTypeId = 1,
+                    CreditInfoId = 1,
+                    CustSignId = 1 // ✅ ใช้ foreign key โดยตรง
                 }
             );
+
+
+
         }
     }
 }

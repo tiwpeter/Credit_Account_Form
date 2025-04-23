@@ -16,8 +16,6 @@ namespace ModelTest.Controllers
         // Foreign Key
         public int CustomerId { get; set; }
 
-        [ForeignKey("CustomerId")]
-        public CustomerModel Customer { get; set; }
     }
     public class CustomerSignDto
     {

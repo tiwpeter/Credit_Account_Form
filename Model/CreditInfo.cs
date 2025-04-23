@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace ModelTest.Controllers
 {
@@ -15,19 +16,17 @@ namespace ModelTest.Controllers
 
         public decimal CreditLimit { get; set; } // ขีดจำกัดเครดิต (แบบทศนิยม)
                                                  // ForeignKey สำหรับ Customer
-        public int CustomerId { get; set; }
-        [ForeignKey("CustomerId")]
-        public CustomerModel Customer { get; set; } // ความสัมพันธ์กับ Customer
+
 
     }
 
     public class CreditInfoDto
     {
         public int CreditInfoId { get; set; }
+        [Precision(18, 4)]
         public decimal EstimatedPurchase { get; set; }
         public int TimeRequired { get; set; }
         public decimal CreditLimit { get; set; }
-        public int CustomerId { get; set; }
     }
 
 }

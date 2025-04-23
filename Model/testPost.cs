@@ -45,9 +45,14 @@ namespace ModelTest.Controllers
         public BusinessTypeModel BusinessType { get; set; }
 
         // การเพิ่ม CreditInfo ที่เกี่ยวข้องกับ Customer
-
+        public int? CreditInfoId { get; set; }  // Make it nullable if not all customers have credit info
+        [ForeignKey("CreditInfoId")]
         public CreditInfoModel CreditInfo { get; set; } // ชี้ไปที่ CreditInfo
-        public ICollection<CustomerSignModel> CustomerSigns { get; set; }
+
+
+        public int? CustSignId { get; set; }  // Make it nullable if not all customers have credit info
+        [ForeignKey("CustSignId")]
+        public CustomerSignModel CustomerSigns { get; set; }
 
 
     }
@@ -75,7 +80,8 @@ namespace ModelTest.Controllers
         // เพิ่ม CreditInfo
         public CreditInfoDto CreditInfo { get; set; }  // ชี้ไปที่ CreditInfoDto
 
-        public IEnumerable<CustomerSignDto> CustomerSigns { get; set; }
+        public CustomerSignDto CustomerSign { get; set; }
+
 
 
     }
