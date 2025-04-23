@@ -21,3 +21,16 @@ public class AddressModel
     public CountryModel Country { get; set; }
 
 }
+public class AddressDto
+{
+    public int AddressId { get; set; }
+    public string CustomerName { get; set; }
+
+
+    public CountryDto Country { get; set; }
+
+
+    public ProvinceDto Province { get; set; }
+
+
+}
