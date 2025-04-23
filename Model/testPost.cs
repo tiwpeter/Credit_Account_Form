@@ -110,12 +110,32 @@ namespace ModelTest.Controllers
     }
     public class CreateCustomerRequest
     {
+        // Customer
         public string CustomerName { get; set; }
-        public string GeneralName { get; set; }
-        public string AddressCustomerName { get; set; }
-        public int CountryId { get; set; }  // เปลี่ยนจาก CountryName เป็น CountryId
 
+        // General
+        public string GeneralName { get; set; }
+
+        // Address
+        public int CountryId { get; set; }
+        public int ProvinceId { get; set; }
+
+        // Shipping
+        public string SubDistrict { get; set; }
+        public int ShippingProvinceId { get; set; }
+
+        // BusinessType
+        public int BusinessTypeId { get; set; }
+
+        // CreditInfo
+        public decimal EstimatedPurchase { get; set; }
+        public int TimeRequired { get; set; }
+        public decimal CreditLimit { get; set; }
+
+        // CustomerSign
+        public string CustSignFirstName { get; set; }
     }
+
     // objects  adjust dto
 
 

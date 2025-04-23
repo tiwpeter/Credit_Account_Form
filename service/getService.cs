@@ -39,7 +39,7 @@ public class GetCustomerService
                             CountryId = c.General.Address.Country.CountryId,
                             CountryName = c.General.Address.Country.CountryName
                         },
-                        Province = c.General.Address.Province == null ? null : new ProvinceDto
+                        Province = new ProvinceDto
                         {
                             ProvinceId = c.General.Address.Province.ProvinceId,
                             ProvinceName = c.General.Address.Province.ProvinceName
@@ -50,10 +50,9 @@ public class GetCustomerService
                 {
                     ShippingId = c.Shipping.shipping_id,
                     SubDistrict = c.Shipping.subDistrict,
-                    ProvinceName = c.Shipping.Province != null ? c.Shipping.Province.ProvinceName : null,
-                    CountryName = c.Shipping.Province != null && c.Shipping.Province.Country != null
-                        ? c.Shipping.Province.Country.CountryName
-                        : null
+                    ProvinceName = c.Shipping.Province.ProvinceName,
+                    CountryName = c.Shipping.Province.Country.CountryName
+
                 },
                 BusinessTypeId = c.BusinessTypeId,  // ดึง BusinessTypeId
                 BusinessTypeName = c.BusinessType.busiTypeName,  // ดึง BusinessTypeName
