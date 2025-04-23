@@ -27,14 +27,12 @@ public class CustomerService
         // 2. ตรวจสอบหรือสร้าง Address
         var address = await _context.Set<AddressModel>()
             .FirstOrDefaultAsync(a =>
-                a.CustomerName == request.AddressCustomerName &&
                 a.CountryId == country.CountryId);
 
         if (address == null)
         {
             address = new AddressModel
             {
-                CustomerName = request.AddressCustomerName,
                 CountryId = country.CountryId
             };
             _context.Add(address);

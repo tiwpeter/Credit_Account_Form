@@ -3,5 +3,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelTest.Controllers
 {
+    public class ShippingModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
+        public int shipping_id { get; set; }
+        public string subDistrict { get; set; }
+
+        // FK ไป Province
+        [ForeignKey("ProvinceId")]
+        public int ProvinceId { get; set; }
+        public ProvinceModel Province { get; set; }
+    }
+    public class ShippingDto
+    {
+        public int ShippingId { get; set; }
+        public string SubDistrict { get; set; }
+        public int ProvinceId { get; set; }
+        public string ProvinceName { get; set; } // เพิ่ม ProvinceName
+        public string CountryName { get; set; } // เพิ่ม CountryName
+    }
+
 
 }

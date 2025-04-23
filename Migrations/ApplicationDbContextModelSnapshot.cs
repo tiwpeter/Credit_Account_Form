@@ -21,7 +21,7 @@ namespace apiNet8.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ModelTest.Controllers.AddressModel", b =>
+            modelBuilder.Entity("AddressModel", b =>
                 {
                     b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
@@ -32,13 +32,14 @@ namespace apiNet8.Migrations
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
 
                     b.HasKey("AddressId");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex("ProvinceId");
 
                     b.ToTable("Addresses");
 
@@ -47,13 +48,13 @@ namespace apiNet8.Migrations
                         {
                             AddressId = 1,
                             CountryId = 1,
-                            CustomerName = "John Doe"
+                            ProvinceId = 1
                         },
                         new
                         {
                             AddressId = 2,
                             CountryId = 2,
-                            CustomerName = "Sakura Tanaka"
+                            ProvinceId = 2
                         });
                 });
 
@@ -101,9 +102,14 @@ namespace apiNet8.Migrations
                     b.Property<int>("GeneralId")
                         .HasColumnType("int");
 
+                    b.Property<int>("shipping_id")
+                        .HasColumnType("int");
+
                     b.HasKey("CustomerId");
 
                     b.HasIndex("GeneralId");
+
+                    b.HasIndex("shipping_id");
 
                     b.ToTable("Customers");
 
@@ -111,14 +117,16 @@ namespace apiNet8.Migrations
                         new
                         {
                             CustomerId = 1,
-                            CustomerName = "Customer A",
-                            GeneralId = 1
+                            CustomerName = "สมชาย",
+                            GeneralId = 1,
+                            shipping_id = 1
                         },
                         new
                         {
                             CustomerId = 2,
-                            CustomerName = "Customer B",
-                            GeneralId = 2
+                            CustomerName = "สมหญิง",
+                            GeneralId = 2,
+                            shipping_id = 2
                         });
                 });
 
@@ -158,15 +166,95 @@ namespace apiNet8.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ModelTest.Controllers.AddressModel", b =>
+            modelBuilder.Entity("ModelTest.Controllers.ProvinceModel", b =>
+                {
+                    b.Property<int>("ProvinceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProvinceId"));
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProvinceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProvinceId");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Provinces");
+
+                    b.HasData(
+                        new
+                        {
+                            ProvinceId = 1,
+                            CountryId = 1,
+                            ProvinceName = "Bangkok"
+                        },
+                        new
+                        {
+                            ProvinceId = 2,
+                            CountryId = 2,
+                            ProvinceName = "Tokyo"
+                        });
+                });
+
+            modelBuilder.Entity("ModelTest.Controllers.ShippingModel", b =>
+                {
+                    b.Property<int>("shipping_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("shipping_id"));
+
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("subDistrict")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("shipping_id");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.ToTable("Shippings");
+
+                    b.HasData(
+                        new
+                        {
+                            shipping_id = 1,
+                            ProvinceId = 1,
+                            subDistrict = "บางรัก"
+                        },
+                        new
+                        {
+                            shipping_id = 2,
+                            ProvinceId = 2,
+                            subDistrict = "ห้วยขวาง"
+                        });
+                });
+
+            modelBuilder.Entity("AddressModel", b =>
                 {
                     b.HasOne("ModelTest.Controllers.CountryModel", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ModelTest.Controllers.ProvinceModel", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Country");
+
+                    b.Navigation("Province");
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.CustomerModel", b =>
@@ -177,18 +265,53 @@ namespace apiNet8.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ModelTest.Controllers.ShippingModel", "Shipping")
+                        .WithMany()
+                        .HasForeignKey("shipping_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("General");
+
+                    b.Navigation("Shipping");
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.GeneralModel", b =>
                 {
-                    b.HasOne("ModelTest.Controllers.AddressModel", "Address")
+                    b.HasOne("AddressModel", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("ModelTest.Controllers.ProvinceModel", b =>
+                {
+                    b.HasOne("ModelTest.Controllers.CountryModel", "Country")
+                        .WithMany("Provinces")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("ModelTest.Controllers.ShippingModel", b =>
+                {
+                    b.HasOne("ModelTest.Controllers.ProvinceModel", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Province");
+                });
+
+            modelBuilder.Entity("ModelTest.Controllers.CountryModel", b =>
+                {
+                    b.Navigation("Provinces");
                 });
 #pragma warning restore 612, 618
         }

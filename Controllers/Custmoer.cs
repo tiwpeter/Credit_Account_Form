@@ -40,5 +40,18 @@ namespace ModelTest.ApiControllers
             return Ok(new { message = "Customer created successfully" });
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCustomerById(int id)
+        {
+            var customer = await _getcustomerService.GetCustomerByIdAsync(id);
+
+            if (customer == null)
+            {
+                return NotFound(new { message = "Customer not found" });
+            }
+
+            return Ok(customer);
+        }
+
     }
 }

@@ -1,0 +1,30 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ModelTest.Controllers
+{
+    public class CustomerSignModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CustSignId { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string CustSignFirstName { get; set; }
+
+        // Foreign Key
+        public int CustomerId { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public CustomerModel Customer { get; set; }
+    }
+    public class CustomerSignDto
+    {
+        public int CustSignId { get; set; }
+        public string CustSignFirstName { get; set; }
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; } // ดึงชื่อจาก CustomerModel
+    }
+
+}

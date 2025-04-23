@@ -15,8 +15,82 @@ public class GetCustomerService
     {
         var customers = await _context.Set<CustomerModel>()
             .Include(c => c.General)
+                .ThenInclude(g => g.Address)
+                    .ThenInclude(a => a.Country)
+                        .ThenInclude(c => c.Provinces)
+            .Include(c => c.Shipping)  // รวมข้อมูล Shipping
+                .ThenInclude(s => s.Province)  // รวมข้อมูล Province
+            .Include(c => c.BusinessType)  // รวมข้อมูล BusinessType
+            .Include(c => c.CreditInfo)  // รวมข้อมูล CreditInfo
+                    .Include(c => c.CustomerSigns) // ⬅ เพิ่มการโหลด CustomerSigns
+
+            .Select(c => new CustomerDto
+            {
+                CustomerId = c.CustomerId,
+                CustomerName = c.CustomerName,
+                GeneralId = c.GeneralId,
+                General = new GeneralDto
+                {
+                    GeneralName = c.General.generalName,
+                    Address = new AddressDto
+                    {
+                        Country = new CountryDto
+                        {
+                            CountryId = c.General.Address.Country.CountryId,
+                            CountryName = c.General.Address.Country.CountryName
+                        },
+                        Province = new ProvinceDto
+                        {
+                            ProvinceId = c.General.Address.Province.ProvinceId,
+                            ProvinceName = c.General.Address.Province.ProvinceName
+                        }
+                    }
+                },
+                Shipping = new ShippingDto
+                {
+                    ShippingId = c.Shipping.shipping_id,
+                    SubDistrict = c.Shipping.subDistrict,
+                    ProvinceName = c.Shipping.Province!.ProvinceName,
+                    CountryName = c.Shipping.Province!.Country!.CountryName,
+
+                },
+                BusinessTypeId = c.BusinessTypeId,  // ดึง BusinessTypeId
+                BusinessTypeName = c.BusinessType.busiTypeName,  // ดึง BusinessTypeName
+                CreditInfo = new CreditInfoDto  // รวมข้อมูล CreditInfo
+                {
+                    EstimatedPurchase = c.CreditInfo.EstimatedPurchase,
+                    TimeRequired = c.CreditInfo.TimeRequired,
+                    CreditLimit = c.CreditInfo.CreditLimit
+                },
+
+                // ⬇ เพิ่ม CustomerSignDto
+                CustomerSigns = c.CustomerSigns.Select(sign => new CustomerSignDto
+                {
+                    CustSignId = sign.CustSignId,
+                    CustSignFirstName = sign.CustSignFirstName,
+                    CustomerId = sign.CustomerId
+                })
+
+            })
+            //ทั่วไปถ้าแค่ “อ่านข้อมูลอย่างเดียว” และไม่มีความจำเป็นต้องเรียก method ที่อยู่บน List<T> (เช่น .Add(), .Remove() ฯลฯ)
+            .ToListAsync();
+
+        return customers;
+    }
+
+
+
+
+
+
+
+    public async Task<CustomerDto?> GetCustomerByIdAsync(int id)
+    {
+        var customer = await _context.Set<CustomerModel>()
+            .Include(c => c.General)
             .ThenInclude(g => g.Address)
             .ThenInclude(a => a.Country)
+            .Where(c => c.CustomerId == id)
             .Select(c => new CustomerDto
             {
                 CustomerId = c.CustomerId,
@@ -26,7 +100,6 @@ public class GetCustomerService
                     GeneralName = c.General.generalName,
                     Address = new AddressDto
                     {
-                        CustomerName = c.General.Address.CustomerName,
                         Country = new CountryDto
                         {
                             CountryId = c.General.Address.Country.CountryId
@@ -34,8 +107,9 @@ public class GetCustomerService
                     }
                 }
             })
-            .ToListAsync();
+            .FirstOrDefaultAsync();
 
-        return customers;
+        return customer;
     }
+
 }

@@ -33,34 +33,26 @@ namespace ModelTest.Controllers
         [ForeignKey("GeneralId")]
         public GeneralModel General { get; set; }
 
+
+        public int shipping_id { get; set; }
+
+        [ForeignKey("shipping_id")]
+        public ShippingModel Shipping { get; set; }
+
+        public int BusinessTypeId { get; set; }  // เพิ่มคอลัมน์ BusinessTypeId
+
+        [ForeignKey("BusinessTypeId")]
+        public BusinessTypeModel BusinessType { get; set; }
+
+        // การเพิ่ม CreditInfo ที่เกี่ยวข้องกับ Customer
+
+        public CreditInfoModel CreditInfo { get; set; } // ชี้ไปที่ CreditInfo
+        public ICollection<CustomerSignModel> CustomerSigns { get; set; }
+
+
     }
 
 
-    public class CountryModel
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CountryId { get; set; }
-
-        public string CountryName { get; set; }
-
-    }
-
-    public class AddressModel
-    {
-        [Key]
-        public int AddressId { get; set; }
-
-        public string CustomerName { get; set; }
-
-
-
-        public int CountryId { get; set; }
-
-        [ForeignKey("CountryId")]
-        public CountryModel Country { get; set; }
-
-    }
 
     public class GeneralDto
     {
@@ -76,14 +68,33 @@ namespace ModelTest.Controllers
         public string CustomerName { get; set; }
         public int GeneralId { get; set; }
         public GeneralDto General { get; set; }
+        public ShippingDto Shipping { get; set; }
+        public int BusinessTypeId { get; set; }  // เพิ่ม BusinessTypeId
+        public string BusinessTypeName { get; set; }  // เพิ่ม BusinessTypeName
+
+        // เพิ่ม CreditInfo
+        public CreditInfoDto CreditInfo { get; set; }  // ชี้ไปที่ CreditInfoDto
+
+        public IEnumerable<CustomerSignDto> CustomerSigns { get; set; }
+
+
     }
+
+
+
 
     public class AddressDto
     {
         public int AddressId { get; set; }
         public string CustomerName { get; set; }
-        public int CountryId { get; set; }
+
+
         public CountryDto Country { get; set; }
+
+
+        public ProvinceDto Province { get; set; }
+
+
     }
 
     public class CountryDto

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class BusinessTypeDto
+public class BusinessTypeModel
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)] public int busiTypeID { get; set; }
