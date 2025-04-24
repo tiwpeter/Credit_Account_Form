@@ -66,6 +66,14 @@ public class GetCustomerService
                 {
                     CustSignId = c.Shipping.shipping_id,
                     CustSignFirstName = c.Shipping.subDistrict
+                },
+                ShopType = new ShopTypeModel
+                {
+                    id = c.ShopType.id,
+                    shopCode = c.ShopType.shopCode,
+                    shopName = c.ShopType.shopName,
+                    shopDes = c.ShopType.shopDes,
+                    accGroupName = c.ShopType.accGroupName
                 }
             }).ToListAsync(); // ⬅ เพิ่มตรงนี้
         return customers;

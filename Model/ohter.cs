@@ -1,9 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 // ประเภทร้านค้า
+
+[Owned]
 public class ShopTypeModel
 {
+
     public int id { get; set; }
 
     public string shopCode { get; set; }

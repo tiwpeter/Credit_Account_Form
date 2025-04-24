@@ -16,6 +16,7 @@ namespace API.Data
         public DbSet<BusinessTypeModel> BusinessTypes { get; set; }
         public DbSet<CreditInfoModel> CreditInfo { get; set; }
         public DbSet<CustomerSignModel> CustomerSign { get; set; }
+        public DbSet<ShopTypeModel> ShopType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +38,11 @@ namespace API.Data
             // Index
             modelBuilder.Entity<AddressModel>().HasIndex(a => a.CountryId);
             modelBuilder.Entity<AddressModel>().HasIndex(a => a.ProvinceId);
+
+            modelBuilder.Entity<CustomerModel>()
+             .OwnsOne(c => c.ShopType);
+
+
 
             // Seed Business Types
             modelBuilder.Entity<BusinessTypeModel>().HasData(
@@ -110,6 +116,17 @@ namespace API.Data
                 }
             );
 
+            modelBuilder.Entity<CustomerModel>().OwnsOne(c => c.ShopType).HasData(
+                    new
+                    {
+                        CustomerModelCustomerId = 1, // Must match the primary key in CustomerModel
+                        id = 1,
+                        shopCode = "SHOP001",
+                        shopName = "John's Store",
+                        shopDes = "A general store",
+                        accGroupName = "Retail"
+                    }
+                );
             // CustomerModel
             modelBuilder.Entity<CustomerModel>().HasData(
                 new CustomerModel
@@ -120,9 +137,11 @@ namespace API.Data
                     shipping_id = 1,
                     BusinessTypeId = 1,
                     CreditInfoId = 1,
-                    CustSignId = 1 // ✅ ใช้ foreign key โดยตรง
+                    CustSignId = 1,// ✅ ใช้ foreign key โดยตรง
+
                 }
             );
+
 
 
 

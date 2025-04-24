@@ -37,6 +37,8 @@ namespace ModelTest.Controllers
 
     public class GetCustomersDTO
     {
+        public ShopTypeModel ShopType { get; set; }  // แบบ owned entity
+
         public string CustomerId { get; set; }
         public GeneralDto General { get; set; }
         public ShippingDto Shipping { get; set; }

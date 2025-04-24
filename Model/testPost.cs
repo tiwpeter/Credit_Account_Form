@@ -13,6 +13,10 @@ namespace ModelTest.Controllers
 
         public string CustomerName { get; set; }
 
+
+        public ShopTypeModel ShopType { get; set; }
+
+
         public int GeneralId { get; set; }
 
         [ForeignKey("GeneralId")]
