@@ -30,6 +30,12 @@ namespace ModelTest.Controllers
         public CompanyModel Company { get; set; }
         // หน่วยงานที่รับผิดชอบด้านการขาย
         public SaleOrgModel SaleOrg { get; set; }
+
+
+        //ใช้ ระบุประเภทหรือหมวดหมู่ของบัญชีในระบบขององค์กร เช่น รหัสบัญชีสำหรับสินทรัพย์, หนี้สิน, รายได้, ค่าใช้จ่าย เป็นต้น
+        public AccountCodeModel AccountCode { get; set; }
+
+
         ////ประเภทกลุ่มลูกค้าในบัญชี
         public accountGroupModel accountGroup { get; set; }
 
