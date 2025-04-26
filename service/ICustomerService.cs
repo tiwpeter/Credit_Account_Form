@@ -12,12 +12,14 @@ public class CustomerService
 
     public async Task<int> CreateCustomerAsync(CreateCustomerRequest request)
     {
+
+        //ฟอร์ม(Angular)->ส่ง JSON->CreateCustomerRequest(รับใน API)->CustomerModel(Entity)->Database
         var customer = new CustomerModel
         {
             CustomerName = request.CustomerName,
+            // 
             General = new GeneralModel
             {
-                generalName = request.GeneralName,
                 Address = new AddressModel
                 {
                     CountryId = request.CountryId,
@@ -26,7 +28,6 @@ public class CustomerService
             },
             Shipping = new ShippingModel
             {
-                subDistrict = request.SubDistrict,
                 ProvinceId = request.ShippingProvinceId
             },
             BusinessTypeId = request.BusinessTypeId,
@@ -36,12 +37,7 @@ public class CustomerService
                 TimeRequired = request.TimeRequired,
                 CreditLimit = request.CreditLimit
             },
-            CustomerSigns = new CustomerSignModel
-            {
 
-                CustSignFirstName = request.CustSignFirstName
-
-            }
         };
 
         _context.Customers.Add(customer);

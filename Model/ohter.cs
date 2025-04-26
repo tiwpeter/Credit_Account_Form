@@ -24,9 +24,9 @@ public class IndustryTypeModel
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
     public int id { get; set; }
-    public string InduTypeCode { get; set; }
-    public string InduTypeName { get; set; }
-    public string InduTypeDes { get; set; }
+    public string? InduTypeCode { get; set; }  // สามารถรับค่า NULL ได้
+    public string? InduTypeName { get; set; }  // สามารถรับค่า NULL ได้
+    public string? InduTypeDes { get; set; }   // สามารถรับค่า NULL ได้
 
 
 }

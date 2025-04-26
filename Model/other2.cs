@@ -63,8 +63,9 @@ public class CustPricProcModel
     public string Description { get; set; }        // รายละเอียดขั้นตอนการคิดราคา
 }
 
-[Owned]
 // รายการราคาสินค้า ใช้เพื่อเก็บข้อมูลราคาสินค้าแต่ละตัวในแต่ละเงื่อนไข เช่น ราคาสำหรับลูกค้าประเภทต่างๆ, เขตการขาย, สกุลเงิน, หรือช่วงเวลาโปรโมชั่น
+
+[Owned]
 public class PriceListModel
 {
     [Key]
@@ -106,12 +107,13 @@ public class SaleManagerModel
 
 }
 
+[Owned]
 // ข้อมูลประเทศที่กลุ่มลูกค้ารับผิดชอบ
 public class CustGroupCountryModel
 {
-    [Key]
-    public int Id { get; set; }  // รหัสกลุ่มลูกค้าตามประเทศ
 
+    [Key]
+    public int Id { get; set; }
     public string CountryCode { get; set; }   // รหัสประเทศ
     public string CountryName { get; set; }   // ชื่อประเทศ
     public string CountryDes { get; set; }    // คำอธิบายประเทศ

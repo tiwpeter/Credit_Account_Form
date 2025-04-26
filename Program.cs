@@ -3,11 +3,25 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+                .AllowAnyOrigin()    // หรือใช้ .WithOrigins("https://your-frontend.com") เพื่อจำกัดโดเมน
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
+
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add controller services
 builder.Services.AddControllers();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<GetCustomerService>();
@@ -28,7 +42,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Map controllers
+// Enable CORS
+app.UseCors("AllowAll");
+
 app.MapControllers();
 
 app.Run();

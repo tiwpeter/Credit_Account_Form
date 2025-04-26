@@ -27,7 +27,7 @@ public class GetCustomerService
             .Include(c => c.CustomerSigns)
             .Select(c => new GetCustomersDTO
             {
-                CustomerId = c.CustomerId.ToString(),
+                CustomerId = c.CustomerId,
                 General = new GeneralDto
                 {
                     GeneralName = c.General.generalName,
@@ -75,6 +75,7 @@ public class GetCustomerService
                     shopDes = c.ShopType.shopDes,
                     accGroupName = c.ShopType.accGroupName
                 }
+
             }).ToListAsync(); // ⬅ เพิ่มตรงนี้
         return customers;
     }
