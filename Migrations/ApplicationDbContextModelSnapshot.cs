@@ -88,6 +88,17 @@ namespace apiNet8.Migrations
                     b.HasKey("busiTypeID");
 
                     b.ToTable("BusinessTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            busiTypeID = 1,
+                            RegisteredCapital = 1000000m,
+                            RegistrationDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            busiTypeCode = "BT01",
+                            busiTypeDes = "ธุรกิจค้าปลีก",
+                            busiTypeName = "ค้าปลีก"
+                        });
                 });
 
             modelBuilder.Entity("DocCreditModel", b =>
@@ -190,9 +201,6 @@ namespace apiNet8.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
-                    b.Property<int>("BusinessTypeId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CreditInfoId")
                         .HasColumnType("int");
 
@@ -209,12 +217,13 @@ namespace apiNet8.Migrations
                     b.Property<int>("GeneralId")
                         .HasColumnType("int");
 
+                    b.Property<int>("busiTypeID")
+                        .HasColumnType("int");
+
                     b.Property<int>("shipping_id")
                         .HasColumnType("int");
 
                     b.HasKey("CustomerId");
-
-                    b.HasIndex("BusinessTypeId");
 
                     b.HasIndex("CreditInfoId");
 
@@ -224,6 +233,8 @@ namespace apiNet8.Migrations
 
                     b.HasIndex("GeneralId");
 
+                    b.HasIndex("busiTypeID");
+
                     b.HasIndex("shipping_id");
 
                     b.ToTable("Customers");
@@ -232,11 +243,11 @@ namespace apiNet8.Migrations
                         new
                         {
                             CustomerId = 1,
-                            BusinessTypeId = 1,
                             CreditInfoId = 1,
                             CustSignId = 1,
                             CustomerName = "John Doe",
                             GeneralId = 1,
+                            busiTypeID = 1,
                             shipping_id = 1
                         });
                 });
@@ -399,12 +410,6 @@ namespace apiNet8.Migrations
 
             modelBuilder.Entity("ModelTest.Controllers.CustomerModel", b =>
                 {
-                    b.HasOne("BusinessTypeModel", "BusinessType")
-                        .WithMany()
-                        .HasForeignKey("BusinessTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ModelTest.Controllers.CreditInfoModel", "CreditInfo")
                         .WithMany()
                         .HasForeignKey("CreditInfoId");
@@ -423,6 +428,12 @@ namespace apiNet8.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BusinessTypeModel", "BusinessType")
+                        .WithMany()
+                        .HasForeignKey("busiTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ModelTest.Controllers.ShippingModel", "Shipping")
                         .WithMany()
                         .HasForeignKey("shipping_id")
@@ -436,19 +447,15 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("AccountCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("AccountName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("AccountType")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("AccountId");
@@ -465,22 +472,18 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("accGroupName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<int>("id")
                                 .HasColumnType("int");
 
                             b1.Property<string>("shopCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("shopDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("shopName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("CustomerModelCustomerId");
@@ -497,15 +500,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("CashGroupCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("CashGroupName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -522,15 +522,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("CurrencyCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("CurrencyName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Symbol")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -547,15 +544,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("CountryCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("CountryDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("CountryName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -581,15 +575,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("GroupCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("GroupName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -606,15 +597,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("PricProcCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("PricProcName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -631,15 +619,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("RateTypeCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("RateTypeName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -656,15 +641,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("incotermCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("incotermDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("incotermName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -681,15 +663,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("PaymentMethodCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("PaymentMethodName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -706,15 +685,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("priceListCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("priceListDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("priceListName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -731,15 +707,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("DistrictCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("DistrictName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -756,15 +729,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("GroupCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("GroupName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -781,15 +751,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("SaleGroupCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("SaleGroupDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("SaleGroupName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -807,15 +774,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("sortkeyCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("sortkeyDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("sortkeyName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -832,15 +796,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Description")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("TermCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("TermName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("Id");
@@ -858,15 +819,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("companyAddr")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("companyCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("companyName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("company_id");
@@ -898,6 +856,15 @@ namespace apiNet8.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("id");
+
+                            b1.HasData(
+                                new
+                                {
+                                    id = 1,
+                                    InduTypeCode = "AVC2",
+                                    InduTypeDes = "Industry related to technology",
+                                    InduTypeName = "Technology"
+                                });
                         });
 
                     b.OwnsOne("SaleOrgModel", "SaleOrg", b1 =>
@@ -907,15 +874,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("saleOrgCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("saleOrgDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("saleOrgName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("id");
@@ -933,15 +897,12 @@ namespace apiNet8.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("accGroupCode")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("accGroupDes")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("accGroupName")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("id");

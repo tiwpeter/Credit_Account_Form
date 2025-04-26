@@ -12,7 +12,9 @@ namespace ModelTest.ApiControllers
     {
         private readonly ApplicationDbContext _context;
         private readonly CustomerService _customerService;
+
         private readonly GetCustomerService _getcustomerService;
+
 
         public RegisformController(ApplicationDbContext context, CustomerService customerService, GetCustomerService getcustomerService)
         {
@@ -28,22 +30,40 @@ namespace ModelTest.ApiControllers
             return Ok(customers);
         }
 
-        // id = service
+        // id = sevice
+
+
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
         {
-            // ตรวจสอบว่า request ข้อมูลถูกต้องหรือไม่
-            if (!ModelState.IsValid)
+            // ตรวจสอบว่า CountryId ที่ได้รับจาก frontend มีอยู่ในฐานข้อมูลหรือไม่
+            var countryExists = await _context.Countries
+                .AnyAsync(c => c.CountryId == request.General.Address.Country.CountryId);  // เปลี่ยนเป็น request.General.Address.Country.CountryId
+
+            Console.WriteLine($"Received CountryId: {request.General.Address.Country.CountryId}");  // แก้ไขเป็น request.General.Address.Country.CountryId
+
+            if (!countryExists)
             {
-                // หากข้อมูลไม่ถูกต้อง ส่งกลับ BadRequest พร้อมข้อผิดพลาด
-                return BadRequest(new { message = "Validation failed", errors = ModelState });
+                // หาก CountryId ไม่พบในฐานข้อมูล ส่งผลลัพธ์ NotFound
+                return NotFound(new { message = "Country not found", countryId = request.General.Address.Country.CountryId });
             }
 
+            // หากพบ CountryId ในฐานข้อมูล
+            else
+            {
+                // ส่งผลลัพธ์ที่แสดงว่า CountryId มีอยู่ในฐานข้อมูล
+                return Ok(new { message = "Country found", countryId = request.General.Address.Country.CountryId });
+            }
 
-            // ดำเนินการสร้าง customer หากข้อมูลถูกต้อง
+            // ดำเนินการสร้าง customer ถ้าผ่านการตรวจสอบ
             await _customerService.CreateCustomerAsync(request);
 
             return Ok(new { message = "Customer created successfully" });
         }
+
+
+
+
+
     }
 }

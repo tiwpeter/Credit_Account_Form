@@ -12,10 +12,7 @@ namespace ModelTest.Controllers
         public string CustomerName { get; set; }
 
         // General
-
-        // Address
-        public int CountryId { get; set; }
-        public int ProvinceId { get; set; }
+        public GeneralDto General { get; set; }
 
         // Shipping
         public int ShippingProvinceId { get; set; }
@@ -27,9 +24,8 @@ namespace ModelTest.Controllers
         public decimal EstimatedPurchase { get; set; }
         public int TimeRequired { get; set; }
         public decimal CreditLimit { get; set; }
-
-        // CustomerSign
     }
+
 
 
     public class GetCustomersDTO

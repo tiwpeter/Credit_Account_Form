@@ -41,9 +41,9 @@ namespace ModelTest.Controllers
 
 
         //ประเภทของธุรกิจที่พวกเขาทำอยู่ครับ เช่นว่า ธุรกิจนั้นคือ ค้าปลีก, ขายส่ง, โรงงาน, ซอฟต์แวร์, บริการ ฯลฯ
-        public int BusinessTypeId { get; set; }  // เพิ่มคอลัมน์ BusinessTypeId
+        public int busiTypeID { get; set; }  // เพิ่มคอลัมน์ BusinessTypeId
 
-        [ForeignKey("BusinessTypeId")]
+        [ForeignKey("busiTypeID ")]
         public BusinessTypeModel BusinessType { get; set; }
 
         // ข้อมูลการชำระเงิน, สถานะเครดิต, ประวัติการกู้ยืม หรือข้อมูลที่เกี่ยวข้องกับการให้เครดิตทางการเงิน

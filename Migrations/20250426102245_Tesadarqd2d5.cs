@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace apiNet8.Migrations
 {
     /// <inheritdoc />
-    public partial class Tesaaq9 : Migration
+    public partial class Tesadarqd2d5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -188,72 +188,72 @@ namespace apiNet8.Migrations
                     IndustryType_InduTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IndustryType_InduTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IndustryType_InduTypeDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Company_companyCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Company_companyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Company_companyAddr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleOrg_saleOrgCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleOrg_saleOrgName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleOrg_saleOrgDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountCode_AccountCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountCode_AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountCode_AccountType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountCode_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    accountGroup_accGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    accountGroup_accGroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    accountGroup_accGroupDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BusinessTypeId = table.Column<int>(type: "int", nullable: false),
+                    Company_companyCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Company_companyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Company_companyAddr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleOrg_saleOrgCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleOrg_saleOrgName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleOrg_saleOrgDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountCode_AccountCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountCode_AccountName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountCode_AccountType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountCode_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    accountGroup_accGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    accountGroup_accGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    accountGroup_accGroupDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    busiTypeID = table.Column<int>(type: "int", nullable: false),
                     CreditInfoId = table.Column<int>(type: "int", nullable: true),
                     DocCreditId = table.Column<int>(type: "int", nullable: true),
                     CustSignId = table.Column<int>(type: "int", nullable: true),
-                    SortKey_sortkeyCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SortKey_sortkeyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SortKey_sortkeyDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CashGroup_CashGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CashGroup_CashGroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CashGroup_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_PaymentMethodCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_PaymentMethodName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TermOfPayment_TermCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TermOfPayment_TermName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TermOfPayment_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleDistrict_DistrictCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleDistrict_DistrictName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleDistrict_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleGroup_GroupCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleGroup_GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleGroup_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustGroupType_GroupCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustGroupType_GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustGroupType_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Currency_CurrencyCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Currency_CurrencyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Currency_Symbol = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExchRateType_RateTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExchRateType_RateTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExchRateType_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustPricProc_PricProcCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustPricProc_PricProcName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustPricProc_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PriceList_priceListCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PriceList_priceListName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PriceList_priceListDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Incoterm_incotermCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Incoterm_incotermName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Incoterm_incotermDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleManager_SaleGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleManager_SaleGroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SaleManager_SaleGroupDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustGroupCountry_CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustGroupCountry_CountryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustGroupCountry_CountryDes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SortKey_sortkeyCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SortKey_sortkeyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SortKey_sortkeyDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CashGroup_CashGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CashGroup_CashGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CashGroup_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentMethod_PaymentMethodCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentMethod_PaymentMethodName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentMethod_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TermOfPayment_TermCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TermOfPayment_TermName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TermOfPayment_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleDistrict_DistrictCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleDistrict_DistrictName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleDistrict_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleGroup_GroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleGroup_GroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleGroup_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustGroupType_GroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustGroupType_GroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustGroupType_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Currency_CurrencyCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Currency_CurrencyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Currency_Symbol = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExchRateType_RateTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExchRateType_RateTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExchRateType_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustPricProc_PricProcCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustPricProc_PricProcName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustPricProc_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PriceList_priceListCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PriceList_priceListName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PriceList_priceListDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Incoterm_incotermCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Incoterm_incotermName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Incoterm_incotermDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleManager_SaleGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleManager_SaleGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SaleManager_SaleGroupDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustGroupCountry_CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustGroupCountry_CountryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustGroupCountry_CountryDes = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.CustomerId);
                     table.ForeignKey(
-                        name: "FK_Customers_BusinessTypes_BusinessTypeId",
-                        column: x => x.BusinessTypeId,
+                        name: "FK_Customers_BusinessTypes_busiTypeID",
+                        column: x => x.busiTypeID,
                         principalTable: "BusinessTypes",
                         principalColumn: "busiTypeID",
                         onDelete: ReferentialAction.Cascade);
@@ -292,10 +292,10 @@ namespace apiNet8.Migrations
                 {
                     CustomerModelCustomerId = table.Column<int>(type: "int", nullable: false),
                     id = table.Column<int>(type: "int", nullable: false),
-                    shopCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    shopName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    shopDes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    accGroupName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    shopCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    shopName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    shopDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    accGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -307,6 +307,11 @@ namespace apiNet8.Migrations
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "BusinessTypes",
+                columns: new[] { "busiTypeID", "RegisteredCapital", "RegistrationDate", "busiTypeCode", "busiTypeDes", "busiTypeName" },
+                values: new object[] { 1, 1000000m, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BT01", "ธุรกิจค้าปลีก", "ค้าปลีก" });
 
             migrationBuilder.InsertData(
                 table: "Countries",
@@ -365,8 +370,8 @@ namespace apiNet8.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "CustGroupCountry_CountryCode", "CustGroupCountry_CountryDes", "CustGroupCountry_CountryName", "BusinessTypeId", "CreditInfoId", "CustSignId", "CustomerName", "DocCreditId", "GeneralId", "shipping_id" },
-                values: new object[] { 1, "TH", "ประเทศในเอเชียตะวันออกเฉียงใต้", "Thailand", 1, 1, 1, "John Doe", null, 1, 1 });
+                columns: new[] { "CustomerId", "CustGroupCountry_CountryCode", "CustGroupCountry_CountryDes", "CustGroupCountry_CountryName", "IndustryType_InduTypeCode", "IndustryType_InduTypeDes", "IndustryType_InduTypeName", "CreditInfoId", "CustSignId", "CustomerName", "DocCreditId", "GeneralId", "busiTypeID", "shipping_id" },
+                values: new object[] { 1, "TH", "ประเทศในเอเชียตะวันออกเฉียงใต้", "Thailand", "AVC2", "Industry related to technology", "Technology", 1, 1, "John Doe", null, 1, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CountryId",
@@ -379,9 +384,9 @@ namespace apiNet8.Migrations
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_BusinessTypeId",
+                name: "IX_Customers_busiTypeID",
                 table: "Customers",
-                column: "BusinessTypeId");
+                column: "busiTypeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_CreditInfoId",

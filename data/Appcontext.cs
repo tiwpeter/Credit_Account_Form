@@ -45,6 +45,31 @@ namespace API.Data
             modelBuilder.Entity<CustomerModel>()
                    .OwnsOne(p => p.SaleDistrict);
 
+            // Seed BusinessType
+            modelBuilder.Entity<BusinessTypeModel>().HasData(
+               new BusinessTypeModel
+               {
+                   busiTypeID = 1,
+                   busiTypeCode = "BT01",
+                   busiTypeName = "ค้าปลีก",
+                   busiTypeDes = "ธุรกิจค้าปลีก",
+                   RegistrationDate = new DateTime(2025, 1, 1),
+                   RegisteredCapital = 1000000m
+               }
+
+            );
+
+
+            modelBuilder.Entity<CustomerModel>().OwnsOne(c => c.IndustryType).HasData(
+                new
+                {
+                    CustomerModelCustomerId = 1,
+                    id = 1,
+                    InduTypeCode = "AVC2",  // ค่า NULL
+                    InduTypeName = "Technology",
+                    InduTypeDes = "Industry related to technology"
+                }
+            );
 
 
             // Seed Country
@@ -128,7 +153,7 @@ namespace API.Data
                     CustomerName = "John Doe",
                     GeneralId = 1,
                     shipping_id = 1,
-                    BusinessTypeId = 1,
+                    busiTypeID = 1,
                     CreditInfoId = 1,
                     CustSignId = 1,// ✅ ใช้ foreign key โดยตรง
 

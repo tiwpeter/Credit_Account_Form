@@ -12,32 +12,30 @@ public class CustomerService
 
     public async Task<int> CreateCustomerAsync(CreateCustomerRequest request)
     {
-
-        //ฟอร์ม(Angular)->ส่ง JSON->CreateCustomerRequest(รับใน API)->CustomerModel(Entity)->Database
+        // สร้าง customer ด้วยข้อมูลที่ได้รับจาก request
         var customer = new CustomerModel
         {
             CustomerName = request.CustomerName,
-            // 
             General = new GeneralModel
             {
+                generalName = request.General.GeneralName,
                 Address = new AddressModel
                 {
-                    CountryId = request.CountryId,
-                    ProvinceId = request.ProvinceId
+                    CountryId = request.General.Address.Country.CountryId, // ใช้ CountryId ที่ถูกต้อง
+                    ProvinceId = request.General.Address.Province.ProvinceId // ใช้ ProvinceId ที่ถูกต้อง
                 }
             },
             Shipping = new ShippingModel
             {
                 ProvinceId = request.ShippingProvinceId
             },
-            BusinessTypeId = request.BusinessTypeId,
+            busiTypeID = request.BusinessTypeId,
             CreditInfo = new CreditInfoModel
             {
                 EstimatedPurchase = request.EstimatedPurchase,
                 TimeRequired = request.TimeRequired,
                 CreditLimit = request.CreditLimit
             },
-
         };
 
         _context.Customers.Add(customer);

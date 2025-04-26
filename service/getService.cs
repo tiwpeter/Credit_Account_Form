@@ -80,6 +80,11 @@ public class GetCustomerService
         return customers;
     }
 
+    public async Task<CountryModel> GetCountryByIdAsync(int countryId)
+    {
+        return await _context.Countries
+                             .FirstOrDefaultAsync(c => c.CountryId == countryId);
+    }
 
 
 }
