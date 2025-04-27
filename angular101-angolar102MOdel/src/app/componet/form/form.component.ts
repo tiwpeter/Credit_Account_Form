@@ -53,14 +53,16 @@ export class FormComponent {
 
 
   Shipping: any = {
-    DeliveryName: 'John Doe',
-    Address1: '456 Shipping St',
-    Address2: 'Apt 7D',
-    District: 'Shipping District',
-    Province: 'Shipping Province',
-    PostalCode: '67890',
-    Country: 'Shipping Country'
-  };
+  DeliveryName: 'John Doe',
+  Address1: '456 Shipping St',
+  Address2: 'Apt 7D',
+  District: 'Shipping District',
+  SubDistrict: 'Shipping SubDistrict', // เพิ่มตรงนี้
+  Province: 'Shipping Province',
+  PostalCode: '67890',
+  Country: 'Shipping Country'
+};
+
 
   // ข้อมูลร้านค้า (ShopType)
   ShopType: any = {
@@ -122,14 +124,16 @@ export class FormComponent {
     };
 
     const shippingData = {
-      DeliveryName: this.Shipping.DeliveryName,
-      Address1: this.Shipping.Address1,
-      Address2: this.Shipping.Address2,
-      District: this.Shipping.District,
-      Province: this.Shipping.Province,
-      PostalCode: this.Shipping.PostalCode,
-      Country: this.Shipping.Country
-    };
+  DeliveryName: this.Shipping.DeliveryName,
+  Address1: this.Shipping.Address1,
+  Address2: this.Shipping.Address2,
+  District: this.Shipping.District,
+  SubDistrict: this.Shipping.SubDistrict, // เพิ่ม SubDistrict
+  Province: this.Shipping.Province,
+  PostalCode: this.Shipping.PostalCode,
+  Country: this.Shipping.Country
+};
+
 
     const shopData = {
       shopCode: this.ShopType.shopCode,
