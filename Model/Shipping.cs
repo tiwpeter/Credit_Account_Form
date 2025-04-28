@@ -14,14 +14,21 @@ namespace ModelTest.Controllers
         [ForeignKey("ProvinceId")]
         public int ProvinceId { get; set; }
         public ProvinceModel Province { get; set; }
+
+        public int CountryId { get; set; }
+
+        [ForeignKey("CountryId")]
+        public CountryModel Country { get; set; }
+
     }
     public class ShippingDto
     {
         public int ShippingId { get; set; }
         public string SubDistrict { get; set; }
-        public int ProvinceId { get; set; }
-        public string ProvinceName { get; set; } // เพิ่ม ProvinceName
-        public string CountryName { get; set; } // เพิ่ม CountryName
+        public ProvinceDto Province { get; set; }
+
+        public CountryDto Country { get; set; }
+
     }
 
 

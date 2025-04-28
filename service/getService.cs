@@ -49,8 +49,16 @@ public class GetCustomerService
                 {
                     ShippingId = c.Shipping.shipping_id,
                     SubDistrict = c.Shipping.subDistrict,
-                    ProvinceName = c.Shipping.Province.ProvinceName,
-                    CountryName = c.Shipping.Province.Country.CountryName
+                    Country = new CountryDto
+                    {
+                        CountryId = c.General.Address.Country.CountryId,
+                        CountryName = c.General.Address.Country.CountryName
+                    },
+                    Province = new ProvinceDto
+                    {
+                        ProvinceId = c.Shipping.Province.ProvinceId,
+                        ProvinceName = c.Shipping.Province.ProvinceName
+                    },
                 },
                 BusinessType = new BusinessTypeDTO
                 {

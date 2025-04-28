@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace apiNet8.Migrations
 {
     /// <inheritdoc />
-    public partial class Tesadarqd2d5 : Migration
+    public partial class Tesadarqd2de : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -143,17 +143,24 @@ namespace apiNet8.Migrations
                     shipping_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     subDistrict = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProvinceId = table.Column<int>(type: "int", nullable: false)
+                    ProvinceId = table.Column<int>(type: "int", nullable: false),
+                    CountryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shippings", x => x.shipping_id);
                     table.ForeignKey(
+                        name: "FK_Shippings_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Shippings_Provinces_ProvinceId",
                         column: x => x.ProvinceId,
                         principalTable: "Provinces",
                         principalColumn: "ProvinceId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -352,11 +359,11 @@ namespace apiNet8.Migrations
 
             migrationBuilder.InsertData(
                 table: "Shippings",
-                columns: new[] { "shipping_id", "ProvinceId", "subDistrict" },
+                columns: new[] { "shipping_id", "CountryId", "ProvinceId", "subDistrict" },
                 values: new object[,]
                 {
-                    { 1, 1, "บางรัก" },
-                    { 2, 2, "ห้วยขวาง" }
+                    { 1, 1, 1, "บางรัก" },
+                    { 2, 1, 2, "ห้วยขวาง" }
                 });
 
             migrationBuilder.InsertData(
@@ -421,6 +428,11 @@ namespace apiNet8.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Provinces_CountryId",
                 table: "Provinces",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shippings_CountryId",
+                table: "Shippings",
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(

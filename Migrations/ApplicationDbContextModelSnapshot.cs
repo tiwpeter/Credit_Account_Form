@@ -361,6 +361,9 @@ namespace apiNet8.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("shipping_id"));
 
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProvinceId")
                         .HasColumnType("int");
 
@@ -370,6 +373,8 @@ namespace apiNet8.Migrations
 
                     b.HasKey("shipping_id");
 
+                    b.HasIndex("CountryId");
+
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("Shippings");
@@ -378,12 +383,14 @@ namespace apiNet8.Migrations
                         new
                         {
                             shipping_id = 1,
+                            CountryId = 1,
                             ProvinceId = 1,
                             subDistrict = "บางรัก"
                         },
                         new
                         {
                             shipping_id = 2,
+                            CountryId = 1,
                             ProvinceId = 2,
                             subDistrict = "ห้วยขวาง"
                         });
@@ -1010,11 +1017,19 @@ namespace apiNet8.Migrations
 
             modelBuilder.Entity("ModelTest.Controllers.ShippingModel", b =>
                 {
+                    b.HasOne("ModelTest.Controllers.CountryModel", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ModelTest.Controllers.ProvinceModel", "Province")
                         .WithMany()
                         .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Country");
 
                     b.Navigation("Province");
                 });

@@ -14,6 +14,8 @@ namespace ModelTest.Controllers
         // General
         public GeneralDto General { get; set; }
 
+        public ShippingDto ShippingDto { get; set; }
+
         // Shipping
         public int ShippingProvinceId { get; set; }
 

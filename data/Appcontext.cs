@@ -35,9 +35,24 @@ namespace API.Data
                 .HasForeignKey(a => a.ProvinceId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<ShippingModel>()
+                  .HasOne(s => s.Province)
+                  .WithMany()
+                  .HasForeignKey(s => s.ProvinceId)
+                  .OnDelete(DeleteBehavior.Restrict); // หรือ DeleteBehavior.SetNull
+
+            modelBuilder.Entity<ShippingModel>()
+                .HasOne(s => s.Country)
+                .WithMany()
+                .HasForeignKey(s => s.CountryId)
+                .OnDelete(DeleteBehavior.Restrict); // หรือ DeleteBehavior.SetNull
+
+
             // Index
             modelBuilder.Entity<AddressModel>().HasIndex(a => a.CountryId);
             modelBuilder.Entity<AddressModel>().HasIndex(a => a.ProvinceId);
+            modelBuilder.Entity<ShippingModel>().HasIndex(a => a.CountryId);
+            modelBuilder.Entity<ShippingModel>().HasIndex(a => a.ProvinceId);
 
             modelBuilder.Entity<CustomerModel>()
              .OwnsOne(c => c.ShopType);
@@ -111,19 +126,22 @@ namespace API.Data
 
             // Seed Shipping
             modelBuilder.Entity<ShippingModel>().HasData(
-                new ShippingModel
-                {
-                    shipping_id = 1,
-                    subDistrict = "บางรัก",
-                    ProvinceId = 1
-                },
-                new ShippingModel
-                {
-                    shipping_id = 2,
-                    subDistrict = "ห้วยขวาง",
-                    ProvinceId = 2
-                }
-            );
+    new ShippingModel
+    {
+        shipping_id = 1,
+        subDistrict = "บางรัก",
+        ProvinceId = 1,
+        CountryId = 1  // Ensure this ID exists in the Countries table
+    },
+    new ShippingModel
+    {
+        shipping_id = 2,
+        subDistrict = "ห้วยขวาง",
+        ProvinceId = 2,
+        CountryId = 1  // Ensure this ID exists in the Countries table
+    }
+);
+
             // Seed CreditInfo
             modelBuilder.Entity<CreditInfoModel>().HasData(
                 new CreditInfoModel
