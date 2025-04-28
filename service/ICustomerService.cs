@@ -30,10 +30,9 @@ public class CustomerService
                 },
                 Shipping = new ShippingModel
                 {
-                    ProvinceId = request.ShippingProvinceId,
-                    subDistrict = request.ShippingDto.SubDistrict,
-                    CountryId = request.ShippingDto.Country.CountryId, // <-- แบบนี้ถูกต้อง
-
+                    CountryId = request.ShippingDto.Country.CountryId, // แก้ตรงนี้
+                    ProvinceId = request.ShippingDto.Province.ProvinceId, // ← ดึงจาก DTO เลย
+                    subDistrict = request.ShippingDto.SubDistrict
                 },
                 busiTypeID = request.BusinessTypeId,
                 CreditInfo = new CreditInfoModel
