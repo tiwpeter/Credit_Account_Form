@@ -16,16 +16,21 @@ namespace ModelTest.Controllers
 
         public ShippingDto ShippingDto { get; set; }
 
-        // Shipping
-        public int ShippingProvinceId { get; set; }
+        // 🔥 เพิ่มตรงนี้
+        public ShopTypeModel ShopType { get; set; }
+        public IndustryTypeModel IndustryType { get; set; } // 🆕 เพิ่ม
 
-        // BusinessType
-        public int BusinessTypeId { get; set; }
+        public CompanyModel Company { get; set; } // 🆕 เพิ่ม
 
-        // CreditInfo
-        public decimal EstimatedPurchase { get; set; }
-        public int TimeRequired { get; set; }
-        public decimal CreditLimit { get; set; }
+        public SaleOrgModel SaleOrg { get; set; } // 🆕 เพิ่ม
+
+        public AccountCodeModel AccountCode { get; set; } // 🆕 เพิ่ม
+
+        public accountGroupModel accountGroup { get; set; } // 🆕 เพิ่ม
+
+
+        public BusinessTypeModel BusinessType { get; set; } // 👈 เพิ่ม Object เต็มๆ
+
     }
 
 

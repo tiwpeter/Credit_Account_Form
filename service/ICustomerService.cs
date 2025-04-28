@@ -34,13 +34,62 @@ public class CustomerService
                     ProvinceId = request.ShippingDto.Province.ProvinceId, // ← ดึงจาก DTO เลย
                     subDistrict = request.ShippingDto.SubDistrict
                 },
-                busiTypeID = request.BusinessTypeId,
-                CreditInfo = new CreditInfoModel
+                // 🔥 เพิ่มตรงนี้
+                ShopType = new ShopTypeModel
                 {
-                    EstimatedPurchase = request.EstimatedPurchase,
-                    TimeRequired = request.TimeRequired,
-                    CreditLimit = request.CreditLimit
+                    id = request.ShopType.id,
+                    shopCode = request.ShopType.shopCode,
+                    shopName = request.ShopType.shopName,
+                    shopDes = request.ShopType.shopDes,
+                    accGroupName = request.ShopType.accGroupName
                 },
+                IndustryType = new IndustryTypeModel
+                {
+                    id = request.IndustryType.id,
+                    InduTypeCode = request.IndustryType.InduTypeCode,
+                    InduTypeName = request.IndustryType.InduTypeName,
+                    InduTypeDes = request.IndustryType.InduTypeDes
+                },
+                Company = new CompanyModel
+                {
+                    company_id = request.Company.company_id,
+                    companyCode = request.Company.companyCode,
+                    companyName = request.Company.companyName,
+                    companyAddr = request.Company.companyAddr
+                },
+                SaleOrg = new SaleOrgModel
+                {
+                    id = request.SaleOrg.id,
+                    saleOrgCode = request.SaleOrg.saleOrgCode,
+                    saleOrgName = request.SaleOrg.saleOrgName,
+                    saleOrgDes = request.SaleOrg.saleOrgDes
+                },
+                AccountCode = new AccountCodeModel
+                {
+                    AccountId = request.AccountCode.AccountId,
+                    AccountCode = request.AccountCode.AccountCode,
+                    AccountName = request.AccountCode.AccountName,
+                    AccountType = request.AccountCode.AccountType,
+                    Description = request.AccountCode.Description
+                },
+
+                BusinessType = new BusinessTypeModel
+                {
+                    busiTypeID = request.BusinessType.busiTypeID,
+                    busiTypeCode = request.BusinessType.busiTypeCode,
+                    busiTypeName = request.BusinessType.busiTypeName,
+                    busiTypeDes = request.BusinessType.busiTypeDes,
+                    RegistrationDate = request.BusinessType.RegistrationDate,
+                    RegisteredCapital = request.BusinessType.RegisteredCapital
+                },
+                // busi
+                accountGroup = new accountGroupModel
+                {
+                    id = request.accountGroup.id,
+                    accGroupCode = request.accountGroup.accGroupCode,
+                    accGroupName = request.accountGroup.accGroupName,
+                    accGroupDes = request.accountGroup.accGroupDes
+                }
             };
 
             _context.Customers.Add(customer);

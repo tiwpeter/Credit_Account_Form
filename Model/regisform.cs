@@ -36,8 +36,6 @@ namespace ModelTest.Controllers
         public AccountCodeModel AccountCode { get; set; }
 
 
-        ////ประเภทกลุ่มลูกค้าในบัญชี
-        public accountGroupModel accountGroup { get; set; }
 
 
         //ประเภทของธุรกิจที่พวกเขาทำอยู่ครับ เช่นว่า ธุรกิจนั้นคือ ค้าปลีก, ขายส่ง, โรงงาน, ซอฟต์แวร์, บริการ ฯลฯ
@@ -64,6 +62,10 @@ namespace ModelTest.Controllers
         public int? CustSignId { get; set; }
         [ForeignKey("CustSignId")]
         public CustomerSignModel CustomerSigns { get; set; }
+
+        ////ประเภทกลุ่มลูกค้าในบัญชี
+        public accountGroupModel accountGroup { get; set; }
+
 
         //ใช้ ระบุประเภทหรือหมวดหมู่ของบัญชีในระบบขององค์กร เช่น รหัสบัญชีสำหรับสินทรัพย์, หนี้สิน, รายได้, ค่าใช้จ่าย เป็นต้น
         public SortKeyModel SortKey { get; set; }
