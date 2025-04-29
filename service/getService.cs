@@ -25,6 +25,9 @@ public class GetCustomerService
             .Include(c => c.BusinessType)
             .Include(c => c.CreditInfo)
             .Include(c => c.CustomerSigns)
+
+            .Include(c => c.ShopType)
+
             .Select(c => new GetCustomersDTO
             {
                 CustomerId = c.CustomerId,
@@ -82,6 +85,146 @@ public class GetCustomerService
                     shopName = c.ShopType.shopName,
                     shopDes = c.ShopType.shopDes,
                     accGroupName = c.ShopType.accGroupName
+                },
+
+                // ใส่ IndustryType
+                IndustryType = new IndustryTypeModel
+                {
+                    id = c.IndustryType.id,
+                    InduTypeCode = c.IndustryType.InduTypeCode,
+                    InduTypeName = c.IndustryType.InduTypeName,
+                    InduTypeDes = c.IndustryType.InduTypeDes
+                },
+                Company = new CompanyModel
+                {
+                    company_id = c.Company.company_id,
+                    companyCode = c.Company.companyCode,
+                    companyName = c.Company.companyName,
+                    companyAddr = c.Company.companyAddr
+                },
+                SaleOrg = new SaleOrgModel
+                {
+                    id = c.SaleOrg.id,
+                    saleOrgCode = c.SaleOrg.saleOrgCode,
+                    saleOrgName = c.SaleOrg.saleOrgName,
+                    saleOrgDes = c.SaleOrg.saleOrgDes
+                },
+
+                accountGroup = new accountGroupModel
+                {
+                    id = c.accountGroup.id,
+                    accGroupCode = c.accountGroup.accGroupCode,
+                    accGroupName = c.accountGroup.accGroupName,
+                    accGroupDes = c.accountGroup.accGroupDes
+                },
+                DocCredit = new DocCreditModel
+                {
+                    CompanyCertificate = c.DocCredit.CompanyCertificate,
+                    CopyOfPP_20 = c.DocCredit.CopyOfPP_20,
+                    CopyOfCoRegis = c.DocCredit.CopyOfCoRegis,
+                    CopyOfIDCard = c.DocCredit.CopyOfIDCard,
+                    CompanyLocationMap = c.DocCredit.CompanyLocationMap,
+                    OtherSpecify = c.DocCredit.OtherSpecify
+                },/*, // 🔥 เพิ่ม CustomerSign ตรงนี้
+                CustomerSigns = new CustomerSignModel
+                {
+                    CustSignFirstName = c.CustomerSign.CustSignFirstName,
+                    custsignTel = c.CustomerSign.custsignTel,
+                    custsignEmail = c.CustomerSign.custsignEmail,
+                    custsignLine = c.CustomerSign.custsignLine,
+                },*/
+                AccountCode = new AccountCodeModel
+                {
+                    AccountId = c.AccountCode.AccountId,
+                    AccountCode = c.AccountCode.AccountCode,
+                    AccountName = c.AccountCode.AccountName,
+                    AccountType = c.AccountCode.AccountType,
+                    Description = c.AccountCode.Description
+                },
+                SortKey = new SortKeyModel
+                {
+                    sortkeyCode = c.SortKey.sortkeyCode,
+                    sortkeyName = c.SortKey.sortkeyName,
+                    sortkeyDes = c.SortKey.sortkeyDes
+                },
+                PaymentMethod = new PaymentMethodModel
+                {
+                    PaymentMethodCode = c.PaymentMethod.PaymentMethodCode,
+                    PaymentMethodName = c.PaymentMethod.PaymentMethodName,
+                    Description = c.PaymentMethod.Description
+                },
+                TermOfPayment = new TermOfPaymentModel
+                {
+                    TermCode = c.TermOfPayment.TermCode,
+                    TermName = c.TermOfPayment.TermName,
+                    Description = c.TermOfPayment.Description
+                },
+
+                SaleDistrict = new SaleDistrictModel
+                {
+                    DistrictCode = c.SaleDistrict.DistrictCode,
+                    DistrictName = c.SaleDistrict.DistrictName,
+                    Description = c.SaleDistrict.Description
+                },
+
+                SaleGroup = new SaleGroupModel
+                {
+                    GroupCode = c.SaleGroup.GroupCode,
+                    GroupName = c.SaleGroup.GroupName,
+                    Description = c.SaleGroup.Description
+                },
+                CustGroupType = new CustGroupTypeModel
+                {
+                    GroupCode = c.CustGroupType.GroupCode,
+                    GroupName = c.CustGroupType.GroupName,
+                    Description = c.CustGroupType.Description
+                },
+
+                Currency = new CurrencyModel
+                {
+                    CurrencyCode = c.Currency.CurrencyCode,
+                    CurrencyName = c.Currency.CurrencyName,
+                    Symbol = c.Currency.Symbol
+                },
+
+                ExchRateType = new ExchRateTypeModel
+                {
+                    RateTypeCode = c.ExchRateType.RateTypeCode,
+                    RateTypeName = c.ExchRateType.RateTypeName,
+                    Description = c.ExchRateType.Description
+                },
+                CustPricProc = new CustPricProcModel
+                {
+                    PricProcCode = c.CustPricProc.PricProcCode,
+                    PricProcName = c.CustPricProc.PricProcName,
+                    Description = c.CustPricProc.Description
+                },
+
+                PriceList = new PriceListModel
+                {
+                    priceListCode = c.PriceList.priceListCode,
+                    priceListName = c.PriceList.priceListName,
+                    priceListDes = c.PriceList.priceListDes
+                },
+
+                Incoterm = new IncotermModel
+                {
+                    incotermCode = c.Incoterm.incotermCode,
+                    incotermName = c.Incoterm.incotermName,
+                    incotermDes = c.Incoterm.incotermDes
+                },
+                SaleManager = new SaleManagerModel
+                {
+                    SaleGroupCode = c.SaleManager.SaleGroupCode,
+                    SaleGroupName = c.SaleManager.SaleGroupName,
+                    SaleGroupDes = c.SaleManager.SaleGroupDes
+                },
+
+                CustGroupCountry = new CustGroupCountryModel
+                {
+                    CountryCode = c.CustGroupCountry.CountryCode,
+                    CountryName = c.CustGroupCountry.CountryName,
+                    CountryDes = c.CustGroupCountry.CountryDes
                 }
 
             }).ToListAsync(); // ⬅ เพิ่มตรงนี้

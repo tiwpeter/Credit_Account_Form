@@ -126,6 +126,9 @@ namespace ModelTest.Controllers
         public accountGroupModel accountGroup { get; set; }
 
 
+        public CreditInfoDto CreditInfoDto { get; set; }  // ชี้ไปที่ CreditInfoDto
+
+
         //ประเภทของธุรกิจที่พวกเขาทำอยู่ครับ เช่นว่า ธุรกิจนั้นคือ ค้าปลีก, ขายส่ง, โรงงาน, ซอฟต์แวร์, บริการ ฯลฯ
         public BusinessTypeDTO BusinessType { get; set; }
 
