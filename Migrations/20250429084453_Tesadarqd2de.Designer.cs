@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiNet8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250428010502_Tesadarqd2de")]
+    [Migration("20250429084453_Tesadarqd2de")]
     partial class Tesadarqd2de
     {
         /// <inheritdoc />
@@ -91,17 +91,6 @@ namespace apiNet8.Migrations
                     b.HasKey("busiTypeID");
 
                     b.ToTable("BusinessTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            busiTypeID = 1,
-                            RegisteredCapital = 1000000m,
-                            RegistrationDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            busiTypeCode = "BT01",
-                            busiTypeDes = "ธุรกิจค้าปลีก",
-                            busiTypeName = "ค้าปลีก"
-                        });
                 });
 
             modelBuilder.Entity("DocCreditModel", b =>
@@ -185,15 +174,6 @@ namespace apiNet8.Migrations
                     b.HasKey("CreditInfoId");
 
                     b.ToTable("CreditInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            CreditInfoId = 1,
-                            CreditLimit = 100000.00m,
-                            EstimatedPurchase = 50000.00m,
-                            TimeRequired = 12
-                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.CustomerModel", b =>
@@ -241,18 +221,6 @@ namespace apiNet8.Migrations
                     b.HasIndex("shipping_id");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            CustomerId = 1,
-                            CreditInfoId = 1,
-                            CustSignId = 1,
-                            CustomerName = "John Doe",
-                            GeneralId = 1,
-                            busiTypeID = 1,
-                            shipping_id = 1
-                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.CustomerSignModel", b =>
@@ -271,17 +239,21 @@ namespace apiNet8.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("custsignEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("custsignLine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("custsignTel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CustSignId");
 
                     b.ToTable("CustomerSign");
-
-                    b.HasData(
-                        new
-                        {
-                            CustSignId = 1,
-                            CustSignFirstName = "John",
-                            CustomerId = 0
-                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.GeneralModel", b =>
@@ -304,20 +276,6 @@ namespace apiNet8.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Generals");
-
-                    b.HasData(
-                        new
-                        {
-                            general_id = 1,
-                            AddressId = 1,
-                            generalName = "General A"
-                        },
-                        new
-                        {
-                            general_id = 2,
-                            AddressId = 2,
-                            generalName = "General B"
-                        });
                 });
 
             modelBuilder.Entity("ModelTest.Controllers.ProvinceModel", b =>
@@ -381,22 +339,6 @@ namespace apiNet8.Migrations
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("Shippings");
-
-                    b.HasData(
-                        new
-                        {
-                            shipping_id = 1,
-                            CountryId = 1,
-                            ProvinceId = 1,
-                            subDistrict = "บางรัก"
-                        },
-                        new
-                        {
-                            shipping_id = 2,
-                            CountryId = 1,
-                            ProvinceId = 2,
-                            subDistrict = "ห้วยขวาง"
-                        });
                 });
 
             modelBuilder.Entity("AddressModel", b =>
@@ -568,15 +510,6 @@ namespace apiNet8.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("Id");
-
-                            b1.HasData(
-                                new
-                                {
-                                    Id = 1,
-                                    CountryCode = "TH",
-                                    CountryDes = "ประเทศในเอเชียตะวันออกเฉียงใต้",
-                                    CountryName = "Thailand"
-                                });
                         });
 
                     b.OwnsOne("CustGroupTypeModel", "CustGroupType", b1 =>
@@ -866,15 +799,6 @@ namespace apiNet8.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("id");
-
-                            b1.HasData(
-                                new
-                                {
-                                    id = 1,
-                                    InduTypeCode = "AVC2",
-                                    InduTypeDes = "Industry related to technology",
-                                    InduTypeName = "Technology"
-                                });
                         });
 
                     b.OwnsOne("SaleOrgModel", "SaleOrg", b1 =>

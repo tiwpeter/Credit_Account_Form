@@ -60,45 +60,7 @@ namespace API.Data
             modelBuilder.Entity<CustomerModel>()
                    .OwnsOne(p => p.SaleDistrict);
 
-            // Seed BusinessType
-            modelBuilder.Entity<BusinessTypeModel>().HasData(
-               new BusinessTypeModel
-               {
-                   busiTypeID = 1,
-                   busiTypeCode = "BT01",
-                   busiTypeName = "ค้าปลีก",
-                   busiTypeDes = "ธุรกิจค้าปลีก",
-                   RegistrationDate = new DateTime(2025, 1, 1),
-                   RegisteredCapital = 1000000m
-               }
 
-            );
-
-
-            modelBuilder.Entity<CustomerModel>().OwnsOne(c => c.IndustryType).HasData(
-                new
-                {
-                    CustomerModelCustomerId = 1,
-                    id = 1,
-                    InduTypeCode = "AVC2",  // ค่า NULL
-                    InduTypeName = "Technology",
-                    InduTypeDes = "Industry related to technology"
-                }
-            );
-
-
-            // Seed Country
-            // ต้อง .OwnsOne แล้วค่อย .HasData
-            modelBuilder.Entity<CustomerModel>().OwnsOne(c => c.CustGroupCountry).HasData(
-                new
-                {
-                    CustomerModelCustomerId = 1,  // FK ชื่อ = ParentEntityName + PrimaryKey (EF ตั้งแบบนี้ตาม Convention)
-                    Id = 1,
-                    CountryCode = "TH",
-                    CountryName = "Thailand",
-                    CountryDes = "ประเทศในเอเชียตะวันออกเฉียงใต้"
-                }
-            );
 
             // Seed Country
             modelBuilder.Entity<CountryModel>().HasData(
@@ -118,65 +80,7 @@ namespace API.Data
                 new AddressModel { AddressId = 2, CountryId = 2, ProvinceId = 2 }
             );
 
-            // Seed General
-            modelBuilder.Entity<GeneralModel>().HasData(
-                new GeneralModel { general_id = 1, generalName = "General A", AddressId = 1 },
-                new GeneralModel { general_id = 2, generalName = "General B", AddressId = 2 }
-            );
 
-            // Seed Shipping
-            modelBuilder.Entity<ShippingModel>().HasData(
-    new ShippingModel
-    {
-        shipping_id = 1,
-        subDistrict = "บางรัก",
-        ProvinceId = 1,
-        CountryId = 1  // Ensure this ID exists in the Countries table
-    },
-    new ShippingModel
-    {
-        shipping_id = 2,
-        subDistrict = "ห้วยขวาง",
-        ProvinceId = 2,
-        CountryId = 1  // Ensure this ID exists in the Countries table
-    }
-);
-
-            // Seed CreditInfo
-            modelBuilder.Entity<CreditInfoModel>().HasData(
-                new CreditInfoModel
-                {
-                    CreditInfoId = 1,
-                    EstimatedPurchase = 50000.00m,
-                    TimeRequired = 12,
-                    CreditLimit = 100000.00m,
-                }
-            );
-            // CustomerSignModel
-            modelBuilder.Entity<CustomerSignModel>().HasData(
-                new CustomerSignModel
-                {
-                    CustSignId = 1,
-                    CustSignFirstName = "John",
-
-                }
-            );
-
-
-            // CustomerModel
-            modelBuilder.Entity<CustomerModel>().HasData(
-                new CustomerModel
-                {
-                    CustomerId = 1,
-                    CustomerName = "John Doe",
-                    GeneralId = 1,
-                    shipping_id = 1,
-                    busiTypeID = 1,
-                    CreditInfoId = 1,
-                    CustSignId = 1,// ✅ ใช้ foreign key โดยตรง
-
-                }
-            );
 
 
 

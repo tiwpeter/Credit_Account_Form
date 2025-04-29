@@ -65,7 +65,10 @@ namespace apiNet8.Migrations
                     CustSignId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustSignFirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    custsignTel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    custsignEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    custsignLine = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,13 +208,13 @@ namespace apiNet8.Migrations
                     AccountCode_AccountName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccountCode_AccountType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccountCode_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    accountGroup_accGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    accountGroup_accGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    accountGroup_accGroupDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     busiTypeID = table.Column<int>(type: "int", nullable: false),
                     CreditInfoId = table.Column<int>(type: "int", nullable: true),
                     DocCreditId = table.Column<int>(type: "int", nullable: true),
                     CustSignId = table.Column<int>(type: "int", nullable: true),
+                    accountGroup_accGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    accountGroup_accGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    accountGroup_accGroupDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SortKey_sortkeyCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SortKey_sortkeyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SortKey_sortkeyDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -316,11 +319,6 @@ namespace apiNet8.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "BusinessTypes",
-                columns: new[] { "busiTypeID", "RegisteredCapital", "RegistrationDate", "busiTypeCode", "busiTypeDes", "busiTypeName" },
-                values: new object[] { 1, 1000000m, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BT01", "ธุรกิจค้าปลีก", "ค้าปลีก" });
-
-            migrationBuilder.InsertData(
                 table: "Countries",
                 columns: new[] { "CountryId", "CountryName" },
                 values: new object[,]
@@ -328,16 +326,6 @@ namespace apiNet8.Migrations
                     { 1, "Thailand" },
                     { 2, "Japan" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "CreditInfo",
-                columns: new[] { "CreditInfoId", "CreditLimit", "EstimatedPurchase", "TimeRequired" },
-                values: new object[] { 1, 100000.00m, 50000.00m, 12 });
-
-            migrationBuilder.InsertData(
-                table: "CustomerSign",
-                columns: new[] { "CustSignId", "CustSignFirstName", "CustomerId" },
-                values: new object[] { 1, "John", 0 });
 
             migrationBuilder.InsertData(
                 table: "Provinces",
@@ -356,29 +344,6 @@ namespace apiNet8.Migrations
                     { 1, 1, 1 },
                     { 2, 2, 2 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Shippings",
-                columns: new[] { "shipping_id", "CountryId", "ProvinceId", "subDistrict" },
-                values: new object[,]
-                {
-                    { 1, 1, 1, "บางรัก" },
-                    { 2, 1, 2, "ห้วยขวาง" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Generals",
-                columns: new[] { "general_id", "AddressId", "generalName" },
-                values: new object[,]
-                {
-                    { 1, 1, "General A" },
-                    { 2, 2, "General B" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Customers",
-                columns: new[] { "CustomerId", "CustGroupCountry_CountryCode", "CustGroupCountry_CountryDes", "CustGroupCountry_CountryName", "IndustryType_InduTypeCode", "IndustryType_InduTypeDes", "IndustryType_InduTypeName", "CreditInfoId", "CustSignId", "CustomerName", "DocCreditId", "GeneralId", "busiTypeID", "shipping_id" },
-                values: new object[] { 1, "TH", "ประเทศในเอเชียตะวันออกเฉียงใต้", "Thailand", "AVC2", "Industry related to technology", "Technology", 1, 1, "John Doe", null, 1, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CountryId",
