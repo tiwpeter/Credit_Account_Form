@@ -16,13 +16,25 @@ namespace ModelTest.Controllers
         // Foreign Key
         public int CustomerId { get; set; }
 
+
+        public string custsignTel { get; set; }
+        public string custsignEmail { get; set; }
+        public string custsignLine { get; set; }
+
+
+
+
+
     }
     public class CustomerSignDto
     {
         public int CustSignId { get; set; }
         public string CustSignFirstName { get; set; }
-        public int CustomerId { get; set; }
-        public string CustomerName { get; set; } // ดึงชื่อจาก CustomerModel
+
+        public string custsignTel { get; set; }
+        public string custsignEmail { get; set; }
+        public string custsignLine { get; set; }
     }
+
 
 }

@@ -64,6 +64,47 @@ public class CustomerService
                     saleOrgName = request.SaleOrg.saleOrgName,
                     saleOrgDes = request.SaleOrg.saleOrgDes
                 },
+
+                BusinessType = new BusinessTypeModel
+                {
+                    busiTypeID = request.BusinessType.busiTypeID,
+                    busiTypeCode = request.BusinessType.busiTypeCode,
+                    busiTypeName = request.BusinessType.busiTypeName,
+                    busiTypeDes = request.BusinessType.busiTypeDes,
+                    RegistrationDate = DateTime.Now, // <<< ให้ระบบกำหนดวันเองตอนนี้เลย
+                    RegisteredCapital = request.BusinessType.RegisteredCapital
+                },
+
+                accountGroup = new accountGroupModel
+                {
+                    id = request.accountGroup.id,
+                    accGroupCode = request.accountGroup.accGroupCode,
+                    accGroupName = request.accountGroup.accGroupName,
+                    accGroupDes = request.accountGroup.accGroupDes
+                },
+                CreditInfo = new CreditInfoModel
+                {
+                    CreditInfoId = request.CreditInfoDto.CreditInfoId,
+                    EstimatedPurchase = request.CreditInfoDto.EstimatedPurchase,
+                    TimeRequired = request.CreditInfoDto.TimeRequired,
+                    CreditLimit = request.CreditInfoDto.CreditLimit
+                },
+                DocCredit = new DocCreditModel
+                {
+                    CompanyCertificate = request.DocCredit.CompanyCertificate,
+                    CopyOfPP_20 = request.DocCredit.CopyOfPP_20,
+                    CopyOfCoRegis = request.DocCredit.CopyOfCoRegis,
+                    CopyOfIDCard = request.DocCredit.CopyOfIDCard,
+                    CompanyLocationMap = request.DocCredit.CompanyLocationMap,
+                    OtherSpecify = request.DocCredit.OtherSpecify
+                }, // 🔥 เพิ่ม CustomerSign ตรงนี้
+                CustomerSigns = new CustomerSignModel
+                {
+                    CustSignFirstName = request.CustomerSign.CustSignFirstName,
+                    custsignTel = request.CustomerSign.custsignTel,
+                    custsignEmail = request.CustomerSign.custsignEmail,
+                    custsignLine = request.CustomerSign.custsignLine,
+                },
                 AccountCode = new AccountCodeModel
                 {
                     AccountId = request.AccountCode.AccountId,
@@ -72,24 +113,93 @@ public class CustomerService
                     AccountType = request.AccountCode.AccountType,
                     Description = request.AccountCode.Description
                 },
-
-                BusinessType = new BusinessTypeModel
+                SortKey = new SortKeyModel
                 {
-                    busiTypeID = request.BusinessType.busiTypeID,
-                    busiTypeCode = request.BusinessType.busiTypeCode,
-                    busiTypeName = request.BusinessType.busiTypeName,
-                    busiTypeDes = request.BusinessType.busiTypeDes,
-                    RegistrationDate = request.BusinessType.RegistrationDate,
-                    RegisteredCapital = request.BusinessType.RegisteredCapital
+                    sortkeyCode = request.SortKey.sortkeyCode,
+                    sortkeyName = request.SortKey.sortkeyName,
+                    sortkeyDes = request.SortKey.sortkeyDes
                 },
-                // busi
-                accountGroup = new accountGroupModel
+                PaymentMethod = new PaymentMethodModel
                 {
-                    id = request.accountGroup.id,
-                    accGroupCode = request.accountGroup.accGroupCode,
-                    accGroupName = request.accountGroup.accGroupName,
-                    accGroupDes = request.accountGroup.accGroupDes
+                    PaymentMethodCode = request.PaymentMethod.PaymentMethodCode,
+                    PaymentMethodName = request.PaymentMethod.PaymentMethodName,
+                    Description = request.PaymentMethod.Description
+                },
+                TermOfPayment = new TermOfPaymentModel
+                {
+                    TermCode = request.TermOfPayment.TermCode,
+                    TermName = request.TermOfPayment.TermName,
+                    Description = request.TermOfPayment.Description
+                },
+
+                SaleDistrict = new SaleDistrictModel
+                {
+                    DistrictCode = request.SaleDistrict.DistrictCode,
+                    DistrictName = request.SaleDistrict.DistrictName,
+                    Description = request.SaleDistrict.Description
+                },
+
+                SaleGroup = new SaleGroupModel
+                {
+                    GroupCode = request.SaleGroup.GroupCode,
+                    GroupName = request.SaleGroup.GroupName,
+                    Description = request.SaleGroup.Description
+                },
+                CustGroupType = new CustGroupTypeModel
+                {
+                    GroupCode = request.CustGroupType.GroupCode,
+                    GroupName = request.CustGroupType.GroupName,
+                    Description = request.CustGroupType.Description
+                },
+
+                Currency = new CurrencyModel
+                {
+                    CurrencyCode = request.Currency.CurrencyCode,
+                    CurrencyName = request.Currency.CurrencyName,
+                    Symbol = request.Currency.Symbol
+                },
+
+                ExchRateType = new ExchRateTypeModel
+                {
+                    RateTypeCode = request.ExchRateType.RateTypeCode,
+                    RateTypeName = request.ExchRateType.RateTypeName,
+                    Description = request.ExchRateType.Description
+                },
+                CustPricProc = new CustPricProcModel
+                {
+                    PricProcCode = request.CustPricProc.PricProcCode,
+                    PricProcName = request.CustPricProc.PricProcName,
+                    Description = request.CustPricProc.Description
+                },
+
+                PriceList = new PriceListModel
+                {
+                    priceListCode = request.PriceList.priceListCode,
+                    priceListName = request.PriceList.priceListName,
+                    priceListDes = request.PriceList.priceListDes
+                },
+
+                Incoterm = new IncotermModel
+                {
+                    incotermCode = request.Incoterm.incotermCode,
+                    incotermName = request.Incoterm.incotermName,
+                    incotermDes = request.Incoterm.incotermDes
+                },
+                SaleManager = new SaleManagerModel
+                {
+                    SaleGroupCode = request.SaleManager.SaleGroupCode,
+                    SaleGroupName = request.SaleManager.SaleGroupName,
+                    SaleGroupDes = request.SaleManager.SaleGroupDes
+                },
+
+                CustGroupCountry = new CustGroupCountryModel
+                {
+                    CountryCode = request.CustGroupCountry.CountryCode,
+                    CountryName = request.CustGroupCountry.CountryName,
+                    CountryDes = request.CustGroupCountry.CountryDes
                 }
+
+
             };
 
             _context.Customers.Add(customer);

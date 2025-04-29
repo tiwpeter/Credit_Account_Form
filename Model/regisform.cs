@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+// เก็บ model
 namespace ModelTest.Controllers
 {
     public class CustomerModel
@@ -67,7 +68,7 @@ namespace ModelTest.Controllers
         public accountGroupModel accountGroup { get; set; }
 
 
-        //ใช้ ระบุประเภทหรือหมวดหมู่ของบัญชีในระบบขององค์กร เช่น รหัสบัญชีสำหรับสินทรัพย์, หนี้สิน, รายได้, ค่าใช้จ่าย เป็นต้น
+        //ใช้ เรียงลำดับ
         public SortKeyModel SortKey { get; set; }
 
         //กลุ่มที่ใช้สำหรับการจัดการเงินสด
@@ -111,8 +112,6 @@ namespace ModelTest.Controllers
 
         // ข้อมูลประเทศที่กลุ่มลูกค้ารับผิดชอบ
         public CustGroupCountryModel CustGroupCountry { get; set; }
-
-
 
 
 

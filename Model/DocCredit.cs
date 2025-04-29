@@ -22,4 +22,18 @@ public class DocCreditModel
     public bool CompanyLocationMap { get; set; }  // True = มี, False = ไม่มี
     public string OtherSpecify { get; set; }  // ข้อความเพิ่มเติม
 
+
+}
+
+public class DocCreditDto
+{
+    public int? DocCreditId { get; set; }  // อนุญาตให้ null ได้ ตอนสร้างใหม่ยังไม่ต้องมี id
+
+    public bool CompanyCertificate { get; set; } // มีใบรับรองบริษัทไหม
+    public bool CopyOfPP_20 { get; set; } // มีสำเนาทะเบียนภาษีมูลค่าเพิ่มไหม
+    public bool CopyOfCoRegis { get; set; } // มีสำเนาทะเบียนบริษัทไหม
+    public bool CopyOfIDCard { get; set; } // มีสำเนาบัตรประชาชนไหม
+    public bool CompanyLocationMap { get; set; } // มีแผนที่บริษัทไหม
+
+    public string OtherSpecify { get; set; } // หมายเหตุเพิ่มเติม
 }
