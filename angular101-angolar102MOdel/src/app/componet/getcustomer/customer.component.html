@@ -46,15 +46,16 @@
                     <!-- Loop over customers -->
                     <tr *ngFor="let customer of customers; let i = index" class="border-b border-gray-200">
                         <td class="px-4 py-3">{{ i + 1 }}</td> <!-- Index for numbering -->
-                        <td class="px-4 py-3">{{ customer.generalName }}</td> <!-- CaseName -->
-                        <td class="px-4 py-3">{{ customer.addrLine1 }}</td> <!-- Address -->
-                        <td class="px-4 py-3">{{ customer.accGroupName }}</td> <!-- Business Type -->
-                        <td class="px-4 py-3">{{ customer.induTypeName }}</td> <!-- Industry Type -->
+                        <td class="px-4 py-3">{{ customer.general.generalName }}</td>
+                        <td class="px-4 py-3">{{ customer.general.address.province.provinceName }}</td> <!-- Address -->
+                        <td class="px-4 py-3">{{ customer.shopType.shopName }}</td> <!-- Business Type -->
+                        <td class="px-4 py-3">{{ customer.industryType.induTypeName }}</td> <!-- Industry Type -->
                         <td class="px-4 py-3">{{ customer.deliveryName }}</td> <!-- Customer Name -->
-                        <td class="px-4 py-3">{{ customer.payName }}</td> <!-- Payment Method -->
+                        <td class="px-4 py-3">{{ customer.paymentMethod.paymentMethodName }}</td>
+                        <!-- Payment Method -->
                         <td class="px-4 py-3 text-center">
                             <button class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600"
-                                [routerLink]="['/Customer', customer.id]">
+                                [routerLink]="['/Customer', customer.customerId]">
                                 View
                             </button>
                             <button

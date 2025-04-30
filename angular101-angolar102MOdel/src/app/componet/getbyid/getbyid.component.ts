@@ -12,8 +12,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./getbyid.component.css']
 })
 export class GetbyidComponent implements OnInit {
+    customerId: string | null = null;
   customerForm!: FormGroup;
-  customerId: string | null = null;
 
   constructor(
     private apiService: IdseviceService,
@@ -37,7 +37,8 @@ export class GetbyidComponent implements OnInit {
         if (data) {
           console.log('✅ ข้อมูลลูกค้าที่ได้จาก API:', data); // log ข้อมูลที่ได้รับจาก API
 
-          // ถ้ามีข้อมูล ก็จะเรียก this.initForm(data); เพื่อกำหนดค่าฟอร์มให้ตรงกับข้อมูลที่ได้รับจาก API.
+          // / สร้างฟอร์มด้วยข้อมูลที่ได้รับจาก API
+
           this.initForm(data);
         }
 
@@ -57,49 +58,18 @@ export class GetbyidComponent implements OnInit {
     this.router.navigate(['/getCustomer']);  // นำทางไปยังหน้า getCustomer
   }
 
-//เตรียมข้อมูลที่ส่ง
+//กำหนดค่า
 initForm(customer: any) {
   this.customerForm = this.fb.group({
-    // ฟิลด์สำหรับ GeneralModel
-    generals: this.fb.group({
-      // or null
-      generalName: [customer.general?.generalName || ''],
-      generalFax: [customer.general?.generalFax || ''],
-      generalTax: [customer.general?.generalTax || ''],
-      generalTel: [customer.general?.generalTel || ''],
-      generalLine: [customer.general?.generalLine || ''],
-      generalEmail: [customer.general?.generalEmail || ''],
-      generalName1: [customer.general?.generalName1 || ''],
-      generalBranch: [customer.general?.generalBranch || '']
+    accountCode: this.fb.group({
+      accountId: [customer.accountCode?.accountId || ''],
+      accountCode: [customer.accountCode?.accountCode || ''],
+      accountName: [customer.accountCode?.accountName || ''],
+      accountType: [customer.accountCode?.accountType || ''],
+      description: [customer.accountCode?.description || '']
     }),
 
-    // ฟิลด์สำหรับ AddressesModel
-    addresses: this.fb.group({
-      addrType: [customer.addresses?.addrType || ''],
-      addrLine1: [customer.addresses?.addrLine1 || ''],
-      addrLine2: [customer.addresses?.addrLine2 || ''],
-      subDistrict: [customer.addresses?.subDistrict || ''],
-      district: [customer.addresses?.district || ''],
-      province: [customer.addresses?.province || ''],
-      postalCode: [customer.addresses?.postalCode || ''],
-      country: [customer.addresses?.country || ''],
-      createdDate: [customer.addresses?.createdDate || ''],
-      countryId: [customer.addresses?.CountryId || 0],
-      provinceId: [customer.addresses?.ProvinceId || 0]
-    }),
 
-     shipping: this.fb.group({
-      DeliveryName: [customer.shipping?.deliveryName || ''],
-      address1: [customer.shipping?.address1 || ''],
-      address2: [customer.shipping?.address2 || ''],
-      district: [customer.shipping?.district || ''],
-      province: [customer.shipping?.province || ''],
-      postalCode: [customer.shipping?.postalCode || ''],
-      shippingcountry: [customer.shipping?.shippingcountry || ''],
-      mobile: [customer.shipping?.mobile || ''],
-      contact_name: [customer.shipping?.contact_name || ''],
-      freight: [customer.shipping?.freight || '']
-    }),
   });
 }
 

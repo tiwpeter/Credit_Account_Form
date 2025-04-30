@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CustomerService {
 
-  private apiUrl = 'http://localhost:5083/api/customer/customer'; // URL ของ API
+  private apiUrl = 'http://localhost:5259/api/Regisform'; // URL ของ API
 
   
   constructor(private http: HttpClient) {}

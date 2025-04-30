@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms'; // 👈 ต้อง import ตร
 import { Router } from '@angular/router'; // เพิ่ม Router เพื่อใช้ในการนำทาง
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // 👈 เพิ่ม HttpClientModule
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -94,7 +95,28 @@ export class FormComponent {
 
   http = inject(HttpClient);
   router = inject(Router); // Inject Router
+countryList: any[] = [];
 
+  ngOnInit() {
+    this.loadCountries();
+  }
+
+  loadCountries() {
+    this.getCountries().subscribe({
+      next: (res) => {
+        console.log('✅ ได้ข้อมูลจาก API:', res);
+        this.countryList = res;
+      },
+      error: (err) => {
+        console.error('❌ เจอ error ตอนดึงข้อมูล:', err);
+      }
+    });
+  }
+
+
+
+
+  
  OnSave() {
     console.log("Current values:", this.GeneralsObj, this.AddressObj, this.Shipping, this.ShopType, this.IndustryType);
 
@@ -202,6 +224,14 @@ export class FormComponent {
       this.imtemList = result; // ปรับให้ตรงกับข้อมูลที่ได้จาก API
     });
   }
+
+  // ฟังก์ชันดึงข้อมูลประเทศ
+  getCountries(): Observable<any> {
+    return this.http.get<any>('http://localhost:5259/api/countries');
+    // เปลี่ยน 'https://your-api-url.com/api/countries' เป็น url จริงของคุณ
+  }
+
+ 
 
   // คลิกแล้วไปที่หน้ารายละเอียด
   onItemClick(id: number) {
