@@ -91,12 +91,12 @@ loadFormDataFromApi(id: string) {
             addrLine2: general.address?.addrLine2,
             subDistrict: general.address?.subDistrict,
             district: general.address?.district,
-            province: general.address?.province,
+    province: general.address?.province?.provinceName, // ใช้ provinceName แทน object
             postalCode: general.address?.postalCode,
-            country: general.address?.country?.name || '', // ใช้ key ที่ถูกต้องจาก object
+            country: general.address?.country?.countryName , // ใช้ key ที่ถูกต้องจาก object
             createdDate: general.address?.createdDate,
             countryId: general.address?.countryId,
-            provinceId: general.address?.provinceId
+            provinceId: general.address?.province?.provinceId
           }
         });
       }

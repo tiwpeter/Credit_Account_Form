@@ -10,10 +10,10 @@
 <body class="bg-gray-100 min-h-screen">
     <div class="bg-white p-8 rounded-2xl shadow-lg">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">registerForm</h2>
-
+        <!-- ฟอร์มข้อมูลทั่วไป -->
+        <span class="text-xl font-bold text-gray-800 mb-6">ข้อมูลส่วนตัว</span>
         <form [formGroup]="generalForm" (ngSubmit)="onSubmit()">
 
-            <!-- ฟอร์มข้อมูลทั่วไป -->
             <div>
                 <label for="generalName">ชื่อทั่วไป:</label>
                 <input id="generalName" formControlName="generalName" type="text" />
@@ -64,10 +64,8 @@
             </div>
 
             <!-- ฟอร์มที่อยู่ -->
+            <h3 class="text-xl font-bold text-gray-800">ที่อยู่</h3>
             <div formGroupName="address">
-                <h3>ที่อยู่</h3>
-
-
                 <div>
                     <label for="addrLine1">ที่อยู่บรรทัดที่ 1:</label>
                     <input id="addrLine1" formControlName="addrLine1" type="text" />
@@ -123,13 +121,10 @@
                 </div>
             </div>
 
-
-
-
-
-            <!-- ปุ่มยืนยันการส่ง -->
-            <button type="submit" [disabled]="generalForm.invalid">ส่งข้อมูล</button>
         </form>
+
+        <!-- ปุ่มยืนยันการส่ง -->
+        <h3 class="text-xl font-bold text-gray-800">ที่จัดส่ง</h3>
         <!-- Shipping -->
         <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
 
