@@ -14,7 +14,7 @@ export const routes: Routes = [
         component: CustomerComponent,
         title: 'Home Page'
     }   ,{
-        path: 'form',  // รับค่า id จาก URL
+        path: 'form/:id',  // รับค่า id จาก URL
         component: FormComponent,
         title: 'Home Page'
     },

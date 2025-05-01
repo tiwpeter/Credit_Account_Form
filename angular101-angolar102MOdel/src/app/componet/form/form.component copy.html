@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">registerForm</h2>
+        <form id="registerForm" class="space-y-4">
+            <div class="flex gap-2">
+                <!-- Name -->
+                <div class="bg-gray-200 shadow-md w-full">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Email</span>
+                        <input placeholder="อีเมล" />
+                    </div>
+                </div>
+            </div>
+            <!-- General -->
+            <h2 class="text-xl font-bold text-gray-800 mb-6">ข้อมูลประจำตัว</h2>
+
+            <div class="General">
+                <div class="flex gap-2">
+                    <!-- Name -->
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <div class="ml-2 flex flex-col">
+                            <span class="text-gray-500">Name</span>
+                            <input type="text" name="name" [(ngModel)]="GeneralsObj.GeneralName1"
+                                placeholder="กรอกข้อมูล" class="placeholder:text-black bg-transparent outline-none"
+                                required />
+                        </div>
+                    </div>
+
+                    <!-- Tel -->
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <div class="ml-2 flex flex-col">
+                            <span class="text-gray-500">Tel</span>
+                            <input type="text" name="tel" [(ngModel)]="GeneralsObj.GeneralTel" placeholder="0891234567"
+                                class="placeholder:text-black bg-transparent outline-none" required />
+                        </div>
+                    </div>
+
+                    <!-- Fax -->
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <div class="ml-2 flex flex-col">
+                            <span class="text-gray-500">Fax</span>
+                            <input type="text" name="fax" [(ngModel)]="GeneralsObj.GeneralFax" placeholder="026789123"
+                                class="placeholder:text-black bg-transparent outline-none" required />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Email</span>
+                        <input type="email" name="email" [(ngModel)]="GeneralsObj.GeneralEmail"
+                            placeholder="example@email.com" class="placeholder:text-black bg-transparent outline-none"
+                            required />
+                    </div>
+                </div>
+
+                <!-- Line -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Line</span>
+                        <input type="text" name="line" [(ngModel)]="GeneralsObj.GeneralLine" placeholder="line_id"
+                            class="placeholder:text-black bg-transparent outline-none" required />
+                    </div>
+                </div>
+
+                <!-- Tax -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Tax</span>
+                        <input type="text" name="tax" [(ngModel)]="GeneralsObj.GeneralTax" placeholder="123456789"
+                            class="placeholder:text-black bg-transparent outline-none" required />
+                    </div>
+                </div>
+
+                <!-- Branch -->
+                <div class="bg-gray-200 shadow-md w-full mt-4">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Branch</span>
+                        <input type="text" name="branch" [(ngModel)]="GeneralsObj.GeneralBranch"
+                            placeholder="Main Branch" class="placeholder:text-black bg-transparent outline-none"
+                            required />
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">ที่อยู่</h2>
+            <!--Addresses-->
+            <div class="Addresses">
+                <div class="flex gap-2">
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="group-users.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">ประเภทของที่อยู่</span>
+                            <input type="text" name="AddrType" class="placeholder:text-black"
+                                [(ngModel)]="AddressObj.AddrType" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">บรรทัดแรกของที่อยู่</span>
+                            <input type="text" name="AddrLine1" placeholder="กรอกข้อมูล" class="placeholder:text-black"
+                                [(ngModel)]="AddressObj.AddrLine1" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">บรรทัดที่สองของที่อยู่</span>
+                            <input type="text" name="AddrLine2" placeholder="กรอกข้อมูล" class="placeholder:text-black"
+                                [(ngModel)]="AddressObj.AddrLine2" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New fields -->
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">SubDistrict</span>
+                            <input type="text" name="SubDistrict" placeholder="subDistrict"
+                                class="placeholder:text-black" [(ngModel)]="AddressObj.SubDistrict" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">District</span>
+                            <input type="text" name="District" placeholder="district" class="placeholder:text-black"
+                                [(ngModel)]="AddressObj.District" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Province</span>
+                            <input type="text" name="Province" placeholder="province" class="placeholder:text-black"
+                                [(ngModel)]="AddressObj.Province" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">PostalCode</span>
+                            <input type="text" name="PostalCode" placeholder="postalCode" class="placeholder:text-black"
+                                [(ngModel)]="AddressObj.PostalCode" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Country</span>
+                            <select class="placeholder:text-black" [(ngModel)]="AddressObj.CountryId" required>
+                                <option *ngFor="let country of countryList" [value]="country.id">
+                                    {{ country.countryName }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6 mt-8">ข้อมูลการจัดส่ง</h2>
+            <!-- Shipping -->
+            <div class="Shipping">
+                <div class="flex gap-2">
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="delivery-icon.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">ชื่อผู้รับ</span>
+                            <input type="text" name="DeliveryName" class="placeholder:text-black"
+                                [(ngModel)]="Shipping.DeliveryName" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ที่อยู่บรรทัดแรก</span>
+                            <input type="text" name="Address1" class="placeholder:text-black"
+                                [(ngModel)]="Shipping.Address1" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ที่อยู่บรรทัดที่สอง</span>
+                            <input type="text" name="Address2" class="placeholder:text-black"
+                                [(ngModel)]="Shipping.Address2" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">District</span>
+                            <input type="text" name="District" class="placeholder:text-black"
+                                [(ngModel)]="Shipping.District" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Province</span>
+                            <input type="text" name="Province" class="placeholder:text-black"
+                                [(ngModel)]="Shipping.Province" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">PostalCode</span>
+                            <input type="text" name="PostalCode" class="placeholder:text-black"
+                                [(ngModel)]="Shipping.PostalCode" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">Country</span>
+                            <input type="text" name="Country" class="placeholder:text-black"
+                                [(ngModel)]="Shipping.Country" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6 mt-8">ประเภทร้านค้า</h2>
+            <!-- ร้านค้า -->
+            <div class="ShopType">
+                <div class="flex gap-2">
+                    <!-- shopCode -->
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="shop-icon.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">รหัสร้าน</span>
+                            <input type="text" name="shopCode" class="placeholder:text-black"
+                                [(ngModel)]="ShopType.shopCode" required>
+                        </div>
+                    </div>
+
+                    <!-- shopName -->
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ชื่อร้าน</span>
+                            <input type="text" name="shopName" class="placeholder:text-black"
+                                [(ngModel)]="ShopType.shopName" required>
+                        </div>
+                    </div>
+
+                    <!-- accGroupName -->
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">กลุ่มบัญชี</span>
+                            <input type="text" name="accGroupName" class="placeholder:text-black"
+                                [(ngModel)]="ShopType.accGroupName" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <!-- shopDes -->
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex bg-gray-200 shadow-md w-full">
+                            <div class="flex flex-col mr-2 ml-2 w-full">
+                                <span class="text-gray-500">รายละเอียดร้าน</span>
+                                <textarea name="shopDes" class="placeholder:text-black p-2 w-full"
+                                    [(ngModel)]="ShopType.shopDes" required rows="4"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6 mt-8">อุตสาหกรรม</h2>
+            <!-- IndustryType -->
+            <div class="IndustryType">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="industry-icon.png" alt=""> <!-- เปลี่ยนไอคอนเป็นของอุตสาหกรรม -->
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">รหัสประเภทอุตสาหกรรม</span>
+                            <input type="text" name="InduTypeCode" class="placeholder:text-black"
+                                [(ngModel)]="IndustryType.InduTypeCode" required>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ชื่อประเภทอุตสาหกรรม</span>
+                            <input type="text" name="InduTypeName" class="placeholder:text-black"
+                                [(ngModel)]="IndustryType.InduTypeName" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-2 shadow-md">
+                    <!-- รายละเอียดประเภทอุตสาหกรรม -->
+                    <div class="flex bg-gray-200 w-full">
+                        <div class="flex flex-col mr-2 ml-2 w-full">
+                            <span class="text-gray-500">รายละเอียดประเภทอุตสาหกรรม</span>
+                            <textarea name="InduTypeDes" class="placeholder:text-black p-2 w-full"
+                                [(ngModel)]="IndustryType.InduTypeDes" required rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">บริษัท</h2>
+            <!--บริษัท -->
+            <div class="Company">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="group-users.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">รหัสบริษัท</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ชื่อบริษัท</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ที่อยู่บริษัท</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">องค์กรการขาย</h2>
+            <!--องค์กรการขาย -->
+            <div class="SaleOrg">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="group-users.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">รหัสหน่วยงานขาย</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ชื่อหน่วยงานขาย</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="flex gap-2 mt-2 shadow-md">
+                    <!-- รายละเอียดประเภทอุตสาหกรรม -->
+                    <div class="flex bg-gray-200 w-full">
+                        <div class="flex flex-col mr-2 ml-2 w-full">
+                            <span
+                                class="text-gray-500">ใช้สำหรับอธิบายหรือให้ข้อมูลเพิ่มเติมเกี่ยวกับองค์กรหรือหน่วยงานขาย</span>
+                            <textarea name="InduTypeDes" class="placeholder:text-black p-2 w-full" required
+                                rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">ประเภทธรุกิจ</h2>
+            <!--ประเภทธรุกิจ -->
+            <div class="BusinessType">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2">
+                            <div class="h-full flex items-center justify-center">
+                                <img src="group-users.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">รหัสธุรกิจ</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ชื่อหน่วยงานขาย</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="flex gap-2 mt-2">
+
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ทุนจดทะเบียน</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="mr-2 ml-2"> </div>
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">วันที่ที่ธุรกิจถูกจดทะเบียน</span>
+                            <input type="date" id="registrationDate" name="registrationDate" class="" required>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="flex gap-2 mt-2 shadow-md">
+                    <!-- รายละเอียดประเภทอุตสาหกรรม -->
+                    <div class="flex bg-gray-200 w-full">
+                        <div class="flex flex-col mr-2 ml-2 w-full">
+                            <span class="text-gray-500">คำอธิบายเกี่ยวกับประเภทธุรกิจ</span>
+                            <textarea name="InduTypeDes" class="placeholder:text-black p-2 w-full" required
+                                rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">ข้อมูลเครดิต</h2>
+            <!--ข้อมูลเครดิต -->
+            <div class="CreditInfo">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+
+
+                        <div class="flex flex-col">
+                            <span
+                                class="text-gray-500">ประมาณการจำนวนเงินที่ลูกค้าคาดว่าจะใช้จ่ายในการซื้อสินค้าหรือใช้บริการ</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">วงเงินเครดิตที่ลูกค้าสามารถใช้ได้</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ลูกค้าต้องการเวลาประมาณ กี่เดือนในการดำเนินการชำระเงิน
+                            </span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">เอกสารการอนุมัติขอสินเชื่อ</h2>
+            <!--ข้อมูลเกี่ยวกับการอนุมัติการขอสินเชื่อ -->
+            <div class="DocumentCredit">
+                <form class="space-y-4">
+
+                    <!-- Company Certificate -->
+                    <div>
+                        <label class="block text-gray-700 mb-1">เอกสารใบรับรองบริษัท</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="companyCert" value="1" class="mr-2" />
+                                <span>มี</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="companyCert" value="0" class="mr-2" />
+                                <span>ไม่มี</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Copy of PP20 -->
+                    <div>
+                        <label class="block text-gray-700 mb-1">จดทะเบียนภาษีหรือไม่</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="pp20" value="1" class="mr-2" />
+                                <span>หากมีสำเนาการจดทะเบียนบริษัท</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="pp20" value="0" class="mr-2" />
+                                <span>หากไม่มี</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Copy of Company Registration -->
+                    <div>
+                        <label class="block text-gray-700 mb-1">มีสำเนาการจดทะเบียนบริษัทหรือไม่</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="coRegis" value="1" class="mr-2" />
+                                <span>มี</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="coRegis" value="0" class="mr-2" />
+                                <span>ไม่มี</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Copy of ID Card -->
+                    <div>
+                        <label class="block text-gray-700 mb-1">มีสำเนาบัตรประชาชนหรือไม่</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="idCard" value="1" class="mr-2" />
+                                <span>หากมีสำเนาบัตรประชาชน</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="idCard" value="0" class="mr-2" />
+                                <span>หากไม่มี</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Company Location Map -->
+                    <div>
+                        <label class="block text-gray-700 mb-1">แผนที่ตำแหน่งที่ตั้งของบริษัท</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="locationMap" value="1" class="mr-2" />
+                                <span>หากมีแผนที่ตำแหน่งที่ตั้งของบริษัท</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="locationMap" value="0" class="mr-2" />
+                                <span>หากไม่มี</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Other -->
+                    <div>
+                        <label for="other"
+                            class="block text-gray-700 mb-1">คำอธิบายเพิ่มเติมเกี่ยวกับเอกสารเพิ่มเติม</label>
+                        <textarea id="other" rows="4"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"></textarea>
+                    </div>
+
+
+                </form>
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">ข้อมูลผู้ติดต่อหลัก</h2>
+            <!--ข้อมูลผู้ติดต่อหลัก -->
+            <div class="CustomerSigns">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">ชื่อจริง</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">นามสกุล</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="flex gap-2 mt-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">เบอร์โทรศัพท์
+                            </span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">อีเมล
+                            </span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">LINE ID
+                            </span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">งบดุล</h2>
+            <!--งบดุล -->
+            <div class="AccountCode">
+                <div class="flex gap-2">
+                    <div class="flex bg-gray-200 shadow-md w-full">
+
+
+                        <div class="flex flex-col">
+                            <span class="text-gray-500">เงินสดในมือ</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">รายได้จากการขาย</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+                    <div class="flex bg-gray-200 shadow-md w-full">
+                        <div class="flex flex-col mr-2 ml-2">
+                            <span class="text-gray-500">ค่าใช้จ่าย</span>
+                            <input type="text" placeholder="กรอกข้อมูล" class="placeholder:text-black">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6">จัดเรียงข้อมูลตาม</h2>
+            <!-- SortKey  -->
+            <div class="SortKey ">
+                <!-- SortKey Code -->
+                <div class="flex gap-2">
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <label for="sortkeyCode" class="block text-gray-700 mb-1">Sort Key Code</label>
+                        <select id="sortkeyCode" name="sortkeyCode"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <option value="">-- เลือกรหัส Sort Key --</option>
+                            <option value="SK001">SK001</option>
+                            <option value="SK002">SK002</option>
+                            <option value="SK003">SK003</option>
+                        </select>
+                    </div>
+
+                    <!-- SortKey Name -->
+                    <div class="bg-gray-200 shadow-md w-full">
+                        <label for="sortkeyName" class="block text-gray-700 mb-1">Sort Key Name</label>
+                        <select id="sortkeyName" name="sortkeyName"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <option value="">-- เลือกชื่อ Sort Key --</option>
+                            <option value="เรียงตามวันที่">เรียงตามวันที่</option>
+                            <option value="เรียงตามชื่อ">เรียงตามชื่อ</option>
+                            <option value="เรียงตามประเภท">เรียงตามประเภท</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- SortKey Description -->
+                <div>
+                    <label for="sortkeyDes" class="block text-gray-700 mb-1">คำอธิบายเพิ่มเติม</label>
+                    <textarea id="other" rows="4"
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"></textarea>
+
+                </div>
+
+            </div>
+
+            <div class="container mx-auto ">
+
+                <!-- กลุ่มเงินสด -->
+                <h2 class="text-xl font-bold text-gray-800 mb-6">กลุ่มเงินสด</h2>
+                <div class="AccountCode">
+                    <div class="flex gap-2">
+                        <!-- เงินสดในมือ -->
+                        <div class="flex bg-gray-200 shadow-md w-full">
+                            <div class="flex flex-col w-full p-2">
+                                <span class="text-gray-500 mb-1">เงินสดในมือ</span>
+                                <input type="text" placeholder="กรุณากรอกข้อมูล"
+                                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- รายได้จากการขาย -->
+                        <div class="flex bg-gray-200 shadow-md w-full">
+                            <div class="flex flex-col w-full p-2">
+                                <span class="text-gray-500 mb-1">รายได้จากการขาย</span>
+                                <input type="text" placeholder="กรุณากรอกข้อมูล"
+                                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-6">
+
+                <!-- การจัดกลุ่มเงินสด -->
+                <h2 class="text-xl font-bold text-gray-800 mb-6">การจัดกลุ่มเงินสด</h2>
+                <div class="CashGroup">
+                    <div class="flex gap-2">
+                        <!-- รหัส -->
+                        <div class="flex bg-gray-200 shadow-md w-full">
+                            <div class="flex flex-col w-full p-2">
+                                <span class="text-gray-500 mb-1">รหัส</span>
+                                <input type="text" placeholder="กรุณากรอกรหัส"
+                                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- ประเภทเงินสด -->
+                        <div class="flex bg-gray-200 shadow-md w-full">
+                            <div class="flex flex-col w-full p-2">
+                                <span class="text-gray-500 mb-1">ประเภทเงินสด</span>
+                                <input type="text" placeholder="กรุณากรอกประเภทเงินสด"
+                                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--PaymentMethod-->
+            <div class="mx-auto mt-12 bg-white rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">เลือกวิธีการชำระเงิน</h2>
+                <form (ngSubmit)="onSubmit()" class="space-y-4">
+                    <!-- เลือก Payment Method -->
+                    <div>
+                        <label for="payMethod" class="block text-gray-700">เลือกวิธีการชำระเงิน</label>
+                        <select id="payMethod" [(ngModel)]="selectedPayMethod" name="payMethod"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                            required>
+                            <option value="">เลือกวิธีการชำระเงิน</option>
+                            <option value="CASH">เงินสด</option>
+                            <option value="CARD">บัตรเครดิต</option>
+                            <option value="TRANSFER">โอนผ่านธนาคาร</option>
+                        </select>
+                    </div>
+
+                    <!--TermOfPay-->
+                    <form class="space-y-4">
+
+                        <!-- Payment Term Dropdown -->
+                        <div class="mb-4">
+                            <label for="paymentTerm" class="block text-gray-700">เลือกเงื่อนไขการชำระเงิน</label>
+                            <select id="paymentTerm"
+                                class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                                <option value="" disabled selected>กรุณาเลือกเงื่อนไขการชำระเงิน</option>
+                                <option value="NET30">ชำระภายใน 30 วัน</option>
+                                <option value="NET60">ชำระภายใน 60 วัน</option>
+                                <option value="ทันที">ชำระเงินทันที</option>
+                            </select>
+                        </div>
+
+                        <!-- Payment Term Description -->
+                        <div id="paymentTermDescription" class="mt-2 text-gray-600">
+                            <p>กรุณาเลือกเงื่อนไขการชำระเงิน</p>
+                        </div>
+
+
+                    </form>
+
+
+                    <!-- คำอธิบายเพิ่มเติม -->
+                    <div id="paymentDescription" class="mt-4">
+                        <label for="payDesc" class="block text-gray-700">คำอธิบายเพิ่มเติม</label>
+                        <input type="text" id="payDesc" [value]="paymentDescription"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                            disabled />
+                    </div>
+
+
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+            <!--SaleGroup-->
+            <div class="container mx-auto ">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">กลุ่มการขาย</h2>
+                <form class="space-y-4">
+                    <!-- รหัสกลุ่มการขาย -->
+                    <div class="flex flex-col">
+                        <label for="saleGroCode" class="text-gray-700 mb-1">รหัสกลุ่มการขาย</label>
+                        <input type="text" id="saleGroCode" placeholder="กรอกรหัสกลุ่มการขาย"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    </div>
+
+                    <!-- ชื่อกลุ่มการขาย -->
+                    <div class="flex flex-col">
+                        <label for="saleGroName" class="text-gray-700 mb-1">ชื่อกลุ่มการขาย</label>
+                        <input type="text" id="saleGroName" placeholder="กรอกชื่อกลุ่มการขาย"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    </div>
+
+                    <!-- SaleDistrict Form -->
+                    <form>
+                        <!-- SaleDistrict Select -->
+                        <div class="mb-4">
+                            <label for="saleDistrict" class="block text-gray-700">เขตการขาย</label>
+                            <select id="saleDistrict" name="saleDistrict"
+                                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                                <option value="">เลือกเขตการขาย</option>
+                                <option *ngFor="let district of saleDistricts" [value]="district.id">{{
+                                    district.saledisName
+                                    }}</option>
+                            </select>
+                        </div>
+
+                        <!-- Selected District Details -->
+                        <div *ngIf="selectedDistrict" class="mt-4 p-4 bg-gray-50 border border-gray-300 rounded-md">
+                            <h3 class="text-lg font-semibold text-gray-800">รายละเอียดเขตการขาย</h3>
+                            <p><strong>รหัสเขต:</strong> {{ selectedDistrict.saledisCode }}</p>
+                            <p><strong>ชื่อเขต:</strong> {{ selectedDistrict.saledisName }}</p>
+                            <p><strong>คำอธิบาย:</strong> {{ selectedDistrict.saledisDes }}</p>
+                        </div>
+                    </form>
+                </form>
+            </div>
+
+
+
+
+            <!--CustGroupType-->
+            <div class="container mx-auto ">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">ประเภทของกลุ่มลูกค้า</h2>
+                <form class="space-y-4">
+                    <!-- รหัสประเภทกลุ่มลูกค้า -->
+                    <div class="flex flex-col">
+                        <label for="custgroTypeCode" class="text-gray-700 mb-1">รหัสประเภทกลุ่มลูกค้า</label>
+                        <input type="text" id="custgroTypeCode" placeholder="กรอกรหัสประเภทกลุ่มลูกค้า"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    </div>
+
+                    <!-- ชื่อประเภทกลุ่มลูกค้า -->
+                    <div class="flex flex-col">
+                        <label for="custgroTypeName" class="text-gray-700 mb-1">เลือกประเภทกลุ่มลูกค้า</label>
+                        <select id="custgroTypeName"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                            <option value="general_customers">ลูกค้าทั่วไป (General Customers)</option>
+                            <option value="bulk_buyers">ลูกค้าผู้ซื้อจำนวนมาก (Bulk Buyers)</option>
+                            <option value="regular_customers">ลูกค้าคงที่ (Regular Customers)</option>
+                            <option value="business_customers">ลูกค้าธุรกิจ (Business Customers)</option>
+                            <option value="vip_customers">ลูกค้าพิเศษ (VIP Customers)</option>
+                        </select>
+                    </div>
+
+
+                    <!-- คำอธิบายประเภทกลุ่มลูกค้า -->
+                    <div class="flex flex-col">
+                        <label for="custgroTypeDes" class="text-gray-700 mb-1">คำอธิบายประเภทกลุ่มลูกค้า</label>
+                        <input type="text" id="custgroTypeDes" placeholder="กรอกคำอธิบายประเภทกลุ่มลูกค้า"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    </div>
+
+
+                </form>
+            </div>
+
+
+
+            <!--Currency-->
+            <div class="container mx-auto ">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">สกุลเงิน</h2>
+                <form class="space-y-4">
+                    <!-- รหัสสกุลเงิน -->
+                    <div class="flex flex-col">
+                        <label for="currencyCode" class="text-gray-700 mb-1">รหัสสกุลเงิน</label>
+                        <input type="text" id="currencyCode" placeholder="เช่น USD THB"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    </div>
+
+                    <!-- ชื่อสกุลเงิน -->
+                    <div class="flex flex-col">
+                        <label for="currencyName" class="text-gray-700 mb-1">ชื่อสกุลเงิน</label>
+                        <input type="text" id="currencyName" placeholder="เช่น ดอลลาร์ บาท"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    </div>
+
+                    <!-- คำอธิบายสกุลเงิน -->
+                    <div class="flex flex-col">
+                        <label for="currencyDes" class="text-gray-700 mb-1">คำอธิบายสกุลเงิน</label>
+                        <input type="text" id="currencyDes" placeholder="กรอกคำอธิบายสกุลเงิน"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    </div>
+
+                </form>
+            </div>
+
+
+            <!--ExchRateType-->
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">อัตราแลกเปลี่ยน</h2>
+            <div class="ExchRateType">
+                <div class="flex flex-col">
+                    <label for="erTypeCode" class="text-gray-700 mb-1">รหัสประเภทอัตราแลกเปลี่ยน</label>
+                    <input type="text" id="erTypeCode" placeholder="กรอกรหัสประเภทอัตราแลกเปลี่ยน" value="USD_EUR"
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col mt-4">
+                    <label for="erTypeName" class="text-gray-700 mb-1">ชื่อประเภทอัตราแลกเปลี่ยน</label>
+                    <input type="text" id="erTypeName" placeholder="กรอกชื่อประเภทอัตราแลกเปลี่ยน" value="USD to EUR"
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col mt-4">
+                    <label for="erTypeDes" class="text-gray-700 mb-1">คำอธิบายประเภทอัตราแลกเปลี่ยน</label>
+                    <textarea id="erTypeDes" placeholder="กรอกคำอธิบายประเภทอัตราแลกเปลี่ยน"
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        ใช้สำหรับการแปลงจากดอลลาร์สหรัฐ (USD) เป็นยูโร (EUR) ในการทำธุรกรรมระหว่างประเทศ
+        </textarea>
+                </div>
+            </div>
+
+
+
+            <!--custPricProc -->
+            <!--รหัสสินค้า ราราคา priceList ?? **-->
+
+            <!--Incoterms-->
+            <!--ข้อกำหนดทางการค้าระหว่างประเทศ-->
+            <!--ชื่อเต็มของ Incoterm เช่น  ผู้รับผิดชอบค่าใช้จ่ายต่าง-->
+            <!--คำอธิบายเกี่ยวกับขอบเขตความรับผิดชอบของ Incoterm นั้น เช่น ใครจ่ายค่าขนส่ง ใครรับผิดชอบเมื่อของเสียหาย ฯลฯ-->
+            <!--เขตความรับผิดชอบของ-->
+            <div class="Incoterms">
+                <div class="">
+                    <h1 class="text-2xl font-bold mb-4">ข้อกำหนดการค้าระหว่างประเทศ</h1>
+
+                    <form (ngSubmit)="onSubmit()" #incotermForm="ngForm">
+                        <!-- incotermCode -->
+                        <div class="mb-4">
+                            <label for="incotermCode" class="block text-gray-700 font-medium mb-2">รหัส การค้า</label>
+                            <input id="incotermCode" type="text" name="incotermCode" required
+                                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <!-- incotermName -->
+                        <div class="mb-4">
+                            <label for="incotermName"
+                                class="block text-gray-700 font-medium mb-2">ผู้รับผิดชอบค่าใช้จ่ายต่าง</label>
+                            <input id="incotermName" type="text" name="incotermName" required
+                                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <!-- incotermDes -->
+                        <div class="mb-6">
+                            <label for="incotermDes"
+                                class="block text-gray-700 font-medium mb-2">คำอธิบายเกี่ยวกับขอบเขตข้อกำหนดการค้าระหว่างประเทศ</label>
+                            <textarea id="incotermDes" name="incotermDes" rows="4" required
+                                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+
+            <!--SalePerson  เก็บข้อมูลเกี่ยวกับพนักงานขาย -->
+
+
+            <!--SaleMaster ใช้เก็บข้อมูลเกี่ยวกับ กลุ่มพนักงานขาย (Sales Group) หรือ หน่วยงานฝ่ายขาย -->
+            <!--ชื่อกลุ่มฝ่ายขาย เช่น "ทีมขายภาคเหนือ", -->
+            <!--	คำอธิบายเพิ่มเติมเกี่ยวกับกลุ่มนั้น เช่น ความรับผิดชอบ, พื้นที่ดูแล, หรือผลิตภัณฑ์ที่ดูแล-->
+            <!--SG02	ฝ่ายขายต่างประเทศ	รับผิดชอบลูกค้าต่างประเทศ-->
+
+
+            <!--CustGroupContry  จัดกลุ่มลูกค้าตามประเทศ -->
+            <!--TH-G1	กลุ่มลูกค้าภายในประเทศไทย	ลูกค้าประเภทค้าส่งในไทย-->
+            <div class="mt-10  bg-white shadow-lg rounded-xl">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">กลุ่มลูกค้าแต่ละประเทศ</h2>
+
+                <form>
+                    <!-- custgroContryCode -->
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">รหัสกลุ่มลูกค้า</label>
+                        <input type="text" name="custgroContryCode" required
+                            class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <!-- custgroContryName -->
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">ชื่อกลุ่มลูกค้า</label>
+                        <input type="text" name="custgroContryName"
+                            class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <!-- custgroContryDes -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">รายละเอียดกลุ่มลูกค้า</label>
+                        <textarea name="custgroContryDes" rows="3"
+                            class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                </form>
+            </div>
+
+
+
+
+            <!-- Submit -->
+            <div class="text-center">
+                <button (click)="OnSave()"
+                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+            </div>
+
+            <div>
+                <span>back to list</span>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+</html>

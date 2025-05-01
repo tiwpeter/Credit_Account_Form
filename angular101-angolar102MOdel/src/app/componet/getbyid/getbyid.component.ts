@@ -61,6 +61,39 @@ export class GetbyidComponent implements OnInit {
 //กำหนดค่า
 initForm(customer: any) {
   this.customerForm = this.fb.group({
+    customerId: [customer.customerId || ''],
+
+    general: this.fb.group({
+      generalId: [customer.general?.generalId || ''],
+      generalName: [customer.general?.generalName || ''],
+      addressId: [customer.general?.addressId || ''],
+      address: this.fb.group({
+        addressId: [customer.general?.address?.addressId || ''],
+        customerName: [customer.general?.address?.customerName || ''],
+        country: this.fb.group({
+          countryId: [customer.general?.address?.country?.countryId || ''],
+          countryName: [customer.general?.address?.country?.countryName || '']
+        }),
+        province: this.fb.group({
+          provinceId: [customer.general?.address?.province?.provinceId || ''],
+          provinceName: [customer.general?.address?.province?.provinceName || '']
+        })
+      })
+    }),
+
+    shipping: this.fb.group({
+      shippingId: [customer.shipping?.shippingId || ''],
+      subDistrict: [customer.shipping?.subDistrict || ''],
+      province: this.fb.group({
+        provinceId: [customer.shipping?.province?.provinceId || ''],
+        provinceName: [customer.shipping?.province?.provinceName || '']
+      }),
+      country: this.fb.group({
+        countryId: [customer.shipping?.country?.countryId || ''],
+        countryName: [customer.shipping?.country?.countryName || '']
+      })
+    }),
+
     accountCode: this.fb.group({
       accountId: [customer.accountCode?.accountId || ''],
       accountCode: [customer.accountCode?.accountCode || ''],
@@ -69,7 +102,16 @@ initForm(customer: any) {
       description: [customer.accountCode?.description || '']
     }),
 
+    businessType: this.fb.group({
+      busiTypeID: [customer.businessType?.busiTypeID || ''],
+      busiTypeName: [customer.businessType?.busiTypeName || '']
+    }),
 
+    company: this.fb.group({
+      company_id: [customer.company?.company_id || ''],
+      companyName: [customer.company?.companyName || ''],
+      companyAddr: [customer.company?.companyAddr || '']
+    })
   });
 }
 
