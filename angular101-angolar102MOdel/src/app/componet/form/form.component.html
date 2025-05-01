@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">registerForm</h2>
+        <!-- ฟอร์มข้อมูลทั่วไป -->
+        <span class="text-xl font-bold text-gray-800 mb-6">ข้อมูลส่วนตัว</span>
+        <form [formGroup]="generalForm" (ngSubmit)="onSubmit()">
+
+            <div>
+                <label for="generalName">ชื่อทั่วไป:</label>
+                <input id="generalName" formControlName="generalName" type="text" />
+                <div *ngIf="generalForm.get('generalName')?.invalid && generalForm.get('generalName')?.touched">
+                    <small class="text-red-500">กรุณากรอกชื่อทั่วไป</small>
+                </div>
+            </div>
+
+            <div>
+                <label for="generalName1">ชื่อทั่วไป 1:</label>
+                <input id="generalName1" formControlName="generalName1" type="text" />
+            </div>
+
+            <div>
+                <label for="generalTel">เบอร์โทรศัพท์:</label>
+                <input id="generalTel" formControlName="generalTel" type="text" />
+                <div *ngIf="generalForm.get('generalTel')?.invalid && generalForm.get('generalTel')?.touched">
+                    <small class="text-red-500">กรุณากรอกเบอร์โทรศัพท์</small>
+                </div>
+            </div>
+
+            <div>
+                <label for="generalFax">แฟกซ์:</label>
+                <input id="generalFax" formControlName="generalFax" type="text" />
+            </div>
+
+            <div>
+                <label for="generalEmail">อีเมล:</label>
+                <input id="generalEmail" formControlName="generalEmail" type="email" />
+                <div *ngIf="generalForm.get('generalEmail')?.invalid && generalForm.get('generalEmail')?.touched">
+                    <small class="text-red-500">กรุณากรอกอีเมลที่ถูกต้อง</small>
+                </div>
+            </div>
+
+            <div>
+                <label for="generalLine">ไอดี Line:</label>
+                <input id="generalLine" formControlName="generalLine" type="text" />
+            </div>
+
+            <div>
+                <label for="generalTax">หมายเลขภาษี:</label>
+                <input id="generalTax" formControlName="generalTax" type="text" />
+            </div>
+
+            <div>
+                <label for="generalBranch">สาขา:</label>
+                <input id="generalBranch" formControlName="generalBranch" type="text" />
+            </div>
+
+            <!-- ฟอร์มที่อยู่ -->
+            <h3 class="text-xl font-bold text-gray-800">ที่อยู่</h3>
+            <div formGroupName="address">
+                <div>
+                    <label for="addrLine1">ที่อยู่บรรทัดที่ 1:</label>
+                    <input id="addrLine1" formControlName="addrLine1" type="text" />
+                    <div
+                        *ngIf="generalForm.get('address.addrLine1')?.invalid && generalForm.get('address.addrLine1')?.touched">
+                        <small class="text-red-500">กรุณากรอกที่อยู่บรรทัดที่ 1</small>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="addrLine2">ที่อยู่บรรทัดที่ 2:</label>
+                    <input id="addrLine2" formControlName="addrLine2" type="text" />
+                </div>
+
+                <div>
+                    <label for="subDistrict">ตำบล/แขวง:</label>
+                    <input id="subDistrict" formControlName="subDistrict" type="text" />
+                </div>
+
+                <div>
+                    <label for="district">อำเภอ/เขต:</label>
+                    <input id="district" formControlName="district" type="text" />
+                </div>
+
+                <div>
+                    <label for="province">จังหวัด:</label>
+                    <input id="province" formControlName="province" type="text" />
+                </div>
+
+                <div>
+                    <label for="postalCode">รหัสไปรษณีย์:</label>
+                    <input id="postalCode" formControlName="postalCode" type="text" />
+                </div>
+
+                <div>
+                    <label for="country">ประเทศ:</label>
+                    <input id="country" formControlName="country" type="text" />
+                </div>
+
+                <div>
+                    <label for="createdDate">วันที่สร้าง:</label>
+                    <input id="createdDate" formControlName="createdDate" type="text" />
+                </div>
+
+                <div>
+                    <label for="countryId">รหัสประเทศ:</label>
+                    <input id="countryId" formControlName="countryId" type="number" />
+                </div>
+
+                <div>
+                    <label for="provinceId">รหัสจังหวัด:</label>
+                    <input id="provinceId" formControlName="provinceId" type="number" />
+                </div>
+            </div>
+
+        </form>
+
+        <!-- ปุ่มยืนยันการส่ง -->
+        <h3 class="text-xl font-bold text-gray-800">ที่จัดส่ง</h3>
+        <!-- Shipping -->
+        <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
+
+            <div>
+                <label for="DeliveryName">ชื่อผู้รับ:</label>
+                <input id="DeliveryName" formControlName="DeliveryName" type="text" />
+            </div>
+
+            <div>
+                <label for="address1">ที่อยู่:</label>
+                <input id="address1" formControlName="address1" type="text" />
+            </div>
+
+            <div>
+                <label for="district">อำเภอ/เขต:</label>
+                <input id="district" formControlName="district" type="text" />
+            </div>
+
+            <div>
+                <label for="province">จังหวัด:</label>
+                <input id="province" formControlName="province" type="text" />
+            </div>
+
+            <div>
+                <label for="postalCode">รหัสไปรษณีย์:</label>
+                <input id="postalCode" formControlName="postalCode" type="text" />
+            </div>
+
+            <div>
+                <label for="shippingcountry">ประเทศ:</label>
+                <input id="shippingcountry" formControlName="shippingcountry" type="text" />
+            </div>
+
+            <div>
+                <label for="mobile">เบอร์โทรศัพท์:</label>
+                <input id="mobile" formControlName="mobile" type="text" />
+            </div>
+
+            <div>
+                <label for="contact_name">ชื่อผู้ติดต่อ:</label>
+                <input id="contact_name" formControlName="contact_name" type="text" />
+            </div>
+
+            <div>
+                <label for="freight">ค่าขนส่ง:</label>
+                <input id="freight" formControlName="freight" type="text" />
+            </div>
+
+        </form>
+
+        <button type="submit" (click)="onSubmit()">Submit</button>
+
+    </div>
+
+</body>
+
+</html>

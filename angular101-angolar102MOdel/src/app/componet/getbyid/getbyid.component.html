@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view</title>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg">
+        <div *ngIf="customerForm && customerForm.value; else loading">
+            <h2>ข้อมูลลูกค้า</h2>
+
+
+
+            <h3>ข้อมูลบัญชี</h3>
+            <div>
+                <p><strong>รหัสบัญชี:</strong> {{ customerForm.value.accountCode.accountCode }}</p>
+                <p><strong>ชื่อบัญชี:</strong> {{ customerForm.value.accountCode.accountName }}</p>
+                <p><strong>ประเภทบัญชี:</strong> {{ customerForm.value.accountCode.accountType }}</p>
+            </div>
+
+            <button (click)="downloadCustomerReport()">ดาวน์โหลดข้อมูล</button>
+            <button (click)="goBackToGetCustomer()">ย้อนกลับ</button>
+        </div>
+
+        <ng-template #loading>
+            <p>⏳ กำลังโหลดข้อมูลลูกค้า...</p>
+        </ng-template>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Claim & Complaint List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex justify-center p-6">
+    <div class="w-full max-w-6xl bg-white shadow-lg rounded-lg p-6">
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">แบบฟรอมแสดงข้อมูลใบเปิดบัญชีลูกค้า</h1>
+
+        <!-- Add Button -->
+        <div class="flex mb-6">
+            <button
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                Add Claim/Complaint
+            </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="flex mb-6">
+            <input type="text" placeholder="Search user..."
+                class="bg-gray-100 w-full sm:w-80 px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600" />
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto text-sm">
+                <thead class="bg-gray-200 text-left">
+                    <tr>
+                        <th class="px-4 py-3">#</th>
+                        <th class="px-4 py-3">CaseName</th> <!--generalName-->
+                        <th class="px-4 py-3">ที่อยู่</th><!--addrLine1-->
+                        <th class="px-4 py-3">ประเภทร้านค้า</th><!--accGroupName-->
+                        <th class="px-4 py-3">อุสาหกรรม</th><!--InduTypeName-->
+                        <th class="px-4 py-3">ชื่อลูกค้า</th><!--deliveryName-->
+                        <th class="px-4 py-3">วิธีการชำระเงิน</th><!--payName-->
+                        <th class="px-4 py-3 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop over customers -->
+                    <tr *ngFor="let customer of customers; let i = index" class="border-b border-gray-200">
+                        <td class="px-4 py-3">{{ i + 1 }}</td> <!-- Index for numbering -->
+                        <td class="px-4 py-3">{{ customer.general.generalName }}</td>
+                        <td class="px-4 py-3">{{ customer.general.address.province.provinceName }}</td> <!-- Address -->
+                        <td class="px-4 py-3">{{ customer.shopType.shopName }}</td> <!-- Business Type -->
+                        <td class="px-4 py-3">{{ customer.industryType.induTypeName }}</td> <!-- Industry Type -->
+                        <td class="px-4 py-3">{{ customer.deliveryName }}</td> <!-- Customer Name -->
+                        <td class="px-4 py-3">{{ customer.paymentMethod.paymentMethodName }}</td>
+                        <!-- Payment Method -->
+                        <td class="px-4 py-3 text-center">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600"
+                                [routerLink]="['/Customer', customer.customerId]">
+                                View
+                            </button>
+                            <button
+                                class="bg-yellow-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-yellow-600">Edit</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
