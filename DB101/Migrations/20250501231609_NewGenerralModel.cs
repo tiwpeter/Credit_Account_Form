@@ -151,7 +151,15 @@ namespace apiNet8.Migrations
                 {
                     shipping_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    DeliveryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    address1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    address2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     subDistrict = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    district = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    postalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    contact_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    mobile = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    freight = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProvinceId = table.Column<int>(type: "int", nullable: false),
                     CountryId = table.Column<int>(type: "int", nullable: false)
                 },

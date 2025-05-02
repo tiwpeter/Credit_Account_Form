@@ -48,9 +48,17 @@ public class CustomerService
                 },
                 Shipping = new ShippingModel
                 {
+                    DeliveryName = request.ShippingDto.DeliveryName,
+                    address1 = request.ShippingDto.address1,
+                    address2 = request.ShippingDto.address2,
+                    subDistrict = request.ShippingDto.subDistrict,
+                    district = request.ShippingDto.district,
+                    postalCode = request.ShippingDto.postalCode,
+                    contact_name = request.ShippingDto.contact_name,
+                    mobile = request.ShippingDto.mobile,
+                    freight = request.ShippingDto.freight,
                     CountryId = request.ShippingDto.Country.CountryId, // แก้ตรงนี้
                     ProvinceId = request.ShippingDto.Province.ProvinceId, // ← ดึงจาก DTO เลย
-                    subDistrict = request.ShippingDto.SubDistrict
                 },
                 // 🔥 เพิ่มตรงนี้
                 ShopType = new ShopTypeModel

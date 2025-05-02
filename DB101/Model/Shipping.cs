@@ -8,7 +8,19 @@ namespace ModelTest.Controllers
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // ให้ฐานข้อมูลสร้างค่า Id อัตโนมัติ
         public int shipping_id { get; set; }
+        public string DeliveryName { get; set; }
+
+        public string address1 { get; set; }
+        public string address2 { get; set; }
+
         public string subDistrict { get; set; }
+        public string district { get; set; }
+        public string postalCode { get; set; }
+        public string contact_name { get; set; }
+
+        public string mobile { get; set; }
+
+        public string freight { get; set; }
 
         // FK ไป Province
         [ForeignKey("ProvinceId")]
@@ -24,7 +36,19 @@ namespace ModelTest.Controllers
     public class ShippingDto
     {
         public int ShippingId { get; set; }
-        public string SubDistrict { get; set; }
+        public string DeliveryName { get; set; }
+
+        public string address1 { get; set; }
+        public string address2 { get; set; }
+
+        public string subDistrict { get; set; }
+        public string district { get; set; }
+        public string postalCode { get; set; }
+        public string contact_name { get; set; }
+
+        public string mobile { get; set; }
+
+        public string freight { get; set; }
         public ProvinceDto Province { get; set; }
 
         public CountryDto Country { get; set; }

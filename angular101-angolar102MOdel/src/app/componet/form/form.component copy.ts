@@ -322,7 +322,7 @@ provinces: any[] = [];
   }
 
 
-  submitFormData(id: string, data: any) {
+  submitFormData(id: '', data: any) {
     this.http.put(`https://your-api-url.com/form-data/${id}`, data)
       .subscribe(response => {
         console.log('✅ Data updated successfully', response);

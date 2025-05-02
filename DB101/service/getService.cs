@@ -64,8 +64,15 @@ public class GetCustomerService
                 },
                 Shipping = new ShippingDto
                 {
-                    ShippingId = c.Shipping.shipping_id,
-                    SubDistrict = c.Shipping.subDistrict,
+                    DeliveryName = c.Shipping.DeliveryName,
+                    address1 = c.Shipping.address1,
+                    address2 = c.Shipping.address2,
+                    subDistrict = c.Shipping.subDistrict,
+                    district = c.Shipping.district,
+                    postalCode = c.Shipping.postalCode,
+                    contact_name = c.Shipping.contact_name,
+                    mobile = c.Shipping.mobile,
+                    freight = c.Shipping.freight,
                     Country = new CountryDto
                     {
                         CountryId = c.General.Address.Country.CountryId,
@@ -301,8 +308,15 @@ public class GetCustomerService
                 },
                 Shipping = new ShippingDto
                 {
-                    ShippingId = c.Shipping.shipping_id,
-                    SubDistrict = c.Shipping.subDistrict,
+                    DeliveryName = c.Shipping.DeliveryName,
+                    address1 = c.Shipping.address1,
+                    address2 = c.Shipping.address2,
+                    subDistrict = c.Shipping.subDistrict,
+                    district = c.Shipping.district,
+                    postalCode = c.Shipping.postalCode,
+                    contact_name = c.Shipping.contact_name,
+                    mobile = c.Shipping.mobile,
+                    freight = c.Shipping.freight,
                     Country = new CountryDto
                     {
                         CountryId = c.General.Address.Country.CountryId,
