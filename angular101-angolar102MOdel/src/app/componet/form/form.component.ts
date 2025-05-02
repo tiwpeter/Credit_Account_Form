@@ -19,6 +19,7 @@ provinces: any[] = [];
     loadFormDataFromApi(id: string) {
     this.http.get<any>(`http://localhost:5259/api/Regisform/${id}`)
       .subscribe(response => {
+            this.customerData = response;
         console.log('📦 API Response:', response);
 
         // นำข้อมูลจาก API มาป้อนในแต่ละ Object 
@@ -76,6 +77,14 @@ provinces: any[] = [];
           }
         };
         const shopType = response.shopType;
+
+
+this.customerData.custGroupType = {
+  id: response.custGroupType.id,
+  groupCode: response.custGroupType.groupCode,
+  groupName: response.custGroupType.groupName,
+  description: response.custGroupType.description
+};
 
         //เตรียมพร้อมข้อมูลส่ง
         this.customerData.shopType = {
