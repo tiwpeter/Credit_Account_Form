@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div *ngIf="customerData">
+        <h2>ข้อมูลทั่วไป</h2>
+        <label>ชื่อบริษัท:</label>
+        <input type="text" [(ngModel)]="customerData.general.generalName" name="generalName" />
+
+        <label>เบอร์โทร:</label>
+        <input type="text" [(ngModel)]="customerData.general.generalTel" name="generalTel" />
+
+        <label>ที่อยู่:</label>
+        <input type="text" [(ngModel)]="customerData.general.address.addrLine1" name="addrLine1" />
+
+        <label>จังหวัด:</label>
+        <input type="text" [(ngModel)]="customerData.general.address.province.provinceName" name="provinceName" />
+
+        <label>ประเทศ:</label>
+        <input type="text" [(ngModel)]="customerData.general.address.country.countryName" name="countryName" />
+
+        <hr />
+
+        <h2>ข้อมูลการจัดส่ง</h2>
+        <label>ชื่อผู้รับ:</label>
+        <input type="text" [(ngModel)]="customerData.shipping.deliveryName" name="deliveryName" />
+
+        <label>เบอร์โทร:</label>
+        <input type="text" [(ngModel)]="customerData.shipping.mobile" name="mobile" />
+
+        <label>จังหวัด:</label>
+        <input type="text" [(ngModel)]="customerData.shipping.province.provinceName" name="shippingProvince" />
+    </div>
+
+
+</body>
+
+</html>

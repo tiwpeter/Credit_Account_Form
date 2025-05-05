@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View</title>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg">
+        <form [formGroup]="customerForm" (ngSubmit)="save()">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">ข้อมูลประจำตัว</h2>
+            <div class="flex gap-2">
+                <!-- Name -->
+                <div class="bg-gray-200 shadow-md w-full">
+                    <div class="ml-2 flex flex-col">
+                        <span class="text-gray-500">Email</span>
+                        <input formControlName="email" placeholder="อีเมล" />
+                    </div>
+                </div>
+            </div>
+            <p><strong>รหัสบัญชี:</strong> {{ customerForm.value.accountCode.accountCode }}</p>
+
+            <button type="submit" class="mt-4 px-6 py-2 bg-blue-500 text-white rounded">บันทึก</button>
+        </form>
+    </div>
+</body>
+
+</html>

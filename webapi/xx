@@ -1,0 +1,25 @@
+
+      [Customer.sortkeyCode]
+      [Customer.sortkeyName]
+            [Customer.sortkeyDes]
+
+[Customer.cashCode]
+      [Customer.cashName]
+
+      [Customer.cashDes]
+     
+
+      [Customer.payCode]
+      [Customer.payName]
+      [Customer.payDes]
+       
+ [Customer.topCode]
+      [Customer.topName]
+      [Customer.topDes]
+<TextObject Name="Text7" Left="245.7" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.sortkeyCode]" Font="Arial, 10pt"/>
+<TextObject Name="Text7" Left="245.7" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.cashCode]" Font="Arial, 10pt"/>
+<TextObject Name="Text7" Left="245.7" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.cashName]" Font="Arial, 10pt"/>
+<TextObject Name="Text7" Left="245.7" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.cashDes]" Font="Arial, 10pt"/>
+
+<TextObject Name="Text7" Left="245.7" Top="916.65" Width="160.65" Height="18.9" Text="[Customer.payName]" Font="Arial, 10pt"/>
+

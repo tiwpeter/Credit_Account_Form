@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "fcUOOnNwuNjsXJgiQ7/1zA3kZnS7lWMR09Ox375KS40=",
+  "Source": "demoapi",
+  "BasePath": "_content/demoapi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
