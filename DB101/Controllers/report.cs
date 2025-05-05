@@ -70,21 +70,11 @@ public async Task<IActionResult> GenerateCustomerReport(int id)
     {
         Console.WriteLine($"GeneralName: {general.GeneralName}, GeneralName1: {general.GeneralName1}, GeneralTel: {general.GeneralTel}");
     }
-
-    if (!generalDataList.Any())
-    {
-        return NotFound("No general data available for the report.");
-    }
-
+    
     // สร้าง Report
     Report report = new Report();
-    string reportPath = Path.Combine(Directory.GetCurrentDirectory(), "1d.frx");
+    string reportPath = Path.Combine(Directory.GetCurrentDirectory(), "General.frx");
 
-    // ตรวจสอบว่าไฟล์ .frx มีอยู่หรือไม่
-    if (!System.IO.File.Exists(reportPath))
-    {
-        return NotFound("Report template file not found.");
-    }
 
     report.Load(reportPath);
 
@@ -96,12 +86,6 @@ public async Task<IActionResult> GenerateCustomerReport(int id)
 
     // เตรียมรายงาน
     report.Prepare();
-
-    // ตรวจสอบว่ามีหน้าในรายงานหรือไม่
-    if (report.Pages.Count == 0)
-    {
-        return NotFound("No pages to display in the report.");
-    }
 
     // สร้าง MemoryStream สำหรับการส่งไฟล์ PDF
     using (var stream = new MemoryStream())
@@ -115,5 +99,5 @@ public async Task<IActionResult> GenerateCustomerReport(int id)
     }
 }
 
-    }
+}
 }

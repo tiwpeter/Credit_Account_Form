@@ -1406,3 +1406,4 @@ C:\Users\myPC\Desktop\Angular9-netCore9-ButyCode\DB101\obj\Debug\net8.0\staticwe
 C:\Users\myPC\Desktop\Angular9-netCore9-ButyCode\DB101\obj\Debug\net8.0\apiNet8.csproj.Up2Date
 C:\Users\myPC\Desktop\Angular9-netCore9-ButyCode\DB101\obj\Debug\net8.0\apiNet8.genruntimeconfig.cache
 C:\Users\myPC\Desktop\Angular9-netCore9-ButyCode\DB101\obj\Debug\net8.0\ref\apiNet8.dll
+C:\Users\myPC\Desktop\Angular9-netCore9-ButyCode\DB101\obj\Debug\net8.0\apiNet8.sourcelink.json
