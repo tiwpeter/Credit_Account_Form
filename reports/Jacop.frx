@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="05/15/2025 04:04:20" ReportInfo.Modified="05/15/2025 15:13:29" ReportInfo.CreatorVersion="2025.1.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/15/2025 04:04:20" ReportInfo.Modified="05/15/2025 17:13:15" ReportInfo.CreatorVersion="2025.1.0.0">
   <Dictionary>
     <BusinessObjectDataSource Name="ReportData" ReferenceName="ReportData" DataType="System.Int32" Enabled="true"/>
   </Dictionary>
@@ -14,3 +14,14 @@
     </DataBand>
   </ReportPage>
 </Report>
+/*
+BusinessObjectDataSource ใน FastReport 
+เป็นแหล่งข้อมูลประเภทหนึ่งที่ใช้สำหรับ เชื่อมต่อข้อมูลจาก object 
+หรือ class ในรูปแบบ OOP (Object-Oriented Programming) 
+โดยเฉพาะกับ List<T>, IEnumerable<T>, หรือแม้แต่ object ซ้อนกัน (nested objects) ได้อย่างง่ายดาย
+*/
+
+/*
+TableDataSource  เหมาะสำหรับ	ระบบที่ใช้ ADO.NET, SQL, ORM ที่คืน DataTable
+BusinessObjectDataSource  เหมาะสำหรับ ระบบที่ใช้ Entity Framework, OOP, LINQ
+*/

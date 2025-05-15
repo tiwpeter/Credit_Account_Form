@@ -65,7 +65,8 @@ namespace CustomerApi.Controllers
             using (Report report = new Report())
             {
                 // โหลด template (.frx)
-                report.Load("Jacop.frx");
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "reports", "Jacop.frx");
+                report.Load(filePath);
 
                 // ลงทะเบียนข้อมูล
                 report.RegisterData(reportData, "ReportData");
@@ -82,7 +83,7 @@ namespace CustomerApi.Controllers
                 report.Export(pdfExport, pdfStream);
                 pdfStream.Position = 0;
 
-                return File(pdfStream.ToArray(), "application/pdf", "customer_report.pdf");
+                return File(pdfStream.ToArray(), "application/pdf", "Jacop.pdf");
             }
         }
     }

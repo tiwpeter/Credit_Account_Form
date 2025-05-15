@@ -334,3 +334,4 @@ C:\Users\WIN10\Desktop\0.4\DB101 - สำเนา\obj\Debug\net8.0\refint\apiNe
 C:\Users\WIN10\Desktop\0.4\DB101 - สำเนา\obj\Debug\net8.0\apiNet8.pdb
 C:\Users\WIN10\Desktop\0.4\DB101 - สำเนา\obj\Debug\net8.0\apiNet8.genruntimeconfig.cache
 C:\Users\WIN10\Desktop\0.4\DB101 - สำเนา\obj\Debug\net8.0\ref\apiNet8.dll
+C:\Users\WIN10\Desktop\0.4\DB101 - สำเนา\obj\Debug\net8.0\apiNet8.sourcelink.json
