@@ -1,0 +1,9 @@
+ constructor และ initForm() สำหรับจัดรูปข้อมูล
+
+ ngOnInit()
+
+    this.generalForm.patchValue(response.generalFormData);
+      this.shippingForm.patchValue(response.shippingFormData);
+patchValue() ใช้เติมค่าลงในฟอร์ม
+patchValue() จะเติมเฉพาะช่องที่มีตรงกัน ไม่จำเป็นต้องครบทุกช่องเหมือน setValue()
+
