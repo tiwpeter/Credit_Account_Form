@@ -35,49 +35,55 @@ namespace ModelTest.ApiControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCustomerById(int id)
         {
-            // 1. เรียกใช้ Service
-            var customer = await _getcustomerService.GetCustomerByIdAsync(id);
+            // 1. ดึงข้อมูลลูกค้าจากฐานข้อมูล
+            var customer = await _context.Customers
+                .Include(c => c.CustGroupCountry)
+                .Where(c => c.CustomerId == id)
+                .Select(c => new GetCustomersDTO
+                {
+                    CustomerId = c.CustomerId,
+                    CustGroupCountry = new CustGroupCountryModel
+                    {
+                        CountryCode = c.CustGroupCountry.CountryCode,
+                        CountryName = c.CustGroupCountry.CountryName,
+                        CountryDes = c.CustGroupCountry.CountryDes
+                    }
+                })
+                .FirstOrDefaultAsync();
 
             if (customer == null)
                 return NotFound();
 
-            // ✅ FastReport ต้องการรายการ => ใส่ลงใน List
+            // 2. แปลงให้อยู่ใน List (FastReport ต้องการ IEnumerable)
             var customerList = new List<GetCustomersDTO> { customer };
+            var countryList = new List<CustGroupCountryModel> { customer.CustGroupCountry };
 
-            // 2. สร้าง Report
+            // 3. โหลดรายงาน
             Report report = new Report();
-
-            // 3. โหลด Template
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Jacop.frx");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Jacop.frx");
             report.Load(filePath);
 
-            DataTable dt = new DataTable("CustomerData");
-            dt.Columns.Add("CustomerId", typeof(int));
-            dt.Columns.Add("GeneralName", typeof(string));
-
-            foreach (var c in customerList)
-            {
-                dt.Rows.Add(c.CustomerId, c.General?.GeneralName ?? string.Empty);
-            }
             // 4. ลงทะเบียนข้อมูล
             report.RegisterData(customerList, "CustomerData");
-            report.GetDataSource("CustomerData").Enabled = true;  // ✅ ต้องเปิดใช้แบบนี้
+            report.GetDataSource("CustomerData").Enabled = true;
 
+            report.RegisterData(countryList, "CustGroupCountry");
+            report.GetDataSource("CustGroupCountry").Enabled = true;
 
+            report.Design();  // เปิด Designer พร้อมข้อมูลจริง
 
-            // 6. Prepare และ Export
+            // 5. Prepare และ Export เป็น PDF
             report.Prepare();
             using var stream = new MemoryStream();
             var pdfExport = new PDFSimpleExport();
             pdfExport.Export(report, stream);
             stream.Position = 0;
 
-            // 7. Dispose Report
             report.Dispose();
 
-            // 8. ส่งกลับเป็น PDF
             return File(stream.ToArray(), "application/pdf", $"Customer_{id}_Report.pdf");
         }
+
 
 
 

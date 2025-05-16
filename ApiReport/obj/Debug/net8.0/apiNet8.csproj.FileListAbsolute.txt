@@ -1528,3 +1528,4 @@ C:\Users\WIN10\Desktop\0.5com\ApiReport\obj\Debug\net8.0\apiNet8.pdb
 C:\Users\WIN10\Desktop\0.5com\ApiReport\obj\Debug\net8.0\apiNet8.genruntimeconfig.cache
 C:\Users\WIN10\Desktop\0.5com\ApiReport\obj\Debug\net8.0\ref\apiNet8.dll
 C:\Users\WIN10\Desktop\0.5com\ApiReport\obj\Debug\net8.0\apiNet8.sourcelink.json
+C:\Users\WIN10\Desktop\0.5com\ApiReport\bin\Debug\net8.0\data.json

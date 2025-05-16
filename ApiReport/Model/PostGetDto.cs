@@ -99,7 +99,16 @@ namespace ModelTest.Controllers
     {
         public int CustomerId { get; set; }
         public string GeneralName => General?.GeneralName ?? string.Empty;
-        public string addrLine1 => General?.Address.addrLine1 ?? string.Empty;
+        public string addrLine1 { get; set; }
+        // Flattened Address Properties
+        public int AddressId { get; set; }
+        public string addrLine2 { get; set; }
+        public string subDistrict { get; set; }
+        public string district { get; set; }
+        public string postalCode { get; set; }
+
+        public string ProvinceName { get; set; }
+        public string CountryName { get; set; }
         public string GeneralName1 { get; set; }
 
 
