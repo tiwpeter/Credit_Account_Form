@@ -42,11 +42,14 @@ namespace ModelTest.ApiControllers
                 .Select(c => new GetCustomersDTO
                 {
                     CustomerId = c.CustomerId,
-                    CustGroupCountry = new CustGroupCountryModel
+                    CustGroupCountries = new List<CustGroupCountryModel>  // 👈 เปลี่ยนตรงนี้
                     {
-                        CountryCode = c.CustGroupCountry.CountryCode,
-                        CountryName = c.CustGroupCountry.CountryName,
-                        CountryDes = c.CustGroupCountry.CountryDes
+                        new CustGroupCountryModel
+                        {
+                            CountryCode = c.CustGroupCountry.CountryCode,
+                            CountryName = c.CustGroupCountry.CountryName,
+                            CountryDes = c.CustGroupCountry.CountryDes
+                        }
                     }
                 })
                 .FirstOrDefaultAsync();
@@ -56,21 +59,16 @@ namespace ModelTest.ApiControllers
 
             // 2. แปลงให้อยู่ใน List (FastReport ต้องการ IEnumerable)
             var customerList = new List<GetCustomersDTO> { customer };
-            var countryList = new List<CustGroupCountryModel> { customer.CustGroupCountry };
 
             // 3. โหลดรายงาน
             Report report = new Report();
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Jacop.frx");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "CustomerReport.frx");
             report.Load(filePath);
 
             // 4. ลงทะเบียนข้อมูล
             report.RegisterData(customerList, "CustomerData");
             report.GetDataSource("CustomerData").Enabled = true;
 
-            report.RegisterData(countryList, "CustGroupCountry");
-            report.GetDataSource("CustGroupCountry").Enabled = true;
-
-            report.Design();  // เปิด Designer พร้อมข้อมูลจริง
 
             // 5. Prepare และ Export เป็น PDF
             report.Prepare();
