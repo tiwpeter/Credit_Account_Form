@@ -99,6 +99,8 @@ namespace ModelTest.Controllers
     {
         public int CustomerId { get; set; }
         public string GeneralName => General?.GeneralName ?? string.Empty;
+        public string addrLine1 => General?.Address.addrLine1 ?? string.Empty;
+        public string GeneralName1 { get; set; }
 
 
         //ข้อมูลประจำตัว
