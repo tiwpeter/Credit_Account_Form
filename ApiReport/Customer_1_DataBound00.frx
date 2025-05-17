@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/15/2025 04:04:20" ReportInfo.Modified="05/17/2025 10:01:16" ReportInfo.CreatorVersion="2025.2.0.0">
+  <Dictionary>
+    <TableDataSource Name="Provinces" DataType="System.Int32" Enabled="true" TableName="Provinces">
+      <Column Name="ProvinceId" DataType="System.Int32"/>
+      <Column Name="ProvinceName" DataType="System.String"/>
+      <Column Name="CountryId" DataType="System.Int32"/>
+    </TableDataSource>
+    <BusinessObjectDataSource Name="CustomerData" ReferenceName="CustomerData" DataType="System.Collections.Generic.List`1[[ModelTest.Controllers.GetCustomersDTO, apiNet8, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="CustomerId" DataType="System.Int32"/>
+      <BusinessObjectDataSource Name="CustGroupCountries" Enabled="false" DataType="System.Collections.Generic.List`1[[CustGroupCountryModel, apiNet8, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="TitleText" Width="718.2" Height="37.8" Text="Customer Report" HorzAlign="Center" Font="Arial, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="41.8" Width="718.2" Height="349.65">
+      <TextObject Name="Text3" Left="94.5" Top="9.45" Width="255.15" Height="18.9" Text="[CustomerData.CustomerId]" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="453.6" Top="9.45" Width="94.5" Height="18.9" Text="[CustomerData.GeneralName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="604.8" Width="94.5" Height="18.9" Text="[CustomerData.addrLine1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="122.85" Top="103.95" Width="94.5" Height="18.9" Text="[CustomerData.GeneralName1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="396.9" Top="122.85" Width="264.6" Height="18.9" Text="[CustomerData.CustGroupCountry.CountryName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="330.75" Top="198.45" Width="226.8" Height="18.9" Text="[CustomerData.CustomerName]" Font="Arial, 10pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -16,16 +16,12 @@ namespace ModelTest.ApiControllers
     public class RegisformController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly CustomerService _customerService;
-
-        private readonly GetCustomerService _getcustomerService;
 
 
-        public RegisformController(ApplicationDbContext context, CustomerService customerService, GetCustomerService getcustomerService)
+
+        public RegisformController(ApplicationDbContext context)
         {
             _context = context;
-            _customerService = customerService;
-            _getcustomerService = getcustomerService;
         }
 
 
@@ -41,12 +37,16 @@ namespace ModelTest.ApiControllers
                 .Where(c => c.CustomerId == id)
                 .Select(c => new GetCustomersDTO
                 {
+
                     CustomerId = c.CustomerId,
-                    CustGroupCountries = new CustGroupCountryModel
+                    CustGroupCountries = new List<CustGroupCountryModel>  // 👈 เปลี่ยนตรงนี้
                     {
-                        CountryCode = c.CustGroupCountry.CountryCode,
-                        CountryName = c.CustGroupCountry.CountryName,
-                        CountryDes = c.CustGroupCountry.CountryDes
+                        new CustGroupCountryModel
+                        {
+                            CountryCode = c.CustGroupCountry.CountryCode,
+                            CountryName = c.CustGroupCountry.CountryName,
+                            CountryDes = c.CustGroupCountry.CountryDes
+                        }
                     }
                 })
                 .FirstOrDefaultAsync();
@@ -56,13 +56,14 @@ namespace ModelTest.ApiControllers
 
             // 2. แปลงให้อยู่ใน List (FastReport ต้องการ IEnumerable)
             var customerList = new List<GetCustomersDTO> { customer };
-            var countryList = new List<CustGroupCountryModel> { customer.CustGroupCountries };
+            var countryList = customer.CustGroupCountries;
 
             // 3. โหลดรายงาน
             Report report = new Report();
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Jacop.frx");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Customer_1_DataBound007.frx");
             report.Load(filePath);
 
+            // 4. ลงทะเบียนข้อมูล
             // 4. ลงทะเบียนข้อมูล
             report.RegisterData(customerList, "CustomerData");
             report.GetDataSource("CustomerData").Enabled = true;
@@ -70,11 +71,29 @@ namespace ModelTest.ApiControllers
             report.RegisterData(countryList, "CustGroupCountry");
             report.GetDataSource("CustGroupCountry").Enabled = true;
 
-            string savedFrxPath = Path.Combine(Directory.GetCurrentDirectory(), $"Customer_{id}_DataBound.frx");
-            report.Save(savedFrxPath);
+            /*
+
+
+                        string savedFrxPath = Path.Combine(Directory.GetCurrentDirectory(), $"Customer_{id}_DataBound007.frx");
+                        report.Save(savedFrxPath);
+                        report.Dispose();
+
+                        return Ok(new { message = "FRX file created successfully", path = savedFrxPath });
+            */
+
+            // 6. Prepare และ Export
+            report.Prepare();
+            using var stream = new MemoryStream();
+            var pdfExport = new PDFSimpleExport();
+            pdfExport.Export(report, stream);
+            stream.Position = 0;
+
+            // 7. Dispose Report
             report.Dispose();
 
-            return Ok(new { message = "FRX file created successfully", path = savedFrxPath });
+            // 8. ส่งกลับเป็น PDF
+            return File(stream.ToArray(), "application/pdf", $"Customer_{id}_Report.pdf");
+
         }
 
 
