@@ -99,19 +99,9 @@ namespace ModelTest.Controllers
     {
         public int CustomerId { get; set; }
 
+        public CustGroupCountryModel CustGroupCountries { get; set; }  // 👈 เปลี่ยนเป็น List
+
         // ข้อมูลประเทศที่กลุ่มลูกค้ารับผิดชอบ
-        public List<CustGroupCountryModel> CustGroupCountries { get; set; }
-
-
-
-
-        /// <summary>
-        /// ///
-        /// </summary>
-
-
-
-
     }
 
 }

@@ -61,15 +61,7 @@ public class GetCustomerService
             .Select(c => new GetCustomersDTO
             {
                 CustomerId = c.CustomerId,
-                CustGroupCountries = new List<CustGroupCountryModel>  // 👈 เปลี่ยนตรงนี้
-        {
-            new CustGroupCountryModel
-            {
-                CountryCode = c.CustGroupCountry.CountryCode,
-                CountryName = c.CustGroupCountry.CountryName,
-                CountryDes = c.CustGroupCountry.CountryDes
-            }
-        }
+
 
             }).FirstOrDefaultAsync(); // <<< เอาแค่ตัวเดียว
 

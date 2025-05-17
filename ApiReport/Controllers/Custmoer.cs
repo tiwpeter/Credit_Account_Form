@@ -42,14 +42,11 @@ namespace ModelTest.ApiControllers
                 .Select(c => new GetCustomersDTO
                 {
                     CustomerId = c.CustomerId,
-                    CustGroupCountries = new List<CustGroupCountryModel>  // 👈 เปลี่ยนตรงนี้
+                    CustGroupCountries = new CustGroupCountryModel
                     {
-                        new CustGroupCountryModel
-                        {
-                            CountryCode = c.CustGroupCountry.CountryCode,
-                            CountryName = c.CustGroupCountry.CountryName,
-                            CountryDes = c.CustGroupCountry.CountryDes
-                        }
+                        CountryCode = c.CustGroupCountry.CountryCode,
+                        CountryName = c.CustGroupCountry.CountryName,
+                        CountryDes = c.CustGroupCountry.CountryDes
                     }
                 })
                 .FirstOrDefaultAsync();
@@ -59,27 +56,25 @@ namespace ModelTest.ApiControllers
 
             // 2. แปลงให้อยู่ใน List (FastReport ต้องการ IEnumerable)
             var customerList = new List<GetCustomersDTO> { customer };
+            var countryList = new List<CustGroupCountryModel> { customer.CustGroupCountries };
 
             // 3. โหลดรายงาน
             Report report = new Report();
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "CustomerReport.frx");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Jacop.frx");
             report.Load(filePath);
 
             // 4. ลงทะเบียนข้อมูล
             report.RegisterData(customerList, "CustomerData");
             report.GetDataSource("CustomerData").Enabled = true;
 
+            report.RegisterData(countryList, "CustGroupCountry");
+            report.GetDataSource("CustGroupCountry").Enabled = true;
 
-            // 5. Prepare และ Export เป็น PDF
-            report.Prepare();
-            using var stream = new MemoryStream();
-            var pdfExport = new PDFSimpleExport();
-            pdfExport.Export(report, stream);
-            stream.Position = 0;
-
+            string savedFrxPath = Path.Combine(Directory.GetCurrentDirectory(), $"Customer_{id}_DataBound.frx");
+            report.Save(savedFrxPath);
             report.Dispose();
 
-            return File(stream.ToArray(), "application/pdf", $"Customer_{id}_Report.pdf");
+            return Ok(new { message = "FRX file created successfully", path = savedFrxPath });
         }
 
 
