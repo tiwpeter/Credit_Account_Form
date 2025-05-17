@@ -15,89 +15,40 @@ namespace ModelTest.ApiControllers
     [ApiController]
     public class RegisformController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly GetCustomerService _customerService;
 
-
-
-        public RegisformController(ApplicationDbContext context)
+        public RegisformController(GetCustomerService customerService)
         {
-            _context = context;
+            _customerService = customerService;
         }
 
-
-
-        // id = sevice
-        // id = service
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCustomerById(int id)
         {
-            // 1. ดึงข้อมูลลูกค้าจากฐานข้อมูล
-            var customer = await _context.Customers
-                .Include(c => c.CustGroupCountry)
-                .Where(c => c.CustomerId == id)
-                .Select(c => new GetCustomersDTO
-                {
-
-                    CustomerId = c.CustomerId,
-                    CustGroupCountries = new List<CustGroupCountryModel>  // 👈 เปลี่ยนตรงนี้
-                    {
-                        new CustGroupCountryModel
-                        {
-                            CountryCode = c.CustGroupCountry.CountryCode,
-                            CountryName = c.CustGroupCountry.CountryName,
-                            CountryDes = c.CustGroupCountry.CountryDes
-                        }
-                    }
-                })
-                .FirstOrDefaultAsync();
-
+            var customer = await _customerService.GetCustomerByIdAsync(id);
             if (customer == null)
                 return NotFound();
 
-            // 2. แปลงให้อยู่ใน List (FastReport ต้องการ IEnumerable)
             var customerList = new List<GetCustomersDTO> { customer };
-            var countryList = customer.CustGroupCountries;
+            var countryList = new List<CustGroupCountryModel> { customer.CustGroupCountries };
 
-            // 3. โหลดรายงาน
-            Report report = new Report();
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Customer_1_DataBound007.frx");
-            report.Load(filePath);
-
-            // 4. ลงทะเบียนข้อมูล
-            // 4. ลงทะเบียนข้อมูล
+            using var report = new Report();
             report.RegisterData(customerList, "CustomerData");
             report.GetDataSource("CustomerData").Enabled = true;
 
             report.RegisterData(countryList, "CustGroupCountry");
             report.GetDataSource("CustGroupCountry").Enabled = true;
 
-            /*
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Customer_1_DataBound009.frx");
+            report.Load(filePath);
 
-
-                        string savedFrxPath = Path.Combine(Directory.GetCurrentDirectory(), $"Customer_{id}_DataBound007.frx");
-                        report.Save(savedFrxPath);
-                        report.Dispose();
-
-                        return Ok(new { message = "FRX file created successfully", path = savedFrxPath });
-            */
-
-            // 6. Prepare และ Export
             report.Prepare();
             using var stream = new MemoryStream();
             var pdfExport = new PDFSimpleExport();
             pdfExport.Export(report, stream);
             stream.Position = 0;
 
-            // 7. Dispose Report
-            report.Dispose();
-
-            // 8. ส่งกลับเป็น PDF
             return File(stream.ToArray(), "application/pdf", $"Customer_{id}_Report.pdf");
-
         }
-
-
-
-
     }
 }
