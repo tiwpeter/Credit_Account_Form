@@ -50,12 +50,12 @@ public class GetCustomerService
                         district = c.General.Address.district,
                         postalCode = c.General.Address.postalCode,
                         createdDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                        Country = new CountryDto
+                        Country = new CountryModel
                         {
                             CountryId = c.General.Address.Country.CountryId,
                             CountryName = c.General.Address.Country.CountryName
                         },
-                        Province = new ProvinceDto
+                        Province = new ProvinceModel
                         {
                             ProvinceId = c.General.Address.Province.ProvinceId,
                             ProvinceName = c.General.Address.Province.ProvinceName
@@ -295,12 +295,12 @@ public class GetCustomerService
                         district = c.General.Address.district,
                         postalCode = c.General.Address.postalCode,
                         createdDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                        Country = new CountryDto
+                        Country = new CountryModel
                         {
                             CountryId = c.General.Address.Country.CountryId,
                             CountryName = c.General.Address.Country.CountryName
                         },
-                        Province = new ProvinceDto
+                        Province = new ProvinceModel
                         {
                             ProvinceId = c.General.Address.Province.ProvinceId,
                             ProvinceName = c.General.Address.Province.ProvinceName

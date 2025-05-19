@@ -16,10 +16,14 @@ namespace ModelTest.ApiControllers
     public class RegisformController : ControllerBase
     {
         private readonly GetCustomerService _customerService;
+        private readonly CustomerService _postcustomerService;
 
-        public RegisformController(GetCustomerService customerService)
+
+
+        public RegisformController(GetCustomerService customerService, CustomerService postcustomerService)
         {
             _customerService = customerService;
+            _postcustomerService = postcustomerService;
         }
 
         //post
@@ -102,6 +106,19 @@ namespace ModelTest.ApiControllers
 
             // ส่ง PDF กลับไปให้ browser download
             return File(ms.ToArray(), "application/pdf", $"CustomerReport_{id}.pdf");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
+        {
+            var errors = await _postcustomerService.CreateCustomerAsync(request);
+
+            if (errors.Any())
+            {
+                return BadRequest(new { message = "Validation errors", errors });
+            }
+
+            return Ok(new { message = "Customer created successfully" });
         }
     }
 }

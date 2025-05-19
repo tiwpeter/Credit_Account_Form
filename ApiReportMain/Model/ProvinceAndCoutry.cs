@@ -17,11 +17,6 @@ namespace ModelTest.Controllers
         [ForeignKey("CountryId")]
         public CountryModel Country { get; set; }
     }
-    public class ProvinceDto
-    {
-        public int ProvinceId { get; set; }
-        public string ProvinceName { get; set; }
-    }
 
     public class CountryModel
     {
@@ -33,4 +28,17 @@ namespace ModelTest.Controllers
 
         public List<ProvinceModel> Provinces { get; set; }
     }
+}
+public class CountryDto
+{
+    public int CountryId { get; set; }
+    public string CountryName { get; set; }
+
+    public List<ProvinceDto> Provinces { get; set; }
+}
+
+public class ProvinceDto
+{
+    public int ProvinceId { get; set; }
+    public string ProvinceName { get; set; }
 }

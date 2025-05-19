@@ -24,6 +24,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<GetCustomerService>();
+builder.Services.AddScoped<CustomerService>();
 
 
 // Connect to the database

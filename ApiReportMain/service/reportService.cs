@@ -31,7 +31,7 @@ public class ReportService
                 // Register Address.Country
                 if (customer.General.Address.Country != null)
                 {
-                    var countryList = new List<CountryDto> { customer.General.Address.Country };
+                    var countryList = new List<CountryModel> { customer.General.Address.Country };
                     report.RegisterData(countryList, "AddressCountry");
                     report.GetDataSource("AddressCountry").Enabled = true;
                 }
@@ -39,7 +39,7 @@ public class ReportService
                 // Register Address.Province
                 if (customer.General.Address.Province != null)
                 {
-                    var provinceList = new List<ProvinceDto> { customer.General.Address.Province };
+                    var provinceList = new List<ProvinceModel> { customer.General.Address.Province };
                     report.RegisterData(provinceList, "AddressProvince");
                     report.GetDataSource("AddressProvince").Enabled = true;
                 }

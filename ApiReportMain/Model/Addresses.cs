@@ -36,10 +36,10 @@ public class AddressDto
     public string postalCode { get; set; }
     public string createdDate { get; set; }
 
-    public CountryDto Country { get; set; }
+    public CountryModel Country { get; set; }
 
 
-    public ProvinceDto Province { get; set; }
+    public ProvinceModel Province { get; set; }
 
 
 }
