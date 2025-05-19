@@ -57,18 +57,21 @@ namespace ModelTest.ApiControllers
             // สร้าง List จากข้อมูลลูกค้า เพื่อใช้กับ FastReport
             var customerList = new List<GetCustomersDTO> { customer };
 
-            // สร้าง List สำหรับข้อมูลประเทศ (แม้เก็บเป็น object เดียว ก็ต้องแปลงเป็น List)
-            var countryList = new List<CustGroupCountryModel> { customer.CustGroupCountry };
 
             using var report = new Report();
+
+
+            var generalList = new List<GeneralDto> { customer.General };
+            report.RegisterData(generalList, "GeneralData");
+            report.GetDataSource("GeneralData").Enabled = true;
+
 
             // นำข้อมูลลูกค้าเข้าไปใน Report
             report.RegisterData(customerList, "CustomerData");
             report.GetDataSource("CustomerData").Enabled = true;
 
-            // นำข้อมูลประเทศเข้าไปใน Report
-            report.RegisterData(countryList, "CustGroupCountry");
-            report.GetDataSource("CustGroupCountry").Enabled = true;
+            // นำข้อมูลหลักเข้ารายงาน
+
 
             // สร้าง path สำหรับบันทึกไฟล์ .frx โดยใช้ id เพื่อไม่ให้ชื่อซ้ำกัน
             string savedFrxPath = Path.Combine(Directory.GetCurrentDirectory(), $"Customer_{id}_DataBoundN.frx");
@@ -88,30 +91,35 @@ namespace ModelTest.ApiControllers
         [HttpGet("report/{id}")]
         public async Task<IActionResult> GetReportId(int id)
         {
+            // ดึงข้อมูลลูกค้าจาก service/database
             var customer = await _customerService.GetCustomerByIdAsync(id);
+
             if (customer == null)
-                return NotFound();
+                return NotFound("Customer not found");
 
-            var customerList = new List<GetCustomersDTO> { customer };
-            var countryList = new List<CustGroupCountryModel> { customer.CustGroupCountry };
+            // สร้าง Report
+            var report = new Report();
 
-            using var report = new Report();
-            report.RegisterData(customerList, "CustomerData");
-            report.GetDataSource("CustomerData").Enabled = true;
-
-            report.RegisterData(countryList, "CustGroupCountry");
-            report.GetDataSource("CustGroupCountry").Enabled = true;
-
+            // โหลด template .frx ที่ออกแบบไว้
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Customer_1_DataBoundN.frx");
             report.Load(filePath);
 
-            report.Prepare();
-            using var stream = new MemoryStream();
-            var pdfExport = new PDFSimpleExport();
-            pdfExport.Export(report, stream);
-            stream.Position = 0;
+            // นำข้อมูล customer ใส่เข้า Report
+            var reportService = new ReportService();
+            reportService.RegisterCustomerReportData(report, customer);
 
-            return File(stream.ToArray(), "application/pdf", $"Customer_{id}_Report.pdf");
+            // สร้างรายงานจริง (เตรียม rendering)
+            report.Prepare();
+
+            // Export เป็น PDF
+            using var ms = new MemoryStream();
+            var pdfExport = new PDFSimpleExport();
+            report.Export(pdfExport, ms);
+            ms.Position = 0;
+
+            // ส่ง PDF กลับไปให้ browser download
+            return File(ms.ToArray(), "application/pdf", $"CustomerReport_{id}.pdf");
         }
+
     }
 }

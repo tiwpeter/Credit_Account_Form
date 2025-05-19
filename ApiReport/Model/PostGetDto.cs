@@ -99,7 +99,8 @@ namespace ModelTest.Controllers
     {
         public int CustomerId { get; set; }
 
-
+        // ต้องมี GeneralId เพื่อเชื่อมกับ GeneralData
+        public int GeneralId => General?.GeneralId ?? 0;
         //ข้อมูลประจำตัว
         public GeneralDto General { get; set; }
 
