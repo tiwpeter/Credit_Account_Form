@@ -331,7 +331,12 @@ public class GetCustomerService
                 },
                 BusinessType = new BusinessTypeDTO
                 {
+                    busiTypeID = c.BusinessType.busiTypeID,
+                    busiTypeCode = c.BusinessType.busiTypeCode,
                     busiTypeName = c.BusinessType.busiTypeName,
+                    busiTypeDes = c.BusinessType.busiTypeDes,
+                    RegistrationDate = c.BusinessType.RegistrationDate,
+                    RegisteredCapital = c.BusinessType.RegisteredCapital
                 },
                 CreditInfo = new CreditInfoDto
                 {
@@ -339,11 +344,7 @@ public class GetCustomerService
                     TimeRequired = c.CreditInfo.TimeRequired,
                     CreditLimit = c.CreditInfo.CreditLimit
                 },
-                CustomerSign = new CustomerSignDto
-                {
-                    CustSignId = c.Shipping.shipping_id,
-                    CustSignFirstName = c.Shipping.subDistrict
-                },
+
                 ShopType = new ShopTypeModel
                 {
                     id = c.ShopType.id,
@@ -391,14 +392,14 @@ public class GetCustomerService
                     CopyOfIDCard = c.DocCredit.CopyOfIDCard,
                     CompanyLocationMap = c.DocCredit.CompanyLocationMap,
                     OtherSpecify = c.DocCredit.OtherSpecify
-                },/*, // 🔥 เพิ่ม CustomerSign ตรงนี้
-                CustomerSigns = new CustomerSignModel
+                }, // 🔥 เพิ่ม CustomerSign ตรงนี้
+                CustomerSign = new CustomerSignDto
                 {
-                    CustSignFirstName = c.CustomerSign.CustSignFirstName,
-                    custsignTel = c.CustomerSign.custsignTel,
-                    custsignEmail = c.CustomerSign.custsignEmail,
-                    custsignLine = c.CustomerSign.custsignLine,
-                },*/
+                    CustSignFirstName = c.CustomerSigns.CustSignFirstName,
+                    custsignTel = c.CustomerSigns.custsignTel,
+                    custsignEmail = c.CustomerSigns.custsignEmail,
+                    custsignLine = c.CustomerSigns.custsignLine,
+                },
                 AccountCode = new AccountCodeModel
                 {
                     AccountId = c.AccountCode.AccountId,

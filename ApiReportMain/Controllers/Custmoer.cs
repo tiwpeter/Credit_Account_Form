@@ -59,7 +59,7 @@ namespace ModelTest.ApiControllers
             reportService.RegisterCustomerReportData(report, customer);
 
             // สร้าง path สำหรับบันทึกไฟล์ .frx โดยใช้ id เพื่อไม่ให้ชื่อซ้ำกัน
-            string savedFrxPath = Path.Combine(Directory.GetCurrentDirectory(), $"Customer_{id}_DataBoundN.frx");
+            string savedFrxPath = Path.Combine(Directory.GetCurrentDirectory(), $"Customer_{id}_DataBoundN2.frx");
 
             // ✅ บันทึก report template (พร้อม data schema) เป็นไฟล์ .frx
             report.Save(savedFrxPath);

@@ -138,5 +138,104 @@ public class ReportService
             report.RegisterData(new List<DocCreditModel> { customer.DocCredit }, "DocCreditData");
             report.GetDataSource("DocCreditData").Enabled = true;
         }
+
+        // AccountCode
+        if (customer.AccountCode != null)
+        {
+            report.RegisterData(new List<AccountCodeModel> { customer.AccountCode }, "AccountCodeData");
+            report.GetDataSource("AccountCodeData").Enabled = true;
+        }
+
+        // SortKey
+        if (customer.SortKey != null)
+        {
+            report.RegisterData(new List<SortKeyModel> { customer.SortKey }, "SortKeyData");
+            report.GetDataSource("SortKeyData").Enabled = true;
+        }
+
+        // PaymentMethod
+        if (customer.PaymentMethod != null)
+        {
+            report.RegisterData(new List<PaymentMethodModel> { customer.PaymentMethod }, "PaymentMethodData");
+            report.GetDataSource("PaymentMethodData").Enabled = true;
+        }
+
+        // TermOfPayment
+        if (customer.TermOfPayment != null)
+        {
+            report.RegisterData(new List<TermOfPaymentModel> { customer.TermOfPayment }, "TermOfPaymentData");
+            report.GetDataSource("TermOfPaymentData").Enabled = true;
+        }
+
+        // SaleDistrict
+        if (customer.SaleDistrict != null)
+        {
+            report.RegisterData(new List<SaleDistrictModel> { customer.SaleDistrict }, "SaleDistrictData");
+            report.GetDataSource("SaleDistrictData").Enabled = true;
+        }
+
+        // SaleGroup
+        if (customer.SaleGroup != null)
+        {
+            report.RegisterData(new List<SaleGroupModel> { customer.SaleGroup }, "SaleGroupData");
+            report.GetDataSource("SaleGroupData").Enabled = true;
+        }
+
+        // CustGroupType
+        if (customer.CustGroupType != null)
+        {
+            report.RegisterData(new List<CustGroupTypeModel> { customer.CustGroupType }, "CustGroupTypeData");
+            report.GetDataSource("CustGroupTypeData").Enabled = true;
+        }
+
+        // Currency
+        if (customer.Currency != null)
+        {
+            report.RegisterData(new List<CurrencyModel> { customer.Currency }, "CurrencyData");
+            report.GetDataSource("CurrencyData").Enabled = true;
+        }
+
+        // ExchRateType
+        if (customer.ExchRateType != null)
+        {
+            report.RegisterData(new List<ExchRateTypeModel> { customer.ExchRateType }, "ExchRateTypeData");
+            report.GetDataSource("ExchRateTypeData").Enabled = true;
+        }
+
+        // CustPricProc
+        if (customer.CustPricProc != null)
+        {
+            report.RegisterData(new List<CustPricProcModel> { customer.CustPricProc }, "CustPricProcData");
+            report.GetDataSource("CustPricProcData").Enabled = true;
+        }
+
+        // PriceList
+        if (customer.PriceList != null)
+        {
+            report.RegisterData(new List<PriceListModel> { customer.PriceList }, "PriceListData");
+            report.GetDataSource("PriceListData").Enabled = true;
+        }
+
+        // Incoterm
+        if (customer.Incoterm != null)
+        {
+            report.RegisterData(new List<IncotermModel> { customer.Incoterm }, "IncotermData");
+            report.GetDataSource("IncotermData").Enabled = true;
+        }
+
+        if (customer.CustGroupCountry != null)
+        {
+            var custGroupList = new List<CustGroupCountryModel> { customer.CustGroupCountry };
+            report.RegisterData(custGroupList, "CustGroupCountry");
+            report.GetDataSource("CustGroupCountry").Enabled = true;
+        }
+
+        // SaleManager
+        if (customer.SaleManager != null)
+        {
+            report.RegisterData(new List<SaleManagerModel> { customer.SaleManager }, "SaleManagerData");
+            report.GetDataSource("SaleManagerData").Enabled = true;
+        }
+
     }
 }

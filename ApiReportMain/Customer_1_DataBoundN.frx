@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="05/18/2025 09:57:23" ReportInfo.Modified="05/18/2025 09:57:41" ReportInfo.CreatorVersion="2025.1.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/18/2025 09:57:23" ReportInfo.Modified="05/19/2025 09:13:44" ReportInfo.CreatorVersion="2025.1.0.0">
   <Dictionary>
     <BusinessObjectDataSource Name="CustomerData" ReferenceName="CustomerData" DataType="System.Int32" Enabled="true">
       <Column Name="CustomerId" DataType="System.Int32"/>
@@ -153,15 +153,231 @@
       <Column Name="CompanyLocationMap" DataType="System.Boolean" BindableControl="CheckBox"/>
       <Column Name="OtherSpecify" DataType="System.String"/>
     </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="AccountCodeData" ReferenceName="AccountCodeData" DataType="System.Int32" Enabled="true">
+      <Column Name="AccountId" DataType="System.Int32"/>
+      <Column Name="AccountCode" DataType="System.String"/>
+      <Column Name="AccountName" DataType="System.String"/>
+      <Column Name="AccountType" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="SortKeyData" ReferenceName="SortKeyData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="sortkeyCode" DataType="System.String"/>
+      <Column Name="sortkeyName" DataType="System.String"/>
+      <Column Name="sortkeyDes" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="PaymentMethodData" ReferenceName="PaymentMethodData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="PaymentMethodCode" DataType="System.String"/>
+      <Column Name="PaymentMethodName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="TermOfPaymentData" ReferenceName="TermOfPaymentData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="TermCode" DataType="System.String"/>
+      <Column Name="TermName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="SaleDistrictData" ReferenceName="SaleDistrictData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="DistrictCode" DataType="System.String"/>
+      <Column Name="DistrictName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="SaleGroupData" ReferenceName="SaleGroupData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="GroupCode" DataType="System.String"/>
+      <Column Name="GroupName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="CustGroupTypeData" ReferenceName="CustGroupTypeData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="GroupCode" DataType="System.String"/>
+      <Column Name="GroupName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="CurrencyData" ReferenceName="CurrencyData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="CurrencyCode" DataType="System.String"/>
+      <Column Name="CurrencyName" DataType="System.String"/>
+      <Column Name="Symbol" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="ExchRateTypeData" ReferenceName="ExchRateTypeData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="RateTypeCode" DataType="System.String"/>
+      <Column Name="RateTypeName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="CustPricProcData" ReferenceName="CustPricProcData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="PricProcCode" DataType="System.String"/>
+      <Column Name="PricProcName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="PriceListData" ReferenceName="PriceListData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="priceListCode" DataType="System.String"/>
+      <Column Name="priceListName" DataType="System.String"/>
+      <Column Name="priceListDes" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="IncotermData" ReferenceName="IncotermData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="incotermCode" DataType="System.String"/>
+      <Column Name="incotermName" DataType="System.String"/>
+      <Column Name="incotermDes" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="SaleManagerData" ReferenceName="SaleManagerData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="SaleGroupCode" DataType="System.String"/>
+      <Column Name="SaleGroupName" DataType="System.String"/>
+      <Column Name="SaleGroupDes" DataType="System.String"/>
+    </BusinessObjectDataSource>
   </Dictionary>
   <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8"/>
-    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35">
-      <TextObject Name="Text2" Left="217.35" Width="94.5" Height="18.9" Text="accGroupCode" Font="Arial, 10pt"/>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="18.9">
+      <TextObject Name="Text4" Left="9.45" Width="94.5" Height="18.9" Text="AccountCode" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="113.4" Width="94.5" Height="18.9" Text="AccountName" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="217.35" Width="94.5" Height="18.9" Text="AccountType" Font="Arial, 10pt"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="74.15" Width="718.2" Height="75.6" DataSource="AccountGroupData">
-      <TextObject Name="Text1" Left="217.35" Top="18.9" Width="292.95" Height="18.9" Text="[AccountGroupData.accGroupCode]" Font="Arial, 10pt"/>
+    <DataBand Name="Data1" Top="64.7" Width="718.2" Height="3146.85" DataSource="AccountGroupData">
+      <TextObject Name="Text1" Left="9.45" Top="18.9" Width="94.5" Height="18.9" Text="ข้อมูลทั่วไป" Font="Arial, 10pt"/>
+      <TextObject Name="Text2" Left="9.45" Top="85.05" Width="94.5" Height="18.9" Text="[GeneralData.GeneralName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text3" Left="122.85" Top="85.05" Width="94.5" Height="18.9" Text="[GeneralData.GeneralName1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="9.45" Top="160.65" Width="94.5" Height="18.9" Text="[GeneralData.GeneralTel]" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="113.4" Top="160.65" Width="94.5" Height="18.9" Text="[GeneralData.GeneralFax]" Font="Arial, 10pt"/>
+      <TextObject Name="Text12" Left="217.35" Top="160.65" Width="94.5" Height="18.9" Text="[GeneralData.GeneralEmail]" Font="Arial, 10pt"/>
+      <TextObject Name="Text13" Left="340.2" Top="160.65" Width="94.5" Height="18.9" Text="[GeneralData.GeneralLine]" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Left="9.45" Top="226.8" Width="94.5" Height="18.9" Text="[GeneralData.GeneralTax]" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="113.4" Top="226.8" Width="94.5" Height="18.9" Text="[GeneralData.GeneralBranch]" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="9.45" Top="292.95" Width="94.5" Height="18.9" Text="ที่อยู่" Font="Arial, 10pt"/>
+      <TextObject Name="Text17" Left="9.45" Top="359.1" Width="94.5" Height="18.9" Text="[AddressData.addrLine1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text18" Left="113.4" Top="359.1" Width="94.5" Height="18.9" Text="[AddressData.addrLine2]" Font="Arial, 10pt"/>
+      <TextObject Name="Text19" Left="9.45" Top="425.25" Width="94.5" Height="18.9" Text="[AddressData.subDistrict]" Font="Arial, 10pt"/>
+      <TextObject Name="Text20" Left="113.4" Top="425.25" Width="94.5" Height="18.9" Text="[AddressData.district]" Font="Arial, 10pt"/>
+      <TextObject Name="Text21" Left="217.35" Top="425.25" Width="94.5" Height="18.9" Text="[AddressData.postalCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text22" Left="321.3" Top="425.25" Width="94.5" Height="18.9" Text="[AddressData.createdDate]" Font="Arial, 10pt"/>
+      <TextObject Name="Text24" Left="9.45" Top="472.5" Width="94.5" Height="18.9" Text="[AddressCountry.CountryName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text25" Left="113.4" Top="472.5" Width="94.5" Height="18.9" Text="[AddressProvince.ProvinceId]" Font="Arial, 10pt"/>
+      <TextObject Name="Text26" Left="217.35" Top="472.5" Width="94.5" Height="18.9" Text="[AddressProvince.ProvinceName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text23" Left="9.45" Top="538.65" Width="94.5" Height="18.9" Text="ข้อมูลจัดส่ง" Font="Arial, 10pt"/>
+      <TextObject Name="Text27" Left="9.45" Top="595.35" Width="94.5" Height="18.9" Text="[ShippingData.DeliveryName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text28" Left="113.4" Top="595.35" Width="94.5" Height="18.9" Text="[ShippingData.address1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text29" Left="217.35" Top="595.35" Width="94.5" Height="18.9" Text="[ShippingData.address2]" Font="Arial, 10pt"/>
+      <TextObject Name="Text30" Left="321.3" Top="595.35" Width="94.5" Height="18.9" Text="[ShippingData.subDistrict]" Font="Arial, 10pt"/>
+      <TextObject Name="Text31" Left="9.45" Top="652.05" Width="94.5" Height="18.9" Text="[ShippingData.district]" Font="Arial, 10pt"/>
+      <TextObject Name="Text32" Left="113.4" Top="652.05" Width="94.5" Height="18.9" Text="[ShippingData.postalCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text33" Left="217.35" Top="652.05" Width="94.5" Height="18.9" Text="[ShippingData.contact_name]" Font="Arial, 10pt"/>
+      <TextObject Name="Text34" Left="321.3" Top="652.05" Width="94.5" Height="18.9" Text="[ShippingData.mobile]" Font="Arial, 10pt"/>
+      <TextObject Name="Text35" Left="425.25" Top="652.05" Width="94.5" Height="18.9" Text="[ShippingData.freight]" Font="Arial, 10pt"/>
+      <TextObject Name="Text36" Left="9.45" Top="699.3" Width="94.5" Height="18.9" Text="[ShippingCountry.CountryName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text37" Left="113.4" Top="699.3" Width="94.5" Height="18.9" Text="[ShippingProvince.ProvinceId]" Font="Arial, 10pt"/>
+      <TextObject Name="Text38" Left="217.35" Top="699.3" Width="94.5" Height="18.9" Text="[ShippingProvince.ProvinceName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text39" Left="9.45" Top="774.9" Width="189" Height="18.9" Text="กลุ่มประเทศที่ลูกค้ารับผิดชอบ" Font="Arial, 10pt"/>
+      <TextObject Name="Text40" Left="9.45" Top="812.7" Width="94.5" Height="18.9" Text="[CustGroupCountry.CountryCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text41" Left="113.4" Top="812.7" Width="94.5" Height="18.9" Text="[CustGroupCountry.CountryName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text42" Left="217.35" Top="812.7" Width="94.5" Height="18.9" Text="[CustGroupCountry.CountryDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text43" Left="9.45" Top="878.85" Width="151.2" Height="18.9" Text="ประเภทธุรกิจ" Font="Arial, 10pt"/>
+      <TextObject Name="Text44" Left="9.45" Top="926.1" Width="94.5" Height="18.9" Text="[BusinessTypeData.busiTypeCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text45" Left="113.4" Top="926.1" Width="94.5" Height="18.9" Text="[BusinessTypeData.busiTypeName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text46" Left="217.35" Top="926.1" Width="94.5" Height="18.9" Text="[BusinessTypeData.busiTypeDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text47" Left="321.3" Top="926.1" Width="94.5" Height="18.9" Text="[BusinessTypeData.RegistrationDate]" Font="Arial, 10pt"/>
+      <TextObject Name="Text48" Left="425.25" Top="926.1" Width="94.5" Height="18.9" Text="[BusinessTypeData.RegisteredCapital]" Font="Arial, 10pt"/>
+      <TextObject Name="Text49" Left="9.45" Top="992.25" Width="160.65" Height="18.9" Text="ข้อมูลการชำระเงิน" Font="Arial, 10pt"/>
+      <TextObject Name="Text50" Left="9.45" Top="1030.05" Width="94.5" Height="18.9" Text="[CreditInfoData.EstimatedPurchase]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text51" Left="113.4" Top="1030.05" Width="94.5" Height="18.9" Text="[CreditInfoData.TimeRequired]" Font="Arial, 10pt"/>
+      <TextObject Name="Text52" Left="217.35" Top="1030.05" Width="94.5" Height="18.9" Text="[CreditInfoData.CreditLimit]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text53" Left="9.45" Top="1086.75" Width="94.5" Height="18.9" Text="ลายเซ็นของลูกค้า" Font="Arial, 10pt"/>
+      <TextObject Name="Text54" Left="9.45" Top="1134" Width="94.5" Height="18.9" Text="[CustomerSignData.CustSignFirstName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text55" Left="113.4" Top="1134" Width="94.5" Height="18.9" Text="[CustomerSignData.custsignTel]" Font="Arial, 10pt"/>
+      <TextObject Name="Text56" Left="217.35" Top="1134" Width="94.5" Height="18.9" Text="[CustomerSignData.custsignEmail]" Font="Arial, 10pt"/>
+      <TextObject Name="Text57" Left="321.3" Top="1134" Width="94.5" Height="18.9" Text="[CustomerSignData.custsignLine]" Font="Arial, 10pt"/>
+      <TextObject Name="Text58" Left="9.45" Top="1181.25" Width="94.5" Height="18.9" Text="ประเภทร้านต้า" Font="Arial, 10pt"/>
+      <TextObject Name="Text59" Left="9.45" Top="1219.05" Width="94.5" Height="18.9" Text="[ShopTypeData.shopCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text60" Left="113.4" Top="1219.05" Width="94.5" Height="18.9" Text="[ShopTypeData.shopName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text61" Left="217.35" Top="1219.05" Width="94.5" Height="18.9" Text="[ShopTypeData.shopDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text62" Left="321.3" Top="1219.05" Width="94.5" Height="18.9" Text="[ShopTypeData.accGroupName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text63" Left="9.45" Top="1266.3" Width="179.55" Height="18.9" Text="ประเภทอุตสาหกรรม" Font="Arial, 10pt"/>
+      <TextObject Name="Text64" Left="9.45" Top="1313.55" Width="94.5" Height="18.9" Text="[IndustryTypeData.InduTypeCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text65" Left="113.4" Top="1313.55" Width="94.5" Height="18.9" Text="[IndustryTypeData.InduTypeName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text66" Left="217.35" Top="1313.55" Width="94.5" Height="18.9" Text="[IndustryTypeData.InduTypeDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text67" Left="9.45" Top="1370.25" Width="94.5" Height="18.9" Text="ข้อมูลบริษัท" Font="Arial, 10pt"/>
+      <TextObject Name="Text68" Left="9.45" Top="1408.05" Width="94.5" Height="18.9" Text="[CompanyData.companyCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text69" Left="113.4" Top="1408.05" Width="94.5" Height="18.9" Text="[CompanyData.companyName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text70" Left="217.35" Top="1408.05" Width="94.5" Height="18.9" Text="[CompanyData.companyAddr]" Font="Arial, 10pt"/>
+      <TextObject Name="Text71" Left="9.45" Top="1474.2" Width="207.9" Height="18.9" Text="หน่วยงานที่รับผิดชอบด้านการขาย" Font="Arial, 10pt"/>
+      <TextObject Name="Text72" Left="9.45" Top="1521.45" Width="94.5" Height="18.9" Text="[SaleOrgData.saleOrgCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text73" Left="113.4" Top="1521.45" Width="94.5" Height="18.9" Text="[SaleOrgData.saleOrgName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text74" Left="217.35" Top="1521.45" Width="94.5" Height="18.9" Text="[SaleOrgData.saleOrgDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text75" Left="9.45" Top="1578.15" Width="151.2" Height="18.9" Text="กลุ่มลูกค้าในบัญชี" Font="Arial, 10pt"/>
+      <TextObject Name="Text76" Left="9.45" Top="1625.4" Width="94.5" Height="18.9" Text="[AccountGroupData.accGroupCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text77" Left="113.4" Top="1625.4" Width="94.5" Height="18.9" Text="[AccountGroupData.accGroupName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text78" Left="217.35" Top="1625.4" Width="94.5" Height="18.9" Text="[AccountGroupData.accGroupDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text79" Left="9.45" Top="1672.65" Width="179.55" Height="18.9" Text="เอกสารที่เกี่ยวข้องกับการกู้ยืมเงินในทางการเงิน" Font="Arial, 10pt"/>
+      <CheckBoxObject Name="CheckBox1" Left="9.45" Top="1701" Width="18.9" Height="18.9" DataColumn="DocCreditData.CompanyCertificate"/>
+      <CheckBoxObject Name="CheckBox2" Left="37.8" Top="1701" Width="18.9" Height="18.9" DataColumn="DocCreditData.CopyOfPP_20"/>
+      <CheckBoxObject Name="CheckBox3" Left="66.15" Top="1701" Width="18.9" Height="18.9" DataColumn="DocCreditData.CopyOfCoRegis"/>
+      <CheckBoxObject Name="CheckBox4" Left="94.5" Top="1701" Width="18.9" Height="18.9" DataColumn="DocCreditData.CopyOfIDCard"/>
+      <CheckBoxObject Name="CheckBox5" Left="122.85" Top="1701" Width="18.9" Height="18.9" DataColumn="DocCreditData.CompanyLocationMap"/>
+      <TextObject Name="Text80" Left="151.2" Top="1701" Width="94.5" Height="18.9" Text="[DocCreditData.OtherSpecify]" Font="Arial, 10pt"/>
+      <TextObject Name="Text81" Left="9.45" Top="1757.7" Width="236.25" Height="18.9" Text="ระบุประเภทของบัญชี" Font="Arial, 10pt"/>
+      <TextObject Name="Text82" Left="9.45" Top="1795.5" Width="94.5" Height="18.9" Text="[AccountCodeData.AccountCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text83" Left="113.4" Top="1795.5" Width="94.5" Height="18.9" Text="[AccountCodeData.AccountName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text84" Left="217.35" Top="1795.5" Width="94.5" Height="18.9" Text="[AccountCodeData.AccountType]" Font="Arial, 10pt"/>
+      <TextObject Name="Text85" Left="9.45" Top="1833.3" Width="94.5" Height="18.9" Text="[AccountCodeData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text86" Left="9.45" Top="1890" Width="94.5" Height="18.9" Text="เรียงลำดับ" Font="Arial, 10pt"/>
+      <TextObject Name="Text87" Left="9.45" Top="1937.25" Width="94.5" Height="18.9" Text="[SortKeyData.sortkeyCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text88" Left="113.4" Top="1937.25" Width="94.5" Height="18.9" Text="[SortKeyData.sortkeyName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text89" Left="217.35" Top="1937.25" Width="94.5" Height="18.9" Text="[SortKeyData.sortkeyDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text90" Left="9.45" Top="1993.95" Width="94.5" Height="18.9" Text="วิธีการชำระเงิน" Font="Arial, 10pt"/>
+      <TextObject Name="Text91" Left="9.45" Top="2041.2" Width="94.5" Height="18.9" Text="[PaymentMethodData.PaymentMethodCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text92" Left="113.4" Top="2041.2" Width="94.5" Height="18.9" Text="[PaymentMethodData.PaymentMethodName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text93" Left="217.35" Top="2041.2" Width="94.5" Height="18.9" Text="[PaymentMethodData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text94" Left="9.45" Top="2107.35" Width="160.65" Height="18.9" Text="เงื่อนไขการชำระเงิน" Font="Arial, 10pt"/>
+      <TextObject Name="Text95" Left="9.45" Top="2154.6" Width="94.5" Height="18.9" Text="[TermOfPaymentData.TermCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text96" Left="113.4" Top="2154.6" Width="94.5" Height="18.9" Text="[TermOfPaymentData.TermName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text97" Left="217.35" Top="2154.6" Width="94.5" Height="18.9" Text="[TermOfPaymentData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text98" Left="9.45" Top="2211.3" Width="236.25" Height="18.9" Text="พื้นที่ที่รับผิดชอบในการขายสินค้า/บริการ" Font="Arial, 10pt"/>
+      <TextObject Name="Text99" Left="9.45" Top="2239.65" Width="94.5" Height="18.9" Text="[SaleDistrictData.DistrictCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text100" Left="113.4" Top="2239.65" Width="94.5" Height="18.9" Text="[SaleDistrictData.DistrictName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text101" Left="217.35" Top="2239.65" Width="94.5" Height="18.9" Text="[SaleDistrictData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text102" Left="9.45" Top="2296.35" Width="189" Height="18.9" Text="กลุ่มฝ่ายขาย" Font="Arial, 10pt"/>
+      <TextObject Name="Text103" Left="9.45" Top="2334.15" Width="94.5" Height="18.9" Text="[SaleGroupData.GroupCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text104" Left="113.4" Top="2334.15" Width="94.5" Height="18.9" Text="[SaleGroupData.GroupName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text105" Left="217.35" Top="2334.15" Width="94.5" Height="18.9" Text="[SaleGroupData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text106" Left="9.45" Top="2381.4" Width="160.65" Height="18.9" Text="ประเภทกลุ่มลูกค้า" Font="Arial, 10pt"/>
+      <TextObject Name="Text107" Left="9.45" Top="2428.65" Width="94.5" Height="18.9" Text="[CustGroupTypeData.GroupCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text108" Left="113.4" Top="2428.65" Width="94.5" Height="18.9" Text="[CustGroupTypeData.GroupName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text109" Left="217.35" Top="2428.65" Width="94.5" Height="18.9" Text="[CustGroupTypeData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text110" Left="9.45" Top="2485.35" Width="189" Height="18.9" Text="สกุลเงิน" Font="Arial, 10pt"/>
+      <TextObject Name="Text111" Left="9.45" Top="2523.15" Width="94.5" Height="18.9" Text="[CurrencyData.CurrencyCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text112" Left="113.4" Top="2523.15" Width="94.5" Height="18.9" Text="[CurrencyData.CurrencyName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text113" Left="217.35" Top="2523.15" Width="94.5" Height="18.9" Text="[CurrencyData.Symbol]" Font="Arial, 10pt"/>
+      <TextObject Name="Text114" Left="9.45" Top="2589.3" Width="189" Height="18.9" Text="อัตราแลกเปลี่ยนสกุลเงิน" Font="Arial, 10pt"/>
+      <TextObject Name="Text115" Left="9.45" Top="2627.1" Width="94.5" Height="18.9" Text="[ExchRateTypeData.RateTypeCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text116" Left="113.4" Top="2627.1" Width="94.5" Height="18.9" Text="[ExchRateTypeData.RateTypeName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text117" Left="217.35" Top="2627.1" Width="94.5" Height="18.9" Text="[ExchRateTypeData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text118" Left="9.45" Top="2683.8" Width="236.25" Height="18.9" Text="กระบวนการกำหนดราคาสำหรับลูกค้า" Font="Arial, 10pt"/>
+      <TextObject Name="Text119" Left="9.45" Top="2731.05" Width="94.5" Height="18.9" Text="[CustPricProcData.PricProcCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text120" Left="113.4" Top="2731.05" Width="94.5" Height="18.9" Text="[CustPricProcData.PricProcName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text121" Left="217.35" Top="2731.05" Width="94.5" Height="18.9" Text="[CustPricProcData.Description]" Font="Arial, 10pt"/>
+      <TextObject Name="Text122" Left="9.45" Top="2768.85" Width="189" Height="18.9" Text="รายการราคาสินค้า" Font="Arial, 10pt"/>
+      <TextObject Name="Text123" Left="9.45" Top="2816.1" Width="94.5" Height="18.9" Text="[PriceListData.priceListCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text124" Left="113.4" Top="2816.1" Width="94.5" Height="18.9" Text="[PriceListData.priceListName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text125" Left="217.35" Top="2816.1" Width="94.5" Height="18.9" Text="[PriceListData.priceListDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text126" Left="9.45" Top="2863.35" Width="207.9" Height="18.9" Text="กฎที่ใช้ในสัญญาซื้อขายระหว่างประเทศ" Font="Arial, 10pt"/>
+      <TextObject Name="Text127" Left="9.45" Top="2910.6" Width="94.5" Height="18.9" Text="[PriceListData.priceListCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text128" Left="113.4" Top="2910.6" Width="94.5" Height="18.9" Text="[PriceListData.priceListName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text129" Left="217.35" Top="2910.6" Width="94.5" Height="18.9" Text="[PriceListData.priceListDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text130" Left="9.45" Top="2967.3" Width="151.2" Height="18.9" Text="ผู้จัดการฝ่ายขาย" Font="Arial, 10pt"/>
+      <TextObject Name="Text131" Left="9.45" Top="3005.1" Width="94.5" Height="18.9" Text="[SaleManagerData.SaleGroupCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text132" Left="113.4" Top="3005.1" Width="94.5" Height="18.9" Text="[SaleManagerData.SaleGroupName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text133" Left="217.35" Top="3005.1" Width="94.5" Height="18.9" Text="[SaleManagerData.SaleGroupDes]" Font="Arial, 10pt"/>
+      <TextObject Name="Text134" Left="9.45" Top="3052.35" Width="245.7" Height="18.9" Text="กฎที่ใช้ในสัญญาซื้อขายระหว่างประเทศ" Font="Arial, 10pt"/>
+      <TextObject Name="Text135" Left="9.45" Top="3090.15" Width="94.5" Height="18.9" Text="[IncotermData.incotermCode]" Font="Arial, 10pt"/>
+      <TextObject Name="Text136" Left="113.4" Top="3090.15" Width="94.5" Height="18.9" Text="[IncotermData.incotermName]" Font="Arial, 10pt"/>
+      <TextObject Name="Text137" Left="217.35" Top="3090.15" Width="94.5" Height="18.9" Text="[IncotermData.incotermDes]" Font="Arial, 10pt"/>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="153.75" Width="718.2" Height="18.9"/>
+    <PageFooterBand Name="PageFooter1" Top="3215.55" Width="718.2" Height="47.25"/>
   </ReportPage>
 </Report>

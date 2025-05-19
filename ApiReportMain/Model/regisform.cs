@@ -111,6 +111,7 @@ namespace ModelTest.Controllers
         public SaleManagerModel SaleManager { get; set; }
 
         // ข้อมูลประเทศที่กลุ่มลูกค้ารับผิดชอบ
+        //กลุ่มประเทศที่ลูกค้ารับผิดชอบ
         public CustGroupCountryModel CustGroupCountry { get; set; }
 
 
