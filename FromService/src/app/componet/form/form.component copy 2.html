@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div *ngIf="customerData">
+        <h2>ข้อมูลทั่วไป</h2>
+        <label>ชื่อบริษัท:</label>
+        <input type="text" [(ngModel)]="customerData.general.generalName" name="generalName" />
+
+        <label>เบอร์โทร:</label>
+        <input type="text" [(ngModel)]="customerData.general.generalTel" name="generalTel" />
+
+        <label>ที่อยู่:</label>
+        <input type="text" [(ngModel)]="customerData.general.address.addrLine1" name="addrLine1" />
+
+        <label>จังหวัด:</label>
+        <input type="text" [(ngModel)]="customerData.general.address.province.provinceName" name="provinceName" />
+
+        <label>ประเทศ:</label>
+        <input type="text" [(ngModel)]="customerData.general.address.country.countryName" name="countryName" />
+
+        <hr />
+
+        <h2>ข้อมูลการจัดส่ง</h2>
+        <label>ชื่อผู้รับ:</label>
+        <input type="text" [(ngModel)]="customerData.shipping.deliveryName" name="deliveryName" />
+
+        <label>เบอร์โทร:</label>
+        <input type="text" [(ngModel)]="customerData.shipping.mobile" name="mobile" />
+
+        <label>จังหวัด:</label>
+        <input type="text" [(ngModel)]="customerData.shipping.province.provinceName" name="shippingProvince" />
+
+        <hr />
+        <h2>shopType</h2>
+
+        <label>รหัสร้านค้า (Shop Code):</label>
+        <input type="text" [(ngModel)]="customerData.shopType.shopCode" name="shopCode" />
+
+        <label>ชื่อร้านค้า (Shop Name):</label>
+        <input type="text" [(ngModel)]="customerData.shopType.shopName" name="shopName" />
+
+        <label>รายละเอียดร้านค้า (Shop Description):</label>
+        <input type="text" [(ngModel)]="customerData.shopType.shopDes" name="shopDes" />
+
+        <label>กลุ่มบัญชี (Account Group Name):</label>
+        <input type="text" [(ngModel)]="customerData.shopType.accGroupName" name="accGroupName" />
+
+        <hr />
+        <h2>Industry Type</h2>
+
+        <div *ngIf="customerData?.industryType">
+            <label>รหัสประเภทอุตสาหกรรม (Industry Code):</label>
+            <input type="text" [(ngModel)]="customerData.industryType.induTypeCode" name="induTypeCode" />
+
+            <label>ชื่อประเภทอุตสาหกรรม (Industry Name):</label>
+            <input type="text" [(ngModel)]="customerData.industryType.induTypeName" name="induTypeName" />
+
+            <label>รายละเอียดประเภทอุตสาหกรรม (Description):</label>
+            <input type="text" [(ngModel)]="customerData.industryType.induTypeDes" name="induTypeDes" />
+        </div>
+
+        <hr />
+        <h2>Sale Organization</h2>
+        <div *ngIf="customerData?.saleOrg">
+            <label>รหัสองค์กรขาย:</label>
+            <input type="text" [(ngModel)]="customerData.saleOrg.saleOrgCode" name="saleOrgCode" />
+
+            <label>ชื่อองค์กรขาย:</label>
+            <input type="text" [(ngModel)]="customerData.saleOrg.saleOrgName" name="saleOrgName" />
+
+            <label>รายละเอียด:</label>
+            <input type="text" [(ngModel)]="customerData.saleOrg.saleOrgDes" name="saleOrgDes" />
+        </div>
+
+        <hr />
+        <h2>Company</h2>
+        <div *ngIf="customerData?.company">
+            <label>รหัสบริษัท:</label>
+            <input type="text" [(ngModel)]="customerData.company.companyCode" name="companyCode" />
+
+            <label>ชื่อบริษัท:</label>
+            <input type="text" [(ngModel)]="customerData.company.companyName" name="companyName" />
+
+            <label>ที่อยู่บริษัท:</label>
+            <input type="text" [(ngModel)]="customerData.company.companyAddr" name="companyAddr" />
+        </div>
+
+        <hr />
+        <h2>Account Group</h2>
+        <div *ngIf="customerData?.accountGroup">
+            <label>รหัสกลุ่มบัญชี:</label>
+            <input type="text" [(ngModel)]="customerData.accountGroup.accGroupCode" name="accGroupCode" />
+
+            <label>ชื่อกลุ่มบัญชี:</label>
+            <input type="text" [(ngModel)]="customerData.accountGroup.accGroupName" name="accGroupName" />
+
+            <label>รายละเอียดกลุ่มบัญชี:</label>
+            <input type="text" [(ngModel)]="customerData.accountGroup.accGroupDes" name="accGroupDes" />
+        </div>
+
+        <hr />
+        <h2>Sort Key</h2>
+        <div *ngIf="customerData?.sortKey">
+            <label>รหัส SortKey:</label>
+            <input type="text" [(ngModel)]="customerData.sortKey.sortkeyCode" name="sortkeyCode" />
+
+            <label>ชื่อ SortKey:</label>
+            <input type="text" [(ngModel)]="customerData.sortKey.sortkeyName" name="sortkeyName" />
+
+            <label>คำอธิบาย:</label>
+            <input type="text" [(ngModel)]="customerData.sortKey.sortkeyDes" name="sortkeyDes" />
+        </div>
+
+        <hr />
+        <h2>Cash Group</h2>
+        <div *ngIf="customerData?.cashGroup">
+            <label>รหัส Cash Group:</label>
+            <input type="text" [(ngModel)]="customerData.cashGroup.cashGroupCode" name="cashGroupCode" />
+
+            <label>ชื่อ Cash Group:</label>
+            <input type="text" [(ngModel)]="customerData.cashGroup.cashGroupName" name="cashGroupName" />
+
+            <label>คำอธิบาย:</label>
+            <input type="text" [(ngModel)]="customerData.cashGroup.description" name="cashGroupDescription" />
+        </div>
+
+        <hr />
+        <h2>Payment Method</h2>
+        <div *ngIf="customerData?.paymentMethod">
+            <label>รหัสวิธีชำระเงิน:</label>
+            <input type="text" [(ngModel)]="customerData.paymentMethod.paymentMethodCode" name="paymentMethodCode" />
+
+            <label>ชื่อวิธีชำระเงิน:</label>
+            <input type="text" [(ngModel)]="customerData.paymentMethod.paymentMethodName" name="paymentMethodName" />
+
+            <label>คำอธิบาย:</label>
+            <input type="text" [(ngModel)]="customerData.paymentMethod.description" name="paymentMethodDescription" />
+        </div>
+
+        <hr />
+        <h2>Term of Payment</h2>
+        <div *ngIf="customerData?.termOfPayment">
+            <label>รหัสเงื่อนไขชำระเงิน:</label>
+            <input type="text" [(ngModel)]="customerData.termOfPayment.termCode" name="termCode" />
+
+            <label>ชื่อเงื่อนไขชำระเงิน:</label>
+            <input type="text" [(ngModel)]="customerData.termOfPayment.termName" name="termName" />
+
+            <label>คำอธิบาย:</label>
+            <input type="text" [(ngModel)]="customerData.termOfPayment.description" name="termDescription" />
+        </div>
+
+        <hr />
+        <h2>Sale District</h2>
+        <div *ngIf="customerData?.saleDistrict">
+            <label>รหัสเขตขาย:</label>
+            <input type="text" [(ngModel)]="customerData.saleDistrict.districtCode" name="districtCode" />
+
+            <label>ชื่อเขตขาย:</label>
+            <input type="text" [(ngModel)]="customerData.saleDistrict.districtName" name="districtName" />
+
+            <label>คำอธิบาย:</label>
+            <input type="text" [(ngModel)]="customerData.saleDistrict.description" name="districtDescription" />
+        </div>
+
+        <h2>Business Type</h2>
+        <div *ngIf="customerData?.businessType">
+            <label>รหัสประเภทธุรกิจ:</label>
+            <input type="text" [(ngModel)]="customerData.businessType.busiTypeCode" name="busiTypeCode" />
+
+            <label>ชื่อประเภทธุรกิจ:</label>
+            <input type="text" [(ngModel)]="customerData.businessType.busiTypeName" name="busiTypeName" />
+
+            <label>คำอธิบายประเภทธุรกิจ:</label>
+            <input type="text" [(ngModel)]="customerData.businessType.busiTypeDes" name="busiTypeDes" />
+
+            <label>วันที่จดทะเบียน:</label>
+            <input type="date" [(ngModel)]="customerData.businessType.registrationDate" name="registrationDate" />
+
+            <label>ทุนจดทะเบียน:</label>
+            <input type="number" [(ngModel)]="customerData.businessType.registeredCapital" name="registeredCapital" />
+        </div>
+
+        <hr />
+
+        <h2>Credit Info</h2>
+        <div *ngIf="customerData?.creditInfo">
+            <label>รหัสข้อมูลเครดิต:</label>
+            <input type="number" [(ngModel)]="customerData.creditInfo.creditInfoId" name="creditInfoId" />
+
+            <label>ยอดซื้อประมาณการ:</label>
+            <input type="number" [(ngModel)]="customerData.creditInfo.estimatedPurchase" name="estimatedPurchase" />
+
+            <label>ระยะเวลาที่ต้องการ (วัน):</label>
+            <input type="number" [(ngModel)]="customerData.creditInfo.timeRequired" name="timeRequired" />
+
+            <label>วงเงินเครดิต:</label>
+            <input type="number" [(ngModel)]="customerData.creditInfo.creditLimit" name="creditLimit" />
+        </div>
+
+        <hr />
+
+        <div *ngIf="customerData?.docCredit">
+
+            <div>
+                <label>Company Certificate</label>
+                <label>
+                    <input type="radio" name="companyCertificate" [value]="true"
+                        [(ngModel)]="customerData.docCredit.companyCertificate" /> True
+                </label>
+                <label>
+                    <input type="radio" name="companyCertificate" [value]="false"
+                        [(ngModel)]="customerData.docCredit.companyCertificate" /> False
+                </label>
+            </div>
+
+            <div>
+                <label>Copy of PP 20</label>
+                <label>
+                    <input type="radio" name="copyOfPP_20" [value]="true"
+                        [(ngModel)]="customerData.docCredit.copyOfPP_20" />
+                    True
+                </label>
+                <label>
+                    <input type="radio" name="copyOfPP_20" [value]="false"
+                        [(ngModel)]="customerData.docCredit.copyOfPP_20" />
+                    False
+                </label>
+            </div>
+
+            <div>
+                <label>Copy of Company Registration</label>
+                <label>
+                    <input type="radio" name="copyOfCoRegis" [value]="true"
+                        [(ngModel)]="customerData.docCredit.copyOfCoRegis" /> True
+                </label>
+                <label>
+                    <input type="radio" name="copyOfCoRegis" [value]="false"
+                        [(ngModel)]="customerData.docCredit.copyOfCoRegis" /> False
+                </label>
+            </div>
+
+            <div>
+                <label>Copy of ID Card</label>
+                <label>
+                    <input type="radio" name="copyOfIDCard" [value]="true"
+                        [(ngModel)]="customerData.docCredit.copyOfIDCard" />
+                    True
+                </label>
+                <label>
+                    <input type="radio" name="copyOfIDCard" [value]="false"
+                        [(ngModel)]="customerData.docCredit.copyOfIDCard" />
+                    False
+                </label>
+            </div>
+
+            <div>
+                <label>Company Location Map</label>
+                <label>
+                    <input type="radio" name="companyLocationMap" [value]="true"
+                        [(ngModel)]="customerData.docCredit.companyLocationMap" /> True
+                </label>
+                <label>
+                    <input type="radio" name="companyLocationMap" [value]="false"
+                        [(ngModel)]="customerData.docCredit.companyLocationMap" /> False
+                </label>
+            </div>
+
+            <div>
+                <label>Other Specify</label>
+                <input type="text" [(ngModel)]="customerData.docCredit.otherSpecify" name="otherSpecify" />
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

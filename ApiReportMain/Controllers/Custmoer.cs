@@ -25,7 +25,7 @@ namespace ModelTest.ApiControllers
         //post
 
         // get all 
-        [HttpGet("customer")]
+        [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
             var customers = await _customerService.GetCustomersAsync();
@@ -33,7 +33,7 @@ namespace ModelTest.ApiControllers
         }
 
         //get id
-        [HttpGet("customer/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<GetCustomersDTO>> GetCustomerById(int id)
         {
             var customer = await _customerService.GetCustomerByIdAsync(id); // ✅ ใช้ _getCustomerService
