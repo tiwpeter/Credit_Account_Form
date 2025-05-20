@@ -1,0 +1,247 @@
+{
+  "customerName": "GlobalTech Solutions Ltd.",
+  "general": {
+    "generalName": "GlobalTech Solutions Ltd.",
+    "generalName1": "GlobalTech",
+    "generalTel": "+44-20-7946-0958",
+    "generalFax": "+44-20-7946-0959",
+    "generalEmail": "info@globaltech.com",
+    "generalLine": "@globaltech",
+    "generalTax": "GB123456789",
+    "generalBranch": "Head Office",
+    "address": {
+      "addrLine1": "221B Baker Street",
+      "addrLine2": "Marylebone",
+      "subDistrict": "Westminster",
+      "district": "London",
+      "country": {
+        "countryId": 1001
+      },
+      "province": {
+        "provinceId": 1001
+      },
+      "postalCode": "NW1 6XE",
+     
+      "createdDate": "2023-11-20"
+    }
+  },
+  "shipping": {
+    "shippingId": 201,
+    "deliveryName": "GlobalTech Warehouse",
+    "address1": "500 Tech Drive",
+    "address2": "Unit 12",
+    "subDistrict": "Docklands",
+    "district": "London",
+    "postalCode": "E14 9SG",
+    "contact_name": "John Carter",
+    "mobile": "+44-789-456-1234",
+    "freight": "DHL Express",
+    "country": {
+        "countryId": 1001
+      },
+      "province": {
+        "provinceId": 1001
+      }
+  },
+  "shopType": {
+    "id": 1,
+    "shopCode": "INT001",
+    "shopName": "International Electronics Retailer",
+    "shopDes": "Retailer specializing in international electronics products",
+    "accGroupName": "Retail"
+  },
+  "industryType": {
+    "id": 2,
+    "induTypeCode": "IT",
+    "induTypeName": "Information Technology",
+    "induTypeDes": "Companies operating in the IT sector"
+  },
+  "company": {
+    "company_id": 1,
+    "companyCode": "GT001",
+    "companyName": "GlobalTech Holdings",
+    "companyAddr": "456 Innovation Avenue, Silicon Valley, CA"
+  },
+  "saleOrg": {
+    "id": 1,
+    "saleOrgCode": "EU001",
+    "saleOrgName": "EU Sales Department",
+    "saleOrgDes": "Responsible for all EU market sales"
+  },
+  "accountGroup": {
+    "id": 1,
+    "accGroupCode": "ENT",
+    "accGroupName": "Enterprise Clients",
+    "accGroupDes": "Large scale business clients"
+  },
+  "businessType": {
+    "busiTypeID": 1,
+    "busiTypeCode": "LTD",
+    "busiTypeName": "Limited Company",
+    "busiTypeDes": "Privately held limited company",
+    "registrationDate": "2012-04-15T00:00:00.000Z",
+    "registeredCapital": 10000000
+  },
+  "creditInfo": {
+    "estimatedPurchase": 250000,
+    "timeRequired": 45,
+    "creditLimit": 200000
+  },
+  "docCreditId": 1,
+  "docCredit": {
+    "docCreditId": 1,
+    "companyCertificate": true,
+    "copyOfPP_20": false,
+    "copyOfCoRegis": true,
+    "copyOfIDCard": false,
+    "companyLocationMap": true,
+    "otherSpecify": "Business license document"
+  },
+  "customerSign": {
+    "custSignId": 1,
+    "custSignFirstName": "Emily Watson",
+    "custsignTel": "+44-789-123-4567",
+    "custsignEmail": "emily.watson@globaltech.com",
+    "custsignLine": "@emilytech"
+  },
+  "accountCode": {
+    "accountId": 1,
+    "accountCode": "AC-EU-001",
+    "accountName": "GlobalTech Main Account",
+    "accountType": "AR",
+    "description": "Main accounts receivable for GlobalTech"
+  },
+  "sortKey": {
+    "id": 1,
+    "sortkeyCode": "EL001",
+    "sortkeyName": "Electronics",
+    "sortkeyDes": "Sorted under electronics category"
+  },
+  "cashGroup": {
+    "id": 1,
+    "cashGroupCode": "CASH01",
+    "cashGroupName": "Cash Customers",
+    "description": "Customers who pay with cash"
+  },
+  "paymentMethod": {
+    "id": 1,
+    "paymentMethodCode": "BANK_TRANSFER",
+    "paymentMethodName": "Bank Transfer",
+    "description": "Payment via international bank transfer"
+  },
+  "termOfPayment": {
+    "id": 1,
+    "termCode": "NET45",
+    "termName": "Net 45 Days",
+    "description": "Payment due within 45 days"
+  },
+  "saleDistrict": {
+    "id": 1,
+    "districtCode": "LDN1",
+    "districtName": "London Central",
+    "description": "Central London sales region"
+  },
+  "saleGroup": {
+    "id": 1,
+    "groupCode": "SG-EU01",
+    "groupName": "EU Sales Group",
+    "description": "Sales group handling EU clients"
+  },
+  "custGroupType": {
+    "id": 1,
+    "groupCode": "MONTHLY-BIZ",
+    "groupName": "Monthly Business Clients",
+    "description": "Clients with regular monthly transactions"
+  },
+  "currency": {
+    "id": 1,
+    "currencyCode": "GBP",
+    "currencyName": "British Pound",
+    "symbol": "£"
+  },
+  "exchRateType": {
+    "id": 1,
+    "rateTypeCode": "STD",
+    "rateTypeName": "Standard Rate",
+    "description": "Standard exchange rate used"
+  },
+  "custPricProc": {
+    "id": 1,
+    "pricProcCode": "STD01",
+    "pricProcName": "Standard Pricing",
+    "description": "Standard price processing method"
+  },
+  "priceList": {
+    "id": 1,
+    "priceListCode": "PL-GLOBAL",
+    "priceListName": "Global Price List",
+    "priceListDes": "Pricing list for all global clients"
+  },
+  "incoterm": {
+    "id": 1,
+    "incotermCode": "CIF",
+    "incotermName": "Cost, Insurance, and Freight",
+    "incotermDes": "Seller covers cost, insurance, and freight"
+  },
+  "saleManager": {
+    "id": 1,
+    "saleGroupCode": "MG-EU001",
+    "saleGroupName": "Michael Stone",
+    "saleGroupDes": "Sales manager for EU region"
+  },
+  "custGroupCountry": {
+    "id": 1,
+    "countryCode": "UK",
+    "countryName": "United Kingdom",
+    "countryDes": "Customer group based in UK"
+  }
+}
+
+
+
+
+
+[
+    {
+        "countryId": 1,
+        "countryName": "Thailand",
+        "provinces": [
+            {
+                "provinceId": 1,
+                "provinceName": "Bangkok"
+            }
+        ]
+    },
+    {
+        "countryId": 2,
+        "countryName": "Japan",
+        "provinces": [
+            {
+                "provinceId": 2,
+                "provinceName": "Tokyo"
+            }
+        ]
+    },
+    {
+        "countryId": 1001,
+        "countryName": "USA",
+        "provinces": [
+            {
+                "provinceId": 1001,
+                "provinceName": "California"
+            },
+            {
+                "provinceId": 1002,
+                "provinceName": "Texas"
+            },
+            {
+                "provinceId": 1003,
+                "provinceName": "New York"
+            },
+            {
+                "provinceId": 1004,
+                "provinceName": "Florida"
+            }
+        ]
+    }
+]

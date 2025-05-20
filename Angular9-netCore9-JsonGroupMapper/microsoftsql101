@@ -1,4 +1,0 @@
-https://www.youtube.com/watch?v=u_dPA-adMkk
-https://www.youtube.com/watch?v=SIQhe-yt3mA&list=PL82C6-O4XrHfrGOCPmKmwTO7M0avXyQKc&index=4
-dotnet new webapi -o api --framework net8.0 --force
-nuget extention

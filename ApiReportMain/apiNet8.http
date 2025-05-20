@@ -1,6 +1,0 @@
-@apiNet8_HostAddress = http://localhost:5259
-
-GET {{apiNet8_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
