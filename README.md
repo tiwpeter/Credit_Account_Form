@@ -1,3 +1,11 @@
+## Project Status
+
+⚠️ This branch contains a legacy version of the project.
+
+The project is currently being refactored.
+Please review the **rebuild** branch for the latest and cleaner implementation.
+
+
 # 💼 Credit Account Form
 
 Credit Account Form เป็นเว็บแอปสำหรับสร้างและจัดการรายงานข้อมูลลูกค้า  
