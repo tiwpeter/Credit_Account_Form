@@ -1,0 +1,141 @@
+{
+  "applicantType": "PERSONAL",
+  "applicant": {
+    "titleTh": "นาย",
+    "firstNameTh": "สมชาย",
+    "lastNameTh": "ใจดี",
+    "firstNameEn": "Somchai",
+    "lastNameEn": "Jaidee",
+    "idCardNumber": "1234567890123",
+    "dateOfBirth": "1990-05-15",
+    "gender": "MALE",
+    "nationality": "TH",
+    "maritalStatus": "MARRIED",
+    "mobilePhone": "0812345678",
+    "email": "somchai@example.com",
+    "educationLevel": "BACHELOR",
+    "numberOfDependents": 2
+  },
+  "addresses": [
+    {
+      "type": "CURRENT",
+      "houseNumber": "123/45",
+      "moo": "5",
+      "soi": "สุขุมวิท 21",
+      "street": "สุขุมวิท",
+      "subDistrict": "คลองเตยเหนือ",
+      "district": "วัฒนา",
+      "province": "กรุงเทพมหานคร",
+      "postalCode": "10110",
+      "country": "Thailand",
+      "isPrimary": true,
+      "yearsAtAddress": 3,
+      "monthsAtAddress": 6,
+      "ownershipStatus": "RENTED",
+      "monthlyRent": 12000
+    },
+    {
+      "type": "PERMANENT",
+      "houseNumber": "789",
+      "subDistrict": "บางบอน",
+      "district": "บางบอน",
+      "province": "กรุงเทพมหานคร",
+      "postalCode": "10150",
+      "country": "Thailand",
+      "isPrimary": false,
+      "ownershipStatus": "FAMILY_OWNED"
+    }
+  ],
+  "income": {
+    "employmentType": "PERMANENT",
+    "employerName": "บริษัท เทคโนโลยี จำกัด",
+    "position": "Software Engineer",
+    "yearsEmployed": 5,
+    "monthsEmployed": 3,
+    "incomeType": "SALARY",
+    "monthlyIncome": 60000,
+    "otherIncome": 5000,
+    "totalMonthlyIncome": 65000
+  },
+  "creditDetail": {
+    "loanType": "PERSONAL",
+    "requestedAmount": 200000,
+    "requestedTenure": 36,
+    "purpose": "DEBT_CONSOLIDATION",
+    "totalMonthlyIncome": 65000,
+    "totalMonthlyExpenses": 25000,
+    "totalMonthlyDebtPayment": 15000,
+    "netMonthlyIncome": 25000,
+    "debtToIncomeRatio": 0.23,
+    "existingLoans": [
+      {
+        "lender": "ธนาคาร A",
+        "loanType": "Personal Loan",
+        "outstandingBalance": 150000,
+        "monthlyPayment": 8000,
+        "remainingTenure": 18,
+        "interestRate": 15.5
+      },
+      {
+        "lender": "บัตรเครดิต B",
+        "loanType": "Credit Card",
+        "outstandingBalance": 50000,
+        "monthlyPayment": 7000,
+        "remainingTenure": 12,
+        "interestRate": 18.0
+      }
+    ],
+    "totalExistingDebt": 200000,
+    "paymentFrequency": "MONTHLY"
+  },
+  "references": [
+    {
+      "name": "นายอำนาจ ศรีสุข",
+      "relationship": "COLLEAGUE",
+      "phoneNumber": "0898765432",
+      "email": "amnart@example.com"
+    },
+    {
+      "name": "นางสาวชนิดา รักดี",
+      "relationship": "FRIEND",
+      "phoneNumber": "0887654321"
+    }
+  ],
+  "documents": [
+    {
+      "type": "ID_CARD",
+      "name": "สำเนาบัตรประชาชน",
+      "fileName": "id_card.pdf",
+      "fileSize": 245678,
+      "mimeType": "application/pdf",
+      "fileUrl": "https://storage.example.com/docs/id_card_123.pdf",
+      "isMandatory": true
+    },
+    {
+      "type": "INCOME_PROOF",
+      "name": "Slip เงินเดือน 3 เดือน",
+      "fileName": "salary_slips.pdf",
+      "fileSize": 512345,
+      "mimeType": "application/pdf",
+      "fileUrl": "https://storage.example.com/docs/salary_123.pdf",
+      "isMandatory": true
+    },
+    {
+      "type": "BANK_STATEMENT",
+      "name": "Statement บัญชีธนาคาร 6 เดือน",
+      "fileName": "bank_statement.pdf",
+      "fileSize": 1024567,
+      "mimeType": "application/pdf",
+      "fileUrl": "https://storage.example.com/docs/statement_123.pdf",
+      "isMandatory": true
+    }
+  ],
+  "reviewData": {
+    "agreeToTerms": true,
+    "agreeToPrivacyPolicy": true,
+    "agreeToDataSharing": true,
+    "confirmInformationAccuracy": true,
+    "signature": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA...",
+    "additionalComments": "ต้องการรวมหนี้เพื่อลดภาระดอกเบี้ย"
+  }
+}
