@@ -2,6 +2,11 @@
 
 A complete, production-ready credit application system built with Next.js 14, TypeScript, and React Hook Form. This system handles multi-step loan applications with comprehensive business rules, real-time validation, and full type safety.
 
+
+## 🚀 multiple step
+<img width="1600" height="900" alt="ภาพหน้าจอ (4675)" src="https://github.com/user-attachments/assets/1d587769-8c3f-4d4e-80e4-370644fd7575" />
+
+
 ## 🚀 Features
 
 ### Complete Application Workflow
