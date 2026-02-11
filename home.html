@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>รายการคำขอสินเชื่อ</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #1E3A5F;
+            --primary-light: #2A4A6F;
+            --accent: #D4AF37;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --border: #E2E8F0;
+            --success: #22C55E;
+            --warning: #EAB308;
+            --error: #EF4444;
+        }
+
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .logo-sub {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            padding: 12px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .mobile-menu a {
+            padding: 8px 0;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        /* ================= PAGE ================= */
+        .container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 24px;
+        }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-card h3 {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .summary-card p {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* Filter */
+        .filter-bar {
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            align-items: center;
+        }
+
+        .filter-bar input,
+        .filter-bar select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        /* Table */
+        .table-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: #F1F5F9;
+            font-weight: 600;
+        }
+
+        tr:not(:last-child) td {
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Status Badges */
+        .badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-review {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-approved {
+            background: #DCFCE7;
+            color: #166534;
+        }
+
+        .badge-rejected {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        /* Responsive */
+        @media (max-width:1024px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width:768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-box">📄</div>
+                <div>
+                    <div class="logo-title">Credit Account</div>
+                    <div class="logo-sub">Management System</div>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#" class="nav-link active">หน้าหลัก</a>
+                <a href="#" class="nav-link">เปิดบัญชีใหม่</a>
+            </div>
+
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#">หน้าหลัก</a>
+            <a href="#">เปิดบัญชีใหม่</a>
+        </div>
+    </nav>
+
+    <!-- PAGE -->
+    <div class="container">
+
+        <div class="page-header">
+            <h1>📋 รายการคำขอสินเชื่อ</h1>
+            <p>ติดตามและจัดการคำขอสินเชื่อทั้งหมด</p>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>ทั้งหมด</h3>
+                <p>156</p>
+            </div>
+            <div class="summary-card">
+                <h3>รอพิจารณา</h3>
+                <p style="color:#2563EB;">23</p>
+            </div>
+            <div class="summary-card">
+                <h3>อนุมัติ</h3>
+                <p style="color:var(--success);">120</p>
+            </div>
+            <div class="summary-card">
+                <h3>ไม่อนุมัติ</h3>
+                <p style="color:var(--error);">13</p>
+            </div>
+        </div>
+
+        <!-- Filter -->
+        <div class="filter-bar">
+            <input type="text" placeholder="ค้นหาเลขที่คำขอ, ชื่อ..." style="flex:1;">
+            <select>
+                <option>ทุกสถานะ</option>
+                <option>รอพิจารณา</option>
+                <option>อนุมัติ</option>
+                <option>ไม่อนุมัติ</option>
+            </select>
+        </div>
+
+        <!-- Table -->
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>เลขที่</th>
+                        <th>ชื่อ</th>
+                        <th>ประเภท</th>
+                        <th>วงเงิน</th>
+                        <th>สถานะ</th>
+                        <th>วันที่</th>
+                        <th>จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CA2501</td>
+                        <td>นายสมชาย ใจดี</td>
+                        <td>สินเชื่อส่วนบุคคล</td>
+                        <td>฿500,000</td>
+                        <td><span class="badge badge-review">รอพิจารณา</span></td>
+                        <td>1 ม.ค. 2568</td>
+                        <td>👁️ ✏️</td>
+                    </tr>
+                    <tr>
+                        <td>CA2502</td>
+                        <td>นางสาวสุรีย์ ดีใจ</td>
+                        <td>สินเชื่อบ้าน</td>
+                        <td>฿2,000,000</td>
+                        <td><span class="badge badge-approved">อนุมัติ</span></td>
+                        <td>3 ม.ค. 2568</td>
+                        <td>👁️</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("mobileMenu");
+            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+        }
+    </script>
+
+</body>
+
+</html>

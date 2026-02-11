@@ -1,295 +1,375 @@
-"use client";
+'use client';
 
-import { UseFormReturn } from "react-hook-form";
-import { PersonalInfoFormData } from "../types/form";
-import { ApplicantType, Gender, MaritalStatus } from "../types/entities";
+import { UseFormReturn, Controller } from 'react-hook-form';
+import type { Step1PersonalInfoInput } from '@/components/credit/schemas/step-schemas';
 
-interface Step1Props {
-  form: UseFormReturn<PersonalInfoFormData>;
-  onNext: () => void;
+interface Step1PersonalInfoProps {
+  form: UseFormReturn<Step1PersonalInfoInput>;
+  onSubmit: (data: Step1PersonalInfoInput) => Promise<void>;
+  isLoading: boolean;
+  isNewApplication?: boolean;
 }
 
-export function Step1PersonalInfo({ form, onNext }: Step1Props) {
-  const {
-    register,
-    formState: { errors, isValid, isSubmitting },
-    watch,
-  } = form;
+export default function Step1PersonalInfo({
+  form,
+  onSubmit,
+  isLoading,
+  isNewApplication = true,
+}: Step1PersonalInfoProps) {
+  const { control, handleSubmit, formState: { errors }, watch } = form;
 
-  const applicantType = watch("applicantType");
+  const watchedData = watch();
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-[#E1E4ED] p-6 md:p-8 space-y-8">
-      {/* Header */}
-      <div className="border-b border-[#E1E4ED] pb-6">
-        <p className="text-sm text-gray-500">ขั้นตอนที่ 1 จาก 8</p>
-        <h2 className="text-2xl font-bold text-[#1E3A5F]">
-          ข้อมูลส่วนตัวผู้สมัคร
-        </h2>
-        <p className="text-sm text-gray-500 mt-1">
-          กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้องตามบัตรประชาชน
-        </p>
-      </div>
-      <div className="bg-white p-8 rounded-2xl shadow-xl text-center max-w-sm">
-        <h1 className="text-3xl font-bold text-blue-600 mb-4">
-          ทดสอบ Tailwind CSS 🚀
-        </h1>
-        <p className="text-gray-600 mb-6">
-          ถ้าคุณเห็นกล่องนี้สวย ๆ แสดงว่า Tailwind ทำงานแล้ว
-        </p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
-          ปุ่มทดสอบ
-        </button>
-      </div>
-      {/* Applicant Type */}
-      <FormSection title="ประเภทผู้สมัคร">
-        <FormSelect
-          label="ประเภทผู้สมัคร"
-          required
-          error={errors.applicantType?.message}
-          {...register("applicantType")}
-        >
-          <option value="">เลือกประเภทผู้สมัคร</option>
-          <option value={ApplicantType.PERSONAL}>บุคคลธรรมชาติ</option>
-          <option value={ApplicantType.CORPORATE}>นิติบุคคล</option>
-        </FormSelect>
-      </FormSection>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {/* Form Container */}
+      <div className="bg-white rounded-lg shadow p-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">Personal Information</h2>
 
-      {/* Personal Info */}
-      {applicantType === ApplicantType.PERSONAL && (
-        <FormSection title="ข้อมูลบัตรประชาชน">
-          <FormSelect
-            label="คำนำหน้า"
-            required
-            error={errors.titleTh?.message}
-            {...register("titleTh")}
-          >
-            <option value="">เลือกคำนำหน้า</option>
-            <option value="นาย">นาย</option>
-            <option value="นาง">นาง</option>
-            <option value="นางสาว">นางสาว</option>
-          </FormSelect>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <FormInput
-              label="ชื่อ (ไทย)"
-              required
-              error={errors.firstNameTh?.message}
-              {...register("firstNameTh")}
+        {/* Title and Names Row */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          {/* Title */}
+          <div>
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+              Title <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="title"
+              control={control}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                >
+                  <option value="">Select Title</option>
+                  <option value="Mr">Mr.</option>
+                  <option value="Mrs">Mrs.</option>
+                  <option value="Ms">Ms.</option>
+                  <option value="Dr">Dr.</option>
+                  <option value="Prof">Prof.</option>
+                </select>
+              )}
             />
-            <FormInput
-              label="นามสกุล (ไทย)"
-              required
-              error={errors.lastNameTh?.message}
-              {...register("lastNameTh")}
-            />
+            {errors.title && (
+              <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>
+            )}
           </div>
 
-          <FormInput
-            label="เลขประจำตัวประชาชน"
-            required
-            maxLength={13}
-            error={errors.idCardNumber?.message}
-            {...register("idCardNumber")}
-          />
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <FormInput
-              label="วันเดือนปีเกิด"
-              type="date"
-              required
-              error={errors.dateOfBirth?.message}
-              {...register("dateOfBirth")}
+          {/* First Name */}
+          <div className="md:col-span-2">
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+              First Name <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="firstName"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="text"
+                  placeholder="Somchai"
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.firstName ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              )}
             />
-
-            <FormSelect
-              label="เพศ"
-              required
-              error={errors.gender?.message}
-              {...register("gender")}
-            >
-              <option value="">เลือกเพศ</option>
-              <option value={Gender.MALE}>ชาย</option>
-              <option value={Gender.FEMALE}>หญิง</option>
-              <option value={Gender.OTHER}>อื่นๆ</option>
-            </FormSelect>
+            {errors.firstName && (
+              <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>
+            )}
           </div>
-        </FormSection>
-      )}
 
-      {/* Contact Info */}
-      <FormSection title="ข้อมูลติดต่อ">
-        <div className="grid md:grid-cols-2 gap-6">
-          <FormInput
-            label="เบอร์โทรศัพท์มือถือ"
-            type="tel"
-            required
-            error={errors.mobilePhone?.message}
-            {...register("mobilePhone")}
-          />
-
-          <FormInput
-            label="อีเมล"
-            type="email"
-            required
-            error={errors.email?.message}
-            {...register("email")}
-          />
+          {/* Last Name */}
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+              Last Name <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="lastName"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="text"
+                  placeholder="Noomsai"
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.lastName ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              )}
+            />
+            {errors.lastName && (
+              <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>
+            )}
+          </div>
         </div>
 
-        <FormSelect
-          label="สถานะสมรส"
-          required
-          error={errors.maritalStatus?.message}
-          {...register("maritalStatus")}
+        {/* Gender and Date of Birth Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          {/* Gender */}
+          <div>
+            <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-2">
+              Gender <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="gender"
+              control={control}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                >
+                  <option value="">Select Gender</option>
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                  <option value="OTHER">Other</option>
+                </select>
+              )}
+            />
+            {errors.gender && (
+              <p className="text-red-500 text-xs mt-1">{errors.gender.message}</p>
+            )}
+          </div>
+
+          {/* Date of Birth */}
+          <div>
+            <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
+              Date of Birth <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="dateOfBirth"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="date"
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              )}
+            />
+            {errors.dateOfBirth && (
+              <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth.message}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Nationality and ID Card Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          {/* Nationality */}
+          <div>
+            <label htmlFor="nationality" className="block text-sm font-medium text-gray-700 mb-2">
+              Nationality <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="nationality"
+              control={control}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                >
+                  <option value="">Select Nationality</option>
+                  <option value="Thai">Thai</option>
+                  <option value="Laotian">Laotian</option>
+                  <option value="Cambodian">Cambodian</option>
+                  <option value="Vietnamese">Vietnamese</option>
+                  <option value="American">American</option>
+                  <option value="European">European</option>
+                  <option value="Other">Other</option>
+                </select>
+              )}
+            />
+            {errors.nationality && (
+              <p className="text-red-500 text-xs mt-1">{errors.nationality.message}</p>
+            )}
+          </div>
+
+          {/* ID Card Number */}
+          <div>
+            <label htmlFor="idCardNumber" className="block text-sm font-medium text-gray-700 mb-2">
+              Thai ID Card Number <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="idCardNumber"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="text"
+                  placeholder="1234567890123"
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.idCardNumber ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  maxLength={13}
+                />
+              )}
+            />
+            {errors.idCardNumber && (
+              <p className="text-red-500 text-xs mt-1">{errors.idCardNumber.message}</p>
+            )}
+          </div>
+        </div>
+
+        {/* ID Card Expiry */}
+        <div className="mb-6">
+          <label htmlFor="idCardExpire" className="block text-sm font-medium text-gray-700 mb-2">
+            ID Card Expiration Date
+          </label>
+          <Controller
+            name="idCardExpire"
+            control={control}
+            render={({ field }) => (
+              <input
+                {...field}
+                type="date"
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  errors.idCardExpire ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+            )}
+          />
+          {errors.idCardExpire && (
+            <p className="text-red-500 text-xs mt-1">{errors.idCardExpire.message}</p>
+          )}
+        </div>
+
+        {/* Marital Status and Dependents Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          {/* Marital Status */}
+          <div>
+            <label htmlFor="maritalStatus" className="block text-sm font-medium text-gray-700 mb-2">
+              Marital Status <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="maritalStatus"
+              control={control}
+              render={({ field }) => (
+                <select
+                  {...field}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                >
+                  <option value="">Select Marital Status</option>
+                  <option value="SINGLE">Single</option>
+                  <option value="MARRIED">Married</option>
+                  <option value="DIVORCED">Divorced</option>
+                  <option value="WIDOWED">Widowed</option>
+                </select>
+              )}
+            />
+            {errors.maritalStatus && (
+              <p className="text-red-500 text-xs mt-1">{errors.maritalStatus.message}</p>
+            )}
+          </div>
+
+          {/* Dependents */}
+          <div>
+            <label htmlFor="dependents" className="block text-sm font-medium text-gray-700 mb-2">
+              Number of Dependents <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="dependents"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="number"
+                  min="0"
+                  max="20"
+                  onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.dependents ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              )}
+            />
+            {errors.dependents && (
+              <p className="text-red-500 text-xs mt-1">{errors.dependents.message}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Phone and Email Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          {/* Mobile Phone */}
+          <div>
+            <label htmlFor="mobilePhone" className="block text-sm font-medium text-gray-700 mb-2">
+              Mobile Phone Number <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="mobilePhone"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="tel"
+                  placeholder="0891234567"
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.mobilePhone ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              )}
+            />
+            {errors.mobilePhone && (
+              <p className="text-red-500 text-xs mt-1">{errors.mobilePhone.message}</p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              Email Address <span className="text-red-500">*</span>
+            </label>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="email"
+                  placeholder="user@example.com"
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              )}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Form Summary */}
+        {Object.values(watchedData).some(v => v) && (
+          <div className="bg-blue-50 rounded-lg p-4 mb-6">
+            <p className="text-sm text-blue-900 font-semibold mb-2">Summary:</p>
+            <p className="text-sm text-blue-800">
+              {watchedData.title} {watchedData.firstName} {watchedData.lastName}
+              {watchedData.email && ` • ${watchedData.email}`}
+            </p>
+          </div>
+        )}
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={`w-full py-3 rounded-lg font-semibold text-white transition ${
+            isLoading
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700'
+          }`}
         >
-          <option value="">เลือกสถานะสมรส</option>
-          <option value={MaritalStatus.SINGLE}>โสด</option>
-          <option value={MaritalStatus.MARRIED}>สมรส</option>
-          <option value={MaritalStatus.DIVORCED}>หย่า</option>
-          <option value={MaritalStatus.WIDOW}>หม้าย</option>
-        </FormSelect>
-      </FormSection>
+          {isLoading ? 'Processing...' : isNewApplication ? 'Create Application' : 'Next Step'}
+        </button>
 
-      {/* Navigation */}
-      <FormNavigation
-        currentStep={1}
-        totalSteps={8}
-        onNext={onNext}
-        canGoNext={isValid}
-        canGoPrev={false}
-        isSubmitting={isSubmitting}
-      />
-    </div>
-  );
-}
-function FormSection({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="space-y-6">
-      <h3 className="text-lg font-semibold text-[#1E3A5F] border-l-4 border-[#D4AF37] pl-3">
-        {title}
-      </h3>
-      {children}
-    </div>
-  );
-}
-
-export const FormInput = forwardRef<HTMLInputElement, any>(
-  ({ label, required, error, ...props }, ref) => (
-    <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
-
-      <input
-        ref={ref}
-        {...props}
-        aria-invalid={!!error}
-        className={`
-        w-full px-4 py-3 rounded-lg border text-sm
-        transition-all duration-200
-        ${
-          error
-            ? "border-red-500 focus:ring-red-500"
-            : "border-[#E1E4ED] focus:ring-[#D4AF37] focus:border-[#D4AF37]"
-        }
-        focus:outline-none focus:ring-2
-      `}
-      />
-
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-    </div>
-  ),
-);
-import { forwardRef } from "react";
-
-export const FormSelect = forwardRef<HTMLSelectElement, any>(
-  ({ label, required, error, children, ...props }, ref) => (
-    <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
-
-      <select
-        ref={ref}
-        {...props}
-        aria-invalid={!!error}
-        className={`
-        w-full px-4 py-3 rounded-lg border text-sm bg-white
-        transition-all duration-200
-        ${
-          error
-            ? "border-red-500 focus:ring-red-500"
-            : "border-[#E1E4ED] focus:ring-[#D4AF37] focus:border-[#D4AF37]"
-        }
-        focus:outline-none focus:ring-2
-      `}
-      >
-        {children}
-      </select>
-
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-    </div>
-  ),
-);
-
-interface FormNavigationProps {
-  currentStep: number;
-  totalSteps: number;
-  onNext: () => void;
-  onPrev?: () => void;
-  canGoNext?: boolean;
-  canGoPrev?: boolean;
-  isSubmitting?: boolean;
-}
-
-export function FormNavigation({
-  currentStep,
-  totalSteps,
-  onNext,
-  onPrev,
-  canGoNext = true,
-  canGoPrev = true,
-  isSubmitting = false,
-}: FormNavigationProps) {
-  return (
-    <div className="flex items-center justify-between pt-8 border-t border-[#E1E4ED]">
-      {/* Prev Button */}
-      <button
-        type="button"
-        onClick={onPrev}
-        disabled={!canGoPrev}
-        className="px-6 py-2 rounded-lg border border-[#E1E4ED] text-sm
-          disabled:opacity-50 disabled:cursor-not-allowed
-          hover:bg-gray-50 transition"
-      >
-        ย้อนกลับ
-      </button>
-
-      {/* Step Indicator */}
-      <div className="text-sm text-gray-500">
-        ขั้นตอน {currentStep} / {totalSteps}
+        {/* Helper Text */}
+        <p className="text-xs text-gray-600 mt-4 text-center">
+          <span className="text-red-500">*</span> Indicates required fields
+        </p>
       </div>
-
-      {/* Next Button */}
-      <button
-        type="button"
-        onClick={onNext}
-        disabled={!canGoNext || isSubmitting}
-        className="px-6 py-2 rounded-lg text-sm text-white
-          bg-[#1E3A5F]
-          hover:bg-[#162d49]
-          disabled:opacity-50 disabled:cursor-not-allowed
-          transition"
-      >
-        {isSubmitting ? "กำลังดำเนินการ..." : "ถัดไป"}
-      </button>
-    </div>
+    </form>
   );
 }

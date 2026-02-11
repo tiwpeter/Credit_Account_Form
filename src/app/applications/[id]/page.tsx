@@ -1,258 +1,156 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { StatusBadge } from "@/components/credit/ui/StatusBadge";
-import { StatusTimeline } from "@/components/credit/ui/StatusTimeline";
-import { ApplicationStatus } from "@/components/credit/types/entities";
-import Link from "next/link";
-
-interface ApplicationDetail {
-  id: string;
-  applicationNumber: string;
-  applicantName: string;
-  loanType: string;
-  requestedAmount: number;
-  status: ApplicationStatus;
-  createdAt: string;
-  idCardNumber: string;
-  email: string;
-  phone: string;
-  monthlyIncome: number;
-  companyName: string;
-}
-
-interface TimelineEvent {
-  status: ApplicationStatus;
-  timestamp: string;
-  note?: string;
-}
+import { useEffect, useState } from 'react';
+import type { CreditApplication } from '@/components/credit/types/entities';
 
 export default function ApplicationDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const [application, setApplication] = useState<ApplicationDetail | null>(
-    null,
-  );
-  const [timeline, setTimeline] = useState<TimelineEvent[]>([]);
+  const [application, setApplication] = useState<CreditApplication | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Mock data
-    const mockApp: ApplicationDetail = {
-      id: params.id,
-      applicationNumber: `APP-2026-00${params.id}`,
-      applicantName: "สมชาย ใจดี",
-      loanType: "สินเชื่อส่วนบุคคล",
-      requestedAmount: 500000,
-      status: ApplicationStatus.SUBMITTED,
-      createdAt: "2026-02-09T10:30:00Z",
-      idCardNumber: "1234567890123",
-      email: "somchai@example.com",
-      phone: "0812345678",
-      monthlyIncome: 50000,
-      companyName: "บริษัท ABC จำกัด",
+    const fetchApplication = async () => {
+      try {
+        const response = await fetch(`/api/v1/applications?page=1&pageSize=100`);
+        const data = await response.json();
+
+        if (data.success && data.data) {
+          const app = data.data.items.find((a: CreditApplication) => a.id === params.id);
+          if (app) {
+            setApplication(app);
+          } else {
+            setError('Application not found');
+          }
+        }
+      } catch (err) {
+        setError('Failed to load application');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    const mockTimeline: TimelineEvent[] = [
-      {
-        status: ApplicationStatus.DRAFT,
-        timestamp: "2026-02-09T08:00:00Z",
-      },
-      {
-        status: ApplicationStatus.SUBMITTED,
-        timestamp: "2026-02-09T10:30:00Z",
-        note: "ส่งใบสมัครเรียบร้อย",
-      },
-    ];
-
-    setApplication(mockApp);
-    setTimeline(mockTimeline);
-    setLoading(false);
+    fetchApplication();
   }, [params.id]);
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("th-TH", {
-      style: "currency",
-      currency: "THB",
-    }).format(amount);
-  };
-
   if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <p className="text-gray-600">กำลังโหลด...</p>
-      </div>
-    );
+    return <div className="h-96 bg-white rounded-lg animate-pulse" />;
   }
 
-  if (!application) {
+  if (error || !application) {
     return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <p className="text-gray-600">ไม่พบใบสมัคร</p>
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+        <p className="text-red-800">{error || 'Application not found'}</p>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Back Button */}
-      <Link
-        href="/applications"
-        className="text-gold hover:underline mb-4 inline-block"
-      >
-        ← กลับไปหน้ารายการ
-      </Link>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content */}
-        <div className="lg:col-span-2 space-y-8">
-          {/* Header */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <p className="text-sm text-gray-600 mb-1">
-                  {application.applicationNumber}
-                </p>
-                <h1 className="text-3xl font-bold text-navy-dark">
-                  {application.applicantName}
-                </h1>
-              </div>
-              <StatusBadge status={application.status} size="lg" />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-gray-200">
-              <div>
-                <p className="text-sm text-gray-600">ประเภทสินเชื่อ</p>
-                <p className="text-lg font-medium text-gray-900">
-                  {application.loanType}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">จำนวนที่ขอ</p>
-                <p className="text-lg font-medium text-gray-900">
-                  {formatCurrency(application.requestedAmount)}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">รายได้ต่อเดือน</p>
-                <p className="text-lg font-medium text-gray-900">
-                  {formatCurrency(application.monthlyIncome)}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">วันที่สมัคร</p>
-                <p className="text-lg font-medium text-gray-900">
-                  {new Date(application.createdAt).toLocaleDateString("th-TH", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
-            </div>
+    <div className="max-w-4xl mx-auto">
+      {/* Header */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              {application.personalInfo.firstName} {application.personalInfo.lastName}
+            </h1>
+            <p className="text-lg text-gray-600">{application.applicationNumber}</p>
           </div>
-
-          {/* Personal Information */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-bold text-navy-dark mb-6">
-              ข้อมูลส่วนตัว
-            </h2>
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <p className="text-sm text-gray-600 mb-1">เลขประจำตัวประชาชน</p>
-                <p className="font-medium text-gray-900">
-                  {application.idCardNumber}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">อีเมล</p>
-                <p className="font-medium text-gray-900">{application.email}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">เบอร์โทรศัพท์</p>
-                <p className="font-medium text-gray-900">{application.phone}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">สถานที่ทำงาน</p>
-                <p className="font-medium text-gray-900">
-                  {application.companyName}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Documents */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-bold text-navy-dark mb-6">
-              เอกสารประกอบ
-            </h2>
-            <div className="space-y-3">
-              {[
-                { name: "บัตรประชาชน", status: "verified" },
-                { name: "ทะเบียนบ้าน", status: "verified" },
-                { name: "หลักฐานรายได้", status: "pending" },
-              ].map((doc) => (
-                <div
-                  key={doc.name}
-                  className="flex items-center justify-between p-3 border border-gray-200 rounded"
-                >
-                  <span className="font-medium text-gray-900">{doc.name}</span>
-                  <span
-                    className={`text-sm px-3 py-1 rounded-full ${
-                      doc.status === "verified"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {doc.status === "verified"
-                      ? "✓ ยืนยันแล้ว"
-                      : "⏳ รอการยืนยัน"}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <span className={`px-4 py-2 rounded-lg text-sm font-semibold ${
+            application.status === 'APPROVED' ? 'bg-green-100 text-green-800' :
+            application.status === 'REJECTED' ? 'bg-red-100 text-red-800' :
+            application.status === 'DRAFT' ? 'bg-gray-100 text-gray-800' :
+            'bg-blue-100 text-blue-800'
+          }`}>
+            {application.status}
+          </span>
         </div>
 
-        {/* Sidebar */}
-        <div className="lg:col-span-1 space-y-8">
-          {/* Timeline */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-bold text-navy-dark mb-6">
-              ประวัติการดำเนินการ
-            </h2>
-            <StatusTimeline events={timeline} />
+        <div className="grid grid-cols-2 gap-6 text-sm">
+          <div>
+            <p className="text-gray-600 mb-1">Loan Type</p>
+            <p className="font-semibold text-gray-900">{application.loanType}</p>
           </div>
+          <div>
+            <p className="text-gray-600 mb-1">Loan Amount</p>
+            <p className="font-semibold text-gray-900">
+              ฿{application.loanAmount.toLocaleString()}
+            </p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-1">Email</p>
+            <p className="font-semibold text-gray-900">{application.personalInfo.email}</p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-1">Phone</p>
+            <p className="font-semibold text-gray-900">{application.personalInfo.mobilePhone}</p>
+          </div>
+        </div>
+      </div>
 
-          {/* Actions */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-bold text-navy-dark mb-4">การกระทำ</h2>
-            <div className="space-y-3">
-              <button className="w-full px-4 py-2 bg-navy-dark text-white rounded-lg hover:bg-blue-900 transition-colors">
-                📄 ดูเอกสารประกอบ
-              </button>
-              <button className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition-colors">
-                📋 แก้ไขข้อมูล
-              </button>
-              <button className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition-colors">
-                🖨️ พิมพ์เอกสาร
-              </button>
+      {/* Personal Information */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Personal Information</h2>
+        <div className="grid grid-cols-2 gap-6 text-sm">
+          <div>
+            <p className="text-gray-600 mb-1">ID Card Number</p>
+            <p className="font-semibold text-gray-900">{application.personalInfo.idCardNumber}</p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-1">Date of Birth</p>
+            <p className="font-semibold text-gray-900">
+              {new Date(application.personalInfo.dateOfBirth).toLocaleDateString('th-TH')}
+            </p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-1">Gender</p>
+            <p className="font-semibold text-gray-900">{application.personalInfo.gender}</p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-1">Marital Status</p>
+            <p className="font-semibold text-gray-900">{application.personalInfo.maritalStatus}</p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-1">Dependents</p>
+            <p className="font-semibold text-gray-900">{application.personalInfo.dependents}</p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-1">Nationality</p>
+            <p className="font-semibold text-gray-900">{application.personalInfo.nationality}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Application Timeline */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Timeline</h2>
+        <div className="space-y-4">
+          <div className="flex gap-4">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-4 h-4 bg-blue-600 rounded-full" />
+              <div className="w-1 h-12 bg-gray-300" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">Application Created</p>
+              <p className="text-sm text-gray-600">
+                {new Date(application.createdAt).toLocaleString('th-TH')}
+              </p>
             </div>
           </div>
-
-          {/* Contact Support */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-blue-900 mb-3">
-              ต้องการความช่วยเหลือ?
-            </h3>
-            <p className="text-sm text-blue-800 mb-4">
-              หากมีคำถามเกี่ยวกับใบสมัครของคุณ กรุณาติดต่อทีมสนับสนุนของเรา
-            </p>
-            <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium">
-              📧 ติดต่อเรา
-            </button>
+          <div className="flex gap-4">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-4 h-4 bg-gray-300 rounded-full" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">Last Updated</p>
+              <p className="text-sm text-gray-600">
+                {new Date(application.updatedAt).toLocaleString('th-TH')}
+              </p>
+            </div>
           </div>
         </div>
       </div>

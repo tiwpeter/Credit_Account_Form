@@ -1,382 +1,291 @@
-/**
- * Workflow Constants
- * Application workflow states and transitions
- */
-
-import { ApplicationStatus, UserRole } from '../types/entities';
-
-// ============================================================================
-// WORKFLOW STATES
-// ============================================================================
+// Workflow state machine and transitions
 
 export const WORKFLOW_STATES = {
   DRAFT: {
-    value: ApplicationStatus.DRAFT,
     label: 'Draft',
-    description: 'Application is being prepared',
-    color: 'gray',
-    icon: 'FileEdit',
-    allowedRoles: [UserRole.CUSTOMER],
-    nextStates: [ApplicationStatus.SUBMITTED]
+    color: '#6B7280',
+    description: 'Application is being filled out',
+    allowedActions: ['SUBMIT', 'SAVE_DRAFT'],
   },
   SUBMITTED: {
-    value: ApplicationStatus.SUBMITTED,
     label: 'Submitted',
-    description: 'Application has been submitted for review',
-    color: 'blue',
-    icon: 'Send',
-    allowedRoles: [UserRole.CUSTOMER, UserRole.BANK_OFFICER],
-    nextStates: [ApplicationStatus.DOCUMENT_CHECK, ApplicationStatus.NEED_MORE_INFO]
+    color: '#3B82F6',
+    description: 'Application has been submitted',
+    allowedActions: ['DOCUMENT_CHECK', 'REJECT'],
   },
   DOCUMENT_CHECK: {
-    value: ApplicationStatus.DOCUMENT_CHECK,
-    label: 'Document Check',
+    label: 'Document Verification',
+    color: '#F59E0B',
     description: 'Documents are being verified',
-    color: 'yellow',
-    icon: 'FileCheck',
-    allowedRoles: [UserRole.BANK_OFFICER],
-    nextStates: [ApplicationStatus.CREDIT_ANALYSIS, ApplicationStatus.NEED_MORE_INFO]
+    allowedActions: ['PASS_DOCUMENT_CHECK', 'REQUEST_MORE_DOCUMENTS', 'REJECT'],
   },
   CREDIT_ANALYSIS: {
-    value: ApplicationStatus.CREDIT_ANALYSIS,
     label: 'Credit Analysis',
+    color: '#9333EA',
     description: 'Credit analysis is in progress',
-    color: 'orange',
-    icon: 'Calculator',
-    allowedRoles: [UserRole.BANK_OFFICER],
-    nextStates: [ApplicationStatus.APPROVAL, ApplicationStatus.NEED_MORE_INFO, ApplicationStatus.REJECTED]
+    allowedActions: ['APPROVE', 'CONDITIONAL_APPROVE', 'REJECT'],
   },
   APPROVAL: {
-    value: ApplicationStatus.APPROVAL,
-    label: 'Pending Approval',
-    description: 'Waiting for approval decision',
-    color: 'purple',
-    icon: 'Clock',
-    allowedRoles: [UserRole.APPROVER, UserRole.CREDIT_COMMITTEE],
-    nextStates: [ApplicationStatus.APPROVED, ApplicationStatus.REJECTED, ApplicationStatus.NEED_MORE_INFO]
+    label: 'Approval',
+    color: '#EC4899',
+    description: 'Awaiting final approval',
+    allowedActions: ['APPROVE', 'REJECT'],
   },
   APPROVED: {
-    value: ApplicationStatus.APPROVED,
     label: 'Approved',
+    color: '#10B981',
     description: 'Application has been approved',
-    color: 'green',
-    icon: 'CheckCircle',
-    allowedRoles: [UserRole.APPROVER, UserRole.CREDIT_COMMITTEE, UserRole.BANK_OFFICER],
-    nextStates: [ApplicationStatus.CONTRACT_SIGNED]
+    allowedActions: ['SIGN_CONTRACT', 'CANCEL'],
   },
   REJECTED: {
-    value: ApplicationStatus.REJECTED,
     label: 'Rejected',
+    color: '#EF4444',
     description: 'Application has been rejected',
-    color: 'red',
-    icon: 'XCircle',
-    allowedRoles: [UserRole.APPROVER, UserRole.CREDIT_COMMITTEE],
-    nextStates: []
-  },
-  NEED_MORE_INFO: {
-    value: ApplicationStatus.NEED_MORE_INFO,
-    label: 'Need More Information',
-    description: 'Additional information is required',
-    color: 'amber',
-    icon: 'AlertCircle',
-    allowedRoles: [UserRole.BANK_OFFICER, UserRole.APPROVER],
-    nextStates: [ApplicationStatus.SUBMITTED]
+    allowedActions: [],
   },
   CONTRACT_SIGNED: {
-    value: ApplicationStatus.CONTRACT_SIGNED,
     label: 'Contract Signed',
-    description: 'Loan contract has been signed',
-    color: 'indigo',
-    icon: 'FileSignature',
-    allowedRoles: [UserRole.BANK_OFFICER],
-    nextStates: [ApplicationStatus.DISBURSED]
+    color: '#06B6D4',
+    description: 'Contract has been signed',
+    allowedActions: ['DISBURSE', 'CANCEL'],
   },
   DISBURSED: {
-    value: ApplicationStatus.DISBURSED,
     label: 'Disbursed',
+    color: '#14B8A6',
     description: 'Loan has been disbursed',
-    color: 'emerald',
-    icon: 'Coins',
-    allowedRoles: [UserRole.BANK_OFFICER],
-    nextStates: []
-  }
-} as const;
+    allowedActions: [],
+  },
+};
 
-// ============================================================================
-// WORKFLOW TRANSITIONS
-// ============================================================================
+// Workflow Transitions
+export const WORKFLOW_TRANSITIONS = {
+  DRAFT: ['SUBMITTED', 'SAVE_DRAFT'],
+  SUBMITTED: ['DOCUMENT_CHECK', 'REJECTED'],
+  DOCUMENT_CHECK: ['CREDIT_ANALYSIS', 'SUBMITTED', 'REJECTED'],
+  CREDIT_ANALYSIS: ['APPROVAL', 'REJECTED'],
+  APPROVAL: ['APPROVED', 'REJECTED'],
+  APPROVED: ['CONTRACT_SIGNED', 'REJECTED'],
+  REJECTED: [],
+  CONTRACT_SIGNED: ['DISBURSED', 'REJECTED'],
+  DISBURSED: [],
+};
 
-export interface WorkflowTransition {
-  from: ApplicationStatus;
-  to: ApplicationStatus;
-  action: string;
-  label: string;
-  requiresReason: boolean;
-  requiresApproval: boolean;
-  requiredRole: UserRole[];
-  validationRules?: string[];
-}
+// Role-based Permissions
+export const ROLE_PERMISSIONS = {
+  CUSTOMER: [
+    'view_own_application',
+    'create_application',
+    'edit_draft_application',
+    'submit_application',
+    'view_application_status',
+    'upload_documents',
+  ],
+  BANK_OFFICER: [
+    'view_all_applications',
+    'verify_documents',
+    'request_more_documents',
+    'view_credit_analysis',
+    'add_notes',
+    'create_credit_analysis',
+  ],
+  APPROVER: [
+    'view_all_applications',
+    'approve_application',
+    'reject_application',
+    'view_credit_analysis',
+    'view_documents',
+    'add_approval_notes',
+  ],
+  CREDIT_COMMITTEE: [
+    'view_all_applications',
+    'approve_application',
+    'reject_application',
+    'override_decision',
+    'view_credit_analysis',
+  ],
+  ADMIN: [
+    'view_all_applications',
+    'edit_application',
+    'delete_application',
+    'manage_users',
+    'view_reports',
+    'system_settings',
+  ],
+};
 
-export const WORKFLOW_TRANSITIONS: WorkflowTransition[] = [
-  // From DRAFT
+// Step Definitions for Form Wizard
+export const FORM_STEPS = [
   {
-    from: ApplicationStatus.DRAFT,
-    to: ApplicationStatus.SUBMITTED,
-    action: 'SUBMIT',
-    label: 'Submit Application',
-    requiresReason: false,
-    requiresApproval: false,
-    requiredRole: [UserRole.CUSTOMER],
-    validationRules: ['ALL_MANDATORY_FIELDS', 'ALL_MANDATORY_DOCUMENTS']
-  },
-  
-  // From SUBMITTED
-  {
-    from: ApplicationStatus.SUBMITTED,
-    to: ApplicationStatus.DOCUMENT_CHECK,
-    action: 'START_DOCUMENT_CHECK',
-    label: 'Start Document Check',
-    requiresReason: false,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER]
-  },
-  {
-    from: ApplicationStatus.SUBMITTED,
-    to: ApplicationStatus.NEED_MORE_INFO,
-    action: 'REQUEST_MORE_INFO',
-    label: 'Request More Information',
-    requiresReason: true,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER]
-  },
-  
-  // From DOCUMENT_CHECK
-  {
-    from: ApplicationStatus.DOCUMENT_CHECK,
-    to: ApplicationStatus.CREDIT_ANALYSIS,
-    action: 'START_CREDIT_ANALYSIS',
-    label: 'Start Credit Analysis',
-    requiresReason: false,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER],
-    validationRules: ['ALL_DOCUMENTS_VERIFIED']
+    number: 1,
+    name: 'Personal Information',
+    thai: 'ข้อมูลส่วนตัว',
+    description: 'Basic personal information',
+    fields: [
+      'title',
+      'firstName',
+      'lastName',
+      'gender',
+      'dateOfBirth',
+      'nationality',
+      'idCardNumber',
+      'maritalStatus',
+      'dependents',
+      'mobilePhone',
+      'email',
+    ],
+    estimatedTime: '5 minutes',
   },
   {
-    from: ApplicationStatus.DOCUMENT_CHECK,
-    to: ApplicationStatus.NEED_MORE_INFO,
-    action: 'REQUEST_MORE_DOCUMENTS',
-    label: 'Request More Documents',
-    requiresReason: true,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER]
-  },
-  
-  // From CREDIT_ANALYSIS
-  {
-    from: ApplicationStatus.CREDIT_ANALYSIS,
-    to: ApplicationStatus.APPROVAL,
-    action: 'SUBMIT_FOR_APPROVAL',
-    label: 'Submit for Approval',
-    requiresReason: false,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER],
-    validationRules: ['CREDIT_ANALYSIS_COMPLETE', 'DTI_RATIO_VALID']
+    number: 2,
+    name: 'Address Information',
+    thai: 'ที่อยู่',
+    description: 'Current and permanent address',
+    fields: [
+      'currentAddress',
+      'permanentAddress',
+      'yearsAtCurrentAddress',
+      'housingType',
+    ],
+    estimatedTime: '3 minutes',
   },
   {
-    from: ApplicationStatus.CREDIT_ANALYSIS,
-    to: ApplicationStatus.REJECTED,
-    action: 'REJECT_OFFICER',
-    label: 'Reject Application',
-    requiresReason: true,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER]
+    number: 3,
+    name: 'Income & Employment',
+    thai: 'รายได้และการจ้างงาน',
+    description: 'Employment and income details',
+    fields: [
+      'employmentType',
+      'company',
+      'position',
+      'industry',
+      'monthlyIncome',
+      'annualIncome',
+      'otherIncome',
+      'employmentStartDate',
+    ],
+    estimatedTime: '5 minutes',
   },
   {
-    from: ApplicationStatus.CREDIT_ANALYSIS,
-    to: ApplicationStatus.NEED_MORE_INFO,
-    action: 'REQUEST_MORE_INFO_ANALYSIS',
-    label: 'Request More Information',
-    requiresReason: true,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER]
-  },
-  
-  // From APPROVAL
-  {
-    from: ApplicationStatus.APPROVAL,
-    to: ApplicationStatus.APPROVED,
-    action: 'APPROVE',
-    label: 'Approve Application',
-    requiresReason: false,
-    requiresApproval: true,
-    requiredRole: [UserRole.APPROVER, UserRole.CREDIT_COMMITTEE]
+    number: 4,
+    name: 'Credit Details',
+    thai: 'รายละเอียดเงินกู้',
+    description: 'Loan amount and existing debts',
+    fields: [
+      'loanType',
+      'loanAmount',
+      'loanPurpose',
+      'tenorMonths',
+      'existingLoans',
+    ],
+    estimatedTime: '7 minutes',
   },
   {
-    from: ApplicationStatus.APPROVAL,
-    to: ApplicationStatus.REJECTED,
-    action: 'REJECT_APPROVER',
-    label: 'Reject Application',
-    requiresReason: true,
-    requiresApproval: true,
-    requiredRole: [UserRole.APPROVER, UserRole.CREDIT_COMMITTEE]
+    number: 5,
+    name: 'Documents',
+    thai: 'เอกสาร',
+    description: 'Upload required documents',
+    fields: ['documents'],
+    estimatedTime: '10 minutes',
   },
   {
-    from: ApplicationStatus.APPROVAL,
-    to: ApplicationStatus.NEED_MORE_INFO,
-    action: 'REQUEST_MORE_INFO_APPROVAL',
-    label: 'Request More Information',
-    requiresReason: true,
-    requiresApproval: false,
-    requiredRole: [UserRole.APPROVER, UserRole.CREDIT_COMMITTEE]
+    number: 6,
+    name: 'Guarantors',
+    thai: 'ผู้ค้ำประกัน',
+    description: 'Guarantor information (if applicable)',
+    fields: ['guarantors'],
+    estimatedTime: '5 minutes',
+    optional: true,
   },
-  
-  // From APPROVED
   {
-    from: ApplicationStatus.APPROVED,
-    to: ApplicationStatus.CONTRACT_SIGNED,
-    action: 'SIGN_CONTRACT',
+    number: 7,
+    name: 'Company Information',
+    thai: 'ข้อมูลบริษัท',
+    description: 'Company details for business loans',
+    fields: [
+      'companyName',
+      'businessType',
+      'yearsInBusiness',
+      'annualRevenue',
+    ],
+    estimatedTime: '5 minutes',
+    conditional: 'loanType === SME || loanType === CORPORATE',
+  },
+  {
+    number: 8,
+    name: 'Review & Submit',
+    thai: 'ตรวจสอบและส่ง',
+    description: 'Review application and submit',
+    fields: [
+      'acceptTerms',
+      'acceptPrivacy',
+      'authorizedSigner',
+    ],
+    estimatedTime: '2 minutes',
+  },
+];
+
+// Application Status Timeline
+export const STATUS_TIMELINE = [
+  {
+    status: 'DRAFT',
+    step: 1,
+    label: 'Application Started',
+    description: 'You\'ve started the application',
+  },
+  {
+    status: 'SUBMITTED',
+    step: 2,
+    label: 'Application Submitted',
+    description: 'Your application has been submitted to the bank',
+  },
+  {
+    status: 'DOCUMENT_CHECK',
+    step: 3,
+    label: 'Documents Verification',
+    description: 'Our team is verifying your documents',
+  },
+  {
+    status: 'CREDIT_ANALYSIS',
+    step: 4,
+    label: 'Credit Analysis',
+    description: 'We are analyzing your creditworthiness',
+  },
+  {
+    status: 'APPROVAL',
+    step: 5,
+    label: 'Final Approval',
+    description: 'Your application is under final review',
+  },
+  {
+    status: 'APPROVED',
+    step: 6,
+    label: 'Application Approved',
+    description: 'Congratulations! Your application has been approved',
+  },
+  {
+    status: 'CONTRACT_SIGNED',
+    step: 7,
     label: 'Contract Signed',
-    requiresReason: false,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER]
+    description: 'The contract has been signed',
   },
-  
-  // From CONTRACT_SIGNED
   {
-    from: ApplicationStatus.CONTRACT_SIGNED,
-    to: ApplicationStatus.DISBURSED,
-    action: 'DISBURSE',
-    label: 'Disburse Loan',
-    requiresReason: false,
-    requiresApproval: false,
-    requiredRole: [UserRole.BANK_OFFICER],
-    validationRules: ['CONTRACT_SIGNED', 'ACCOUNT_VERIFIED']
+    status: 'DISBURSED',
+    step: 8,
+    label: 'Funds Disbursed',
+    description: 'The loan amount has been transferred to your account',
   },
-  
-  // From NEED_MORE_INFO
-  {
-    from: ApplicationStatus.NEED_MORE_INFO,
-    to: ApplicationStatus.SUBMITTED,
-    action: 'RESUBMIT',
-    label: 'Resubmit Application',
-    requiresReason: false,
-    requiresApproval: false,
-    requiredRole: [UserRole.CUSTOMER]
-  }
 ];
 
-// ============================================================================
-// WORKFLOW HELPERS
-// ============================================================================
-
-export function getNextStates(currentStatus: ApplicationStatus): ApplicationStatus[] {
-  return WORKFLOW_STATES[currentStatus]?.nextStates || [];
-}
-
-export function canTransition(
-  from: ApplicationStatus,
-  to: ApplicationStatus,
-  userRole: UserRole
-): boolean {
-  const transition = WORKFLOW_TRANSITIONS.find(
-    t => t.from === from && t.to === to
-  );
-  
-  if (!transition) return false;
-  
-  return transition.requiredRole.includes(userRole);
-}
-
-export function getAvailableActions(
-  currentStatus: ApplicationStatus,
-  userRole: UserRole
-): WorkflowTransition[] {
-  return WORKFLOW_TRANSITIONS.filter(
-    t => t.from === currentStatus && t.requiredRole.includes(userRole)
-  );
-}
-
-export function isTerminalStatus(status: ApplicationStatus): boolean {
-  return [
-    ApplicationStatus.APPROVED,
-    ApplicationStatus.REJECTED,
-    ApplicationStatus.DISBURSED
-  ].includes(status);
-}
-
-export function canEditApplication(status: ApplicationStatus): boolean {
-  return [
-    ApplicationStatus.DRAFT,
-    ApplicationStatus.NEED_MORE_INFO
-  ].includes(status);
-}
-
-export function requiresOfficerAction(status: ApplicationStatus): boolean {
-  return [
-    ApplicationStatus.SUBMITTED,
-    ApplicationStatus.DOCUMENT_CHECK,
-    ApplicationStatus.CREDIT_ANALYSIS
-  ].includes(status);
-}
-
-export function requiresApproverAction(status: ApplicationStatus): boolean {
-  return status === ApplicationStatus.APPROVAL;
-}
-
-// ============================================================================
-// SLA DEFINITIONS
-// ============================================================================
-
-export interface SLA {
-  status: ApplicationStatus;
-  targetHours: number;
-  warningHours: number;
-  escalationHours: number;
-}
-
-export const SLA_DEFINITIONS: SLA[] = [
-  {
-    status: ApplicationStatus.SUBMITTED,
-    targetHours: 24,
-    warningHours: 20,
-    escalationHours: 30
-  },
-  {
-    status: ApplicationStatus.DOCUMENT_CHECK,
-    targetHours: 48,
-    warningHours: 40,
-    escalationHours: 60
-  },
-  {
-    status: ApplicationStatus.CREDIT_ANALYSIS,
-    targetHours: 72,
-    warningHours: 60,
-    escalationHours: 96
-  },
-  {
-    status: ApplicationStatus.APPROVAL,
-    targetHours: 48,
-    warningHours: 40,
-    escalationHours: 72
-  }
+// Rejection Reasons
+export const REJECTION_REASONS = [
+  'Income too low',
+  'DTI ratio too high',
+  'Insufficient employment history',
+  'Poor credit history',
+  'Invalid documents',
+  'Loan amount too high',
+  'Missing required documents',
+  'Identity verification failed',
+  'Incomplete application',
+  'Other',
 ];
-
-export function getSLA(status: ApplicationStatus): SLA | undefined {
-  return SLA_DEFINITIONS.find(sla => sla.status === status);
-}
-
-export function calculateSLAStatus(
-  status: ApplicationStatus,
-  statusChangedAt: Date
-): 'ON_TIME' | 'WARNING' | 'OVERDUE' | 'ESCALATED' {
-  const sla = getSLA(status);
-  if (!sla) return 'ON_TIME';
-  
-  const hoursElapsed = (Date.now() - statusChangedAt.getTime()) / (1000 * 60 * 60);
-  
-  if (hoursElapsed >= sla.escalationHours) return 'ESCALATED';
-  if (hoursElapsed >= sla.targetHours) return 'OVERDUE';
-  if (hoursElapsed >= sla.warningHours) return 'WARNING';
-  
-  return 'ON_TIME';
-}

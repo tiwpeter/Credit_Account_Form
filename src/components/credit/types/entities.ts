@@ -1,12 +1,13 @@
-/**
- * Credit Application System - Entity Types
- * Production-grade TypeScript definitions for all entities
- * Based on normalized database schema
- */
+// Types for domain entities in the credit application system
 
-// ============================================================================
-// ENUMS
-// ============================================================================
+// Enums
+export enum LoanType {
+  PERSONAL = 'PERSONAL',
+  HOME = 'HOME',
+  AUTO = 'AUTO',
+  SME = 'SME',
+  CORPORATE = 'CORPORATE'
+}
 
 export enum ApplicationStatus {
   DRAFT = 'DRAFT',
@@ -16,94 +17,36 @@ export enum ApplicationStatus {
   APPROVAL = 'APPROVAL',
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
-  NEED_MORE_INFO = 'NEED_MORE_INFO',
   CONTRACT_SIGNED = 'CONTRACT_SIGNED',
   DISBURSED = 'DISBURSED'
 }
 
-export enum ApplicantType {
-  PERSONAL = 'PERSONAL',
-  CORPORATE = 'CORPORATE'
-}
-
-export enum LoanType {
-  PERSONAL = 'PERSONAL',
-  HOME = 'HOME',
-  AUTO = 'AUTO',
-  SME = 'SME',
-  CORPORATE = 'CORPORATE'
+export enum RiskGrade {
+  EXCELLENT = 'EXCELLENT',    // <= 25%
+  GOOD = 'GOOD',              // 26-40%
+  ACCEPTABLE = 'ACCEPTABLE',  // 41-50%
+  FAIR = 'FAIR',              // 51-60%
+  POOR = 'POOR'               // > 60%
 }
 
 export enum EmploymentType {
   PERMANENT = 'PERMANENT',
   CONTRACT = 'CONTRACT',
   SELF_EMPLOYED = 'SELF_EMPLOYED',
-  BUSINESS_OWNER = 'BUSINESS_OWNER',
-  FREELANCE = 'FREELANCE',
-  RETIRED = 'RETIRED',
-  UNEMPLOYED = 'UNEMPLOYED'
-}
-
-export enum IncomeType {
-  SALARY = 'SALARY',
-  BUSINESS = 'BUSINESS',
-  COMMISSION = 'COMMISSION',
-  RENTAL = 'RENTAL',
-  INVESTMENT = 'INVESTMENT',
-  PENSION = 'PENSION',
-  OTHER = 'OTHER'
-}
-
-export enum AddressType {
-  CURRENT = 'CURRENT',
-  PERMANENT = 'PERMANENT',
-  WORK = 'WORK',
-  COMPANY = 'COMPANY'
+  RETIRED = 'RETIRED'
 }
 
 export enum DocumentType {
   ID_CARD = 'ID_CARD',
-  HOUSE_REGISTRATION = 'HOUSE_REGISTRATION',
-  INCOME_PROOF = 'INCOME_PROOF',
-  BANK_STATEMENT = 'BANK_STATEMENT',
+  PASSPORT = 'PASSPORT',
+  PROOF_OF_ADDRESS = 'PROOF_OF_ADDRESS',
+  INCOME_STATEMENT = 'INCOME_STATEMENT',
   TAX_RETURN = 'TAX_RETURN',
-  COMPANY_REGISTRATION = 'COMPANY_REGISTRATION',
-  FINANCIAL_STATEMENT = 'FINANCIAL_STATEMENT',
-  COLLATERAL_DOCUMENT = 'COLLATERAL_DOCUMENT',
-  OTHER = 'OTHER'
-}
-
-export enum DocumentStatus {
-  PENDING = 'PENDING',
-  VERIFIED = 'VERIFIED',
-  REJECTED = 'REJECTED'
-}
-
-export enum RelationType {
-  GUARANTOR = 'GUARANTOR',
-  REFERENCE = 'REFERENCE',
-  CO_BORROWER = 'CO_BORROWER'
-}
-
-export enum RiskGrade {
-  AAA = 'AAA',
-  AA = 'AA',
-  A = 'A',
-  BBB = 'BBB',
-  BB = 'BB',
-  B = 'B',
-  CCC = 'CCC',
-  CC = 'CC',
-  C = 'C',
-  D = 'D'
-}
-
-export enum UserRole {
-  CUSTOMER = 'CUSTOMER',
-  BANK_OFFICER = 'BANK_OFFICER',
-  APPROVER = 'APPROVER',
-  CREDIT_COMMITTEE = 'CREDIT_COMMITTEE',
-  ADMIN = 'ADMIN'
+  BANK_STATEMENT = 'BANK_STATEMENT',
+  EMPLOYMENT_LETTER = 'EMPLOYMENT_LETTER',
+  CONTRACT = 'CONTRACT',
+  LICENSE = 'LICENSE',
+  FINANCIAL_STATEMENT = 'FINANCIAL_STATEMENT'
 }
 
 export enum Gender {
@@ -112,550 +55,203 @@ export enum Gender {
   OTHER = 'OTHER'
 }
 
-export enum MaritalStatus {
-  SINGLE = 'SINGLE',
-  MARRIED = 'MARRIED',
-  DIVORCED = 'DIVORCED',
-  WIDOWED = 'WIDOWED'
-}
-
-export enum PaymentFrequency {
-  MONTHLY = 'MONTHLY',
-  QUARTERLY = 'QUARTERLY',
-  SEMI_ANNUALLY = 'SEMI_ANNUALLY',
-  ANNUALLY = 'ANNUALLY'
-}
-
-// ============================================================================
-// BASE INTERFACES
-// ============================================================================
-
-export interface BaseEntity {
+// Main Entity Interfaces
+export interface PersonalInfo {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  createdBy?: string;
-  updatedBy?: string;
-}
-
-export interface AuditableEntity extends BaseEntity {
-  version: number;
-  isDeleted: boolean;
-  deletedAt?: Date;
-  deletedBy?: string;
-}
-
-// ============================================================================
-// APPLICANT ENTITIES
-// ============================================================================
-
-export interface Applicant extends AuditableEntity {
-  applicationId: string;
-  type: ApplicantType;
-  
-  // Personal Information
-  titleTh?: string;
-  titleEn?: string;
-  firstNameTh: string;
-  lastNameTh: string;
-  firstNameEn?: string;
-  lastNameEn?: string;
-  
-  // Identification
-  idCardNumber: string;
-  passportNumber?: string;
-  taxId?: string;
-  
-  // Personal Details
-  dateOfBirth: Date;
-  age: number;
+  title: string;
+  firstName: string;
+  lastName: string;
   gender: Gender;
+  dateOfBirth: string;
   nationality: string;
-  maritalStatus: MaritalStatus;
-  
-  // Contact
-  mobilePhone: string;
-  homePhone?: string;
-  email: string;
-  lineId?: string;
-  
-  // Additional
-  educationLevel?: string;
-  numberOfDependents: number;
-  
-  // Relations
-  addresses?: Address[];
-  incomes?: Income[];
-}
-
-export interface Company extends AuditableEntity {
-  applicationId: string;
-  
-  // Company Information
-  companyNameTh: string;
-  companyNameEn?: string;
-  registrationNumber: string;
-  taxId: string;
-  
-  // Business Details
-  businessType: string;
-  industryCode: string;
-  establishedDate: Date;
-  yearsInBusiness: number;
-  
-  // Size
-  numberOfEmployees: number;
-  paidUpCapital: number;
-  registeredCapital: number;
-  
-  // Contact
-  phoneNumber: string;
-  email: string;
-  website?: string;
-  
-  // Financial
-  annualRevenue: number;
-  annualProfit?: number;
-  totalAssets?: number;
-  totalLiabilities?: number;
-  
-  // Relations
-  addresses?: Address[];
-  directors?: Director[];
-  shareholders?: Shareholder[];
-}
-
-export interface Director extends BaseEntity {
-  companyId: string;
-  
-  // Personal
-  titleTh: string;
-  firstNameTh: string;
-  lastNameTh: string;
   idCardNumber: string;
-  
-  // Position
-  position: string;
-  isAuthorizedSignatory: boolean;
-  sharePercentage?: number;
+  idCardExpire?: string;
+  passportNumber?: string;
+  passportExpire?: string;
+  mobilePhone: string;
+  email: string;
+  maritalStatus: 'SINGLE' | 'MARRIED' | 'DIVORCED' | 'WIDOWED';
+  dependents: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface Shareholder extends BaseEntity {
-  companyId: string;
-  
-  // Identity
-  name: string;
-  idCardNumber?: string;
-  taxId?: string;
-  
-  // Ownership
-  sharePercentage: number;
-  numberOfShares: number;
-  shareValue: number;
-}
-
-// ============================================================================
-// ADDRESS
-// ============================================================================
-
-export interface Address extends AuditableEntity {
-  applicantId?: string;
-  companyId?: string;
-  type: AddressType;
-  
-  // Address Components
-  houseNumber: string;
-  moo?: string;
-  village?: string;
-  soi?: string;
-  street?: string;
-  subDistrict: string;
-  district: string;
-  province: string;
-  postalCode: string;
-  country: string;
-  
-  // Metadata
-  isPrimary: boolean;
-  yearsAtAddress?: number;
-  monthsAtAddress?: number;
-  
-  // Ownership
-  ownershipStatus?: 'OWNED' | 'RENTED' | 'FAMILY_OWNED' | 'COMPANY_PROVIDED';
-  monthlyRent?: number;
-}
-
-// ============================================================================
-// INCOME & EMPLOYMENT
-// ============================================================================
-
-export interface Income extends AuditableEntity {
-  applicantId: string;
-  
-  // Employment
-  employmentType: EmploymentType;
-  employerName?: string;
-  position?: string;
-  yearsEmployed?: number;
-  monthsEmployed?: number;
-  
-  // Income Details
-  incomeType: IncomeType;
-  monthlyIncome: number;
-  otherIncome?: number;
-  totalMonthlyIncome: number;
-  
-  // Business (if self-employed)
-  businessName?: string;
-  businessType?: string;
-  businessRegistrationNumber?: string;
-  
-  // Verification
-  isVerified: boolean;
-  verifiedBy?: string;
-  verifiedAt?: Date;
-}
-
-// ============================================================================
-// CREDIT APPLICATION
-// ============================================================================
-
-export interface CreditApplication extends AuditableEntity {
-  // Application Info
-  applicationNumber: string;
-  applicantType: ApplicantType;
-  status: ApplicationStatus;
-  
-  // Loan Details
-  loanType: LoanType;
-  requestedAmount: number;
-  requestedTenure: number;
-  purpose: string;
-  
-  // Applicant References
-  primaryApplicantId: string;
-  coApplicantId?: string;
-  companyId?: string;
-  
-  // Status Metadata
-  submittedAt?: Date;
-  submittedBy?: string;
-  currentOfficerId?: string;
-  currentApproverId?: string;
-  
-  // Relations
-  applicant?: Applicant;
-  coApplicant?: Applicant;
-  company?: Company;
-  creditDetail?: CreditDetail;
-  documents?: Document[];
-  guarantors?: Guarantor[];
-  references?: Reference[];
-  approvals?: Approval[];
-  statusHistory?: StatusHistory[];
-  auditLogs?: AuditLog[];
-}
-
-// ============================================================================
-// CREDIT DETAIL
-// ============================================================================
-
-export interface CreditDetail extends AuditableEntity {
+export interface AddressInfo {
+  id: string;
   applicationId: string;
-  
-  // Financial Assessment
-  totalMonthlyIncome: number;
-  totalMonthlyExpenses: number;
-  totalMonthlyDebtPayment: number;
-  netMonthlyIncome: number;
-  
-  // Ratios
-  debtToIncomeRatio: number;
-  debtServiceCoverageRatio?: number;
-  loanToValueRatio?: number;
-  
-  // Existing Debts
+  currentAddress: {
+    building?: string;
+    street: string;
+    province: string;
+    district: string;
+    subdistrict: string;
+    zipCode: string;
+    country: string;
+  };
+  permanentAddress: {
+    building?: string;
+    street: string;
+    province: string;
+    district: string;
+    subdistrict: string;
+    zipCode: string;
+    country: string;
+  };
+  isSameAsCurrentAddress: boolean;
+  yearsAtCurrentAddress: number;
+  housingType: 'OWN' | 'RENT' | 'WITH_FAMILY' | 'OTHER';
+  monthlyRent?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IncomeInfo {
+  id: string;
+  applicationId: string;
+  employmentType: EmploymentType;
+  company: string;
+  position: string;
+  industry: string;
+  monthlyIncome: number;
+  annualIncome: number;
+  otherIncome: number;
+  otherIncomeSource?: string;
+  employmentStartDate: string;
+  workingYears: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreditInfo {
+  id: string;
+  applicationId: string;
+  loanType: LoanType;
+  loanAmount: number;
+  loanPurpose: string;
+  tenorMonths: number;
   existingLoans: ExistingLoan[];
   totalExistingDebt: number;
-  
-  // Credit Score & Assessment
-  creditScore?: number;
-  creditScoreProvider?: string;
-  riskGrade?: RiskGrade;
-  
-  // Approval Details (after approval)
-  approvedAmount?: number;
-  approvedTenure?: number;
-  interestRate?: number;
-  monthlyPayment?: number;
-  
-  // Terms
-  paymentFrequency?: PaymentFrequency;
-  firstPaymentDate?: Date;
-  maturityDate?: Date;
-  
-  // Conditions
-  specialConditions?: string[];
-  collateralRequired?: boolean;
-  collateralDescription?: string;
-  collateralValue?: number;
-  
-  // Analysis
-  analysisNotes?: string;
-  analysisCompletedAt?: Date;
-  analysisCompletedBy?: string;
+  monthlyDebtObligation: number;
+  dtiRatio: number;
+  riskGrade: RiskGrade;
+  isEligible: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ExistingLoan {
   id: string;
+  type: 'BANK_LOAN' | 'CREDIT_CARD' | 'INSTALLMENT';
   lender: string;
-  loanType: string;
-  outstandingBalance: number;
+  amount: number;
   monthlyPayment: number;
-  remainingTenure: number;
-  interestRate: number;
+  remainingBalance: number;
+  term: number;
 }
 
-// ============================================================================
-// DOCUMENTS
-// ============================================================================
-
-export interface Document extends AuditableEntity {
+export interface DocumentUpload {
+  id: string;
   applicationId: string;
-  
-  // Document Info
-  type: DocumentType;
-  name: string;
-  description?: string;
-  
-  // File Details
+  documentType: DocumentType;
   fileName: string;
-  fileSize: number;
-  mimeType: string;
   fileUrl: string;
-  thumbnailUrl?: string;
-  
-  // Status
-  status: DocumentStatus;
-  isMandatory: boolean;
-  
-  // Verification
-  verifiedBy?: string;
-  verifiedAt?: Date;
-  rejectionReason?: string;
-  
-  // OCR Data
-  ocrData?: Record<string, any>;
-  ocrProcessedAt?: Date;
-  ocrConfidence?: number;
-  
-  // Metadata
-  uploadedBy: string;
-  category?: string;
-  expiryDate?: Date;
-  pageCount?: number;
-}
-
-// ============================================================================
-// GUARANTOR & REFERENCE
-// ============================================================================
-
-export interface Guarantor extends AuditableEntity {
-  applicationId: string;
-  relationType: RelationType;
-  
-  // Personal Information
-  titleTh: string;
-  firstNameTh: string;
-  lastNameTh: string;
-  idCardNumber: string;
-  
-  // Contact
-  mobilePhone: string;
-  email?: string;
-  
-  // Relationship
-  relationshipToApplicant: string;
-  yearsKnown: number;
-  
-  // Financial (for guarantor)
-  occupation?: string;
-  monthlyIncome?: number;
-  employer?: string;
-  
-  // Address
-  address?: Address;
-  
-  // Verification
-  isVerified: boolean;
-  verifiedBy?: string;
-  verifiedAt?: Date;
-  verificationNotes?: string;
-}
-
-export interface Reference extends BaseEntity {
-  applicationId: string;
-  
-  // Contact Information
-  name: string;
-  relationship: string;
-  phoneNumber: string;
-  email?: string;
-  
-  // Verification
-  contactedAt?: Date;
-  contactedBy?: string;
-  notes?: string;
-}
-
-// ============================================================================
-// APPROVAL & WORKFLOW
-// ============================================================================
-
-export interface Approval extends AuditableEntity {
-  applicationId: string;
-  
-  // Approval Level
-  level: number;
-  approverRole: UserRole;
-  approverId: string;
-  approverName: string;
-  
-  // Decision
-  decision: 'APPROVED' | 'REJECTED' | 'NEED_MORE_INFO' | 'PENDING';
-  approvedAmount?: number;
-  approvedTenure?: number;
-  interestRate?: number;
-  
-  // Feedback
-  comments?: string;
-  conditions?: string[];
-  requestedDocuments?: string[];
-  
-  // Timing
-  reviewedAt?: Date;
-  dueDate?: Date;
-  
-  // Delegation
-  delegatedTo?: string;
-  delegatedAt?: Date;
-}
-
-export interface StatusHistory extends BaseEntity {
-  applicationId: string;
-  
-  // Status Change
-  fromStatus: ApplicationStatus;
-  toStatus: ApplicationStatus;
-  
-  // Actor
-  changedBy: string;
-  changedByRole: UserRole;
-  
-  // Context
-  reason?: string;
+  fileSize: number;
+  uploadedAt: string;
+  verifiedAt?: string;
+  status: 'PENDING' | 'VERIFIED' | 'REJECTED';
   remarks?: string;
-  
-  // Timing
-  timestamp: Date;
 }
 
-// ============================================================================
-// AUDIT LOG
-// ============================================================================
-
-export interface AuditLog extends BaseEntity {
-  // Entity Reference
-  entityType: string;
-  entityId: string;
-  applicationId?: string;
-  
-  // Action
-  action: 'CREATE' | 'UPDATE' | 'DELETE' | 'VIEW' | 'SUBMIT' | 'APPROVE' | 'REJECT' | 'DOWNLOAD' | 'PRINT';
-  description: string;
-  
-  // Actor
-  userId: string;
-  userName: string;
-  userRole: UserRole;
-  
-  // Context
-  ipAddress?: string;
-  userAgent?: string;
-  sessionId?: string;
-  
-  // Data
-  oldValue?: Record<string, any>;
-  newValue?: Record<string, any>;
-  metadata?: Record<string, any>;
-  
-  // Timing
-  timestamp: Date;
+export interface CreditApplication {
+  id: string;
+  applicationNumber: string;
+  customerId: string;
+  status: ApplicationStatus;
+  loanType: LoanType;
+  loanAmount: number;
+  personalInfo: PersonalInfo;
+  addressInfo?: AddressInfo;
+  incomeInfo?: IncomeInfo;
+  creditInfo?: CreditInfo;
+  documents: DocumentUpload[];
+  guarantors: Guarantor[];
+  approvalHistory: ApprovalHistory[];
+  submittedAt?: string;
+  approvedAt?: string;
+  rejectedAt?: string;
+  rejectionReason?: string;
+  disbursedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-// ============================================================================
-// USER & PERMISSIONS
-// ============================================================================
-
-export interface User extends AuditableEntity {
-  // Identity
-  username: string;
+export interface Guarantor {
+  id: string;
+  applicationId: string;
+  relationship: string;
+  firstName: string;
+  lastName: string;
+  mobilePhone: string;
   email: string;
-  
-  // Personal
-  titleTh?: string;
-  firstNameTh: string;
-  lastNameTh: string;
-  firstNameEn?: string;
-  lastNameEn?: string;
-  
-  // Employment
-  employeeId?: string;
-  department?: string;
-  position?: string;
-  
-  // Access
-  role: UserRole;
+  idCardNumber: string;
+  netWorth?: number;
+}
+
+export interface ApprovalHistory {
+  id: string;
+  applicationId: string;
+  step: ApplicationStatus;
+  approver: string;
+  action: 'APPROVED' | 'REJECTED' | 'PENDING' | 'RETURNED';
+  remarks?: string;
+  timestamp: string;
+}
+
+export interface UserRole {
+  id: string;
+  name: 'CUSTOMER' | 'BANK_OFFICER' | 'APPROVER' | 'CREDIT_COMMITTEE' | 'ADMIN';
   permissions: string[];
-  isActive: boolean;
-  
-  // Security
-  lastLoginAt?: Date;
-  passwordChangedAt?: Date;
-  failedLoginAttempts: number;
-  lockedUntil?: Date;
 }
 
-// ============================================================================
-// TYPE GUARDS
-// ============================================================================
-
-export function isPersonalApplicant(applicant: Applicant): boolean {
-  return applicant.type === ApplicantType.PERSONAL;
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: UserRole;
+  department?: string;
+  createdAt: string;
 }
 
-export function isCorporateApplication(application: CreditApplication): boolean {
-  return application.applicantType === ApplicantType.CORPORATE;
+// Utility Interfaces
+export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: {
+    code: string;
+    message: string;
+    details?: Record<string, string>;
+  };
+  timestamp: string;
 }
 
-export function isApprovalRequired(status: ApplicationStatus): boolean {
-  return [
-    ApplicationStatus.APPROVAL,
-    ApplicationStatus.NEED_MORE_INFO
-  ].includes(status);
+export interface PaginatedResponse<T> {
+  items: T[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
 }
 
-export function canEditApplication(status: ApplicationStatus): boolean {
-  return [
-    ApplicationStatus.DRAFT,
-    ApplicationStatus.NEED_MORE_INFO
-  ].includes(status);
+export interface ValidationError {
+  field: string;
+  message: string;
 }
 
-export function isFinalStatus(status: ApplicationStatus): boolean {
-  return [
-    ApplicationStatus.APPROVED,
-    ApplicationStatus.REJECTED,
-    ApplicationStatus.DISBURSED
-  ].includes(status);
+export interface CalculationResult {
+  dti: number;
+  monthlyPayment: number;
+  totalInterest: number;
+  riskGrade: RiskGrade;
+  isEligible: boolean;
+  eligibilityReasons: string[];
 }

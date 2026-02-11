@@ -1,378 +1,305 @@
+// Financial calculations and eligibility checks
+
+import {
+  BUSINESS_RULES,
+  INTEREST_RATE_TABLE,
+  RISK_GRADE_BY_DTI,
+  LOAN_TYPE_CONFIGS,
+} from './business-rules';
+
 /**
- * Calculation Utilities
- * Financial calculations for credit application
+ * Calculate Debt-to-Income (DTI) ratio
+ * DTI = (Total Monthly Debt Obligations) / (Monthly Income) * 100
  */
+export const calculateDTI = (
+  monthlyIncome: number,
+  monthlyDebtObligation: number
+): number => {
+  if (monthlyIncome <= 0) return 0;
+  return (monthlyDebtObligation / monthlyIncome) * 100;
+};
 
-import { CREDIT_POLICY, calculateDTI as calcDTI, calculateMonthlyPayment as calcPayment, calculateInterestRate as calcRate } from '../constants/business-rules';
-import type { LoanType, EmploymentType } from '../types/entities';
+/**
+ * Determine risk grade based on DTI ratio
+ */
+export const getRiskGradeByDTI = (
+  dti: number
+): 'EXCELLENT' | 'GOOD' | 'ACCEPTABLE' | 'FAIR' | 'POOR' => {
+  const ranges = RISK_GRADE_BY_DTI;
 
-// ============================================================================
-// DTI CALCULATION
-// ============================================================================
+  if (dti <= ranges.EXCELLENT.max * 100) return 'EXCELLENT';
+  if (dti <= ranges.GOOD.max * 100) return 'GOOD';
+  if (dti <= ranges.ACCEPTABLE.max * 100) return 'ACCEPTABLE';
+  if (dti <= ranges.FAIR.max * 100) return 'FAIR';
+  return 'POOR';
+};
 
-export interface DTICalculationInput {
-  monthlyIncome: number;
-  additionalIncomes?: Array<{ amount: number }>;
-  monthlyExpenses: number;
-  existingLoans?: Array<{ monthlyPayment: number }>;
-  monthlyRent?: number;
-}
+/**
+ * Calculate monthly payment using amortization formula
+ * M = P * [r(1+r)^n] / [(1+r)^n - 1]
+ * Where: M = Monthly Payment, P = Principal, r = Monthly Rate, n = Number of Months
+ */
+export const calculateMonthlyPayment = (
+  principal: number,
+  annualRate: number,
+  tenorMonths: number
+): number => {
+  const monthlyRate = annualRate / 12;
 
-export interface DTICalculationResult {
-  totalMonthlyIncome: number;
-  totalMonthlyExpenses: number;
-  totalMonthlyDebtPayment: number;
-  netMonthlyIncome: number;
-  debtToIncomeRatio: number;
-  isWithinLimit: boolean;
-  remainingCapacity: number;
-}
-
-export function calculateDTI(input: DTICalculationInput): DTICalculationResult {
-  const additionalIncome = input.additionalIncomes?.reduce((sum, inc) => sum + inc.amount, 0) || 0;
-  const totalMonthlyIncome = input.monthlyIncome + additionalIncome;
-  
-  const existingDebtPayment = input.existingLoans?.reduce((sum, loan) => sum + loan.monthlyPayment, 0) || 0;
-  const totalMonthlyDebtPayment = existingDebtPayment;
-  
-  const totalMonthlyExpenses = input.monthlyExpenses + (input.monthlyRent || 0);
-  
-  const netMonthlyIncome = totalMonthlyIncome - totalMonthlyExpenses - totalMonthlyDebtPayment;
-  
-  const dti = totalMonthlyIncome > 0 ? totalMonthlyDebtPayment / totalMonthlyIncome : 0;
-  
-  const maxAllowedDebt = totalMonthlyIncome * CREDIT_POLICY.MAX_DTI_RATIO;
-  const remainingCapacity = Math.max(0, maxAllowedDebt - totalMonthlyDebtPayment);
-  
-  return {
-    totalMonthlyIncome,
-    totalMonthlyExpenses,
-    totalMonthlyDebtPayment,
-    netMonthlyIncome,
-    debtToIncomeRatio: dti,
-    isWithinLimit: dti <= CREDIT_POLICY.MAX_DTI_RATIO,
-    remainingCapacity
-  };
-}
-
-// ============================================================================
-// LOAN ELIGIBILITY
-// ============================================================================
-
-export interface EligibilityCheckInput {
-  monthlyIncome: number;
-  age: number;
-  dtiRatio: number;
-  loanType: LoanType;
-  requestedAmount: number;
-  requestedTenure: number;
-  employmentType: EmploymentType;
-  yearsEmployed?: number;
-  creditScore?: number;
-}
-
-export interface EligibilityCheckResult {
-  isEligible: boolean;
-  issues: Array<{
-    code: string;
-    message: string;
-    severity: 'error' | 'warning';
-  }>;
-  recommendations: string[];
-  maxLoanAmount: number;
-  estimatedInterestRate: number;
-  estimatedMonthlyPayment: number;
-}
-
-export function checkEligibility(input: EligibilityCheckInput): EligibilityCheckResult {
-  const issues: EligibilityCheckResult['issues'] = [];
-  const recommendations: string[] = [];
-  
-  // Age Check
-  if (input.age < CREDIT_POLICY.MIN_AGE) {
-    issues.push({
-      code: 'AGE_TOO_LOW',
-      message: `You must be at least ${CREDIT_POLICY.MIN_AGE} years old`,
-      severity: 'error'
-    });
+  if (monthlyRate === 0) {
+    return principal / tenorMonths;
   }
-  
-  if (input.age > CREDIT_POLICY.MAX_AGE) {
-    issues.push({
-      code: 'AGE_TOO_HIGH',
-      message: `Maximum age is ${CREDIT_POLICY.MAX_AGE} years`,
-      severity: 'error'
-    });
-  }
-  
-  const ageAtMaturity = input.age + (input.requestedTenure / 12);
-  if (ageAtMaturity > CREDIT_POLICY.MAX_AGE_AT_MATURITY) {
-    issues.push({
-      code: 'AGE_AT_MATURITY_EXCEEDED',
-      message: `Age at loan maturity (${Math.floor(ageAtMaturity)}) would exceed maximum ${CREDIT_POLICY.MAX_AGE_AT_MATURITY}`,
-      severity: 'error'
-    });
-    recommendations.push(`Consider reducing tenure to ${Math.floor((CREDIT_POLICY.MAX_AGE_AT_MATURITY - input.age) * 12)} months`);
-  }
-  
-  // Income Check
-  if (input.monthlyIncome < CREDIT_POLICY.MIN_MONTHLY_INCOME_THB) {
-    issues.push({
-      code: 'INCOME_TOO_LOW',
-      message: `Monthly income must be at least ฿${CREDIT_POLICY.MIN_MONTHLY_INCOME_THB.toLocaleString()}`,
-      severity: 'error'
-    });
-  }
-  
-  // DTI Check
-  if (input.dtiRatio > CREDIT_POLICY.MAX_DTI_RATIO) {
-    issues.push({
-      code: 'DTI_EXCEEDED',
-      message: `Debt-to-Income ratio (${(input.dtiRatio * 100).toFixed(1)}%) exceeds maximum ${(CREDIT_POLICY.MAX_DTI_RATIO * 100)}%`,
-      severity: 'error'
-    });
-    recommendations.push('Consider reducing existing debt or increasing income');
-  } else if (input.dtiRatio > CREDIT_POLICY.RECOMMENDED_DTI_RATIO) {
-    issues.push({
-      code: 'DTI_HIGH',
-      message: `Debt-to-Income ratio (${(input.dtiRatio * 100).toFixed(1)}%) is above recommended ${(CREDIT_POLICY.RECOMMENDED_DTI_RATIO * 100)}%`,
-      severity: 'warning'
-    });
-  }
-  
-  // Employment Check
-  if (input.employmentType === EmploymentType.PERMANENT || input.employmentType === EmploymentType.CONTRACT) {
-    const totalMonths = (input.yearsEmployed || 0) * 12;
-    if (totalMonths < CREDIT_POLICY.MIN_EMPLOYMENT_MONTHS) {
-      issues.push({
-        code: 'EMPLOYMENT_TOO_SHORT',
-        message: `Minimum ${CREDIT_POLICY.MIN_EMPLOYMENT_MONTHS} months employment required`,
-        severity: 'error'
-      });
-    }
-  }
-  
-  // Credit Score Check
-  if (input.creditScore && input.creditScore < CREDIT_POLICY.MIN_CREDIT_SCORE) {
-    issues.push({
-      code: 'CREDIT_SCORE_LOW',
-      message: `Credit score (${input.creditScore}) is below minimum ${CREDIT_POLICY.MIN_CREDIT_SCORE}`,
-      severity: 'error'
-    });
-    recommendations.push('Work on improving your credit score before applying');
-  }
-  
-  // Calculate max loan amount and rates
-  const maxLoanAmount = calculateMaxLoanAmount(input.monthlyIncome, input.loanType);
-  const estimatedRate = calcRate(
-    input.loanType,
-    input.creditScore,
-    input.dtiRatio,
-    input.employmentType,
-    false
-  );
-  const estimatedPayment = calcPayment(
-    input.requestedAmount,
-    estimatedRate,
-    input.requestedTenure
-  );
-  
-  // Amount Check
-  if (input.requestedAmount > maxLoanAmount) {
-    issues.push({
-      code: 'AMOUNT_EXCEEDED',
-      message: `Requested amount (฿${input.requestedAmount.toLocaleString()}) exceeds maximum (฿${maxLoanAmount.toLocaleString()}) for your income`,
-      severity: 'error'
-    });
-    recommendations.push(`Consider requesting up to ฿${maxLoanAmount.toLocaleString()}`);
-  }
-  
-  // Payment Check
-  const paymentToIncomeRatio = estimatedPayment / input.monthlyIncome;
-  if (paymentToIncomeRatio > 0.40) {
-    issues.push({
-      code: 'PAYMENT_TOO_HIGH',
-      message: `Estimated monthly payment (฿${estimatedPayment.toLocaleString()}) is ${(paymentToIncomeRatio * 100).toFixed(1)}% of income`,
-      severity: 'warning'
-    });
-    recommendations.push('Consider extending the loan tenure to reduce monthly payment');
-  }
-  
-  const hasErrors = issues.some(issue => issue.severity === 'error');
-  
-  return {
-    isEligible: !hasErrors,
-    issues,
-    recommendations,
-    maxLoanAmount,
-    estimatedInterestRate: estimatedRate,
-    estimatedMonthlyPayment: estimatedPayment
-  };
-}
 
-// ============================================================================
-// MONTHLY PAYMENT CALCULATION
-// ============================================================================
+  const numerator = monthlyRate * Math.pow(1 + monthlyRate, tenorMonths);
+  const denominator = Math.pow(1 + monthlyRate, tenorMonths) - 1;
 
-export interface PaymentCalculationInput {
-  principal: number;
-  annualInterestRate: number;
-  tenureMonths: number;
-}
+  return (principal * numerator) / denominator;
+};
 
-export interface PaymentCalculationResult {
-  monthlyPayment: number;
-  totalPayment: number;
-  totalInterest: number;
-  effectiveInterestRate: number;
-}
+/**
+ * Calculate total interest paid over loan tenure
+ */
+export const calculateTotalInterest = (
+  monthlyPayment: number,
+  tenorMonths: number,
+  principal: number
+): number => {
+  return monthlyPayment * tenorMonths - principal;
+};
 
-export function calculatePayment(input: PaymentCalculationInput): PaymentCalculationResult {
-  const monthlyPayment = calcPayment(
-    input.principal,
-    input.annualInterestRate,
-    input.tenureMonths
-  );
-  
-  const totalPayment = monthlyPayment * input.tenureMonths;
-  const totalInterest = totalPayment - input.principal;
-  const effectiveInterestRate = (totalInterest / input.principal) * 100;
-  
-  return {
-    monthlyPayment,
-    totalPayment,
-    totalInterest,
-    effectiveInterestRate
-  };
-}
+/**
+ * Calculate effective interest rate based on risk grade
+ */
+export const getInterestRateByRiskGrade = (
+  riskGrade: string
+): number => {
+  const rates = INTEREST_RATE_TABLE as Record<string, { min: number; max: number }>;
+  const rateRange = rates[riskGrade] || rates.POOR;
 
-// ============================================================================
-// AMORTIZATION SCHEDULE
-// ============================================================================
+  // Use average of min and max
+  return (rateRange.min + rateRange.max) / 2;
+};
 
-export interface AmortizationEntry {
-  period: number;
+/**
+ * Generate amortization schedule
+ */
+export const generateAmortizationSchedule = (
+  principal: number,
+  annualRate: number,
+  tenorMonths: number
+): {
+  month: number;
   payment: number;
   principal: number;
   interest: number;
   balance: number;
-}
+}[] => {
+  const schedule = [];
+  const monthlyRate = annualRate / 12;
+  const monthlyPayment = calculateMonthlyPayment(principal, annualRate, tenorMonths);
 
-export function generateAmortizationSchedule(
-  principal: number,
-  annualInterestRate: number,
-  tenureMonths: number
-): AmortizationEntry[] {
-  const monthlyRate = annualInterestRate / 100 / 12;
-  const monthlyPayment = calcPayment(principal, annualInterestRate, tenureMonths);
-  
-  const schedule: AmortizationEntry[] = [];
   let balance = principal;
-  
-  for (let period = 1; period <= tenureMonths; period++) {
+
+  for (let month = 1; month <= tenorMonths; month++) {
     const interest = balance * monthlyRate;
     const principalPayment = monthlyPayment - interest;
     balance -= principalPayment;
-    
-    // Handle rounding for final payment
-    if (period === tenureMonths) {
-      balance = 0;
-    }
-    
+
     schedule.push({
-      period,
+      month,
       payment: monthlyPayment,
-      principal: principalPayment,
-      interest,
-      balance: Math.max(0, balance)
+      principal: Math.max(principalPayment, 0),
+      interest: Math.max(interest, 0),
+      balance: Math.max(balance, 0),
     });
   }
-  
+
   return schedule;
-}
+};
 
-// ============================================================================
-// LOAN COMPARISON
-// ============================================================================
+/**
+ * Check eligibility based on income and DTI
+ */
+export const checkEligibility = (
+  monthlyIncome: number,
+  monthlyDebtObligation: number,
+  age: number,
+  employmentMonths: number,
+  loanType: string
+): {
+  isEligible: boolean;
+  reasons: string[];
+} => {
+  const reasons: string[] = [];
 
-export interface LoanComparisonInput {
-  amount: number;
-  options: Array<{
-    tenure: number;
-    interestRate: number;
-    label: string;
-  }>;
-}
+  // Age check
+  if (age < BUSINESS_RULES.AGE.MIN || age > BUSINESS_RULES.AGE.MAX) {
+    reasons.push(
+      `Age must be between ${BUSINESS_RULES.AGE.MIN} and ${BUSINESS_RULES.AGE.MAX} years`
+    );
+  }
 
-export interface LoanComparisonResult {
-  comparisons: Array<{
-    label: string;
-    tenure: number;
-    interestRate: number;
-    monthlyPayment: number;
-    totalPayment: number;
-    totalInterest: number;
-  }>;
-  recommended: number; // Index of recommended option
-}
+  // Income check
+  if (monthlyIncome < BUSINESS_RULES.DTI.MIN_MONTHLY_INCOME) {
+    reasons.push(
+      `Minimum monthly income required: ฿${BUSINESS_RULES.DTI.MIN_MONTHLY_INCOME.toLocaleString()}`
+    );
+  }
 
-export function compareLoanOptions(input: LoanComparisonInput): LoanComparisonResult {
-  const comparisons = input.options.map(option => {
-    const payment = calculatePayment({
-      principal: input.amount,
-      annualInterestRate: option.interestRate,
-      tenureMonths: option.tenure
-    });
-    
-    return {
-      label: option.label,
-      tenure: option.tenure,
-      interestRate: option.interestRate,
-      monthlyPayment: payment.monthlyPayment,
-      totalPayment: payment.totalPayment,
-      totalInterest: payment.totalInterest
-    };
-  });
-  
-  // Recommend option with lowest total interest
-  const recommended = comparisons.reduce((minIdx, curr, idx, arr) => 
-    curr.totalInterest < arr[minIdx].totalInterest ? idx : minIdx
-  , 0);
-  
+  // Employment check
+  if (employmentMonths < BUSINESS_RULES.EMPLOYMENT.MIN_MONTHS) {
+    reasons.push(
+      `Minimum employment period required: ${BUSINESS_RULES.EMPLOYMENT.MIN_MONTHS} months`
+    );
+  }
+
+  // DTI check
+  const dti = calculateDTI(monthlyIncome, monthlyDebtObligation);
+  const maxDti = LOAN_TYPE_CONFIGS[loanType]?.maxDti || BUSINESS_RULES.DTI.MAX_RATIO;
+
+  if (dti > maxDti * 100) {
+    reasons.push(
+      `DTI ratio ${dti.toFixed(2)}% exceeds maximum allowed ${(maxDti * 100).toFixed(2)}%`
+    );
+  }
+
   return {
-    comparisons,
-    recommended
+    isEligible: reasons.length === 0,
+    reasons,
   };
-}
+};
 
-// ============================================================================
-// HELPER FUNCTIONS
-// ============================================================================
+/**
+ * Calculate age from date of birth
+ */
+export const calculateAge = (dateOfBirth: string): number => {
+  const today = new Date();
+  const birthDate = new Date(dateOfBirth);
 
-function calculateMaxLoanAmount(monthlyIncome: number, loanType: LoanType): number {
-  // Simplified - real implementation in business-rules.ts
-  const multipliers: Record<LoanType, number> = {
-    PERSONAL: 5,
-    HOME: 50,
-    AUTO: 10,
-    SME: 20,
-    CORPORATE: 100
-  };
-  
-  return monthlyIncome * (multipliers[loanType] || 5);
-}
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
 
-export function formatCurrency(amount: number): string {
-  return `฿${amount.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}`;
-}
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
 
-export function formatPercentage(value: number): string {
-  return `${(value * 100).toFixed(2)}%`;
-}
+  return age;
+};
 
-export function roundToTwoDecimals(value: number): number {
-  return Math.round(value * 100) / 100;
-}
+/**
+ * Calculate months between two dates
+ */
+export const calculateMonths = (startDate: string, endDate: string = new Date().toISOString()): number => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  let months = (end.getFullYear() - start.getFullYear()) * 12;
+  months -= start.getMonth();
+  months += end.getMonth();
+
+  return months <= 0 ? 0 : months;
+};
+
+/**
+ * Validate loan amount against loan type limits
+ */
+export const validateLoanAmount = (
+  loanAmount: number,
+  loanType: string
+): { isValid: boolean; message?: string } => {
+  const config = LOAN_TYPE_CONFIGS[loanType];
+
+  if (!config) {
+    return { isValid: false, message: 'Invalid loan type' };
+  }
+
+  if (loanAmount < config.minAmount) {
+    return {
+      isValid: false,
+      message: `Minimum loan amount for ${config.name}: ฿${config.minAmount.toLocaleString()}`,
+    };
+  }
+
+  if (loanAmount > config.maxAmount) {
+    return {
+      isValid: false,
+      message: `Maximum loan amount for ${config.name}: ฿${config.maxAmount.toLocaleString()}`,
+    };
+  }
+
+  return { isValid: true };
+};
+
+/**
+ * Validate tenor against loan type limits
+ */
+export const validateTenor = (
+  tenorMonths: number,
+  loanType: string
+): { isValid: boolean; message?: string } => {
+  const config = LOAN_TYPE_CONFIGS[loanType];
+
+  if (!config) {
+    return { isValid: false, message: 'Invalid loan type' };
+  }
+
+  if (tenorMonths < config.minTenor) {
+    return {
+      isValid: false,
+      message: `Minimum tenor for ${config.name}: ${config.minTenor} months`,
+    };
+  }
+
+  if (tenorMonths > config.maxTenor) {
+    return {
+      isValid: false,
+      message: `Maximum tenor for ${config.name}: ${config.maxTenor} months`,
+    };
+  }
+
+  return { isValid: true };
+};
+
+/**
+ * Calculate maximum loan amount based on income and DTI
+ */
+export const calculateMaximumLoanAmount = (
+  monthlyIncome: number,
+  monthlyDebtObligation: number,
+  maxDtiRatio: number = 0.50
+): number => {
+  const maxMonthlyDebt = monthlyIncome * maxDtiRatio;
+  const maxNewDebt = maxMonthlyDebt - monthlyDebtObligation;
+
+  // Using average rate and 60-month tenor for estimation
+  const avgMonthlyRate = 0.004; // ~4.8% annual
+  const tenor = 60;
+
+  // Rearrange: M = P * [r(1+r)^n] / [(1+r)^n - 1]
+  // To get: P = M * [(1+r)^n - 1] / [r(1+r)^n]
+  const numerator = Math.pow(1 + avgMonthlyRate, tenor) - 1;
+  const denominator = avgMonthlyRate * Math.pow(1 + avgMonthlyRate, tenor);
+
+  const maxLoan = maxNewDebt * (numerator / denominator);
+
+  return Math.max(0, maxLoan);
+};
+
+/**
+ * Format currency in Thai Baht
+ */
+export const formatBaht = (amount: number): string => {
+  return new Intl.NumberFormat('th-TH', {
+    style: 'currency',
+    currency: 'THB',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+};
+
+/**
+ * Format percentage
+ */
+export const formatPercentage = (value: number, decimals: number = 2): string => {
+  return `${value.toFixed(decimals)}%`;
+};

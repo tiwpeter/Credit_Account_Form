@@ -1,520 +1,246 @@
-/**
- * Business Rules
- * Credit application business validation rules
- */
+// Business rules and credit policies
 
-import { LoanType, ApplicantType, EmploymentType } from '../types/entities';
+export const BUSINESS_RULES = {
+  // DTI Rules
+  DTI: {
+    MAX_RATIO: 0.50, // 50% maximum
+    MIN_MONTHLY_INCOME: 15000, // ฿15,000 minimum
+  },
 
-// ============================================================================
-// CREDIT POLICY RULES
-// ============================================================================
-
-export const CREDIT_POLICY = {
-  // DTI Ratio
-  MAX_DTI_RATIO: 0.50, // 50%
-  RECOMMENDED_DTI_RATIO: 0.40, // 40%
-  
-  // Income Requirements
-  MIN_MONTHLY_INCOME_THB: 15000,
-  MIN_MONTHLY_INCOME_SME_THB: 50000,
-  MIN_MONTHLY_INCOME_CORPORATE_THB: 100000,
-  
   // Age Requirements
-  MIN_AGE: 20,
-  MAX_AGE: 65,
-  MAX_AGE_AT_MATURITY: 70,
-  
-  // Employment
-  MIN_EMPLOYMENT_MONTHS: 6,
-  MIN_BUSINESS_YEARS: 2,
-  
-  // Credit Score
-  MIN_CREDIT_SCORE: 600,
-  GOOD_CREDIT_SCORE: 700,
-  EXCELLENT_CREDIT_SCORE: 750,
-  
-  // Debt
-  MAX_EXISTING_LOANS: 5,
-  
-  // Down Payment
-  MIN_DOWN_PAYMENT_PERCENTAGE: 0.10, // 10%
-} as const;
+  AGE: {
+    MIN: 20,
+    MAX: 65,
+  },
 
-// ============================================================================
-// LOAN TYPE CONFIGURATIONS
-// ============================================================================
+  // Employment Requirements
+  EMPLOYMENT: {
+    MIN_MONTHS: 6, // Minimum 6 months employment
+  },
 
+  // Loan Limits by Type
+  LOAN_LIMITS: {
+    PERSONAL: {
+      MIN: 10000,
+      MAX: 1000000,
+    },
+    HOME: {
+      MIN: 500000,
+      MAX: 20000000,
+    },
+    AUTO: {
+      MIN: 100000,
+      MAX: 5000000,
+    },
+    SME: {
+      MIN: 100000,
+      MAX: 10000000,
+    },
+    CORPORATE: {
+      MIN: 1000000,
+      MAX: 100000000,
+    },
+  },
+
+  // Tenor Limits
+  TENOR: {
+    MIN_MONTHS: 6,
+    MAX_MONTHS: 360,
+  },
+};
+
+// Interest Rate Table by Risk Grade
+export const INTEREST_RATE_TABLE = {
+  EXCELLENT: { min: 0.028, max: 0.035 }, // 2.8% - 3.5%
+  GOOD: { min: 0.035, max: 0.045 },      // 3.5% - 4.5%
+  ACCEPTABLE: { min: 0.045, max: 0.055 }, // 4.5% - 5.5%
+  FAIR: { min: 0.055, max: 0.070 },       // 5.5% - 7.0%
+  POOR: { min: 0.070, max: 0.100 },       // 7.0% - 10.0%
+};
+
+// Risk Grade by DTI
+export const RISK_GRADE_BY_DTI = {
+  EXCELLENT: { min: 0, max: 0.25 },       // DTI <= 25%
+  GOOD: { min: 0.25, max: 0.40 },         // 25% < DTI <= 40%
+  ACCEPTABLE: { min: 0.40, max: 0.50 },   // 40% < DTI <= 50%
+  FAIR: { min: 0.50, max: 0.60 },         // 50% < DTI <= 60%
+  POOR: { min: 0.60, max: 1.0 },          // DTI > 60%
+};
+
+// Loan Type Configuration
 export interface LoanTypeConfig {
-  type: LoanType;
-  nameTh: string;
-  nameEn: string;
-  
-  // Amount Limits
+  name: string;
   minAmount: number;
   maxAmount: number;
-  maxAmountMultiplier?: number; // Multiplier of monthly income
-  
-  // Tenure Limits
-  minTenureMonths: number;
-  maxTenureMonths: number;
-  
-  // Interest Rates
-  baseInterestRate: number;
-  minInterestRate: number;
-  maxInterestRate: number;
-  
-  // Requirements
-  requiresCollateral: boolean;
-  requiresGuarantor: boolean;
-  allowsCoApplicant: boolean;
-  allowsCorporate: boolean;
-  
-  // Documents
-  requiredDocuments: string[];
-  
-  // Special Rules
-  maxDTI?: number;
-  minIncome?: number;
+  maxTenor: number; // months
+  minTenor: number; // months
+  requireGuarantor: boolean;
+  requireCompanyInfo: boolean;
+  maxDti: number; // Maximum DTI ratio
 }
 
-export const LOAN_TYPE_CONFIGS: Record<LoanType, LoanTypeConfig> = {
-  [LoanType.PERSONAL]: {
-    type: LoanType.PERSONAL,
-    nameTh: 'สินเชื่อส่วนบุคคล',
-    nameEn: 'Personal Loan',
+export const LOAN_TYPE_CONFIGS: Record<string, LoanTypeConfig> = {
+  PERSONAL: {
+    name: 'Personal Loan',
     minAmount: 10000,
     maxAmount: 1000000,
-    maxAmountMultiplier: 5, // Max 5x monthly income
-    minTenureMonths: 6,
-    maxTenureMonths: 60,
-    baseInterestRate: 15.0,
-    minInterestRate: 12.0,
-    maxInterestRate: 20.0,
-    requiresCollateral: false,
-    requiresGuarantor: false,
-    allowsCoApplicant: true,
-    allowsCorporate: false,
-    requiredDocuments: ['ID_CARD', 'HOUSE_REGISTRATION', 'INCOME_PROOF', 'BANK_STATEMENT'],
-    maxDTI: 0.50
+    minTenor: 6,
+    maxTenor: 72,
+    requireGuarantor: false,
+    requireCompanyInfo: false,
+    maxDti: 0.50,
   },
-  
-  [LoanType.HOME]: {
-    type: LoanType.HOME,
-    nameTh: 'สินเชื่อบ้าน',
-    nameEn: 'Home Loan',
+  HOME: {
+    name: 'Home Loan',
     minAmount: 500000,
     maxAmount: 20000000,
-    maxAmountMultiplier: 50, // Special calculation for home loans
-    minTenureMonths: 60,
-    maxTenureMonths: 360,
-    baseInterestRate: 5.5,
-    minInterestRate: 4.0,
-    maxInterestRate: 8.0,
-    requiresCollateral: true,
-    requiresGuarantor: false,
-    allowsCoApplicant: true,
-    allowsCorporate: false,
-    requiredDocuments: [
-      'ID_CARD',
-      'HOUSE_REGISTRATION',
-      'INCOME_PROOF',
-      'BANK_STATEMENT',
-      'COLLATERAL_DOCUMENT'
-    ],
-    maxDTI: 0.40
+    minTenor: 60,
+    maxTenor: 360,
+    requireGuarantor: true,
+    requireCompanyInfo: false,
+    maxDti: 0.50,
   },
-  
-  [LoanType.AUTO]: {
-    type: LoanType.AUTO,
-    nameTh: 'สินเชื่อรถยนต์',
-    nameEn: 'Auto Loan',
+  AUTO: {
+    name: 'Auto Loan',
     minAmount: 100000,
     maxAmount: 5000000,
-    maxAmountMultiplier: 10,
-    minTenureMonths: 12,
-    maxTenureMonths: 84,
-    baseInterestRate: 7.0,
-    minInterestRate: 5.0,
-    maxInterestRate: 10.0,
-    requiresCollateral: true,
-    requiresGuarantor: false,
-    allowsCoApplicant: true,
-    allowsCorporate: false,
-    requiredDocuments: [
-      'ID_CARD',
-      'HOUSE_REGISTRATION',
-      'INCOME_PROOF',
-      'BANK_STATEMENT',
-      'COLLATERAL_DOCUMENT'
-    ],
-    maxDTI: 0.45
+    minTenor: 36,
+    maxTenor: 84,
+    requireGuarantor: false,
+    requireCompanyInfo: false,
+    maxDti: 0.50,
   },
-  
-  [LoanType.SME]: {
-    type: LoanType.SME,
-    nameTh: 'สินเชื่อ SME',
-    nameEn: 'SME Loan',
+  SME: {
+    name: 'SME Loan',
     minAmount: 100000,
     maxAmount: 10000000,
-    minTenureMonths: 12,
-    maxTenureMonths: 120,
-    baseInterestRate: 8.0,
-    minInterestRate: 6.0,
-    maxInterestRate: 12.0,
-    requiresCollateral: true,
-    requiresGuarantor: true,
-    allowsCoApplicant: false,
-    allowsCorporate: true,
-    requiredDocuments: [
-      'ID_CARD',
-      'COMPANY_REGISTRATION',
-      'FINANCIAL_STATEMENT',
-      'BANK_STATEMENT',
-      'TAX_RETURN'
-    ],
-    minIncome: 50000
+    minTenor: 12,
+    maxTenor: 180,
+    requireGuarantor: true,
+    requireCompanyInfo: true,
+    maxDti: 0.60,
   },
-  
-  [LoanType.CORPORATE]: {
-    type: LoanType.CORPORATE,
-    nameTh: 'สินเชื่อองค์กร',
-    nameEn: 'Corporate Loan',
+  CORPORATE: {
+    name: 'Corporate Loan',
     minAmount: 1000000,
     maxAmount: 100000000,
-    minTenureMonths: 12,
-    maxTenureMonths: 240,
-    baseInterestRate: 7.0,
-    minInterestRate: 5.0,
-    maxInterestRate: 10.0,
-    requiresCollateral: true,
-    requiresGuarantor: true,
-    allowsCoApplicant: false,
-    allowsCorporate: true,
-    requiredDocuments: [
-      'COMPANY_REGISTRATION',
-      'FINANCIAL_STATEMENT',
-      'BANK_STATEMENT',
-      'TAX_RETURN',
-      'COLLATERAL_DOCUMENT'
-    ],
-    minIncome: 100000
-  }
+    minTenor: 24,
+    maxTenor: 240,
+    requireGuarantor: true,
+    requireCompanyInfo: true,
+    maxDti: 0.70,
+  },
 };
 
-// ============================================================================
-// INTEREST RATE CALCULATION
-// ============================================================================
+// Eligibility Rules
+export const ELIGIBILITY_RULES = {
+  // Basic Requirements
+  BASIC: [
+    { rule: 'age', description: 'Age must be between 20-65 years' },
+    { rule: 'monthlyIncome', description: 'Minimum monthly income ฿15,000' },
+    { rule: 'employmentTenure', description: 'At least 6 months employment' },
+    { rule: 'dtiRatio', description: 'DTI ratio cannot exceed 50%' },
+  ],
 
-export interface InterestRateModifier {
-  condition: string;
-  adjustment: number; // Percentage points
-}
+  // Additional for Home Loans
+  HOME: [
+    { rule: 'minIncome', description: 'Minimum monthly income ฿30,000' },
+    { rule: 'guarantor', description: 'Requires guarantor' },
+  ],
 
-export const INTEREST_RATE_MODIFIERS: InterestRateModifier[] = [
-  // Credit Score Based
-  { condition: 'CREDIT_SCORE_EXCELLENT', adjustment: -2.0 },
-  { condition: 'CREDIT_SCORE_GOOD', adjustment: -1.0 },
-  { condition: 'CREDIT_SCORE_FAIR', adjustment: 0.0 },
-  { condition: 'CREDIT_SCORE_POOR', adjustment: 2.0 },
-  
-  // DTI Based
-  { condition: 'DTI_VERY_LOW', adjustment: -0.5 }, // < 20%
-  { condition: 'DTI_LOW', adjustment: -0.25 }, // 20-30%
-  { condition: 'DTI_MODERATE', adjustment: 0.0 }, // 30-40%
-  { condition: 'DTI_HIGH', adjustment: 0.5 }, // 40-50%
-  
-  // Employment Based
-  { condition: 'PERMANENT_EMPLOYMENT', adjustment: -0.5 },
-  { condition: 'CONTRACT_EMPLOYMENT', adjustment: 0.25 },
-  { condition: 'SELF_EMPLOYED', adjustment: 0.5 },
-  
-  // Collateral Based
-  { condition: 'HIGH_VALUE_COLLATERAL', adjustment: -0.75 },
-  { condition: 'MEDIUM_VALUE_COLLATERAL', adjustment: -0.5 },
-  { condition: 'LOW_VALUE_COLLATERAL', adjustment: 0.0 },
-  
-  // Relationship Based
-  { condition: 'EXISTING_CUSTOMER_5_YEARS', adjustment: -0.5 },
-  { condition: 'EXISTING_CUSTOMER_3_YEARS', adjustment: -0.25 },
-  { condition: 'NEW_CUSTOMER', adjustment: 0.0 }
+  // Additional for SME
+  SME: [
+    { rule: 'businessYears', description: 'At least 1 year in business' },
+    { rule: 'profitability', description: 'Positive annual profit' },
+    { rule: 'guarantor', description: 'Requires guarantor' },
+  ],
+};
+
+// SLA Definitions (Service Level Agreement - in days)
+export const SLA_DEFINITIONS = {
+  DOCUMENT_CHECK: 3,        // 3 days to verify documents
+  CREDIT_ANALYSIS: 7,       // 7 days for credit analysis
+  APPROVAL: 5,              // 5 days for approval
+  TOTAL_PROCESSING: 20,     // 20 days total
+};
+
+// Loan Purposes
+export const LOAN_PURPOSES = [
+  { code: 'HOME_PURCHASE', label: 'Home Purchase', thai: 'ซื้อบ้าน' },
+  { code: 'HOME_RENO', label: 'Home Renovation', thai: 'ปรับปรุงบ้าน' },
+  { code: 'CAR_PURCHASE', label: 'Car Purchase', thai: 'ซื้อรถยนต์' },
+  { code: 'EDUCATION', label: 'Education', thai: 'ศึกษาต่อ' },
+  { code: 'BUSINESS_CAPITAL', label: 'Business Capital', thai: 'ทุนเดินทำเนียบ' },
+  { code: 'DEBT_CONSOLIDATION', label: 'Debt Consolidation', thai: 'รวมหนี้' },
+  { code: 'WEDDING', label: 'Wedding Expenses', thai: 'งานแต่งงาน' },
+  { code: 'MEDICAL', label: 'Medical Expenses', thai: 'ค่าเบี้ยเลี้ยง' },
+  { code: 'INVESTMENT', label: 'Investment', thai: 'ลงทุน' },
+  { code: 'TRAVEL', label: 'Travel/Vacation', thai: 'ท่องเที่ยว' },
 ];
 
-// ============================================================================
-// VALIDATION RULES
-// ============================================================================
+// Industries
+export const INDUSTRIES = [
+  { code: 'IT', label: 'Information Technology', thai: 'เทคโนโลยีสารสนเทศ' },
+  { code: 'FINANCE', label: 'Finance & Banking', thai: 'การเงินและสถาบันการเงิน' },
+  { code: 'HEALTHCARE', label: 'Healthcare', thai: 'สุขภาพและการแพทย์' },
+  { code: 'MANUFACTURING', label: 'Manufacturing', thai: 'การผลิต' },
+  { code: 'RETAIL', label: 'Retail & Commerce', thai: 'ค้นหา' },
+  { code: 'REAL_ESTATE', label: 'Real Estate', thai: 'อสังหาริมทรัพย์' },
+  { code: 'TOURISM', label: 'Tourism & Hospitality', thai: 'การท่องเที่ยวและโรงแรม' },
+  { code: 'EDUCATION', label: 'Education', thai: 'การศึกษา' },
+  { code: 'CONSTRUCTION', label: 'Construction', thai: 'ก่อสร้าง' },
+  { code: 'AGRICULTURE', label: 'Agriculture', thai: 'เกษตรกรรม' },
+];
 
-export interface ValidationRule {
-  code: string;
-  message: string;
-  severity: 'ERROR' | 'WARNING' | 'INFO';
-  validator: (data: any) => boolean;
-}
+// Occupations
+export const OCCUPATIONS = [
+  { code: 'ENGINEER', label: 'Engineer', thai: 'วิศวกร' },
+  { code: 'DOCTOR', label: 'Doctor', thai: 'แพทย์' },
+  { code: 'LAWYER', label: 'Lawyer', thai: 'ทนายความ' },
+  { code: 'ACCOUNTANT', label: 'Accountant', thai: 'บัญชี' },
+  { code: 'TEACHER', label: 'Teacher', thai: 'ครู' },
+  { code: 'MANAGER', label: 'Manager', thai: 'ผู้จัดการ' },
+  { code: 'BUSINESSMAN', label: 'Businessman/woman', thai: 'ผู้ประกอบการ' },
+  { code: 'SALES', label: 'Sales Executive', thai: 'พนักงานขาย' },
+  { code: 'OFFICER', label: 'Government Officer', thai: 'ข้าราชการ' },
+  { code: 'STUDENT', label: 'Student', thai: 'นักเรียน/นักศึกษา' },
+];
 
-export const VALIDATION_RULES = {
-  // Income Validation
-  MIN_INCOME: {
-    code: 'MIN_INCOME',
-    message: 'Monthly income must be at least ฿15,000',
-    severity: 'ERROR' as const,
-    validator: (income: number) => income >= CREDIT_POLICY.MIN_MONTHLY_INCOME_THB
-  },
-  
-  // DTI Validation
-  MAX_DTI: {
-    code: 'MAX_DTI',
-    message: 'Debt-to-Income ratio must not exceed 50%',
-    severity: 'ERROR' as const,
-    validator: (dti: number) => dti <= CREDIT_POLICY.MAX_DTI_RATIO
-  },
-  
-  DTI_WARNING: {
-    code: 'DTI_WARNING',
-    message: 'Debt-to-Income ratio is above recommended 40%',
-    severity: 'WARNING' as const,
-    validator: (dti: number) => dti > CREDIT_POLICY.RECOMMENDED_DTI_RATIO
-  },
-  
-  // Age Validation
-  MIN_AGE: {
-    code: 'MIN_AGE',
-    message: 'Applicant must be at least 20 years old',
-    severity: 'ERROR' as const,
-    validator: (age: number) => age >= CREDIT_POLICY.MIN_AGE
-  },
-  
-  MAX_AGE: {
-    code: 'MAX_AGE',
-    message: 'Applicant must be under 65 years old',
-    severity: 'ERROR' as const,
-    validator: (age: number) => age <= CREDIT_POLICY.MAX_AGE
-  },
-  
-  // Employment Validation
-  MIN_EMPLOYMENT: {
-    code: 'MIN_EMPLOYMENT',
-    message: 'Minimum 6 months employment required',
-    severity: 'ERROR' as const,
-    validator: (months: number) => months >= CREDIT_POLICY.MIN_EMPLOYMENT_MONTHS
-  }
+// Document Requirements by Loan Type
+export const DOCUMENT_REQUIREMENTS: Record<string, string[]> = {
+  PERSONAL: [
+    'ID_CARD',
+    'PROOF_OF_ADDRESS',
+    'INCOME_STATEMENT',
+    'BANK_STATEMENT',
+  ],
+  HOME: [
+    'ID_CARD',
+    'PROOF_OF_ADDRESS',
+    'INCOME_STATEMENT',
+    'TAX_RETURN',
+    'BANK_STATEMENT',
+    'EMPLOYMENT_LETTER',
+  ],
+  AUTO: [
+    'ID_CARD',
+    'PROOF_OF_ADDRESS',
+    'INCOME_STATEMENT',
+    'BANK_STATEMENT',
+    'EMPLOYMENT_LETTER',
+  ],
+  SME: [
+    'ID_CARD',
+    'PROOF_OF_ADDRESS',
+    'TAX_RETURN',
+    'FINANCIAL_STATEMENT',
+    'LICENSE',
+  ],
+  CORPORATE: [
+    'ID_CARD',
+    'TAX_RETURN',
+    'FINANCIAL_STATEMENT',
+    'LICENSE',
+    'EMPLOYMENT_LETTER',
+  ],
 };
-
-// ============================================================================
-// CALCULATION UTILITIES
-// ============================================================================
-
-export function calculateDTI(
-  totalMonthlyIncome: number,
-  totalMonthlyDebtPayment: number
-): number {
-  if (totalMonthlyIncome === 0) return 0;
-  return totalMonthlyDebtPayment / totalMonthlyIncome;
-}
-
-export function calculateMaxLoanAmount(
-  monthlyIncome: number,
-  loanType: LoanType
-): number {
-  const config = LOAN_TYPE_CONFIGS[loanType];
-  
-  if (config.maxAmountMultiplier) {
-    const calculatedMax = monthlyIncome * config.maxAmountMultiplier;
-    return Math.min(calculatedMax, config.maxAmount);
-  }
-  
-  return config.maxAmount;
-}
-
-export function calculateMonthlyPayment(
-  principal: number,
-  annualInterestRate: number,
-  tenureMonths: number
-): number {
-  const monthlyRate = annualInterestRate / 100 / 12;
-  
-  if (monthlyRate === 0) {
-    return principal / tenureMonths;
-  }
-  
-  const payment = principal * 
-    (monthlyRate * Math.pow(1 + monthlyRate, tenureMonths)) /
-    (Math.pow(1 + monthlyRate, tenureMonths) - 1);
-  
-  return Math.round(payment * 100) / 100;
-}
-
-export function calculateInterestRate(
-  loanType: LoanType,
-  creditScore?: number,
-  dti?: number,
-  employmentType?: EmploymentType,
-  hasCollateral?: boolean
-): number {
-  const config = LOAN_TYPE_CONFIGS[loanType];
-  let rate = config.baseInterestRate;
-  
-  // Credit Score Adjustment
-  if (creditScore) {
-    if (creditScore >= CREDIT_POLICY.EXCELLENT_CREDIT_SCORE) {
-      rate -= 2.0;
-    } else if (creditScore >= CREDIT_POLICY.GOOD_CREDIT_SCORE) {
-      rate -= 1.0;
-    } else if (creditScore < CREDIT_POLICY.MIN_CREDIT_SCORE) {
-      rate += 2.0;
-    }
-  }
-  
-  // DTI Adjustment
-  if (dti) {
-    if (dti < 0.20) {
-      rate -= 0.5;
-    } else if (dti < 0.30) {
-      rate -= 0.25;
-    } else if (dti > 0.40) {
-      rate += 0.5;
-    }
-  }
-  
-  // Employment Type Adjustment
-  if (employmentType) {
-    if (employmentType === EmploymentType.PERMANENT) {
-      rate -= 0.5;
-    } else if (employmentType === EmploymentType.SELF_EMPLOYED) {
-      rate += 0.5;
-    } else if (employmentType === EmploymentType.CONTRACT) {
-      rate += 0.25;
-    }
-  }
-  
-  // Collateral Adjustment
-  if (hasCollateral && config.requiresCollateral) {
-    rate -= 0.5;
-  }
-  
-  // Ensure rate is within bounds
-  return Math.max(
-    config.minInterestRate,
-    Math.min(config.maxInterestRate, rate)
-  );
-}
-
-export function isEligibleForLoan(
-  monthlyIncome: number,
-  age: number,
-  dti: number,
-  loanType: LoanType,
-  requestedAmount: number
-): { eligible: boolean; reasons: string[] } {
-  const reasons: string[] = [];
-  const config = LOAN_TYPE_CONFIGS[loanType];
-  
-  // Income Check
-  const minIncome = config.minIncome || CREDIT_POLICY.MIN_MONTHLY_INCOME_THB;
-  if (monthlyIncome < minIncome) {
-    reasons.push(`Monthly income must be at least ฿${minIncome.toLocaleString()}`);
-  }
-  
-  // Age Check
-  if (age < CREDIT_POLICY.MIN_AGE) {
-    reasons.push(`Must be at least ${CREDIT_POLICY.MIN_AGE} years old`);
-  }
-  if (age > CREDIT_POLICY.MAX_AGE) {
-    reasons.push(`Must be under ${CREDIT_POLICY.MAX_AGE} years old`);
-  }
-  
-  // DTI Check
-  const maxDTI = config.maxDTI || CREDIT_POLICY.MAX_DTI_RATIO;
-  if (dti > maxDTI) {
-    reasons.push(`Debt-to-Income ratio (${(dti * 100).toFixed(1)}%) exceeds maximum ${(maxDTI * 100).toFixed(0)}%`);
-  }
-  
-  // Loan Amount Check
-  if (requestedAmount < config.minAmount) {
-    reasons.push(`Minimum loan amount is ฿${config.minAmount.toLocaleString()}`);
-  }
-  
-  const maxAmount = calculateMaxLoanAmount(monthlyIncome, loanType);
-  if (requestedAmount > maxAmount) {
-    reasons.push(`Maximum loan amount for your income is ฿${maxAmount.toLocaleString()}`);
-  }
-  
-  return {
-    eligible: reasons.length === 0,
-    reasons
-  };
-}
-
-// ============================================================================
-// DOCUMENT REQUIREMENTS
-// ============================================================================
-
-export function getRequiredDocuments(
-  applicantType: ApplicantType,
-  loanType: LoanType
-): string[] {
-  const config = LOAN_TYPE_CONFIGS[loanType];
-  
-  if (applicantType === ApplicantType.CORPORATE) {
-    return config.requiredDocuments.filter(doc => 
-      !doc.includes('ID_CARD') || doc.includes('COMPANY')
-    );
-  }
-  
-  return config.requiredDocuments;
-}
-
-// ============================================================================
-// RISK GRADING
-// ============================================================================
-
-export function calculateRiskGrade(
-  creditScore?: number,
-  dti?: number,
-  loanToValue?: number,
-  yearsEmployed?: number
-): string {
-  let score = 0;
-  
-  // Credit Score (40 points)
-  if (creditScore) {
-    if (creditScore >= 750) score += 40;
-    else if (creditScore >= 700) score += 30;
-    else if (creditScore >= 650) score += 20;
-    else if (creditScore >= 600) score += 10;
-  }
-  
-  // DTI (30 points)
-  if (dti !== undefined) {
-    if (dti <= 0.20) score += 30;
-    else if (dti <= 0.30) score += 25;
-    else if (dti <= 0.40) score += 15;
-    else if (dti <= 0.50) score += 5;
-  }
-  
-  // LTV (20 points)
-  if (loanToValue !== undefined) {
-    if (loanToValue <= 0.50) score += 20;
-    else if (loanToValue <= 0.70) score += 15;
-    else if (loanToValue <= 0.80) score += 10;
-    else if (loanToValue <= 0.90) score += 5;
-  }
-  
-  // Employment (10 points)
-  if (yearsEmployed !== undefined) {
-    if (yearsEmployed >= 5) score += 10;
-    else if (yearsEmployed >= 3) score += 7;
-    else if (yearsEmployed >= 1) score += 5;
-    else if (yearsEmployed >= 0.5) score += 2;
-  }
-  
-  // Grade Assignment
-  if (score >= 90) return 'AAA';
-  if (score >= 80) return 'AA';
-  if (score >= 70) return 'A';
-  if (score >= 60) return 'BBB';
-  if (score >= 50) return 'BB';
-  if (score >= 40) return 'B';
-  if (score >= 30) return 'CCC';
-  if (score >= 20) return 'CC';
-  if (score >= 10) return 'C';
-  return 'D';
-}

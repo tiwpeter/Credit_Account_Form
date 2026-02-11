@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Step 1 - ข้อมูลส่วนตัว</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #1E3A5F;
+  --primary-light: #2A4A6F;
+  --accent: #D4AF37;
+  --accent-hover: #C9A432;
+  --bg: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border: #E2E8F0;
+  --success: #22C55E;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 24px;
+}
+
+/* ===== Gradient Header ===== */
+.page-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  padding: 32px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.page-header p {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===== Step Indicator ===== */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background: var(--primary);
+  color: white;
+}
+
+.step-line {
+  width: 40px;
+  height: 2px;
+  background: var(--border);
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
+}
+
+.card h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ===== Form Layout ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(30,58,95,0.1);
+}
+
+/* Full width field */
+.full-width {
+  grid-column: span 3;
+}
+
+/* ===== Buttons ===== */
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  background: #f1f5f9;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .full-width {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .full-width {
+    grid-column: span 1;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>📝 เปิดบัญชีสินเชื่อใหม่</h1>
+    <p>กรอกข้อมูลให้ครบถ้วนเพื่อยื่นคำขอ</p>
+  </div>
+
+  <!-- Step Indicator -->
+  <div class="step-indicator">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <span>ข้อมูลส่วนตัว</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-circle" style="background:#E2E8F0;color:#64748B;">2</div>
+      <span>ที่อยู่</span>
+    </div>
+  </div>
+
+  <!-- Personal Info -->
+  <div class="card">
+    <h3>👤 ข้อมูลส่วนตัว</h3>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>คำนำหน้า</label>
+        <select>
+          <option>นาย</option>
+          <option>นาง</option>
+          <option>นางสาว</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>ชื่อ</label>
+        <input type="text" placeholder="กรอกชื่อ">
+      </div>
+
+      <div class="form-group">
+        <label>นามสกุล</label>
+        <input type="text" placeholder="กรอกนามสกุล">
+      </div>
+
+      <div class="form-group full-width">
+        <label>เลขบัตรประชาชน / Passport</label>
+        <input type="text" placeholder="X-XXXX-XXXXX-XX-X">
+      </div>
+
+      <div class="form-group">
+        <label>วันเกิด</label>
+        <input type="date">
+      </div>
+
+      <div class="form-group">
+        <label>เพศ</label>
+        <select>
+          <option>ชาย</option>
+          <option>หญิง</option>
+          <option>อื่นๆ</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>สัญชาติ</label>
+        <input type="text" placeholder="ไทย">
+      </div>
+
+      <div class="form-group">
+        <label>สถานภาพสมรส</label>
+        <select>
+          <option>โสด</option>
+          <option>สมรส</option>
+          <option>หย่า</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Info -->
+  <div class="card">
+    <h3>📞 ข้อมูลติดต่อ</h3>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>เบอร์โทรศัพท์</label>
+        <input type="tel" placeholder="08X-XXX-XXXX">
+      </div>
+
+      <div class="form-group">
+        <label>อีเมล</label>
+        <input type="email" placeholder="email@example.com">
+      </div>
+
+      <div class="form-group full-width">
+        <label>Line ID</label>
+        <input type="text" placeholder="กรอก Line ID">
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-bar">
+    <button class="btn btn-outline">← ย้อนกลับ</button>
+    <div>
+      <button class="btn btn-outline">บันทึกร่าง</button>
+      <button class="btn btn-primary">ถัดไป →</button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
