@@ -8,7 +8,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="bg-navy-dark text-white shadow-lg">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">💰 Credit System</h1>
+          <h1 className="text-2xl font-bold">💰 Credit Systemๅ/-</h1>
           <div className="flex gap-6">
             <Link href="/" className="hover:text-gold transition-colors">
               หน้าแรก
@@ -26,6 +26,9 @@ export default function Home() {
               สมัครใหม่
             </Link>
           </div>
+        </div>
+        <div className="bg-red-500 text-white p-10 text-3xl">
+          ถ้าเป็นพื้นแดง แสดงว่าใช้ได้แล้ว
         </div>
       </nav>
 
