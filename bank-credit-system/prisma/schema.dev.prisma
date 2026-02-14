@@ -1,0 +1,654 @@
+// ============================================================
+// BANK CREDIT APPLICATION SYSTEM - PRISMA SCHEMA
+// Production-grade normalized schema with full audit support
+// ============================================================
+
+generator client {
+ provider = "prisma-client-js"
+}
+
+datasource db {
+ provider = "sqlite"
+ url = "file:./dev.db"
+}
+
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+// enum String {
+// 
+//  ACTIVE
+//  INACTIVE
+//  SUSPENDED
+//  LOCKED
+// 
+// }
+
+// enum String {
+// 
+//  CUSTOMER
+//  BANK_OFFICER
+//  APPROVER
+//  ADMIN
+// 
+// }
+
+// enum String {
+// 
+//  PERSONAL_LOAN
+//  CORPORATE_LOAN
+// 
+// }
+
+// enum String {
+// 
+//  DRAFT
+//  SUBMITTED
+//  DOCUMENT_CHECK
+//  CREDIT_ANALYSIS
+//  APPROVAL
+//  APPROVED
+//  REJECTED
+//  NEED_MORE_INFO
+//  CONTRACT_SIGNED
+//  DISBURSED
+//  CANCELLED
+// 
+// }
+
+// enum String {
+// 
+//  MALE
+//  FEMALE
+//  OTHER
+// 
+// }
+
+// enum String {
+// 
+//  SINGLE
+//  MARRIED
+//  DIVORCED
+//  WIDOWED
+// 
+// }
+
+// enum String {
+// 
+//  EMPLOYED
+//  SELF_EMPLOYED
+//  BUSINESS_OWNER
+//  RETIRED
+//  UNEMPLOYED
+// 
+// }
+
+// enum String {
+// 
+//  NATIONAL_ID
+//  PASSPORT
+//  INCOME_STATEMENT
+//  BANK_STATEMENT
+//  TAX_RETURN
+//  BUSINESS_REGISTRATION
+//  FINANCIAL_STATEMENT
+//  COLLATERAL_DOCS
+//  CREDIT_REPORT
+//  GUARANTOR_ID
+//  OTHER
+// 
+// }
+
+// enum String {
+// 
+//  PENDING
+//  VERIFIED
+//  REJECTED
+//  EXPIRED
+// 
+// }
+
+// enum String {
+// 
+//  APPROVED
+//  REJECTED
+//  NEED_MORE_INFO
+//  ESCALATED
+// 
+// }
+
+// enum String {
+// 
+//  A_PLUS // Excellent - 4.5-6%
+//  A // Very Good - 6-8%
+//  B_PLUS // Good - 8-10%
+//  B // Fair - 10-13%
+//  C // Below Average - 13-18%
+//  D // High Risk - reject
+// 
+// }
+
+// enum String {
+// 
+//  HOME
+//  WORK
+//  MAILING
+//  REGISTERED
+// 
+// }
+
+// enum String {
+// 
+//  CREATE
+//  UPDATE
+//  DELETE
+//  STATUS_CHANGE
+//  LOGIN
+//  LOGOUT
+//  DOCUMENT_UPLOAD
+//  DOCUMENT_VERIFY
+//  CREDIT_ANALYSIS
+//  APPROVAL_DECISION
+//  DATA_ACCESS
+// 
+// }
+
+// ============================================================
+// USERS & ROLES
+// ============================================================
+
+model User {
+ id String @id @default(uuid())
+ email String @unique
+ password String // bcrypt hash
+ firstName String @map("first_name")
+ lastName String @map("last_name")
+ phoneNumber String? @map("phone_number")
+ status String @default("ACTIVE")
+ failedLoginCount Int @default(0) @map("failed_login_count")
+ lastLoginAt DateTime? @map("last_login_at")
+ passwordChangedAt DateTime? @map("password_changed_at")
+ mustChangePassword Boolean @default(false) @map("must_change_password")
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+ deletedAt DateTime? @map("deleted_at")
+
+ // Relations
+ userRoles UserRole[]
+ applications CreditApplication[] @relation("CustomerApplications")
+ officerActions CreditApplication[] @relation("AssignedOfficer")
+ approvals Approval[]
+ auditLogs AuditLog[]
+ refreshTokens RefreshToken[]
+
+ @@index([email])
+ @@index([status])
+ @@index([deletedAt])
+ @@map("users")
+}
+
+model Role {
+ id String @id @default(uuid())
+ code String @unique
+ name String @unique
+ description String?
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ userRoles UserRole[]
+
+ @@map("roles")
+}
+
+model UserRole {
+ id String @id @default(uuid())
+ userId String @map("user_id")
+ roleId String @map("role_id")
+ grantedAt DateTime @default(now()) @map("granted_at")
+ grantedBy String? @map("granted_by")
+
+ user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+ @@unique([userId, roleId])
+ @@index([userId])
+ @@index([roleId])
+ @@map("user_roles")
+}
+
+model RefreshToken {
+ id String @id @default(uuid())
+ userId String @map("user_id")
+ token String @unique
+ expiresAt DateTime @map("expires_at")
+ isRevoked Boolean @default(false) @map("is_revoked")
+ createdAt DateTime @default(now()) @map("created_at")
+ ipAddress String? @map("ip_address")
+ userAgent String? @map("user_agent")
+
+ user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+ @@index([userId])
+ @@index([token])
+ @@map("refresh_tokens")
+}
+
+// ============================================================
+// CREDIT APPLICATION
+// ============================================================
+
+model CreditApplication {
+ id String @id @default(uuid())
+ applicationNumber String @unique @map("application_number") // e.g., APP-2024-001234
+ type String
+ status String @default("DRAFT")
+ customerId String @map("customer_id")
+ assignedOfficerId String? @map("assigned_officer_id")
+
+ // Loan request details (captured at submission)
+ requestedAmount Decimal @map("requested_amount") 
+ requestedTenureMonths Int @map("requested_tenure_months")
+ loanPurpose String @map("loan_purpose")
+ collateralDescription String? @map("collateral_description")
+
+ // Approved values (set during approval)
+ approvedAmount Decimal? @map("approved_amount") 
+ approvedTenureMonths Int? @map("approved_tenure_months")
+ approvedInterestRate Decimal? @map("approved_interest_rate") // e.g., 0.0850 = 8.50%
+ approvalConditions String? @map("approval_conditions")
+
+ // Workflow timestamps
+ submittedAt DateTime? @map("submitted_at")
+ documentCheckStartAt DateTime? @map("document_check_start_at")
+ creditAnalysisStartAt DateTime? @map("credit_analysis_start_at")
+ approvalStartAt DateTime? @map("approval_start_at")
+ decisionAt DateTime? @map("decision_at")
+ contractSignedAt DateTime? @map("contract_signed_at")
+ disbursedAt DateTime? @map("disbursed_at")
+ disbursedAmount Decimal? @map("disbursed_amount") 
+
+ // Meta
+ rejectionReason String? @map("rejection_reason")
+ internalNote String? @map("internal_note")
+ currentStep Int @default(1) @map("current_step") // For multi-step draft tracking
+ version Int @default(1) // Optimistic locking
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+ deletedAt DateTime? @map("deleted_at")
+
+ // Relations
+ customer User @relation("CustomerApplications", fields: [customerId], references: [id])
+ assignedOfficer User? @relation("AssignedOfficer", fields: [assignedOfficerId], references: [id])
+ personalApplicant PersonalApplicant?
+ corporateApplicant CorporateApplicant?
+ documents Document[]
+ approvals Approval[]
+ creditAnalysis CreditAnalysis?
+ guarantors Guarantor[]
+ auditLogs AuditLog[]
+ statusHistory ApplicationStatusHistory[]
+
+ @@index([status])
+ @@index([customerId])
+ @@index([assignedOfficerId])
+ @@index([type])
+ @@index([applicationNumber])
+ @@index([createdAt])
+ @@index([deletedAt])
+ @@map("credit_applications")
+}
+
+model ApplicationStatusHistory {
+ id String @id @default(uuid())
+ applicationId String @map("application_id")
+ fromStatus String? @map("from_status")
+ toStatus String @map("to_status")
+ changedBy String @map("changed_by")
+ changedByName String @map("changed_by_name")
+ remark String?
+ createdAt DateTime @default(now()) @map("created_at")
+
+ application CreditApplication @relation(fields: [applicationId], references: [id])
+
+ @@index([applicationId])
+ @@map("application_status_history")
+}
+
+// ============================================================
+// PERSONAL APPLICANT
+// ============================================================
+
+model PersonalApplicant {
+ id String @id @default(uuid())
+ applicationId String @unique @map("application_id")
+
+ // Personal info
+ nationalId String @map("national_id") // Encrypted in real system
+ titleName String? @map("title_name")
+ firstName String @map("first_name")
+ lastName String @map("last_name")
+ firstNameTh String? @map("first_name_th")
+ lastNameTh String? @map("last_name_th")
+ dateOfBirth DateTime @map("date_of_birth") 
+ gender String
+ maritalStatus String @map("marital_status")
+ nationality String @default("TH")
+ phoneNumber String @map("phone_number")
+ email String
+
+ // Employment & income
+ employmentType String @map("employment_type")
+ employerName String? @map("employer_name")
+ jobTitle String? @map("job_title")
+ yearsEmployed Decimal? @map("years_employed") 
+ monthlyIncome Decimal @map("monthly_income") 
+ otherIncome Decimal? @map("other_income") @default(0)
+ monthlyExpenses Decimal? @map("monthly_expenses") @default(0)
+
+ // Existing debts (for DTI calculation)
+ existingDebtPayment Decimal? @map("existing_debt_payment") @default(0)
+
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ application CreditApplication @relation(fields: [applicationId], references: [id])
+ addresses Address[]
+
+ @@map("personal_applicants")
+}
+
+// ============================================================
+// CORPORATE APPLICANT
+// ============================================================
+
+model CorporateApplicant {
+ id String @id @default(uuid())
+ applicationId String @unique @map("application_id")
+
+ // Contact person
+ contactFirstName String @map("contact_first_name")
+ contactLastName String @map("contact_last_name")
+ contactTitle String? @map("contact_title")
+ contactPhone String @map("contact_phone")
+ contactEmail String @map("contact_email")
+ contactNationalId String @map("contact_national_id")
+
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ application CreditApplication @relation(fields: [applicationId], references: [id])
+ company Company?
+
+ @@map("corporate_applicants")
+}
+
+model Company {
+ id String @id @default(uuid())
+ corporateApplicantId String @unique @map("corporate_applicant_id")
+
+ // Company info
+ registrationNumber String @unique @map("registration_number")
+ taxId String @unique @map("tax_id")
+ companyNameEn String @map("company_name_en")
+ companyNameTh String? @map("company_name_th")
+ businessType String @map("business_type")
+ industryCode String? @map("industry_code") // SIC code
+ incorporationDate DateTime @map("incorporation_date") 
+ numberOfEmployees Int? @map("number_of_employees")
+
+ // Financial info (latest fiscal year)
+ annualRevenue Decimal? @map("annual_revenue") 
+ annualNetProfit Decimal? @map("annual_net_profit") 
+ totalAssets Decimal? @map("total_assets") 
+ totalLiabilities Decimal? @map("total_liabilities") 
+ monthlyRevenue Decimal? @map("monthly_revenue") 
+ existingDebtPayment Decimal? @map("existing_debt_payment") @default(0)
+
+ phoneNumber String? @map("phone_number")
+ website String?
+ email String?
+
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ corporateApplicant CorporateApplicant @relation(fields: [corporateApplicantId], references: [id])
+ addresses Address[]
+
+ @@map("companies")
+}
+
+// ============================================================
+// ADDRESS
+// ============================================================
+
+model Address {
+ id String @id @default(uuid())
+ personalApplicantId String? @map("personal_applicant_id")
+ companyId String? @map("company_id")
+ addressType String @map("address_type")
+ isPrimary Boolean @default(false) @map("is_primary")
+
+ addressLine1 String @map("address_line1")
+ addressLine2 String? @map("address_line2")
+ subDistrict String @map("sub_district") // แขวง/ตำบล
+ district String // เขต/อำเภอ
+ province String // จังหวัด
+ postalCode String @map("postal_code")
+ country String @default("TH")
+
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ personalApplicant PersonalApplicant? @relation(fields: [personalApplicantId], references: [id])
+ company Company? @relation(fields: [companyId], references: [id])
+
+ @@index([personalApplicantId])
+ @@index([companyId])
+ @@map("addresses")
+}
+
+// ============================================================
+// GUARANTOR
+// ============================================================
+
+model Guarantor {
+ id String @id @default(uuid())
+ applicationId String @map("application_id")
+
+ nationalId String @map("national_id")
+ firstName String @map("first_name")
+ lastName String @map("last_name")
+ relationship String
+ phoneNumber String @map("phone_number")
+ monthlyIncome Decimal @map("monthly_income") 
+ existingDebt Decimal? @map("existing_debt") @default(0)
+
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ application CreditApplication @relation(fields: [applicationId], references: [id])
+
+ @@index([applicationId])
+ @@map("guarantors")
+}
+
+// ============================================================
+// DOCUMENT
+// ============================================================
+
+model Document {
+ id String @id @default(uuid())
+ applicationId String @map("application_id")
+ documentType String @map("document_type")
+ status String @default("PENDING")
+
+ // File storage
+ originalFileName String @map("original_file_name")
+ storedFileName String @map("stored_file_name") // UUID-based storage name
+ filePath String @map("file_path") // S3 key / path
+ fileSize Int @map("file_size") // bytes
+ mimeType String @map("mime_type")
+ checksum String? // SHA-256 for integrity
+
+ // OCR metadata (flexible JSON)
+ ocrMetadata String? @map("ocr_metadata")
+ ocrProcessedAt DateTime? @map("ocr_processed_at")
+ ocrConfidence Decimal? @map("ocr_confidence") 
+
+ // Verification
+ verifiedById String? @map("verified_by_id")
+ verifiedAt DateTime? @map("verified_at")
+ rejectionReason String? @map("rejection_reason")
+ expiryDate DateTime? @map("expiry_date") 
+
+ uploadedById String @map("uploaded_by_id")
+ isDeleted Boolean @default(false) @map("is_deleted")
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ application CreditApplication @relation(fields: [applicationId], references: [id])
+
+ @@index([applicationId])
+ @@index([documentType])
+ @@index([status])
+ @@map("documents")
+}
+
+// ============================================================
+// CREDIT ANALYSIS
+// ============================================================
+
+model CreditAnalysis {
+ id String @id @default(uuid())
+ applicationId String @unique @map("application_id")
+ analyzedById String @map("analyzed_by_id")
+
+ // Income & DTI
+ verifiedMonthlyIncome Decimal @map("verified_monthly_income") 
+ totalMonthlyDebt Decimal @map("total_monthly_debt") 
+ proposedMonthlyPayment Decimal @map("proposed_monthly_payment") 
+ dtiRatio Decimal @map("dti_ratio") // e.g., 0.4500 = 45%
+ dtiPassed Boolean @map("dti_passed")
+
+ // Eligibility checks
+ incomeEligible Boolean @map("income_eligible")
+ amountEligible Boolean @map("amount_eligible")
+ tenureEligible Boolean @map("tenure_eligible")
+
+ // Risk scoring (0-100)
+ creditScore Int? @map("credit_score")
+ riskGrade String? @map("risk_grade")
+ suggestedInterestRate Decimal? @map("suggested_interest_rate") 
+
+ // Analysis detail (JSON for flexibility)
+ analysisFactors String? @map("analysis_factors")
+ recommendation String?
+ analystNote String? @map("analyst_note")
+
+ analyzedAt DateTime @default(now()) @map("analyzed_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ // Relations
+ application CreditApplication @relation(fields: [applicationId], references: [id])
+
+ @@map("credit_analyses")
+}
+
+// ============================================================
+// APPROVAL
+// ============================================================
+
+model Approval {
+ id String @id @default(uuid())
+ applicationId String @map("application_id")
+ approverId String @map("approver_id")
+ decision String
+ sequence Int @default(1) // Support multi-level approval
+
+ // Decision details
+ approvedAmount Decimal? @map("approved_amount") 
+ approvedTenure Int? @map("approved_tenure")
+ interestRate Decimal? @map("interest_rate") 
+ conditions String? // Approval conditions/covenants
+ remarks String?
+ requestedInfo String? @map("requested_info") // For NEED_MORE_INFO decisions
+
+ decidedAt DateTime @default(now()) @map("decided_at")
+ createdAt DateTime @default(now()) @map("created_at")
+
+ // Relations
+ application CreditApplication @relation(fields: [applicationId], references: [id])
+ approver User @relation(fields: [approverId], references: [id])
+
+ @@index([applicationId])
+ @@index([approverId])
+ @@map("approvals")
+}
+
+// ============================================================
+// AUDIT LOG
+// ============================================================
+
+model AuditLog {
+ id String @id @default(uuid())
+ userId String? @map("user_id")
+ action String
+ entityType String @map("entity_type") // e.g., "CreditApplication"
+ entityId String @map("entity_id")
+ applicationId String? @map("application_id")
+
+ // Change tracking
+ beforeState String? @map("before_state")
+ afterState String? @map("after_state")
+ changedFields String @map("changed_fields")
+
+ // Context
+ remark String?
+ ipAddress String? @map("ip_address")
+ userAgent String? @map("user_agent")
+ requestId String? @map("request_id")
+
+ createdAt DateTime @default(now()) @map("created_at")
+
+ // Relations
+ user User? @relation(fields: [userId], references: [id])
+ application CreditApplication? @relation(fields: [applicationId], references: [id])
+
+ @@index([userId])
+ @@index([entityType, entityId])
+ @@index([applicationId])
+ @@index([action])
+ @@index([createdAt])
+ @@map("audit_logs")
+}
+
+// ============================================================
+// MASTER DATA
+// ============================================================
+
+model InterestRateConfig {
+ id String @id @default(uuid())
+ riskGrade String @map("risk_grade")
+ loanType String @map("loan_type")
+ minRate Decimal @map("min_rate") 
+ maxRate Decimal @map("max_rate") 
+ baseRate Decimal @map("base_rate") 
+ effectiveFrom DateTime @map("effective_from")
+ effectiveTo DateTime? @map("effective_to")
+ isActive Boolean @default(true) @map("is_active")
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+
+ @@unique([riskGrade, loanType, effectiveFrom])
+ @@index([riskGrade, loanType, isActive])
+ @@map("interest_rate_configs")
+}
