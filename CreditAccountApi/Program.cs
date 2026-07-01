@@ -1,6 +1,14 @@
+﻿// เพิ่ม using ด้านบน
+using CreditAccountApi.DbContext;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+
+// เพิ่มก่อน builder.Build()
+builder.Services.AddDbContext<CreditAccountDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 
