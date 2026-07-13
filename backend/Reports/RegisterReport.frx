@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/04/2026 00:00:00" ReportInfo.Modified="07/13/2026 00:00:00" ReportInfo.CreatorVersion="2023.1.0.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="RegisterData" ReferenceName="RegisterData" DataType="CreditAccountApi.Features.Register.Get.GetRegisterResponse" Enabled="true">
+      <Column Name="RegisterId" DataType="System.Int32"/>
+      <Column Name="CreatedAt" DataType="System.DateTime"/>
+
+      <!-- Step 1 -->
+      <Column Name="GeneralName1" DataType="System.String"/>
+      <Column Name="GeneralName2" DataType="System.String"/>
+      <Column Name="GeneralTax" DataType="System.String"/>
+      <Column Name="GeneralBranch" DataType="System.String"/>
+      <Column Name="GeneralTel" DataType="System.String"/>
+      <Column Name="GeneralFax" DataType="System.String"/>
+      <Column Name="GeneralEmail" DataType="System.String"/>
+      <Column Name="GeneralLine" DataType="System.String"/>
+
+      <!-- Step 2 -->
+      <Column Name="AddrLine1" DataType="System.String"/>
+      <Column Name="AddrLine2" DataType="System.String"/>
+      <Column Name="SubDistrict" DataType="System.String"/>
+      <Column Name="District" DataType="System.String"/>
+      <Column Name="Province" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+
+      <!-- Step 3 -->
+      <Column Name="CreditLimit" DataType="System.Decimal"/>
+      <Column Name="EstimatedPurchase" DataType="System.Decimal"/>
+      <Column Name="TimeRequired" DataType="System.String"/>
+
+      <!-- Step 4 -->
+      <Column Name="CompanyCertificate" DataType="System.Boolean"/>
+      <Column Name="CopyOfPp20" DataType="System.Boolean"/>
+      <Column Name="CopyOfCoRegis" DataType="System.Boolean"/>
+      <Column Name="CopyOfIdCard" DataType="System.Boolean"/>
+      <Column Name="CompanyLocationMap" DataType="System.Boolean"/>
+      <Column Name="OtherSpecify" DataType="System.String"/>
+
+      <!-- Step 5 -->
+      <Column Name="CustsignFirstname" DataType="System.String"/>
+      <Column Name="CustsignLastname" DataType="System.String"/>
+      <Column Name="CustsignTel" DataType="System.String"/>
+      <Column Name="CustsignEmail" DataType="System.String"/>
+      <Column Name="CustsignLine" DataType="System.String"/>
+
+      <!-- ประเภท -->
+      <Column Name="BusinessType" DataType="System.String"/>
+      <Column Name="IndustryType" DataType="System.String"/>
+      <Column Name="ShopType" DataType="System.String"/>
+
+      <!-- เงื่อนไขการค้า -->
+      <Column Name="TermOfPay" DataType="System.String"/>
+      <Column Name="PaymentMethod" DataType="System.String"/>
+      <Column Name="Currency" DataType="System.String"/>
+      <Column Name="Incoterms" DataType="System.String"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+
+  <ReportPage Name="Page1" PaperWidth="210" PaperHeight="297" LeftMargin="10" TopMargin="10" RightMargin="10" BottomMargin="10" Watermark.Font="Arial, 60pt">
+
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="50.0">
+      <TextObject Name="Text1" Left="0" Top="0" Width="500" Height="40" Text="ใบสมัครเปิดบัญชีเครดิต" Font="Tahoma, 18pt, style=Bold" HorzAlign="Left" VertAlign="Center"/>
+      <TextObject Name="Text2" Left="520" Top="0" Width="198.2" Height="40" Text="COMPANY NAME&#10;Credit Application Form" Font="Tahoma, 8pt, style=Bold" HorzAlign="Right" VertAlign="Center"/>
+    </ReportTitleBand>
+
+    <!-- DataBand ผูกกับ Business Object -->
+    <DataBand Name="Data1" Top="60" Width="718.2" Height="620" DataSource="RegisterData">
+
+      <!-- ===== Step 1: ข้อมูลบริษัท ===== -->
+      <TextObject Name="Header1" Left="0" Top="0" Width="718.2" Height="20" Text="1. ข้อมูลบริษัท" Font="Tahoma, 11pt, style=Bold" Fill.Color="LightGray"/>
+
+      <TextObject Name="LblName1" Left="0" Top="25" Width="150" Height="20" Text="ชื่อบริษัท (ไทย):" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValName1" Left="150" Top="25" Width="300" Height="20" Text="[RegisterData.GeneralName1]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblName2" Left="460" Top="25" Width="100" Height="20" Text="ชื่อบริษัท (Eng):" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValName2" Left="560" Top="25" Width="158.2" Height="20" Text="[RegisterData.GeneralName2]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblTax" Left="0" Top="48" Width="150" Height="20" Text="เลขประจำตัวผู้เสียภาษี:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValTax" Left="150" Top="48" Width="150" Height="20" Text="[RegisterData.GeneralTax]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblBranch" Left="310" Top="48" Width="100" Height="20" Text="สาขา:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValBranch" Left="410" Top="48" Width="150" Height="20" Text="[RegisterData.GeneralBranch]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblTel" Left="0" Top="71" Width="150" Height="20" Text="โทรศัพท์:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValTel" Left="150" Top="71" Width="150" Height="20" Text="[RegisterData.GeneralTel]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblFax" Left="310" Top="71" Width="100" Height="20" Text="แฟกซ์:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValFax" Left="410" Top="71" Width="150" Height="20" Text="[RegisterData.GeneralFax]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblEmail" Left="0" Top="94" Width="150" Height="20" Text="อีเมล:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValEmail" Left="150" Top="94" Width="150" Height="20" Text="[RegisterData.GeneralEmail]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblLine" Left="310" Top="94" Width="100" Height="20" Text="LINE ID:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValLine" Left="410" Top="94" Width="150" Height="20" Text="[RegisterData.GeneralLine]" Font="Tahoma, 9pt"/>
+
+      <!-- ===== Step 2: ที่อยู่ ===== -->
+      <TextObject Name="Header2" Left="0" Top="125" Width="718.2" Height="20" Text="2. ที่อยู่บริษัท" Font="Tahoma, 11pt, style=Bold" Fill.Color="LightGray"/>
+
+      <TextObject Name="LblAddr1" Left="0" Top="150" Width="150" Height="20" Text="ที่อยู่บรรทัด 1:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValAddr1" Left="150" Top="150" Width="568.2" Height="20" Text="[RegisterData.AddrLine1]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblAddr2" Left="0" Top="173" Width="150" Height="20" Text="ที่อยู่บรรทัด 2:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValAddr2" Left="150" Top="173" Width="568.2" Height="20" Text="[RegisterData.AddrLine2]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblSubDistrict" Left="0" Top="196" Width="150" Height="20" Text="ตำบล/แขวง:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValSubDistrict" Left="150" Top="196" Width="150" Height="20" Text="[RegisterData.SubDistrict]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblDistrict" Left="310" Top="196" Width="100" Height="20" Text="อำเภอ/เขต:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValDistrict" Left="410" Top="196" Width="150" Height="20" Text="[RegisterData.District]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblProvince" Left="0" Top="219" Width="150" Height="20" Text="จังหวัด:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValProvince" Left="150" Top="219" Width="150" Height="20" Text="[RegisterData.Province]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblPostal" Left="310" Top="219" Width="100" Height="20" Text="รหัสไปรษณีย์:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValPostal" Left="410" Top="219" Width="150" Height="20" Text="[RegisterData.PostalCode]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblCountry" Left="560" Top="219" Width="60" Height="20" Text="ประเทศ:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValCountry" Left="620" Top="219" Width="98.2" Height="20" Text="[RegisterData.Country]" Font="Tahoma, 9pt"/>
+
+      <!-- ===== Step 3: วงเงิน ===== -->
+      <TextObject Name="Header3" Left="0" Top="250" Width="718.2" Height="20" Text="3. วงเงินสินเชื่อที่ขอ" Font="Tahoma, 11pt, style=Bold" Fill.Color="LightGray"/>
+
+      <TextObject Name="LblCreditLimit" Left="0" Top="275" Width="150" Height="20" Text="วงเงินที่ขอ:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValCreditLimit" Left="150" Top="275" Width="150" Height="20" Text="[RegisterData.CreditLimit]" Format="Number" Format.UseLocale="true" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblEstPurchase" Left="310" Top="275" Width="150" Height="20" Text="ยอดซื้อโดยประมาณ:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValEstPurchase" Left="460" Top="275" Width="150" Height="20" Text="[RegisterData.EstimatedPurchase]" Format="Number" Format.UseLocale="true" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblTimeRequired" Left="0" Top="298" Width="150" Height="20" Text="ระยะเวลาที่ต้องการ:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValTimeRequired" Left="150" Top="298" Width="150" Height="20" Text="[RegisterData.TimeRequired]" Font="Tahoma, 9pt"/>
+
+      <!-- ===== Step 4: เอกสารประกอบ ===== -->
+		<!-- ===== Step 4: เอกสารประกอบ ===== -->
+		<TextObject Name="ValCert" Left="0" Top="354" Width="358" Height="20" Text="[([RegisterData.CompanyCertificate] ? &quot;☑&quot; : &quot;☐&quot;)] หนังสือรับรองบริษัท" Font="Tahoma, 9pt"/>
+		<TextObject Name="ValPp20" Left="360" Top="354" Width="358" Height="20" Text="[([RegisterData.CopyOfPp20] ? &quot;☑&quot; : &quot;☐&quot;)] สำเนา ภ.พ.20" Font="Tahoma, 9pt"/>
+
+		<TextObject Name="ValCoRegis" Left="0" Top="377" Width="358" Height="20" Text="[([RegisterData.CopyOfCoRegis] ? &quot;☑&quot; : &quot;☐&quot;)] สำเนาหนังสือจดทะเบียนบริษัท" Font="Tahoma, 9pt"/>
+		<TextObject Name="ValIdCard" Left="360" Top="377" Width="358" Height="20" Text="[([RegisterData.CopyOfIdCard] ? &quot;☑&quot; : &quot;☐&quot;)] สำเนาบัตรประชาชน" Font="Tahoma, 9pt"/>
+
+		<TextObject Name="ValLocationMap" Left="0" Top="400" Width="358" Height="20" Text="[([RegisterData.CompanyLocationMap] ? &quot;☑&quot; : &quot;☐&quot;)] แผนที่ตั้งบริษัท" Font="Tahoma, 9pt"/>
+		<!-- ===== Step 5: ผู้ลงนาม ===== -->
+      <TextObject Name="Header5" Left="0" Top="431" Width="718.2" Height="20" Text="5. ผู้มีอำนาจลงนาม" Font="Tahoma, 11pt, style=Bold" Fill.Color="LightGray"/>
+
+      <TextObject Name="LblSignName" Left="0" Top="456" Width="150" Height="20" Text="ชื่อ-นามสกุล:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValSignName" Left="150" Top="456" Width="300" Height="20" Text="[RegisterData.CustsignFirstname] [RegisterData.CustsignLastname]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblSignTel" Left="0" Top="479" Width="150" Height="20" Text="โทรศัพท์:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValSignTel" Left="150" Top="479" Width="150" Height="20" Text="[RegisterData.CustsignTel]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblSignEmail" Left="310" Top="479" Width="100" Height="20" Text="อีเมล:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValSignEmail" Left="410" Top="479" Width="150" Height="20" Text="[RegisterData.CustsignEmail]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblSignLine" Left="0" Top="502" Width="150" Height="20" Text="LINE ID:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValSignLine" Left="150" Top="502" Width="150" Height="20" Text="[RegisterData.CustsignLine]" Font="Tahoma, 9pt"/>
+
+      <!-- ===== ประเภทกิจการ / เงื่อนไขการค้า ===== -->
+      <TextObject Name="Header6" Left="0" Top="533" Width="718.2" Height="20" Text="6. ประเภทกิจการและเงื่อนไขการค้า" Font="Tahoma, 11pt, style=Bold" Fill.Color="LightGray"/>
+
+      <TextObject Name="LblBusiType" Left="0" Top="558" Width="150" Height="20" Text="ประเภทธุรกิจ:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValBusiType" Left="150" Top="558" Width="200" Height="20" Text="[RegisterData.BusinessType]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblInduType" Left="360" Top="558" Width="150" Height="20" Text="ประเภทอุตสาหกรรม:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValInduType" Left="510" Top="558" Width="208.2" Height="20" Text="[RegisterData.IndustryType]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblShopType" Left="0" Top="581" Width="150" Height="20" Text="ประเภทร้านค้า:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValShopType" Left="150" Top="581" Width="200" Height="20" Text="[RegisterData.ShopType]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblTermOfPay" Left="0" Top="604" Width="150" Height="20" Text="เงื่อนไขการชำระเงิน:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValTermOfPay" Left="150" Top="604" Width="200" Height="20" Text="[RegisterData.TermOfPay]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblPayMethod" Left="360" Top="604" Width="150" Height="20" Text="วิธีการชำระเงิน:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValPayMethod" Left="510" Top="604" Width="208.2" Height="20" Text="[RegisterData.PaymentMethod]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblCurrency" Left="0" Top="627" Width="150" Height="20" Text="สกุลเงิน:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValCurrency" Left="150" Top="627" Width="200" Height="20" Text="[RegisterData.Currency]" Font="Tahoma, 9pt"/>
+
+      <TextObject Name="LblIncoterms" Left="360" Top="627" Width="150" Height="20" Text="Incoterms:" Font="Tahoma, 9pt"/>
+      <TextObject Name="ValIncoterms" Left="510" Top="627" Width="208.2" Height="20" Text="[RegisterData.Incoterms]" Font="Tahoma, 9pt"/>
+
+    </DataBand>
+
+    <PageFooterBand Name="PageFooter1" Top="700" Width="718.2" Height="20">
+      <TextObject Name="Footer1" Left="0" Top="0" Width="718.2" Height="20" Text="Register ID: [RegisterData.RegisterId] | สร้างเมื่อ: [RegisterData.CreatedAt]" Font="Tahoma, 8pt" HorzAlign="Center"/>
+    </PageFooterBand>
+
+  </ReportPage>
+</Report>
