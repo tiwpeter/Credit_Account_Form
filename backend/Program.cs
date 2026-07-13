@@ -1,27 +1,49 @@
-﻿// เพิ่ม using ด้านบน
-using CreditAccountApi.DbContext;
+﻿using CreditAccountApi.DbContext;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.AddServiceDefaults();
 
-// เพิ่มก่อน builder.Build()
-builder.Services.AddDbContext<CreditAccountDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// ============================================================
+// MediatR — สแกนทุก class ที่ implement IRequestHandler<,>
+// ในนี้จะเจอทั้ง GetRegisterHandler และ GetRegisterReportHandler อัตโนมัติ
+// ============================================================
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
-// Add services to the container.
+builder.AddNpgsqlDbContext<CreditAccountDbContext>("myPostgres");
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// ✅ ทดสอบการเชื่อมต่อ Postgres จริง ๆ ตอน startup
+using (var scope = app.Services.CreateScope())
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<CreditAccountDbContext>();
+    try
+    {
+        var canConnect = await dbContext.Database.CanConnectAsync();
+        if (canConnect)
+        {
+            logger.LogInformation("[LOG] เชื่อมต่อ PostgreSQL สำเร็จ! ✅");
+        }
+        else
+        {
+            logger.LogWarning("[LOG] ไม่สามารถเชื่อมต่อ PostgreSQL ได้ ⚠️");
+        }
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "[LOG] เกิดข้อผิดพลาดขณะเชื่อมต่อ PostgreSQL ❌");
+    }
+}
+
 app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -29,9 +51,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
