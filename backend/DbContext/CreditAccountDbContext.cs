@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CreditAccountApi.DbContext;
 
-public partial class CreditAccountDbContext : DbContext
+
+public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbContext
+
 {
-    public CreditAccountDbContext(DbContextOptions<CreditAccountDbContext> options)
-        : base(options)
+    public CreditAccountDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<CreditAccountDbContext> options)
+            : base(options)
     {
     }
 
@@ -83,6 +85,11 @@ public partial class CreditAccountDbContext : DbContext
     public virtual DbSet<ThaiProvince> ThaiProvinces { get; set; }
 
     public virtual DbSet<ThaiTambon> ThaiTambons { get; set; }
+
+    //
+    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
