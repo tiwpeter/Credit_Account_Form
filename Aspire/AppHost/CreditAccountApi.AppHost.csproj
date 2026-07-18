@@ -1,21 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <IsAspireHost>true</IsAspireHost>
-    <UserSecretsId>ed1846e7-fd74-4efc-b65b-90004b60453c</UserSecretsId>
-  </PropertyGroup>
+	<Sdk Name="Aspire.AppHost.Sdk" Version="9.5.2" />
 
-  <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.2" />
-    <PackageReference Include="DotNetEnv" Version="3.2.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsAspireHost>true</IsAspireHost>
+		<UserSecretsId>ed1846e7-fd74-4efc-b65b-90004b60453c</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-	  <ProjectReference Include="..\..\backend\CreditAccountApi.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.AppHost" Version="9.5.2" />
+		<PackageReference Include="Aspire.Hosting.NodeJs" Version="9.5.2" />
+		<PackageReference Include="DotNetEnv" Version="3.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\backend\CreditAccountApi.csproj" />
+	</ItemGroup>
 
 </Project>

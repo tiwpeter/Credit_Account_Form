@@ -20,9 +20,18 @@ var postgres = builder.AddConnectionString("myPostgres");
 // 3. นำค่าความลับทั่วไปมาลงทะเบียนเป็น Parameter ใน Aspire
 //var apiKeyParam = builder.AddParameter("my-api-key", apiKeyFromEnv);
 
-// 4. ส่งต่อฐานข้อมูล และ API Key ไปให้โปรเจกต์หลังบ้านใช้งาน
-builder.AddProject<Projects.CreditAccountApi>("creditaccountapi")
+// 4. ส่งต่อฐานข้อมูล และ API Key ไปให้โปรเจกต์หลังบ้านใช้งาน // 1. ลงทะเบียนโปรเจกต์ Backend API (.NET)
+var apiService =  builder.AddProject<Projects.CreditAccountApi>("creditaccountapi")
        .WithReference(postgres);
 // .WithEnvironment("MY_API_KEY", apiKeyParam);
+
+
+var angular = builder.AddNpmApp("angular", "../../frontend", "start")
+    .WithReference(apiService)
+    .WaitFor(apiService)
+    .WithHttpEndpoint(env: "PORT")
+    .WithExternalHttpEndpoints();
+
+
 
 builder.Build().Run();
