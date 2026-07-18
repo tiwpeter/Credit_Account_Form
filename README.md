@@ -60,3 +60,17 @@ Credit_Account_Form/
 ├── frontend/         # Frontend Web Application (Angular)
 ├── Program.cs        # Entry point หลักของระบบ
 └── CreditAccountApi.sln
+
+
+---
+
+## 🚀 Getting Started
+
+### ⚙️ การตั้งค่า Environment Variables
+
+ก่อนเริ่มใช้งานระบบ ให้ทำการคัดลอกไฟล์ `.env.example` เพื่อสร้างไฟล์ `.env` สำหรับตั้งค่าคอนฟิกูเรชันต่างๆ เช่น Connection String ของฐานข้อมูล
+
+```bash
+# คัดลอกไฟล์ตัวอย่างเพื่อสร้างไฟล์ .env สำหรับใช้งาน
+cp .env.example .env
+
