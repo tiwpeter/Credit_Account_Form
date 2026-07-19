@@ -74,3 +74,17 @@ Credit_Account_Form/
 # คัดลอกไฟล์ตัวอย่างเพื่อสร้างไฟล์ .env สำหรับใช้งาน
 cp .env.example .env
 ```
+
+
+Requirements
+Node.js
+
+Quick Start
+dotnet run --project Aspire/CreditAccountApi.AppHost/
+ระบบ จะ โหลดรันทุกอย่าง พร้อม Generate code
+Then open your browser at http://localhost:
+dashboard
+
+menual
+fontend 
+backend
