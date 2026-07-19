@@ -75,11 +75,23 @@ Credit_Account_Form/
 cp .env.example .env
 ```
 
+การตั้งค่าแบบปรับแต่งเอง (Manual Setup)
+หากไม่ต้องการใช้ตัวช่วยสำเร็จรูป จะต้องทำตามขั้นตอนนี้:
+คัดลอก Environment Variables: ก็อปปี้ไฟล์ .env.example ไปเป็น .env
+สร้างคีย์ความปลอดภัย (สำคัญมาก): ต้องรันคำสั่งเพื่อสร้างคีย์เข้ารหัสไปใส่ในไฟล์ .env
+เจนคีย์เซสชัน: openssl rand -base64 32 (ใส่ที่ NEXTAUTH_SECRET)
+เจนคีย์เข้ารหัสข้อมูล: openssl rand -base64 24 (ใส่ที่ CALENDSO_ENCRYPTION_KEY)
+จัดการฐานข้อมูล: ตั้งค่า DATABASE_URL ชี้ไปยัง Postgres (รันเองในเครื่อง หรือใช้บริการภายนอกเช่น Railway, Render) จากนั้นสั่ง Migrate โครงสร้างตารางด้วยคำสั่ง yarn workspace @calcom/prisma db-migrate
+
+
+## npm 
+
+
 
 Requirements
 Node.js
 
-Quick Start
+##Quick Start
 dotnet run --project Aspire/CreditAccountApi.AppHost/
 ระบบ จะ โหลดรันทุกอย่าง พร้อม Generate code
 Then open your browser at http://localhost:
