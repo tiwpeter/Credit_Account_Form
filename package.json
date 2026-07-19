@@ -1,0 +1,12 @@
+{
+  "name": "credit_account_form",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <a href=\"#\">\r     <img src=\"https://github.com/user-attachments/assets/40237ae9-2992-43f8-80e5-f8c674afb6d7\" alt=\"Credit Account Form Logo\" width=\"600\" />\r   </a>\r </p>",
+  "main": "index.js",
+  "scripts": {
+  "start": "dotnet run --project Aspire/AppHost/CreditAccountApi.AppHost.csproj"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -21,7 +21,7 @@ var postgres = builder.AddConnectionString("myPostgres");
 //var apiKeyParam = builder.AddParameter("my-api-key", apiKeyFromEnv);
 
 // 4. ส่งต่อฐานข้อมูล และ API Key ไปให้โปรเจกต์หลังบ้านใช้งาน // 1. ลงทะเบียนโปรเจกต์ Backend API (.NET)
-var apiService =  builder.AddProject<Projects.CreditAccountApi>("creditaccountapi")
+var apiService = builder.AddProject<Projects.CreditAccountApi>("creditaccountapi")
        .WithReference(postgres);
 // .WithEnvironment("MY_API_KEY", apiKeyParam);
 
@@ -30,8 +30,7 @@ var angular = builder.AddNpmApp("angular", "../../frontend", "start")
     .WithReference(apiService)
     .WaitFor(apiService)
     .WithHttpEndpoint(env: "PORT")
-    .WithExternalHttpEndpoints();
-
-
+    .WithExternalHttpEndpoints()
+    .WithEnvironment("API_URL", apiService.GetEndpoint("http"));   // ← ไม่มี ; คั่นกลาง + ใช้ apiService
 
 builder.Build().Run();

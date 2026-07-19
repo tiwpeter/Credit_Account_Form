@@ -6,7 +6,9 @@
     "start": "cross-var ng serve --port %PORT% --host 0.0.0.0",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate:api": "orval --config orval.config.ts",
+    "prestart": "npm run generate:api"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +35,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "orval": "^7.13.2",
     "typescript": "~5.7.2"
   }
 }
