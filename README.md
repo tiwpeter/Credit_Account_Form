@@ -64,6 +64,35 @@ Credit_Account_Form/
  ``` 
 ---
 
+## Requirements (ข้อกำหนด)
+- .NET SDK 6.0+ หรือเวอร์ชันที่โปรเจกต์ใช้ (ตรวจสอบไฟล์ global.json ถ้ามี)
+- Node.js 16.x/18.x+ และ npm (สำหรับส่วน frontend/TypeScript)
+- ตัวจัดการแพ็กเกจ (optional): yarn (ถ้าใช้)
+- เครื่องมือฐานข้อมูล (ถ้ามี): PostgreSQL / SQL Server / SQLite ตามที่โปรเจกต์กำหนด
+- (ถ้าใช้ EF Core) dotnet-ef CLI: ติดตั้งด้วย `dotnet tool install --global dotnet-ef`
+
+ไฟล์/การตั้งค่า (ตัวอย่าง)
+- ไฟล์ environment: `.env` หรือ `appsettings.Development.json` — ให้สร้างจาก `.env.example` หรือ `appsettings.example.json` และกำหนดค่าเช่น:
+  - DATABASE_URL / ConnectionStrings: connection string ของฐานข้อมูล
+  - ASPNETCORE_ENVIRONMENT=Development
+  - PORT (ถ้ามี)
+  - API keys / secrets (เก็บนอก repo หรือใน secret manager)
+
+---
+
+
+## Quick Start (เริ่มต้นอย่างรวดเร็ว)
+
+1. Clone repository
+```bash
+git clone https://github.com/tiwpeter/Credit_Account_Form.git
+cd Credit_Account_Form
+
+
+
+-------
+
+
 ## 🚀 Getting Started
 
 ### ⚙️ การตั้งค่า Environment Variables
