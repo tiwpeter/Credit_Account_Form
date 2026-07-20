@@ -1,22 +1,18 @@
-<p align="center">
-  <a href="#">
-    <img src="https://github.com/user-attachments/assets/40237ae9-2992-43f8-80e5-f8c674afb6d7" alt="Credit Account Form Logo" width="600" />
-  </a>
-</p>
 
 <h1 align="center">Credit Account Form System</h1>
 
 <p align="center">
-  <b>ระบบจัดการแบบฟอร์มขออนุมัติบัญชีสินเชื่อแบบ Full-Stack</b><br />
-  พัฒนาด้วย .NET Aspire, ASP.NET Core, PostgreSQL และ Angular
+  <b>ระบบจัดการแบบฟอร์มขออนุมัติวงเงินเครดิต (Full-Stack)</b><br />
+  พัฒนาด้วย .NET Aspire, ASP.NET Core (CQRS + MediatR), PostgreSQL และ Angular
 </p>
 
 <p align="center">
+  <a href="#-สถานะโปรเจกต์-status">สถานะโปรเจกต์</a> •
   <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-getting-started">Getting Started</a> •
   <a href="#-project-structure">Project Structure</a> •
-  <a href="#-contributors">Contributors</a>
+  <a href="#-api-endpoints">API Endpoints</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-roadmap">Roadmap</a>
 </p>
 
 ---
@@ -28,26 +24,44 @@
 </p>
 
 <p align="center">
-  <i>ตัวอย่างเอกสารรายงานแบบฟอร์มขออนุมัติสินเชื่อ (PDF Report) ที่สร้างจากระบบ</i>
+  <i>ตัวอย่างเอกสารรายงานแบบฟอร์มขออนุมัติวงเงินเครดิต (PDF Report) ที่สร้างจากระบบ</i>
 </p>
+
+---
+
+## 🚧 สถานะโปรเจกต์ (Status)
+
+> **โปรเจกต์นี้ยังอยู่ระหว่างการพัฒนา (Work in Progress)** ส่วนที่ทำงานได้จริงตอนนี้คือฝั่ง Backend (อ่านข้อมูล + ออกรายงาน PDF) ส่วน Frontend ยังเป็นแค่โครง Angular เริ่มต้น ยังไม่มีหน้าฟอร์มจริง
+
+| ส่วน | สถานะ | รายละเอียด |
+|---|---|---|
+| Backend API (Read) | ✅ ใช้งานได้ | `GET /api/register`, `GET /api/register/{id}`, `GET /api/register/{id}/report` |
+| Backend API (Create/Update/Delete) | ❌ ยังไม่ทำ | ยังไม่มี endpoint สำหรับบันทึก/แก้ไข/ลบข้อมูลฟอร์ม มีแต่การอ่านข้อมูลที่มีอยู่แล้วในฐานข้อมูล |
+| Database schema | ⚠️ ต้องเตรียมเอง | `CreditAccountDbContext` ถูก scaffold มาจากฐานข้อมูล PostgreSQL ที่มีอยู่แล้ว (ไม่มีโฟลเดอร์ EF Core Migrations ในโปรเจกต์) จึงต้องมี schema/ตารางพร้อมอยู่ก่อนจึงจะรันเชื่อมต่อได้ ปัจจุบันยังไม่มี migration script แนบมาด้วย |
+| Frontend (Angular) | ❌ ยังไม่ทำ | `app.routes.ts` ยังว่างเปล่า และหน้า `app.component.html` ยังเป็น placeholder เริ่มต้นของ Angular CLI มีเพียง API client ที่ generate อัตโนมัติจาก Swagger ด้วย [Orval](https://orval.dev/) ไว้ในโฟลเดอร์ `frontend/src/api/generated` |
+| PDF Report generation | ✅ ใช้งานได้ | ใช้ [FastReport.OpenSource](https://github.com/FastReports/FastReport) และ template `backend/Reports/RegisterReport.frx` |
+| Service orchestration | ✅ ใช้งานได้ | จัดการรัน backend + frontend พร้อมกันผ่าน .NET Aspire AppHost |
 
 ---
 
 ## 🛠 Tech Stack
 
-* **Orchestration:** [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/)
-* **Backend:** C# / ASP.NET Core (RESTful API, Dapper / EF Core)
-* **Frontend:** Angular, TypeScript, SCSS
-* **Database:** PostgreSQL
+* **Orchestration:** [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) — รัน/เชื่อม backend, frontend และ connection string ของฐานข้อมูลให้พร้อมกันจากที่เดียว
+* **Backend:** C# / ASP.NET Core 8, สถาปัตยกรรมแบบ CQRS ด้วย [MediatR](https://github.com/jbogard/MediatR), Entity Framework Core (Npgsql)
+* **PDF Report:** FastReport.OpenSource + FastReport.OpenSource.Export.PdfSimple
+* **Frontend:** Angular 19, TypeScript, SCSS, API client ที่ gen อัตโนมัติด้วย Orval
+* **Database:** PostgreSQL (database-first — schema มีอยู่ก่อนแล้ว ไม่ได้สร้างผ่าน EF Migrations)
+* **API Docs:** Swagger / Swashbuckle
 
 ---
 
 ## 🚀 Features
 
-* 📝 **Credit Form Management:** สร้าง อ่าน แก้ไข และลบข้อมูล (CRUD) สำหรับการลงทะเบียนขออนุมัติสินเชื่อ
-* 📄 **PDF Report Generation:** ส่งออกรายงานสรุปแบบฟอร์มเป็นไฟล์ PDF พร้อม Register ID และ Timestamp
-* 🔗 **Service Orchestration:** บริหารจัดการ Microservices และฐานข้อมูล PostgreSQL ผ่าน .NET Aspire Dashboard
-* 🔒 **Environment Configuration:** รองรับการตั้งค่า Connection String ผ่านไฟล์ `.env`
+* 📋 **Register listing:** ดึงรายการคำขออนุมัติวงเงินเครดิตแบบมี paging และค้นหาจากชื่อบริษัท (`GET /api/register`)
+* 🔍 **Register detail:** ดึงข้อมูลฟอร์มแบบเต็ม รวมข้อมูลบริษัท ที่อยู่ วงเงิน เอกสารแนบ ผู้ลงนาม และเงื่อนไขการค้า จากหลายตารางที่เกี่ยวข้อง (`GET /api/register/{id}`)
+* 📄 **PDF Report export:** สร้างรายงานสรุปแบบฟอร์มเป็นไฟล์ PDF จาก template FastReport (`GET /api/register/{id}/report`)
+* 🔗 **Service orchestration:** บริหารจัดการ backend, frontend และ PostgreSQL connection ผ่าน .NET Aspire Dashboard
+* 🔒 **Environment configuration:** ตั้งค่า connection string และค่าคอนฟิกอื่น ๆ ผ่านไฟล์ `.env`
 
 ---
 
@@ -55,77 +69,118 @@
 
 ```text
 Credit_Account_Form/
-├── Aspire/           # Aspire AppHost และ Service Defaults สำหรับ Orchestration
-├── backend/          # Backend API (CRUD operations & PDF Report Export)
-├── frontend/         # Frontend Web Application (Angular)
-├── Program.cs        # Entry point หลักของระบบ
+├── Aspire/
+│   ├── AppHost/              # .NET Aspire orchestrator — จุดเริ่มรันทั้งระบบ (backend + frontend)
+│   └── ServiceDefaults/      # ค่า default ร่วม (health checks, telemetry, resilience)
+├── backend/
+│   ├── Controllers/          # RegisterController (ใช้งานจริง), TodoItemsController & WeatherForecastController (ตัวอย่าง/boilerplate จาก template)
+│   ├── Features/Register/    # CQRS: Get, GetAll, Report (query + handler ของแต่ละ use case)
+│   ├── Entities/              # EF Core entity classes ที่ scaffold มาจากฐานข้อมูล PostgreSQL ที่มีอยู่
+│   ├── DbContext/             # CreditAccountDbContext
+│   ├── Reports/                # RegisterReport.frx (FastReport template สำหรับออก PDF)
+│   └── Program.cs
+├── frontend/                  # Angular app (ยังเป็นโครงเริ่มต้น ยังไม่มีหน้าฟอร์มจริง)
+│   └── src/api/generated/    # API client ที่ gen อัตโนมัติจาก Swagger ด้วย Orval
+├── Program.cs                 # Entry point เดิม (root) — โปรเจกต์หลักที่ใช้รันจริงคือ Aspire/AppHost
 └── CreditAccountApi.sln
-
- ``` 
----
-
-## Requirements (ข้อกำหนด)
-- .NET SDK 6.0+ หรือเวอร์ชันที่โปรเจกต์ใช้ (ตรวจสอบไฟล์ global.json ถ้ามี)
-- Node.js 16.x/18.x+ และ npm (สำหรับส่วน frontend/TypeScript)
-- ตัวจัดการแพ็กเกจ (optional): yarn (ถ้าใช้)
-- เครื่องมือฐานข้อมูล (ถ้ามี): PostgreSQL / SQL Server / SQLite ตามที่โปรเจกต์กำหนด
-- (ถ้าใช้ EF Core) dotnet-ef CLI: ติดตั้งด้วย `dotnet tool install --global dotnet-ef`
-
-ไฟล์/การตั้งค่า (ตัวอย่าง)
-- ไฟล์ environment: `.env` หรือ `appsettings.Development.json` — ให้สร้างจาก `.env.example` หรือ `appsettings.example.json` และกำหนดค่าเช่น:
-  - DATABASE_URL / ConnectionStrings: connection string ของฐานข้อมูล
-  - ASPNETCORE_ENVIRONMENT=Development
-  - PORT (ถ้ามี)
-  - API keys / secrets (เก็บนอก repo หรือใน secret manager)
+```
 
 ---
 
+## 🔌 API Endpoints
 
-## Quick Start (เริ่มต้นอย่างรวดเร็ว)
+| Method | Endpoint | คำอธิบาย |
+|---|---|---|
+| GET | `/api/register?page=1&pageSize=20&search=` | รายการคำขออนุมัติวงเงินเครดิตแบบมี paging + ค้นหาจากชื่อบริษัท |
+| GET | `/api/register/{id}` | ข้อมูลฟอร์มแบบเต็มของรายการนั้น ๆ (JSON) |
+| GET | `/api/register/{id}/report` | ออกรายงานเป็นไฟล์ PDF |
 
-1. Clone repository
-```bash
-git clone https://github.com/tiwpeter/Credit_Account_Form.git
-cd Credit_Account_Form
+> `TodoItemsController` และ `WeatherForecastController` เป็นตัวอย่าง/boilerplate ที่มากับ template ตอนสร้างโปรเจกต์ ไม่ได้เกี่ยวข้องกับฟีเจอร์หลักของระบบ
 
+ดู schema แบบเต็มและทดลองยิง API ได้ที่ Swagger UI (`/swagger`) หลังรันระบบแล้ว
 
+---
 
--------
+## ⚙️ Requirements
 
+* [.NET SDK 8.0](https://dotnet.microsoft.com/download)
+* [Node.js](https://nodejs.org/) 18+ และ npm (สำหรับ Angular frontend)
+* PostgreSQL ที่มี **schema/ตารางพร้อมอยู่แล้ว** ตรงกับ entity ในโฟลเดอร์ `backend/Entities` — โปรเจกต์นี้ยังไม่มี EF Migrations หรือ SQL script สำหรับสร้างตารางให้ ต้องเตรียมฐานข้อมูลเองก่อน
+* (แนะนำ) [.NET Aspire workload](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/setup-tooling) สำหรับรันผ่าน AppHost
+
+---
 
 ## 🚀 Getting Started
 
-### ⚙️ การตั้งค่า Environment Variables
-
-ก่อนเริ่มใช้งานระบบ ให้ทำการคัดลอกไฟล์ `.env.example` เพื่อสร้างไฟล์ `.env` สำหรับตั้งค่าคอนฟิกูเรชันต่างๆ เช่น Connection String ของฐานข้อมูล
+### 1) Clone repository
 
 ```bash
-# คัดลอกไฟล์ตัวอย่างเพื่อสร้างไฟล์ .env สำหรับใช้งาน
-cp .env.example .env
+git clone https://github.com/tiwpeter/Credit_Account_Form.git
+cd Credit_Account_Form
 ```
 
-การตั้งค่าแบบปรับแต่งเอง (Manual Setup)
-หากไม่ต้องการใช้ตัวช่วยสำเร็จรูป จะต้องทำตามขั้นตอนนี้:
-คัดลอก Environment Variables: ก็อปปี้ไฟล์ .env.example ไปเป็น .env
-สร้างคีย์ความปลอดภัย (สำคัญมาก): ต้องรันคำสั่งเพื่อสร้างคีย์เข้ารหัสไปใส่ในไฟล์ .env
-เจนคีย์เซสชัน: openssl rand -base64 32 (ใส่ที่ NEXTAUTH_SECRET)
-เจนคีย์เข้ารหัสข้อมูล: openssl rand -base64 24 (ใส่ที่ CALENDSO_ENCRYPTION_KEY)
-จัดการฐานข้อมูล: ตั้งค่า DATABASE_URL ชี้ไปยัง Postgres (รันเองในเครื่อง หรือใช้บริการภายนอกเช่น Railway, Render) จากนั้นสั่ง Migrate โครงสร้างตารางด้วยคำสั่ง yarn workspace @calcom/prisma db-migrate
+### 2) ตั้งค่า Environment Variables
 
+คัดลอกไฟล์ตัวอย่างในโฟลเดอร์ `Aspire/AppHost` แล้วกรอกค่าให้ตรงกับฐานข้อมูลของคุณ:
 
-## npm 
+```bash
+cp Aspire/AppHost/.env.example Aspire/AppHost/.env
+```
 
+แก้ไขค่าในไฟล์ `.env`:
 
+```env
+ConnectionStrings__myPostgres=Host=localhost;Port=5432;Database=creditaccount;Username=postgres;Password=changeme
+MY_API_KEY=your-api-key-here
+```
 
-Requirements
-Node.js
+### 3) รันระบบทั้งหมดผ่าน .NET Aspire
 
-##Quick Start
-dotnet run --project Aspire/CreditAccountApi.AppHost/
-ระบบ จะ โหลดรันทุกอย่าง พร้อม Generate code
-Then open your browser at http://localhost:
-dashboard
+```bash
+dotnet run --project Aspire/AppHost/CreditAccountApi.AppHost.csproj
+```
 
-menual
-fontend 
-backend
+คำสั่งนี้จะ:
+- รัน backend API (ASP.NET Core)
+- รัน frontend (Angular) พร้อม generate API client จาก Swagger อัตโนมัติ (ผ่าน `npm run prestart` / Orval)
+- เปิด .NET Aspire Dashboard ให้ดูสถานะ service, log และ trace ของทั้งระบบ
+
+จากนั้นเปิดเบราว์เซอร์ไปที่ URL ที่ Aspire Dashboard แสดง (ปกติจะเปิดอัตโนมัติ) เพื่อดู resource ทั้งหมดและลิงก์ไปยัง backend/frontend
+
+### รันแยกเฉพาะ backend (ไม่ผ่าน Aspire)
+
+```bash
+dotnet run --project backend/CreditAccountApi.csproj
+```
+
+จากนั้นเปิด `http://localhost:5054/swagger` เพื่อทดสอบ API
+
+### รันแยกเฉพาะ frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+---
+
+## 🗺 Roadmap
+
+รายการสิ่งที่ยังไม่ได้ทำ / ควรทำต่อ:
+
+- [ ] เพิ่ม endpoint สำหรับสร้าง/แก้ไข/ลบข้อมูลฟอร์ม (`POST` / `PUT` / `DELETE` ใน `RegisterController`)
+- [ ] จัดเตรียม SQL script หรือ EF Core Migrations สำหรับสร้าง schema ฐานข้อมูลตั้งแต่ต้น (ปัจจุบันต้องมี schema อยู่ก่อนเอง)
+- [ ] พัฒนาหน้า UI จริงฝั่ง Angular สำหรับกรอกฟอร์มขออนุมัติวงเงินเครดิต (ปัจจุบันมีแค่ placeholder ของ Angular CLI)
+- [ ] เพิ่มระบบ Authentication / Authorization (ปัจจุบันยังไม่มี)
+- [ ] ลบ/ทำความสะอาด `TodoItemsController` และ `WeatherForecastController` ที่เป็น boilerplate ตัวอย่าง หากไม่ได้ใช้งานจริง
+
+---
+
+## 🤝 Contributing
+
+ยินดีรับ Pull Request และ Issue — โปรดเปิด Issue เพื่ออธิบายแนวทางก่อนทำการเปลี่ยนแปลงใหญ่
+
+## 📄 License
+
+ยังไม่ได้ระบุ License — โปรดเพิ่มไฟล์ `LICENSE` หากต้องการเผยแพร่แบบ open source
