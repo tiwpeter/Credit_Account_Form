@@ -114,9 +114,17 @@ Credit_Account_Form/
 
 ### 1) Clone repository
 
+> ⚠️ Repo นี้มีขนาด commit history ค่อนข้างใหญ่ (~57 MB) เนื่องจากมีไฟล์ขนาดใหญ่หลงเหลืออยู่ใน commit เก่า แนะนำให้ใช้ **shallow clone** (`--depth 1`) เพื่อดึงเฉพาะ commit ล่าสุด จะได้ไม่ต้องโหลดประวัติทั้งหมด
+ 
+```bash
+git clone --depth 1 https://github.com/tiwpeter/Credit_Account_Form.git
+cd Credit_Account_Form
+```
+
+หรือจะ clone แบบเต็มตั้งแต่แรกก็ได้ด้วยคำสั่งปกติ:
+ 
 ```bash
 git clone https://github.com/tiwpeter/Credit_Account_Form.git
-cd Credit_Account_Form
 ```
 
 ### 2) ตั้งค่า Environment Variables
