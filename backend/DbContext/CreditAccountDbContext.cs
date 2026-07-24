@@ -87,7 +87,6 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
     public virtual DbSet<ThaiTambon> ThaiTambons { get; set; }
 
     //
-    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 
 
 
