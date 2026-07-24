@@ -142,11 +142,26 @@ ConnectionStrings__myPostgres=Host=localhost;Port=5432;Database=creditaccount;Us
 MY_API_KEY=your-api-key-here
 ```
 
-### 3) รันระบบทั้งหมดผ่าน .NET Aspire
+### 3) เตรียม Database Schema + Seed ข้อมูล Master (จังหวัด/อำเภอ/ตำบล)
+
+โปรเจกต์นี้เป็น database-first (ดูหัวข้อ Tech Stack) — ต้องมี schema/ตารางพร้อมอยู่ก่อน
+ตรงกับ entity ใน `backend/Entities` (ดูหัวข้อ Requirements) ถึงจะรัน backend เชื่อมต่อได้
+หลังจากสร้างตารางแล้ว ให้ seed ข้อมูลที่อยู่มาตรฐานไทย (จังหวัด/อำเภอ/ตำบล) ด้วยสคริปต์ที่เตรียมไว้ให้:
+
+```bash
+psql -U your_user -d creditaccount -f database/seed_thai_geography.sql
+```
+
+ข้อมูลนี้แปลงมาจาก open source [`kongvut/thai-province-data`](https://github.com/kongvut/thai-province-data)
+(จังหวัด 77 / อำเภอ 930 / ตำบล 7,452 รายการ) รันเป็น transaction เดียวและจัดลำดับ FK ให้แล้ว
+(geographies → provinces → amphures → tambons) ไม่ต้องแก้อะไรเพิ่ม
+
+### 4) รันระบบทั้งหมดผ่าน .NET Aspire
 
 ```bash
 dotnet run --project Aspire/AppHost/CreditAccountApi.AppHost.csproj
 ```
+...
 
 คำสั่งนี้จะ:
 - รัน backend API (ASP.NET Core)
