@@ -173,6 +173,20 @@ npm start
 
 ---
 
+### วิธีรัน generator
+ 
+**รันเอง (manual):**
+ 
+```bash
+cd frontend
+npm run generate:api
+```
+ 
+**รันอัตโนมัติทุกครั้งก่อน `npm start`:**
+ 
+ใน `package.json` มี hook `prestart` ที่เรียก `generate:api` ให้อยู่แล้ว ดังนั้นเวลารัน `npm start` ตามปกติ (หรือรันผ่าน .NET Aspire AppHost) ระบบจะ generate API client ให้ใหม่โดยอัตโนมัติทุกครั้ง **แต่ backend ต้องรันอยู่ก่อนแล้ว** เพื่อให้ดึง `swagger.json` ได้สำเร็จ
+
+
 ## 🗺 Roadmap
 
 รายการสิ่งที่ยังไม่ได้ทำ / ควรทำต่อ:
