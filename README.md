@@ -146,15 +146,32 @@ MY_API_KEY=your-api-key-here
 
 โปรเจกต์นี้เป็น database-first (ดูหัวข้อ Tech Stack) — ต้องมี schema/ตารางพร้อมอยู่ก่อน
 ตรงกับ entity ใน `backend/Entities` (ดูหัวข้อ Requirements) ถึงจะรัน backend เชื่อมต่อได้
-หลังจากสร้างตารางแล้ว ให้ seed ข้อมูลที่อยู่มาตรฐานไทย (จังหวัด/อำเภอ/ตำบล) ด้วยสคริปต์ที่เตรียมไว้ให้:
+หลังจากสร้างตารางแล้ว ให้ seed ข้อมูลที่อยู่มาตรฐานไทย (จังหวัด/อำเภอ/ตำบล) ด้วยสคริปต์ที่เตรียมไว้ให้ที่
+`database/seed_thai_geography.sql` — ข้อมูลนี้แปลงมาจาก open source
+[`kongvut/thai-province-data`](https://github.com/kongvut/thai-province-data)
+(จังหวัด 77 / อำเภอ 930 / ตำบล 7,452 รายการ) รันเป็น transaction เดียวและจัดลำดับ FK ให้แล้ว
+(geographies → provinces → amphures → tambons)
+
+เลือกวิธีรัน seed ตามที่ฐานข้อมูลของคุณอยู่ที่ไหน:
+
+**กรณี PostgreSQL รัน local**
 
 ```bash
 psql -U your_user -d creditaccount -f database/seed_thai_geography.sql
 ```
 
-ข้อมูลนี้แปลงมาจาก open source [`kongvut/thai-province-data`](https://github.com/kongvut/thai-province-data)
-(จังหวัด 77 / อำเภอ 930 / ตำบล 7,452 รายการ) รันเป็น transaction เดียวและจัดลำดับ FK ให้แล้ว
-(geographies → provinces → amphures → tambons) ไม่ต้องแก้อะไรเพิ่ม
+**กรณีใช้ Neon (cloud PostgreSQL)**
+
+ทางเลือก A — ใช้ Neon SQL Editor (ไม่ต้องติดตั้งอะไรเพิ่ม):
+1. เปิด [Neon Console](https://console.neon.tech) → เลือก project/database ของคุณ
+2. ไปที่ SQL Editor
+3. เปิดไฟล์ `database/seed_thai_geography.sql` → copy เนื้อหาทั้งหมด → วางใน editor → กด Run
+
+ทางเลือก B — ใช้ `psql` connect ไปหา Neon โดยตรง (connection string หาได้จากหน้า Dashboard ของ Neon):
+
+```bash
+psql "postgresql://your_user:your_password@your-neon-host.neon.tech/creditaccount?sslmode=require" -f database/seed_thai_geography.sql
+```
 
 ### 4) รันระบบทั้งหมดผ่าน .NET Aspire
 
