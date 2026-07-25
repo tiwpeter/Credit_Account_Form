@@ -1,0 +1,89 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  # -------------------------------------------------------------
+  # Job 1: Build & Validate Backend (.NET)
+  # -------------------------------------------------------------
+  backend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore CreditAccountApi.sln
+
+      - name: Build Solution
+        run: dotnet build CreditAccountApi.sln --no-restore --configuration Release
+
+      # Optional: Export swagger.json เพื่อนำไปทดสอบตรวจเช็ค Diff กับ Frontend
+      - name: Install Swashbuckle CLI & Export Swagger Spec
+        run: |
+          dotnet tool install -g Swashbuckle.AspNetCore.Cli
+          swagger tofile --output ./swagger-ci.json backend/bin/Release/net8.0/CreditAccountApi.dll v1
+
+      - name: Upload Swagger Spec Spec Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: swagger-spec
+          path: ./swagger-ci.json
+
+  # -------------------------------------------------------------
+  # Job 2: Check & Build Frontend (Angular)
+  # -------------------------------------------------------------
+  frontend-build:
+    needs: backend-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Download Swagger Spec Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: swagger-spec
+
+      # ---------------------------------------------------------
+      # Step สำคัญ: เช็คว่า Developer ลืมเจนโค้ดก่อน Commit หรือไม่?
+      # ---------------------------------------------------------
+      - name: Validate Orval Client is Up-To-Date
+        run: |
+          cd frontend
+          # สั่งรัน Orval โดยอ่าน spec จากไฟล์ swagger-ci.json ที่ดาวน์โหลดมาจาก Job backend
+          npx orval --input ../swagger-ci.json
+          
+          # ตรวจสอบว่ามีไฟล์เปลี่ยนแปลงใน Git หรือไม่
+          if [ -n "$(git status --porcelain src/api/generated)" ]; then
+            echo "❌ ERROR: OpenAPI Spec หรือ Backend DTO มีการเปลี่ยนแปลง แต่ Developer ไม่ได้สั่ง 'npm run generate:api' ก่อน Commit!"
+            echo "กรุณารัน 'npm run generate:api' บนเครื่อง Local แล้ว Commit ไฟล์ที่อัปเดตขึ้นมาใหม่"
+            git status src/api/generated
+            exit 1
+          else
+            echo "✅ Generated API Client matches Backend Swagger Spec!"
+          fi
+
+      - name: Build Angular App
+        run: |
+          cd frontend
+          npm run build -- --configuration production
