@@ -1,89 +1,148 @@
-name: CI Pipeline
+name: CI-CD
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [main, develop]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [main]
 
 jobs:
-  # -------------------------------------------------------------
-  # Job 1: Build & Validate Backend (.NET)
-  # -------------------------------------------------------------
-  backend-build:
+  backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore Dependencies
-        run: dotnet restore CreditAccountApi.sln
+      - name: Restore
+        run: dotnet restore backend/CreditAccountApi.csproj
 
-      - name: Build Solution
-        run: dotnet build CreditAccountApi.sln --no-restore --configuration Release
+      - name: Build
+        run: dotnet build backend/CreditAccountApi.csproj --no-restore -c Release
 
-      # Optional: Export swagger.json เพื่อนำไปทดสอบตรวจเช็ค Diff กับ Frontend
-      - name: Install Swashbuckle CLI & Export Swagger Spec
-        run: |
-          dotnet tool install -g Swashbuckle.AspNetCore.Cli
-          swagger tofile --output ./swagger-ci.json backend/bin/Release/net8.0/CreditAccountApi.dll v1
+      # ถ้ามี test project แยก ให้เพิ่ม step test ตรงนี้
+      # - name: Test
+      #   run: dotnet test <path-to-test-project> -c Release
 
-      - name: Upload Swagger Spec Spec Artifact
-        uses: actions/upload-artifact@v4
+      - name: Publish API
+        run: dotnet publish backend/CreditAccountApi.csproj -c Release -o ./publish/api
+
+      - uses: actions/upload-artifact@v4
         with:
-          name: swagger-spec
-          path: ./swagger-ci.json
+          name: api-artifact
+          path: ./publish/api
 
-  # -------------------------------------------------------------
-  # Job 2: Check & Build Frontend (Angular)
-  # -------------------------------------------------------------
-  frontend-build:
-    needs: backend-build
+  codegen:
+    needs: backend
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore & build Api
+        run: |
+          dotnet restore backend/CreditAccountApi.csproj
+          dotnet build backend/CreditAccountApi.csproj --no-restore -c Release
+
+      - name: Install Swashbuckle CLI
+        run: dotnet tool install --global Swashbuckle.AspNetCore.Cli --version 6.9.0
+
+      - name: Generate swagger.json (no server needed)
+        working-directory: backend
+        env:
+          ConnectionStrings__myPostgres: "Host=localhost;Database=dummy;Username=dummy;Password=dummy"
+        run: |
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          swagger tofile --output swagger.json bin/Release/net8.0/CreditAccountApi.dll v1
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate Angular API client
+        run: |
+          npx --yes @openapitools/openapi-generator-cli generate \
+            -i backend/swagger.json \
+            -g typescript-angular \
+            -o frontend/src/app/core/api-client
+
+      - name: Commit generated client back to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add frontend/src/app/core/api-client
+          git diff --cached --quiet && echo "No changes to commit" || git commit -m "chore: auto-generate Angular API client [skip ci]"
+          git diff --cached --quiet || git push
+
+  frontend:
+    needs: codegen
+    if: always() && (needs.codegen.result == 'success' || needs.codegen.result == 'skipped')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install Frontend Dependencies
-        run: |
-          cd frontend
-          npm ci
+      - run: npm install
+      - run: npm run build -- --configuration production
 
-      - name: Download Swagger Spec Artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: swagger-spec
+          name: web-artifact
+          path: frontend/dist
 
-      # ---------------------------------------------------------
-      # Step สำคัญ: เช็คว่า Developer ลืมเจนโค้ดก่อน Commit หรือไม่?
-      # ---------------------------------------------------------
-      - name: Validate Orval Client is Up-To-Date
-        run: |
-          cd frontend
-          # สั่งรัน Orval โดยอ่าน spec จากไฟล์ swagger-ci.json ที่ดาวน์โหลดมาจาก Job backend
-          npx orval --input ../swagger-ci.json
-          
-          # ตรวจสอบว่ามีไฟล์เปลี่ยนแปลงใน Git หรือไม่
-          if [ -n "$(git status --porcelain src/api/generated)" ]; then
-            echo "❌ ERROR: OpenAPI Spec หรือ Backend DTO มีการเปลี่ยนแปลง แต่ Developer ไม่ได้สั่ง 'npm run generate:api' ก่อน Commit!"
-            echo "กรุณารัน 'npm run generate:api' บนเครื่อง Local แล้ว Commit ไฟล์ที่อัปเดตขึ้นมาใหม่"
-            git status src/api/generated
-            exit 1
-          else
-            echo "✅ Generated API Client matches Backend Swagger Spec!"
-          fi
-
-      - name: Build Angular App
-        run: |
-          cd frontend
-          npm run build -- --configuration production
+  # ปิดไว้ก่อน เปิดใช้เมื่อมี Dockerfile จริงที่ path backend/Dockerfile และ frontend/Dockerfile
+  # docker-build-push:
+  #   needs: [backend, frontend]
+  #   if: github.ref == 'refs/heads/main'
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     packages: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: docker/login-action@v3
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Downcase repository name
+  #       run: echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+  #     - name: Build & Push API image
+  #       uses: docker/build-push-action@v5
+  #       with:
+  #         context: .
+  #         file: backend/Dockerfile
+  #         push: true
+  #         tags: ghcr.io/${{ env.REPO_LOWER }}/api:${{ github.sha }}
+  #     - name: Build & Push Web image
+  #       uses: docker/build-push-action@v5
+  #       with:
+  #         context: frontend
+  #         push: true
+  #         tags: ghcr.io/${{ env.REPO_LOWER }}/web:${{ github.sha }}

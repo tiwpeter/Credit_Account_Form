@@ -1,0 +1,406 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CreditAccountApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/master/all": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/master/amphures": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "provinceId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/master/tambons": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "amphureId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/register": {
+      "get": {
+        "tags": [
+          "Register"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllRegistersResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllRegistersResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllRegistersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/register/{id}": {
+      "get": {
+        "tags": [
+          "Register"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRegisterResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRegisterResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRegisterResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/register/{id}/report": {
+      "get": {
+        "tags": [
+          "Register"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetAllRegistersResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegisterListItem"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetRegisterResponse": {
+        "type": "object",
+        "properties": {
+          "registerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "generalName1": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalName2": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalTax": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalBranch": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalTel": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalFax": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalLine": {
+            "type": "string",
+            "nullable": true
+          },
+          "addrLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addrLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "subDistrict": {
+            "type": "string",
+            "nullable": true
+          },
+          "district": {
+            "type": "string",
+            "nullable": true
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "creditLimit": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedPurchase": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "timeRequired": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyCertificate": {
+            "type": "boolean"
+          },
+          "copyOfPp20": {
+            "type": "boolean"
+          },
+          "copyOfCoRegis": {
+            "type": "boolean"
+          },
+          "copyOfIdCard": {
+            "type": "boolean"
+          },
+          "companyLocationMap": {
+            "type": "boolean"
+          },
+          "otherSpecify": {
+            "type": "string",
+            "nullable": true
+          },
+          "custsignFirstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "custsignLastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "custsignTel": {
+            "type": "string",
+            "nullable": true
+          },
+          "custsignEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "custsignLine": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessType": {
+            "type": "string",
+            "nullable": true
+          },
+          "industryType": {
+            "type": "string",
+            "nullable": true
+          },
+          "shopType": {
+            "type": "string",
+            "nullable": true
+          },
+          "termOfPay": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "incoterms": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterListItem": {
+        "type": "object",
+        "properties": {
+          "registerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "generalName1": {
+            "type": "string",
+            "nullable": true
+          },
+          "generalTax": {
+            "type": "string",
+            "nullable": true
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "creditLimit": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
