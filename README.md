@@ -62,6 +62,7 @@
 * 📄 **PDF Report export:** สร้างรายงานสรุปแบบฟอร์มเป็นไฟล์ PDF จาก template FastReport (`GET /api/register/{id}/report`)
 * 🔗 **Service orchestration:** บริหารจัดการ backend, frontend และ PostgreSQL connection ผ่าน .NET Aspire Dashboard
 * 🔒 **Environment configuration:** ตั้งค่า connection string และค่าคอนฟิกอื่น ๆ ผ่านไฟล์ `.env`
+* 🤖 **CI/CD Pipeline & Auto-Generation:** ระบบอัตโนมัติผ่าน GitHub Actions ช่วยตรวจสอบโค้ด (Check/Build) และ generate Angular API client ใหม่อัตโนมัติ เพื่อความสอดคล้องระหว่าง Frontend และ Backend
 
 ---
 
