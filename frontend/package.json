@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "gen-api": "openapi-generator-cli generate -i ../backend/swagger.json -g typescript-angular -o src/app/core/api-client"
+    "codegen": "openapi-generator-cli generate -i ../backend/swagger.json -g typescript-angular -o ./src/app/core/api-client --additional-properties=ngVersion=19.2.0,providedInRoot=true"
   },
   "private": true,
   "dependencies": {
@@ -20,13 +20,13 @@
     "@angular/router": "^19.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0",
-    "@openapitools/openapi-generator-cli": "^2.13.4"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.5",
     "@angular/cli": "^19.2.5",
     "@angular/compiler-cli": "^19.2.0",
+    "@openapitools/openapi-generator-cli": "^2.40.1",
     "@types/jasmine": "~5.1.0",
     "cross-var": "^1.1.0",
     "jasmine-core": "~5.6.0",

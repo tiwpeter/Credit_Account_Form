@@ -6,6 +6,7 @@ api.module.ts
 api/api.ts
 api/master.service.ts
 api/register.service.ts
+api/test.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -14,6 +15,7 @@ model/getAllRegistersResponse.ts
 model/getRegisterResponse.ts
 model/models.ts
 model/registerListItem.ts
+model/testMessageDto.ts
 param.ts
 provide-api.ts
 query.params.ts
