@@ -28,6 +28,7 @@ var apiService = builder.AddProject<Projects.CreditAccountApi>("creditaccountapi
 
 var angular = builder.AddNpmApp("angular", "../../frontend", "start")
     .WithReference(apiService)
+    .WaitFor(npmInstall)      // รอ npm i เสร็จก่อนค่อย ng serve
     .WaitFor(apiService)
     .WithHttpEndpoint(env: "PORT")
     .WithEnvironment("BROWSER", "none")

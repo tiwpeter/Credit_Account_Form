@@ -1,0 +1,417 @@
+<div class="page">
+  <div class="topbar">
+    <div>
+      <h1>ใบสมัครขอวงเงินเครดิต</h1>
+      <p class="sub">Credit Account Registration</p>
+    </div>
+    <span class="badge">แบบร่าง · ยังไม่บันทึก</span>
+  </div>
+
+  <form class="container" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <mat-progress-bar
+      class="progress"
+      mode="determinate"
+      [value]="(progress() / 8) * 100">
+    </mat-progress-bar>
+
+    @if (masterError()) {
+      <div class="master-error">{{ masterError() }}</div>
+    }
+
+    <!-- 1. ข้อมูลบริษัท -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">1</div>
+        <div>
+          <h2>ข้อมูลบริษัท</h2>
+          <p>General Information</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="grid">
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>ชื่อบริษัท (ไทย)</mat-label>
+            <input matInput formControlName="generalName1" required>
+            @if (form.controls.generalName1.hasError('required')) {
+              <mat-error>กรุณากรอกชื่อบริษัท</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>ชื่อบริษัท (อังกฤษ)</mat-label>
+            <input matInput formControlName="generalName2">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>เบอร์โทรศัพท์</mat-label>
+            <input matInput formControlName="generalTel">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>เบอร์แฟกซ์</mat-label>
+            <input matInput formControlName="generalFax">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>อีเมล</mat-label>
+            <input matInput type="email" formControlName="generalEmail">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Line ID</mat-label>
+            <input matInput formControlName="generalLine">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>เลขประจำตัวผู้เสียภาษี</mat-label>
+            <input matInput formControlName="generalTax">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>สาขา</mat-label>
+            <input matInput formControlName="generalBranch">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- 2. ที่อยู่ (cascading: จังหวัด -> อำเภอ -> ตำบล) -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">2</div>
+        <div>
+          <h2>ที่อยู่บริษัท</h2>
+          <p>Address</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="grid">
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>ที่อยู่ บรรทัดที่ 1</mat-label>
+            <input matInput formControlName="addrLine1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>ที่อยู่ บรรทัดที่ 2</mat-label>
+            <input matInput formControlName="addrLine2">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>จังหวัด</mat-label>
+            <mat-select formControlName="provinceId">
+              @for (opt of address()?.provinces ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>อำเภอ/เขต</mat-label>
+            <mat-select formControlName="amphureId">
+              @if (amphuresLoading()) {
+                <mat-option disabled>กำลังโหลด...</mat-option>
+              }
+              @for (opt of amphures(); track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+            @if (!form.controls.provinceId.value) {
+              <mat-hint>เลือกจังหวัดก่อน</mat-hint>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ตำบล/แขวง</mat-label>
+            <mat-select formControlName="tambonId">
+              @if (tambonsLoading()) {
+                <mat-option disabled>กำลังโหลด...</mat-option>
+              }
+              @for (opt of tambons(); track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+            @if (!form.controls.amphureId.value) {
+              <mat-hint>เลือกอำเภอก่อน</mat-hint>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>รหัสไปรษณีย์</mat-label>
+            <input matInput formControlName="postalCode">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ประเทศ</mat-label>
+            <mat-select formControlName="countryId">
+              @for (opt of address()?.countries ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <p class="hint">* จังหวัด/ประเทศ มาจาก /api/master/all · อำเภอโหลดจาก /api/master/amphures ตามจังหวัดที่เลือก · ตำบลโหลดจาก /api/master/tambons ตามอำเภอที่เลือก</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- 3. วงเงิน -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">3</div>
+        <div>
+          <h2>วงเงินที่ขอ</h2>
+          <p>Credit Limit</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="grid g3">
+          <mat-form-field appearance="outline">
+            <mat-label>วงเงินเครดิตที่ขอ (บาท)</mat-label>
+            <input matInput type="number" formControlName="creditLimit">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ยอดซื้อประมาณการ/เดือน</mat-label>
+            <input matInput type="number" formControlName="estimatedPurchase">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ระยะเวลาที่ต้องการ</mat-label>
+            <input matInput formControlName="timeRequired" placeholder="เช่น 30 วัน">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- 4. เอกสารแนบ -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">4</div>
+        <div>
+          <h2>เอกสารประกอบการสมัคร</h2>
+          <p>Document Checklist</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="check-grid">
+          <mat-checkbox formControlName="companyCertificate">หนังสือรับรองบริษัท</mat-checkbox>
+          <mat-checkbox formControlName="copyOfPp20">สำเนา ภ.พ.20</mat-checkbox>
+          <mat-checkbox formControlName="copyOfCoRegis">สำเนาหนังสือรับรองบริษัท</mat-checkbox>
+          <mat-checkbox formControlName="copyOfIdCard">สำเนาบัตรประชาชน</mat-checkbox>
+          <mat-checkbox formControlName="companyLocationMap">แผนที่ตั้งบริษัท</mat-checkbox>
+        </div>
+
+        <mat-form-field appearance="outline" class="full" style="margin-top: 14px;">
+          <mat-label>ระบุเอกสารอื่นๆ</mat-label>
+          <textarea matInput formControlName="otherSpecify" rows="2"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- 5. ผู้ลงนาม -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">5</div>
+        <div>
+          <h2>ผู้มีอำนาจลงนาม</h2>
+          <p>Customer Sign</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="grid">
+          <mat-form-field appearance="outline">
+            <mat-label>ชื่อ</mat-label>
+            <input matInput formControlName="custsignFirstname" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>นามสกุล</mat-label>
+            <input matInput formControlName="custsignLastname" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>เบอร์โทรศัพท์</mat-label>
+            <input matInput formControlName="custsignTel">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>อีเมล</mat-label>
+            <input matInput type="email" formControlName="custsignEmail">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Line ID</mat-label>
+            <input matInput formControlName="custsignLine">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- 6. Sales Assignment -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">6</div>
+        <div>
+          <h2>ผู้ดูแลการขาย</h2>
+          <p>Sales Assignment · จาก /api/master/all</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="grid g3">
+          <mat-form-field appearance="outline">
+            <mat-label>Sale Org</mat-label>
+            <mat-select formControlName="saleOrg">
+              @for (opt of sales()?.saleOrgs ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sale Group</mat-label>
+            <mat-select formControlName="saleGroup">
+              @for (opt of sales()?.saleGroups ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sale District</mat-label>
+            <mat-select formControlName="saleDistrict">
+              @for (opt of sales()?.saleDistricts ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>พนักงานขาย (Sale Person)</mat-label>
+            <mat-select formControlName="salePerson">
+              @for (opt of sales()?.salePersons ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ผู้จัดการฝ่ายขาย (Sale Manager)</mat-label>
+            <mat-select formControlName="saleManager">
+              @for (opt of sales()?.saleManagers ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- 7. Terms -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">7</div>
+        <div>
+          <h2>เงื่อนไขการชำระเงิน</h2>
+          <p>Terms · จาก /api/master/all</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="grid g3">
+          <mat-form-field appearance="outline">
+            <mat-label>เงื่อนไขการชำระ</mat-label>
+            <mat-select formControlName="termOfPay">
+              @for (opt of finance()?.termOfPays ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>วิธีการชำระเงิน</mat-label>
+            <mat-select formControlName="paymentMethod">
+              @for (opt of finance()?.paymentMethods ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>สกุลเงิน</mat-label>
+            <mat-select formControlName="currency">
+              @for (opt of finance()?.currencies ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Incoterms</mat-label>
+            <mat-select formControlName="incoterms">
+              @for (opt of finance()?.incoterms ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ราคามาตรฐาน (Price List)</mat-label>
+            <mat-select formControlName="priceList">
+              @for (opt of finance()?.priceLists ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- 8. Classification -->
+    <mat-card class="section-card">
+      <div class="card-header">
+        <div class="step-num">8</div>
+        <div>
+          <h2>ประเภทกิจการ</h2>
+          <p>Classification · จาก /api/master/all</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="grid g3">
+          <mat-form-field appearance="outline">
+            <mat-label>ประเภทธุรกิจ</mat-label>
+            <mat-select formControlName="busitypeId">
+              @for (opt of type()?.businessTypes ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ประเภทอุตสาหกรรม</mat-label>
+            <mat-select formControlName="industryType">
+              @for (opt of type()?.industryTypes ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ประเภทร้านค้า</mat-label>
+            <mat-select formControlName="shopType">
+              @for (opt of type()?.shopTypes ?? []; track opt.id) {
+                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="footer-bar">
+      <button mat-stroked-button type="button" (click)="onCancel()">ยกเลิก</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="submitting()">
+        @if (submitting()) { กำลังบันทึก... } @else { บันทึกใบสมัคร }
+      </button>
+    </div>
+
+  </form>
+</div>
