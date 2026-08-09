@@ -143,7 +143,34 @@ ConnectionStrings__myPostgres=Host=localhost;Port=5432;Database=creditaccount;Us
 MY_API_KEY=your-api-key-here
 ```
 
-### 3) เตรียม Database Schema + Seed ข้อมูล Master (จังหวัด/อำเภอ/ตำบล)
+### 3) สร้าง Database Schema (Tables)
+ 
+โปรเจกต์นี้เป็น database-first (ดูหัวข้อ Tech Stack) — ต้องสร้างตารางให้ตรงกับ entity ใน `backend/Entities` ก่อนถึงจะรัน backend เชื่อมต่อได้
+ 
+สคริปต์ `database/schema.sql` สร้างตารางทั้งหมด (master data + transaction tables) และ index ที่ใช้บ่อย โดยเรียงลำดับตาม Foreign Key ให้แล้ว (master data → `generals`/`addresses`/... → `register_from` → index) ไม่ต้องสร้างเองทีละตาราง
+ 
+เลือกวิธีรันตามที่ฐานข้อมูลของคุณอยู่ที่ไหน:
+ 
+**กรณี PostgreSQL รัน local**
+ 
+```bash
+# สร้าง database ก่อน (ถ้ายังไม่มี)
+createdb -U your_user creditaccount
+ 
+# รันสคริปต์สร้างตาราง
+psql -U your_user -d creditaccount -f database/schema.sql
+```
+ 
+**กรณีใช้ Neon (cloud PostgreSQL)**
+ 
+ทางเลือก A — ใช้ Neon SQL Editor (ไม่ต้องติดตั้งอะไรเพิ่ม):
+1. เปิด [Neon Console](https://console.neon.tech) → เลือก project/database ของคุณ
+2. ไปที่ SQL Editor
+3. เปิดไฟล์ `database/schema.sql` → copy เนื้อหาทั้งหมด → วางใน editor → กด Run
+
+
+
+### 4) เตรียม Database Schema + Seed ข้อมูล Master (จังหวัด/อำเภอ/ตำบล)
 
 โปรเจกต์นี้เป็น database-first (ดูหัวข้อ Tech Stack) — ต้องมี schema/ตารางพร้อมอยู่ก่อน
 ตรงกับ entity ใน `backend/Entities` (ดูหัวข้อ Requirements) ถึงจะรัน backend เชื่อมต่อได้
@@ -174,7 +201,7 @@ psql -U your_user -d creditaccount -f database/seed_thai_geography.sql
 psql "postgresql://your_user:your_password@your-neon-host.neon.tech/creditaccount?sslmode=require" -f database/seed_thai_geography.sql
 ```
 
-### 4) รันระบบทั้งหมดผ่าน .NET Aspire
+### 5) รันระบบทั้งหมดผ่าน .NET Aspire
 
 ```bash
 dotnet run --project Aspire/AppHost/CreditAccountApi.AppHost.csproj
