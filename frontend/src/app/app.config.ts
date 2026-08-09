@@ -1,24 +1,17 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http'; // เพิ่มการ import HttpClient
+import { provideAnimations } from '@angular/platform-browser/animations'; // เพิ่มการ import Animations (สำหรับ Angular Material)
+import { BASE_PATH } from './core/api-client/variables';
 
 import { routes } from './app.routes';
-import { environment } from '../environments/environment';
-import { BASE_PATH } from './api-client/variables';
-import { Configuration } from './api-client/configuration';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
     provideAnimations(),
-
-    // ให้ generated client (TestService, MasterService, ...) รู้ base URL
-    { provide: BASE_PATH, useValue: environment.apiUrl },
-    {
-      provide: Configuration,
-      useValue: new Configuration({ basePath: environment.apiUrl })
-    }
+   { provide: BASE_PATH, useValue: '' },
   ]
 };

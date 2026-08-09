@@ -8,13 +8,8 @@ export const routes: Routes = [
         (m) => m.RegisterFormComponent
       )
   },
-  {
-    path: 'test',
-    loadComponent: () =>
-      import('./features/test-connection/test-connection.component').then(
-        (m) => m.TestConnectionComponent
-      )
-  },
-  { path: '', redirectTo: 'test', pathMatch: 'full' },
-  { path: '**', redirectTo: 'test' }
+  
+  // เปลี่ยนจาก 'test' เป็น 'register' (หรือ path หน้าแรกที่คุณต้องการ)
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
+  { path: '**', redirectTo: 'register' }
 ];

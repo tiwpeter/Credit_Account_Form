@@ -3,7 +3,7 @@ import { Observable, tap } from 'rxjs';
 
 // ⚠️ TODO: แก้ path นี้ให้ตรงกับตำแหน่งจริงของ generated client ในโปรเจกต์
 // (โฟลเดอร์ที่ OpenAPI Generator สร้างให้ เช่น src/app/api-client/services/master.service.ts)
-import { MasterService as GeneratedMasterService } from '../../../api-client/services/master.service';
+import { MasterService as GeneratedMasterService } from '../../../core/api-client/api/master.service';
 
 import {
   AddressMaster,
