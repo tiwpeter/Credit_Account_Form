@@ -30,7 +30,7 @@ var angular = builder.AddNpmApp("angular", "../../frontend", "start")
     .WithReference(apiService)
     .WaitFor(apiService)
     .WithHttpEndpoint(env: "PORT")
-    .WithExternalHttpEndpoints()
-    .WithEnvironment("API_URL", apiService.GetEndpoint("http"));   // ← ไม่มี ; คั่นกลาง + ใช้ apiService
+    .WithEnvironment("BROWSER", "none")
+    .WithExternalHttpEndpoints();
 
 builder.Build().Run();
