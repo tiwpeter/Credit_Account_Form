@@ -41,14 +41,15 @@ if (!isOpenApiGeneration)
     {
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
         var dbContext = scope.ServiceProvider.GetRequiredService<CreditAccountDbContext>();
-        var canConnect = await dbContext.Database.CanConnectAsync();
-        if (canConnect)
+        try
         {
+            await dbContext.Database.OpenConnectionAsync();
+            await dbContext.Database.CloseConnectionAsync();
             logger.LogInformation("[LOG] เชื่อมต่อ PostgreSQL สำเร็จ! ✅");
         }
-        else
+        catch (Exception ex)
         {
-            logger.LogWarning("[LOG] ไม่สามารถเชื่อมต่อ PostgreSQL ได้ ⚠️");
+            logger.LogError(ex, "[LOG] เชื่อมต่อ PostgreSQL ล้มเหลว: {Message}", ex.Message);
         }
     }
 }
