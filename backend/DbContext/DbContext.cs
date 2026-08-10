@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using CreditAccountApi.Entities;
 using Microsoft.EntityFrameworkCore;
+using CreditAccountApi.Entities;
 
 namespace CreditAccountApi.DbContext;
 
-
 public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbContext
-
 {
-    public CreditAccountDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<CreditAccountDbContext> options)
-            : base(options)
+    public CreditAccountDbContext()
+    {
+    }
+
+    public CreditAccountDbContext(DbContextOptions<CreditAccountDbContext> options)
+        : base(options)
     {
     }
 
@@ -23,6 +25,8 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
     public virtual DbSet<BusinessType> BusinessTypes { get; set; }
 
     public virtual DbSet<CashGroup> CashGroups { get; set; }
+
+    public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
 
@@ -40,6 +44,8 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
 
     public virtual DbSet<CustomerSign> CustomerSigns { get; set; }
 
+    public virtual DbSet<Discount> Discounts { get; set; }
+
     public virtual DbSet<DocumentCredit> DocumentCredits { get; set; }
 
     public virtual DbSet<Employee> Employees { get; set; }
@@ -52,9 +58,27 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
 
     public virtual DbSet<IndustryType> IndustryTypes { get; set; }
 
+    public virtual DbSet<Option> Options { get; set; }
+
+    public virtual DbSet<OptionImage> OptionImages { get; set; }
+
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderItem> OrderItems { get; set; }
+
+    public virtual DbSet<Parent> Parents { get; set; }
+
+    public virtual DbSet<Payment> Payments { get; set; }
+
     public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
 
     public virtual DbSet<PriceList> PriceLists { get; set; }
+
+    public virtual DbSet<Product> Products { get; set; }
+
+    public virtual DbSet<ProductImage> ProductImages { get; set; }
+
+    public virtual DbSet<ProductOption> ProductOptions { get; set; }
 
     public virtual DbSet<Province> Provinces { get; set; }
 
@@ -76,6 +100,8 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
 
     public virtual DbSet<SortKey> SortKeys { get; set; }
 
+    public virtual DbSet<SqliteSequence> SqliteSequences { get; set; }
+
     public virtual DbSet<TermOfPay> TermOfPays { get; set; }
 
     public virtual DbSet<ThaiAmphure> ThaiAmphures { get; set; }
@@ -86,9 +112,13 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
 
     public virtual DbSet<ThaiTambon> ThaiTambons { get; set; }
 
-    //
+    public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<Visitor> Visitors { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Host=ep-sweet-cake-a5gq9git.us-east-2.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_3FejEkm6TrOf;SSL Mode=Require;Trust Server Certificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -211,6 +241,17 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
             entity.Property(e => e.CashName)
                 .HasMaxLength(200)
                 .HasColumnName("cash_name");
+        });
+
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("categories");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.ParentId).HasColumnName("parent_id");
         });
 
         modelBuilder.Entity<Company>(entity =>
@@ -380,6 +421,19 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
                 .HasColumnName("custsign_tel");
         });
 
+        modelBuilder.Entity<Discount>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("discounts");
+
+            entity.Property(e => e.DiscountEndTime).HasColumnName("discount_end_time");
+            entity.Property(e => e.DiscountPercent).HasColumnName("discount_percent");
+            entity.Property(e => e.DiscountStartTime).HasColumnName("discount_start_time");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+        });
+
         modelBuilder.Entity<DocumentCredit>(entity =>
         {
             entity.HasKey(e => e.DoccreditId).HasName("document_credit_pkey");
@@ -512,6 +566,84 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
                 .HasColumnName("indu_type_name");
         });
 
+        modelBuilder.Entity<Option>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("options");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ImageUrl).HasColumnName("image_url");
+            entity.Property(e => e.OptionName).HasColumnName("option_name");
+            entity.Property(e => e.OptionPrice).HasColumnName("option_price");
+            entity.Property(e => e.OptionType).HasColumnName("option_type");
+            entity.Property(e => e.OptionTypeName).HasColumnName("option_type_name");
+        });
+
+        modelBuilder.Entity<OptionImage>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("option_images");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ImageUrl).HasColumnName("image_url");
+            entity.Property(e => e.OptionId).HasColumnName("option_id");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("orders");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.PaymentId).HasColumnName("payment_id");
+            entity.Property(e => e.PaymentMethod).HasColumnName("payment_method");
+            entity.Property(e => e.Phone).HasColumnName("phone");
+            entity.Property(e => e.ShippingAddress).HasColumnName("shipping_address");
+            entity.Property(e => e.TotalPrice).HasColumnName("total_price");
+            entity.Property(e => e.UserEmail).HasColumnName("user_email");
+        });
+
+        modelBuilder.Entity<OrderItem>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("order_items");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.Price).HasColumnName("price");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+        });
+
+        modelBuilder.Entity<Parent>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("parents");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ParentImageUrl).HasColumnName("parent_image_url");
+            entity.Property(e => e.ParentName).HasColumnName("parent_name");
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("payments");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Method).HasColumnName("method");
+        });
+
         modelBuilder.Entity<PaymentMethod>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("payment_method_pkey");
@@ -546,6 +678,48 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
             entity.Property(e => e.PriceListName)
                 .HasMaxLength(200)
                 .HasColumnName("price_list_name");
+        });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("products");
+
+            entity.Property(e => e.CategoryId).HasColumnName("category_id");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.DiscountEndTime).HasColumnName("discount_end_time");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.Price).HasColumnName("price");
+            entity.Property(e => e.Rating).HasColumnName("rating");
+            entity.Property(e => e.SalePercent).HasColumnName("sale_percent");
+            entity.Property(e => e.Sold).HasColumnName("sold");
+            entity.Property(e => e.Stock).HasColumnName("stock");
+        });
+
+        modelBuilder.Entity<ProductImage>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("product_images");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ImageUrl).HasColumnName("image_url");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+        });
+
+        modelBuilder.Entity<ProductOption>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("product_options");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.OptionId).HasColumnName("option_id");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
         });
 
         modelBuilder.Entity<Province>(entity =>
@@ -906,6 +1080,16 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
                 .HasColumnName("sortkey_name");
         });
 
+        modelBuilder.Entity<SqliteSequence>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sqlite_sequence");
+
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.Seq).HasColumnName("seq");
+        });
+
         modelBuilder.Entity<TermOfPay>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("term_of_pay_pkey");
@@ -1030,6 +1214,33 @@ public partial class CreditAccountDbContext : Microsoft.EntityFrameworkCore.DbCo
                 .HasForeignKey(d => d.AmphureId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("thai_tambons_amphure_id_fkey");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("users_pkey");
+
+            entity.ToTable("users");
+
+            entity.HasIndex(e => e.Email, "users_email_key").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .HasColumnName("name");
+        });
+
+        modelBuilder.Entity<Visitor>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("visitors");
+
+            entity.Property(e => e.Count).HasColumnName("count");
+            entity.Property(e => e.Id).HasColumnName("id");
         });
 
         OnModelCreatingPartial(modelBuilder);

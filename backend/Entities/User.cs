@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace CreditAccountApi.Entities;
 
-public partial class ThaiGeography
+public partial class User
 {
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public virtual ICollection<ThaiProvince> ThaiProvinces { get; set; } = new List<ThaiProvince>();
+    public string Email { get; set; } = null!;
 }

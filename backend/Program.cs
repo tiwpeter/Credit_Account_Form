@@ -1,6 +1,5 @@
-﻿using CreditAccountApi.DbContext;
+using CreditAccountApi.DbContext;
 using Microsoft.EntityFrameworkCore;
-using Scalar.AspNetCore; // 👈 อย่าลืม include ตัวนี้ถ้าจะใช้ Scalar ด้วย
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
@@ -25,11 +24,10 @@ else
 builder.Services.AddControllers();
 
 // ============================================================
-// ✅ 1. ลงทะเบียน OpenAPI / Swagger Generator ทั้งคู่ไว้ตรงนี้
+// ✅ 1. ลงทะเบียน Swagger Generator
 // ============================================================
-builder.Services.AddOpenApi();            // ของ .NET 9 Native
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();         // ของ Swashbuckle (สำหรับ Swagger UI)
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -42,14 +40,14 @@ if (!isOpenApiGeneration)
     {
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
         var dbContext = scope.ServiceProvider.GetRequiredService<CreditAccountDbContext>();
-        try
+        var canConnect = await dbContext.Database.CanConnectAsync();
+        if (canConnect)
         {
-            await dbContext.Database.MigrateAsync();
-            logger.LogInformation("[LOG] Migrate และเชื่อมต่อ PostgreSQL สำเร็จ! ✅");
+            logger.LogInformation("[LOG] เชื่อมต่อ PostgreSQL สำเร็จ! ✅");
         }
-        catch (Exception ex)
+        else
         {
-            logger.LogError(ex, "[LOG] เกิดข้อผิดพลาดขณะเชื่อมต่อ PostgreSQL ❌: {Message}", ex.Message);
+            logger.LogWarning("[LOG] ไม่สามารถเชื่อมต่อ PostgreSQL ได้ ⚠️");
         }
     }
 }
@@ -57,19 +55,16 @@ if (!isOpenApiGeneration)
 app.MapDefaultEndpoints();
 
 // ============================================================
-// ✅ 2. เปิดใช้งาน Endpoints และ UI ทั้งหมดใน Development
+// ✅ 2. เปิดใช้งาน Swagger UI
 // ============================================================
 if (app.Environment.IsDevelopment())
 {
-    // 1) เผยแพร่ OpenAPI JSON Document (.NET 9) -> /openapi/v1.json
-    app.MapOpenApi();
-
-    // 2) เปิดใช้งาน Swagger UI -> /swagger (ลิงก์ใน Aspire Dashboard จะกดเข้าได้ทันที)
     app.UseSwagger();
-    app.UseSwaggerUI();
-
-    // 3) (Optional) เปิดใช้งาน Scalar UI -> /scalar/v1
-    app.MapScalarApiReference();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Credit Account API v1");
+        c.RoutePrefix = "swagger"; // กำหนดให้อยู่ที่ /swagger
+    });
 }
 
 app.UseHttpsRedirection();
