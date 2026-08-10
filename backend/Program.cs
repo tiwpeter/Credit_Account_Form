@@ -1,5 +1,6 @@
 using CreditAccountApi.DbContext;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
@@ -55,15 +56,15 @@ if (!isOpenApiGeneration)
 app.MapDefaultEndpoints();
 
 // ============================================================
-// ✅ 2. เปิดใช้งาน Swagger UI
+// ✅ 2. เปิดใช้งาน API Reference UI (Scalar)
 // ============================================================
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    app.MapScalarApiReference(options =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Credit Account API v1");
-        c.RoutePrefix = "swagger"; // กำหนดให้อยู่ที่ /swagger
+        options.WithTitle("Credit Account API")
+               .WithOpenApiRoutePattern("/swagger/v1/swagger.json");
     });
 }
 
