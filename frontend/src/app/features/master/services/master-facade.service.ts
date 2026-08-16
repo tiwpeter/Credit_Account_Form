@@ -126,8 +126,10 @@ export class MasterFacadeService {
   // ============================================================
   private normalizeOption(raw: RawOption): MasterOption {
     const id = raw.id ?? raw.code ?? raw.value ?? 0;
-    const name = raw.name ?? raw.label ?? raw.description ?? '';
-    return { id: Number(id), name: String(name) };
+    const name = raw.nameTh ?? '';
+    const nameEn = raw.nameEn ?? '';
+    // Nullish Coalescing Operator  ?? =  ค่าว่าง
+    return { id: Number(id), name: String(name), nameEn: String(nameEn) };
   }
 
   private normalizeOptionList(raw: RawOption[] | undefined | null): MasterOption[] {

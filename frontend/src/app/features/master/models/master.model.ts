@@ -2,6 +2,7 @@
 export interface MasterOption {
   id: number;
   name: string;
+  nameEn: string;
 }
 
 // ============================================================
@@ -52,6 +53,8 @@ export interface RawOption {
   name?: string;
   label?: string;
   description?: string;
+  nameTh?: string;   // ➕ เพิ่ม
+  nameEn?: string;   // ➕ เพิ่ม (เผื่อใช้)
   [key: string]: unknown;
 }
 

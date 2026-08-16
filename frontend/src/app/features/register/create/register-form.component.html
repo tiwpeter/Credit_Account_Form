@@ -9,14 +9,11 @@
 
   <form class="container" [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <mat-progress-bar
-      class="progress"
-      mode="determinate"
-      [value]="(progress() / 8) * 100">
+    <mat-progress-bar class="progress" mode="determinate" [value]="(progress() / 8) * 100">
     </mat-progress-bar>
 
     @if (masterError()) {
-      <div class="master-error">{{ masterError() }}</div>
+    <div class="master-error">{{ masterError() }}</div>
     }
 
     <!-- 1. ข้อมูลบริษัท -->
@@ -34,7 +31,7 @@
             <mat-label>ชื่อบริษัท (ไทย)</mat-label>
             <input matInput formControlName="generalName1" required>
             @if (form.controls.generalName1.hasError('required')) {
-              <mat-error>กรุณากรอกชื่อบริษัท</mat-error>
+            <mat-error>กรุณากรอกชื่อบริษัท</mat-error>
             }
           </mat-form-field>
 
@@ -101,7 +98,9 @@
             <mat-label>จังหวัด</mat-label>
             <mat-select formControlName="provinceId">
               @for (opt of address()?.provinces ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">
+                {{ opt.name }} <span class="option-en">({{ opt.nameEn }})</span>
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -110,14 +109,16 @@
             <mat-label>อำเภอ/เขต</mat-label>
             <mat-select formControlName="amphureId">
               @if (amphuresLoading()) {
-                <mat-option disabled>กำลังโหลด...</mat-option>
+              <mat-option disabled>กำลังโหลด...</mat-option>
               }
               @for (opt of amphures(); track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">
+                {{ opt.name }} <span class="option-en">({{ opt.nameEn }})</span>
+              </mat-option>
               }
             </mat-select>
             @if (!form.controls.provinceId.value) {
-              <mat-hint>เลือกจังหวัดก่อน</mat-hint>
+            <mat-hint>เลือกจังหวัดก่อน</mat-hint>
             }
           </mat-form-field>
 
@@ -125,14 +126,16 @@
             <mat-label>ตำบล/แขวง</mat-label>
             <mat-select formControlName="tambonId">
               @if (tambonsLoading()) {
-                <mat-option disabled>กำลังโหลด...</mat-option>
+              <mat-option disabled>กำลังโหลด...</mat-option>
               }
               @for (opt of tambons(); track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">
+                {{ opt.name }} <span class="option-en">({{ opt.nameEn }})</span>
+              </mat-option>
               }
             </mat-select>
             @if (!form.controls.amphureId.value) {
-              <mat-hint>เลือกอำเภอก่อน</mat-hint>
+            <mat-hint>เลือกอำเภอก่อน</mat-hint>
             }
           </mat-form-field>
 
@@ -145,12 +148,13 @@
             <mat-label>ประเทศ</mat-label>
             <mat-select formControlName="countryId">
               @for (opt of address()?.countries ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
         </div>
-        <p class="hint">* จังหวัด/ประเทศ มาจาก /api/master/all · อำเภอโหลดจาก /api/master/amphures ตามจังหวัดที่เลือก · ตำบลโหลดจาก /api/master/tambons ตามอำเภอที่เลือก</p>
+        <p class="hint">* จังหวัด/ประเทศ มาจาก /api/master/all · อำเภอโหลดจาก /api/master/amphures ตามจังหวัดที่เลือก ·
+          ตำบลโหลดจาก /api/master/tambons ตามอำเภอที่เลือก</p>
       </mat-card-content>
     </mat-card>
 
@@ -262,7 +266,7 @@
             <mat-label>Sale Org</mat-label>
             <mat-select formControlName="saleOrg">
               @for (opt of sales()?.saleOrgs ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -271,7 +275,7 @@
             <mat-label>Sale Group</mat-label>
             <mat-select formControlName="saleGroup">
               @for (opt of sales()?.saleGroups ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -280,7 +284,7 @@
             <mat-label>Sale District</mat-label>
             <mat-select formControlName="saleDistrict">
               @for (opt of sales()?.saleDistricts ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -289,7 +293,7 @@
             <mat-label>พนักงานขาย (Sale Person)</mat-label>
             <mat-select formControlName="salePerson">
               @for (opt of sales()?.salePersons ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -298,7 +302,7 @@
             <mat-label>ผู้จัดการฝ่ายขาย (Sale Manager)</mat-label>
             <mat-select formControlName="saleManager">
               @for (opt of sales()?.saleManagers ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -321,7 +325,7 @@
             <mat-label>เงื่อนไขการชำระ</mat-label>
             <mat-select formControlName="termOfPay">
               @for (opt of finance()?.termOfPays ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -330,7 +334,7 @@
             <mat-label>วิธีการชำระเงิน</mat-label>
             <mat-select formControlName="paymentMethod">
               @for (opt of finance()?.paymentMethods ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -339,7 +343,7 @@
             <mat-label>สกุลเงิน</mat-label>
             <mat-select formControlName="currency">
               @for (opt of finance()?.currencies ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -348,7 +352,7 @@
             <mat-label>Incoterms</mat-label>
             <mat-select formControlName="incoterms">
               @for (opt of finance()?.incoterms ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -357,7 +361,7 @@
             <mat-label>ราคามาตรฐาน (Price List)</mat-label>
             <mat-select formControlName="priceList">
               @for (opt of finance()?.priceLists ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -380,7 +384,7 @@
             <mat-label>ประเภทธุรกิจ</mat-label>
             <mat-select formControlName="busitypeId">
               @for (opt of type()?.businessTypes ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -389,7 +393,7 @@
             <mat-label>ประเภทอุตสาหกรรม</mat-label>
             <mat-select formControlName="industryType">
               @for (opt of type()?.industryTypes ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -398,7 +402,7 @@
             <mat-label>ประเภทร้านค้า</mat-label>
             <mat-select formControlName="shopType">
               @for (opt of type()?.shopTypes ?? []; track opt.id) {
-                <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
+              <mat-option [value]="opt.id">{{ opt.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
